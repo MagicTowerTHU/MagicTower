@@ -1,8 +1,12 @@
 #include "magictom.h"
 
+#include <QDir>
+#include <QCoreApplication>
+
 MagicTom::MagicTom()
 {
-    pix = new QPixmap("../assets/1.PNG");
+    //pix = new QPixmap("../MagicTower/assets/images/1.PNG");
+    pix = new QPixmap(":/images/1.png");
     x = y = 0;
 }
 

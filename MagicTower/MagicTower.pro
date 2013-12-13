@@ -26,3 +26,6 @@ HEADERS  += mainwindow.h \
     magicobject.h \
     magicdisplayobject.h \
     magictom.h
+
+RESOURCES += \
+    assets.qrc
