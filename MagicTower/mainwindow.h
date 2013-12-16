@@ -1,7 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "helper.h"
 #include "widget.h"
 #include "magicbacksound.h"
 
@@ -18,7 +17,6 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = 0);
-    Helper helper;
     QTimer *timer;
 
     ~MainWindow();

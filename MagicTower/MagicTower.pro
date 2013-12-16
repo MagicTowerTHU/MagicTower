@@ -16,7 +16,6 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     widget.cpp \
-    helper.cpp \
     magicobject.cpp \
     magicdisplayobject.cpp \
     magictom.cpp \
@@ -28,7 +27,6 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h \
     widget.h \
-    helper.h \
     magicobject.h \
     magicdisplayobject.h \
     magictom.h \

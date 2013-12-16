@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     setWindowTitle(tr("Magic Tower"));
 
-    mWidget = new Widget(&helper, this);
+    mWidget = new Widget(this);
     QLabel *nativeLabel = new QLabel(tr("Hello MagicTower"));
     nativeLabel->setAlignment(Qt::AlignHCenter);
 
