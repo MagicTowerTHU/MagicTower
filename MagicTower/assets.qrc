@@ -195,7 +195,7 @@
         <file>assets/Sounds/15.wav</file>
         <file>assets/Sounds/16.wav</file>
         <file>assets/Sounds/17.wav</file>
-        <file>assets/Sounds/18.wav</file>
+        <file alias="step">assets/Sounds/18.wav</file>
         <file>assets/Sounds/19.wav</file>
         <file>assets/Sounds/20.wav</file>
         <file>assets/Sounds/21.wav</file>

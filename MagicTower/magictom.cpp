@@ -6,6 +6,7 @@ MagicTom::MagicTom()
 {
     pix = new QPixmap(":/images/Tom");
     x = y = 0;
+    mSound = new QSound(":/sounds/step");
 }
 
 void MagicTom::paint(QPainter *painter)
@@ -21,6 +22,7 @@ void MagicTom::moveTo(int tx, int ty)
 void MagicTom::setStep(int dx, int dy)
 {
     this->dx = dx, this->dy = dy;
+    mSound->play();
 }
 
 void MagicTom::move()
