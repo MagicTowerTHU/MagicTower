@@ -11,7 +11,8 @@ MagicMap::MagicMap()
 {
     animateLock = new QMutex();
     animateTimer = new QTimer();
-    property["Tom"] = (int)(void *)(mTom = new MagicTom());
+    //property["Tom"] = (long)(void *)
+    mTom = new MagicTom();
     displayList.push_front(mTom);
     property["level"] = 1;
     animateState = -1;
@@ -25,8 +26,9 @@ void MagicMap::loadMap(QFile *file)
 {
     if (!file)
     {
-        QPoint &_p = mTom->property["position"].toPoint();
+        QPoint _p;
         _p.setX(0), _p.setY(0);
+        mTom->property["position"] = _p;
     }
 }
 
