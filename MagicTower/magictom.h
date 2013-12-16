@@ -12,6 +12,7 @@ class MagicTom : public MagicDisplayObject
     int dx, dy;
 
     QSound *mSound;
+    QSound *mBeep;
 
 public:
     MagicTom();

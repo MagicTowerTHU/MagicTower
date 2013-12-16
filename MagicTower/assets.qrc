@@ -198,7 +198,7 @@
         <file alias="step">assets/Sounds/18.wav</file>
         <file>assets/Sounds/19.wav</file>
         <file>assets/Sounds/20.wav</file>
-        <file>assets/Sounds/21.wav</file>
+        <file alias="beep">assets/Sounds/21.wav</file>
         <file>assets/Sounds/853.wav</file>
         <file>assets/Sounds/857.wav</file>
         <file>assets/Sounds/859.wav</file>
