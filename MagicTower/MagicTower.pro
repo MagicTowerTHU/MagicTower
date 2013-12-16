@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT += multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -18,14 +19,24 @@ SOURCES += main.cpp\
     helper.cpp \
     magicobject.cpp \
     magicdisplayobject.cpp \
-    magictom.cpp
+    magictom.cpp \
+    magicsoundobject.cpp \
+    magicbacksound.cpp \
+    magicmap.cpp \
+    magicwall.cpp \
+    magicfloor.cpp
 
 HEADERS  += mainwindow.h \
     widget.h \
     helper.h \
     magicobject.h \
     magicdisplayobject.h \
-    magictom.h
+    magictom.h \
+    magicsoundobject.h \
+    magicbacksound.h \
+    magicmap.h \
+    magicwall.h \
+    magicfloor.h
 
 RESOURCES += \
     assets.qrc

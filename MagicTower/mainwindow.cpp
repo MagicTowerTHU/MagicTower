@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle(tr("Magic Tower"));
 
     mWidget = new Widget(&helper, this);
-    QLabel *nativeLabel = new QLabel(tr("Native"));
+    QLabel *nativeLabel = new QLabel(tr("Hello MagicTower"));
     nativeLabel->setAlignment(Qt::AlignHCenter);
 
     QGridLayout *layout = new QGridLayout;
@@ -23,7 +23,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), mWidget, SLOT(animate()));
-    timer->start(30);
+    timer->start(20);
+
+    mBackSound = new MagicBackSound();
+    mBackSound->play(QSound::Infinite);
 }
 
 MainWindow::~MainWindow()

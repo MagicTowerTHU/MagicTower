@@ -2,7 +2,7 @@
 #ifndef WIDGET_H
 #define WIDGET_H
 
-#include "magictom.h"
+#include "magicmap.h"
 
 #include <QWidget>
 
@@ -25,7 +25,7 @@ protected:
 private:
     Helper *helper;
     int elapsed;
-    MagicTom *tom;
+    MagicMap *mMap;
 };
 
 #endif

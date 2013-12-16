@@ -6,12 +6,15 @@
 class MagicTom : public MagicDisplayObject
 {
     QPixmap *pix;
-    double x, y;
+    int x, y;
+    int dx, dy;
 
 public:
     MagicTom();
     virtual void paint(QPainter *painter);
-    void move(double, double);
+    void moveTo(int, int);
+    void setStep(int, int);
+    void move();
 };
 
 #endif // MAGICTOM_H

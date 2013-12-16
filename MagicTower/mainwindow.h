@@ -3,6 +3,7 @@
 
 #include "helper.h"
 #include "widget.h"
+#include "magicbacksound.h"
 
 #include <QMainWindow>
 #include <QTimer>
@@ -13,6 +14,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
     Widget *mWidget;
+    MagicBackSound *mBackSound;
 
 public:
     MainWindow(QWidget *parent = 0);

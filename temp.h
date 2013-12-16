@@ -44,10 +44,8 @@ class MagicTom : public MagicDisplayObject
 class MagicMapElement : public MagicDisplayObject
 {
 public:
-	virtual bool tryMove(MagicTom &) = 0;
-	virtual void move(MagicTom &) = 0;
-	
-	// private
+    virtual bool move(MagicTom &) = 0;
+
 	QPoint position;
 	int level;
 	bool enabled;
@@ -57,15 +55,13 @@ bool MagicMapElement::enabled = true;
 class MagicWall : public MagicMapElement
 {
 public:
-	virtual bool tryMove(MagicTom &x) {return false;}
-	virtual void move(MagicTom &x) {}
+    virtual bool move(MagicTom &x) {}
 }
 
 class MagicFloor : public MagicMapElement
 {
 public:
-	virtual bool moveTo(MagicTom &x) {return true;}
-	virtual void move(MagicTom &x) {}
+    virtual bool move(MagicTom &x) {}
 }
 
 class MagicThing : public MagicMapElement

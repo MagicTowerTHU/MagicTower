@@ -1,5 +1,5 @@
 #include "widget.h"
-#include "magictom.h"
+#include "magicmap.h"
 #include "helper.h"
 
 #include <QPainter>
@@ -11,7 +11,7 @@ Widget::Widget(Helper *helper, QWidget *parent)
 {
     elapsed = 0;
     setFixedSize(500, 500);
-    tom = new MagicTom();
+    mMap = new MagicMap();
 }
 
 void Widget::animate()
@@ -26,25 +26,11 @@ void Widget::paintEvent(QPaintEvent *event)
     painter.begin(this);
     painter.setRenderHint(QPainter::Antialiasing);
     //helper->paint(&painter, event, elapsed);
-    tom->paint(&painter);
+    mMap->paint(&painter);
     painter.end();
 }
 
 void Widget::keyPressEvent(QKeyEvent *e)
 {
-    switch(e->key())
-    {
-    case Qt::Key_Left:
-        tom->move(-3, 0);
-        break;
-    case Qt::Key_Up:
-        tom->move(0, -3);
-        break;
-    case Qt::Key_Right:
-        tom->move(3, 0);
-        break;
-    case Qt::Key_Down:
-        tom->move(0, 3);
-        break;
-    }
+    mMap->keyPressEvent(e);
 }
