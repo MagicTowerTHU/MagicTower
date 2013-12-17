@@ -7,19 +7,26 @@
 
 class MagicTom : public MagicDisplayObject
 {
-    QPixmap *pix;
+public:
+    QPixmap *pix,
+    *pix_right, *pix_right_move[2],
+    *pix_left, *pix_left_move[2],
+    *pix_face, *pix_face_move[2],
+    *pix_back, *pix_back_move[2];
+    int animateState;
     int x, y;
     int dx, dy;
 
     QSound *mSound;
     QSound *mBeep;
 
-public:
     MagicTom();
     virtual void paint(QPainter *painter);
     void moveTo(int, int);
-    void setStep(int, int);
+    bool setStep(int, int);
+    int direction();
     void move();
+    void show();
 };
 
 #endif // MAGICTOM_H

@@ -38,10 +38,19 @@ void MagicMap::paint(QPainter *painter)
         (*i)->paint(painter);
 
     if (animateState > 0)
-        mTom->move(), animateState--;
+    {
+        mTom->move();
+        mTom->animateState = animateState;
+        mTom->show();
+        animateState --;
+        //if(animateState == 1) animateLock->unlock();
+    }
     else if (animateState == 0)
     {
         animateState = -1;
+        mTom->animateState = animateState;
+        mTom->show();
+        //if(animateState == 1)
         animateLock->unlock();
     }
 }
@@ -50,20 +59,19 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
 {
     if (animateLock->tryLock())
     {
-        animateState = 8;
         switch(e->key())
         {
         case Qt::Key_Left:
-            mTom->setStep(-4, 0);
+            animateState =  (mTom->setStep(-4, 0)) ? 8 : 0;
             break;
         case Qt::Key_Up:
-            mTom->setStep(0, -4);
+            animateState =  (mTom->setStep(0, -4)) ? 8 : 0;
             break;
         case Qt::Key_Right:
-            mTom->setStep(4, 0);
+            animateState =  (mTom->setStep(4, 0)) ? 8 : 0;
             break;
         case Qt::Key_Down:
-            mTom->setStep(0, 4);
+            animateState =  (mTom->setStep(0, 4)) ? 8 : 0;
             break;
         default:
             animateState = 0;

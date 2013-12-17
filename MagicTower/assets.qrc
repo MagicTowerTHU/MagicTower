@@ -138,20 +138,20 @@
         <file>assets/Images/393.bmp</file>
         <file>assets/Images/395.bmp</file>
         <file>assets/Images/398.bmp</file>
-        <file alias="Tom">assets/Images/415.bmp</file>
+        <file alias="Tom_face">assets/Images/415.bmp</file>
         <file>assets/Images/460.bmp</file>
         <file>assets/Images/462.bmp</file>
-        <file>assets/Images/469.bmp</file>
-        <file>assets/Images/471.bmp</file>
-        <file>assets/Images/473.bmp</file>
-        <file>assets/Images/475.bmp</file>
-        <file>assets/Images/477.bmp</file>
-        <file>assets/Images/479.bmp</file>
-        <file>assets/Images/481.bmp</file>
-        <file>assets/Images/483.bmp</file>
-        <file>assets/Images/485.bmp</file>
-        <file>assets/Images/487.bmp</file>
-        <file>assets/Images/489.bmp</file>
+        <file alias="Tom_face1">assets/Images/469.bmp</file>
+        <file alias="Tom_face2">assets/Images/471.bmp</file>
+        <file alias="Tom_left">assets/Images/473.bmp</file>
+        <file alias="Tom_left1">assets/Images/475.bmp</file>
+        <file alias="Tom_left2">assets/Images/477.bmp</file>
+        <file alias="Tom_right">assets/Images/479.bmp</file>
+        <file alias="Tom_right1">assets/Images/481.bmp</file>
+        <file alias="Tom_right2">assets/Images/483.bmp</file>
+        <file alias="Tom_back">assets/Images/485.bmp</file>
+        <file alias="Tom_back1">assets/Images/487.bmp</file>
+        <file alias="Tom_back2">assets/Images/489.bmp</file>
         <file>assets/Images/569.bmp</file>
         <file>assets/Images/637.bmp</file>
         <file>assets/Images/639.bmp</file>
