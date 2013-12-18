@@ -4,6 +4,7 @@
 #include "magicfloor.h"
 #include "magictom.h"
 #include "magicdisplayobject.h"
+#include "magicbacksound.h"
 
 #include <QMutex>
 #include <QTimer>
@@ -16,6 +17,7 @@ class MagicMap : public MagicDisplayObject
     MagicTom *mTom;
     QMutex *animateLock;
     QTimer *animateTimer;
+    MagicBackSound *mBackSound;
 
     MagicFloor *floor[121];
 

@@ -13,7 +13,6 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
     Widget *mWidget;
-    MagicBackSound *mBackSound;
 
 public:
     MainWindow(QWidget *parent = 0);

@@ -5,6 +5,7 @@
 MagicTom::MagicTom()
 {
     pix_face = new QPixmap(":/images/Tom_face");
+    pix_face->setMask(QBitmap(":/images/Tom_face_mask"));
     pix_face_move[0] = new QPixmap(":/images/Tom_face1");
     pix_face_move[1] = new QPixmap(":/images/Tom_face2");
     pix_back = new QPixmap(":/images/Tom_back");

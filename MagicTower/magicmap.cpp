@@ -20,6 +20,9 @@ MagicMap::MagicMap()
     for (int i = 0; i < 11; i++)
         for (int j = 0; j < 11; j++)
             displayList.push_front(floor[11 * i + j] = new MagicFloor(32 * i, 32 * j));
+
+    mBackSound = new MagicBackSound();
+    mBackSound->play(QSound::Infinite);
 }
 
 void MagicMap::loadMap(QFile *file)
@@ -75,6 +78,13 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
             break;
         default:
             animateState = 0;
+        }
+        switch(e->key())
+        {
+        case Qt::Key_0: mBackSound->change(0); break;
+        case Qt::Key_1: mBackSound->change(1); break;
+        case Qt::Key_2: mBackSound->change(2); break;
+        case Qt::Key_3: mBackSound->change(3); break;
         }
     }
 }

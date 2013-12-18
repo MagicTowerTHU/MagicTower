@@ -141,17 +141,16 @@
         <file alias="Tom_face">assets/Images/415.bmp</file>
         <file>assets/Images/460.bmp</file>
         <file>assets/Images/462.bmp</file>
-        <file alias="Tom_face1">assets/Images/469.bmp</file>
-        <file alias="Tom_face2">assets/Images/471.bmp</file>
-        <file alias="Tom_left">assets/Images/473.bmp</file>
-        <file alias="Tom_left1">assets/Images/475.bmp</file>
-        <file alias="Tom_left2">assets/Images/477.bmp</file>
-        <file alias="Tom_right">assets/Images/479.bmp</file>
-        <file alias="Tom_right1">assets/Images/481.bmp</file>
-        <file alias="Tom_right2">assets/Images/483.bmp</file>
-        <file alias="Tom_back">assets/Images/485.bmp</file>
-        <file alias="Tom_back1">assets/Images/487.bmp</file>
-        <file alias="Tom_back2">assets/Images/489.bmp</file>
+        <file>assets/Images/469.bmp</file>
+        <file>assets/Images/473.bmp</file>
+        <file>assets/Images/475.bmp</file>
+        <file>assets/Images/477.bmp</file>
+        <file>assets/Images/479.bmp</file>
+        <file>assets/Images/481.bmp</file>
+        <file>assets/Images/483.bmp</file>
+        <file>assets/Images/485.bmp</file>
+        <file>assets/Images/487.bmp</file>
+        <file>assets/Images/489.bmp</file>
         <file>assets/Images/569.bmp</file>
         <file>assets/Images/637.bmp</file>
         <file>assets/Images/639.bmp</file>
@@ -176,6 +175,18 @@
         <file>assets/Images/890.jpg</file>
         <file>assets/Images/892.jpg</file>
         <file>assets/Images/894.jpg</file>
+        <file alias="Tom_face_mask">assets/Images/415_.bmp</file>
+        <file alias="Tom_right">assets/Images/479_.png</file>
+        <file alias="Tom_face1">assets/Images/469_.png</file>
+        <file alias="Tom_face2">assets/Images/471_.png</file>
+        <file alias="Tom_right1">assets/Images/481_.png</file>
+        <file alias="Tom_right2">assets/Images/483_.png</file>
+        <file alias="Tom_back">assets/Images/485_.png</file>
+        <file alias="Tom_back1">assets/Images/487_.png</file>
+        <file alias="Tom_back2">assets/Images/489_.png</file>
+        <file alias="Tom_left">assets/Images/473_.png</file>
+        <file alias="Tom_left1">assets/Images/475_.png</file>
+        <file alias="Tom_left2">assets/Images/477_.png</file>
     </qresource>
     <qresource prefix="/sounds">
         <file alias="1.wav">assets/Sounds/1.wav</file>
@@ -200,10 +211,11 @@
         <file>assets/Sounds/20.wav</file>
         <file alias="beep">assets/Sounds/21.wav</file>
         <file>assets/Sounds/853.wav</file>
-        <file>assets/Sounds/857.wav</file>
-        <file>assets/Sounds/859.wav</file>
-        <file>assets/Sounds/860.wav</file>
+        <file alias="back_0">assets/Sounds/857.wav</file>
+        <file alias="back_2">assets/Sounds/859.wav</file>
+        <file alias="back_3">assets/Sounds/860.wav</file>
         <file>assets/Sounds/streaming.wav</file>
-        <file alias="858.wav">assets/Sounds/858.wav</file>
+        <file alias="back_1">assets/Sounds/858.wav</file>
+        <file>assets/Images/469_.png</file>
     </qresource>
 </RCC>

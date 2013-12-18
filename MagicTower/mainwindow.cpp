@@ -24,9 +24,6 @@ MainWindow::MainWindow(QWidget *parent)
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), mWidget, SLOT(animate()));
     timer->start(20);
-
-    mBackSound = new MagicBackSound();
-    mBackSound->play(QSound::Infinite);
 }
 
 MainWindow::~MainWindow()
