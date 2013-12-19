@@ -1,12 +1,17 @@
 #include "magiccondition.h"
 
-MagicCondition::MagicCondition()
+MagicCondition::MagicCondition(MagicOperand *condition)
 {
+    this->condition = condition;
     trueBranch = falseBranch = NULL;
 }
 
 void MagicCondition::run(MagicMap *map)
 {
+    if (condition->getValue(map).isTrue())
+        trueBranch->run(map);
+    else
+        falseBranch->run(map);
 }
 
 void MagicCondition::pushTrueBranch(MagicExpression *trueBranch)

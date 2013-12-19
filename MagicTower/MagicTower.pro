@@ -31,7 +31,8 @@ SOURCES += main.cpp\
     MagicExpression/magicgoto.cpp \
     MagicExpression/magicoperand.cpp \
     MagicExpression/magicconst.cpp \
-    MagicExpression/magicoperation.cpp
+    MagicExpression/magicoperation.cpp \
+    MagicExpression/magicreference.cpp
 
 HEADERS  += mainwindow.h \
     widget.h \
@@ -50,7 +51,8 @@ HEADERS  += mainwindow.h \
     MagicExpression/magicgoto.h \
     MagicExpression/magicoperand.h \
     MagicExpression/magicconst.h \
-    MagicExpression/magicoperation.h
+    MagicExpression/magicoperation.h \
+    MagicExpression/magicreference.h
 
 RESOURCES += \
     assets.qrc

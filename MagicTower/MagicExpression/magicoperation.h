@@ -10,7 +10,7 @@ class MagicOperation : public MagicOperand
 
 public:
     MagicOperation(MagicOperand *, MagicOperand *);
-    virtual MagicVarient getValue();
+    virtual MagicVarient getValue(MagicMap *);
 };
 
 #endif // MAGICOPERATION_H

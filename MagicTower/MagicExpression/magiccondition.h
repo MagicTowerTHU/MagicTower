@@ -2,13 +2,15 @@
 #define MAGICCONDITION_H
 
 #include "magicexpression.h"
+#include "magicoperand.h"
 
 class MagicCondition : public MagicExpression
 {
     MagicExpression *trueBranch, *falseBranch;
+    MagicOperand *condition;
 
 public:
-    MagicCondition();
+    MagicCondition(MagicOperand *);
     virtual void run(MagicMap *);
 
     void pushTrueBranch(MagicExpression *);

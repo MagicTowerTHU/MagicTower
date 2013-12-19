@@ -1,5 +1,9 @@
 #include "magicvarient.h"
 
-MagicVarient::MagicVarient()
+MagicVarient::MagicVarient(int)
+{
+}
+
+MagicVarient::MagicVarient(QString)
 {
 }
