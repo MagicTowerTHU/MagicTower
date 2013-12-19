@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     magicfloor.cpp \
     MagicExpression/magicexpression.cpp \
     MagicExpression/magicassignment.cpp \
-    MagicExpression/magiccondition.cpp
+    MagicExpression/magiccondition.cpp \
+    MagicExpression/magicvarient.cpp
 
 HEADERS  += mainwindow.h \
     widget.h \
@@ -40,7 +41,8 @@ HEADERS  += mainwindow.h \
     magicfloor.h \
     MagicExpression/magicexpression.h \
     MagicExpression/magicassignment.h \
-    MagicExpression/magiccondition.h
+    MagicExpression/magiccondition.h \
+    MagicExpression/magicvarient.h
 
 RESOURCES += \
     assets.qrc
