@@ -5,9 +5,14 @@
 
 class MagicCondition : public MagicExpression
 {
+    MagicExpression *trueBranch, *falseBranch;
+
 public:
     MagicCondition();
-    virtual void run(MagicMap *map);
+    virtual void run(MagicMap *);
+
+    void pushTrueBranch(MagicExpression *);
+    void pushFalseBranch(MagicExpression *);
 };
 
 #endif // MAGICCONDITION_H

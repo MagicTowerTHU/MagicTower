@@ -2,8 +2,19 @@
 
 MagicCondition::MagicCondition()
 {
+    trueBranch = falseBranch = NULL;
 }
 
-void MagicAssignment::run(MagicMap *map)
+void MagicCondition::run(MagicMap *map)
 {
+}
+
+void MagicCondition::pushTrueBranch(MagicExpression *trueBranch)
+{
+    this->trueBranch = trueBranch;
+}
+
+void MagicCondition::pushFalseBranch(MagicExpression *falseBranch)
+{
+    this->falseBranch = falseBranch;
 }

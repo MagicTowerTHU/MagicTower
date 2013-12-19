@@ -7,7 +7,7 @@ class MagicAssignment : public MagicExpression
 {
 public:
     MagicAssignment();
-    virtual void run(MagicMap *map);
+    virtual void run(MagicMap *);
 };
 
 #endif // MAGICASSIGNMENT_H
