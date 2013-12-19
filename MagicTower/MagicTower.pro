@@ -23,7 +23,10 @@ SOURCES += main.cpp\
     magicbacksound.cpp \
     magicmap.cpp \
     magicwall.cpp \
-    magicfloor.cpp
+    magicfloor.cpp \
+    MagicExpression/magicexpression.cpp \
+    MagicExpression/magicassignment.cpp \
+    MagicExpression/magiccondition.cpp
 
 HEADERS  += mainwindow.h \
     widget.h \
@@ -34,7 +37,10 @@ HEADERS  += mainwindow.h \
     magicbacksound.h \
     magicmap.h \
     magicwall.h \
-    magicfloor.h
+    magicfloor.h \
+    MagicExpression/magicexpression.h \
+    MagicExpression/magicassignment.h \
+    MagicExpression/magiccondition.h
 
 RESOURCES += \
     assets.qrc
