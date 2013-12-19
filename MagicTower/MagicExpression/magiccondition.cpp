@@ -4,6 +4,7 @@ MagicCondition::MagicCondition(MagicOperand *condition)
 {
     this->condition = condition;
     trueBranch = falseBranch = NULL;
+    next = NULL;
 }
 
 void MagicCondition::run(MagicMap *map)

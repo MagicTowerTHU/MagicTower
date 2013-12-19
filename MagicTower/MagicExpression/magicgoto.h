@@ -5,7 +5,6 @@
 
 class MagicGoto : public MagicExpression
 {
-    MagicExpression *target;
 public:
     MagicGoto(MagicExpression *);
     virtual void run(MagicMap *);

@@ -9,6 +9,7 @@ class MagicExpression
 public:
     MagicExpression();
     virtual void run(MagicMap *) = 0;
+    void setNext(MagicExpression *);
 };
 
 #endif // MAGICEXPRESSION_H
