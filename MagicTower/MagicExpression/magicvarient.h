@@ -12,23 +12,36 @@ public:
     MagicVarient(int);
     MagicVarient(QString);
 
-    bool operator==(const MagicVarient &);
-    bool operator!=(const MagicVarient &);
-    bool operator>(const MagicVarient &);
-    bool operator>=(const MagicVarient &);
-    bool operator<(const MagicVarient &);
-    bool operator<=(const MagicVarient &);
+    int getInt();
+    QString getString();
+    bool isTrue();
 
-    MagicVarient &operator+(const MagicVarient &);
-    MagicVarient &operator-(const MagicVarient &);
-    MagicVarient &operator*(const MagicVarient &);
-    MagicVarient &operator/(const MagicVarient &);
-    MagicVarient &operator%(const MagicVarient &);
-    MagicVarient &operator^(const MagicVarient &);
-    MagicVarient &operator&(const MagicVarient &);
-    MagicVarient &operator<<(const MagicVarient &);
-    MagicVarient &operator>>(const MagicVarient &);
-    MagicVarient &operator~();
+    MagicVarient operator==(MagicVarient);
+    MagicVarient operator!=(MagicVarient);
+    MagicVarient operator>(MagicVarient);
+    MagicVarient operator>=(MagicVarient);
+    MagicVarient operator<(MagicVarient);
+    MagicVarient operator<=(MagicVarient);
+
+    MagicVarient operator+(MagicVarient);
+    MagicVarient operator-(MagicVarient);
+    MagicVarient operator*(MagicVarient);
+    MagicVarient operator/(MagicVarient);
+    MagicVarient operator%(MagicVarient);
+    MagicVarient operator^(MagicVarient);
+    MagicVarient operator&(MagicVarient);
+    MagicVarient operator<<(MagicVarient);
+    MagicVarient operator>>(MagicVarient);
+    MagicVarient operator~();
+
+    MagicVarient &operator+=(MagicVarient);
+    MagicVarient &operator-=(MagicVarient);
+    MagicVarient &operator*=(MagicVarient);
+    MagicVarient &operator/=(MagicVarient);
+    MagicVarient &operator%=(MagicVarient);
+
+    static MagicVarient input(QString, int);
 };
+
 
 #endif // MAGICVARIENT_H

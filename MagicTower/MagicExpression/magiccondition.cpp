@@ -4,6 +4,7 @@ MagicCondition::MagicCondition()
 {
 }
 
-void MagicAssignment::run(MagicMap *map)
+void MagicCondition::run(MagicMap *map)
 {
 }
+
