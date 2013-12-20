@@ -1,6 +1,5 @@
 #include "magicvarient.h"
 
-<<<<<<< HEAD
 #include <QString>
 
 MagicVarient::MagicVarient(int data)
@@ -294,13 +293,6 @@ MagicVarient & MagicVarient::operator%=(MagicVarient a)
 }
 
 MagicVarient MagicVarient::input(QString source, int position)
-=======
-MagicVarient::MagicVarient(int)
-{
-}
-
-MagicVarient::MagicVarient(QString)
->>>>>>> 0696763055560b5a07793e3df10e1180372b9f7d
 {
     int i = position;
     if(source[i] >= '0' && source[i] <= '9')
@@ -327,3 +319,4 @@ MagicVarient::MagicVarient(QString)
         return MagicVarient(temp);
     }
 }
+
