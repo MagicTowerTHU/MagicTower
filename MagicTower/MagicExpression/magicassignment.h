@@ -2,12 +2,17 @@
 #define MAGICASSIGNMENT_H
 
 #include "magicexpression.h"
+#include "magicreference.h"
+#include "magicoperand.h"
 
 class MagicAssignment : public MagicExpression
 {
+    MagicReference *target;
+    MagicOperand *operand;
+
 public:
     MagicAssignment();
-    virtual void run(MagicMap *map);
+    virtual void run(MagicMap *);
 };
 
 #endif // MAGICASSIGNMENT_H

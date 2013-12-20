@@ -27,7 +27,12 @@ SOURCES += main.cpp\
     MagicExpression/magicexpression.cpp \
     MagicExpression/magicassignment.cpp \
     MagicExpression/magiccondition.cpp \
-    MagicExpression/magicvarient.cpp
+    MagicExpression/magicvarient.cpp \
+    MagicExpression/magicgoto.cpp \
+    MagicExpression/magicoperand.cpp \
+    MagicExpression/magicconst.cpp \
+    MagicExpression/magicoperation.cpp \
+    MagicExpression/magicreference.cpp
 
 HEADERS  += mainwindow.h \
     widget.h \
@@ -42,7 +47,12 @@ HEADERS  += mainwindow.h \
     MagicExpression/magicexpression.h \
     MagicExpression/magicassignment.h \
     MagicExpression/magiccondition.h \
-    MagicExpression/magicvarient.h
+    MagicExpression/magicvarient.h \
+    MagicExpression/magicgoto.h \
+    MagicExpression/magicoperand.h \
+    MagicExpression/magicconst.h \
+    MagicExpression/magicoperation.h \
+    MagicExpression/magicreference.h
 
 RESOURCES += \
     assets.qrc
