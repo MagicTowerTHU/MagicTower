@@ -292,9 +292,8 @@ MagicVarient & MagicVarient::operator%=(MagicVarient a)
     return *this = *this % a;
 }
 
-MagicVarient MagicVarient::input(QString source, int position)
+MagicVarient MagicVarient::input(QString source, int &i)
 {
-    int i = position;
     if(source[i] >= '0' && source[i] <= '9')
     {
         int temp;
@@ -306,10 +305,10 @@ MagicVarient MagicVarient::input(QString source, int position)
         }
         return MagicVarient(temp);
     }
-    else
+    else if (source[i] == '\"')
     {
         QString temp("");
-        while(source[i] != '"' && i <= source.size())
+        while(++i <= source.size() && source[i] != '\"')
         {
             temp += source[i];
             i++;

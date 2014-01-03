@@ -7,7 +7,6 @@
 
 class MagicAssignment : public MagicExpression
 {
-    MagicReference *target;
     MagicOperand *operand;
 
 public:
