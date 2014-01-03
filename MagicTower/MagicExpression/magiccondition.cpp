@@ -24,3 +24,4 @@ void MagicCondition::pushFalseBranch(MagicExpression *falseBranch)
 {
     this->falseBranch = falseBranch;
 }
+
