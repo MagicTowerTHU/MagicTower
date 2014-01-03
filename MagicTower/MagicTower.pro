@@ -30,7 +30,6 @@ SOURCES += main.cpp\
     MagicExpression/magicvarient.cpp \
     MagicExpression/magicgoto.cpp \
     MagicExpression/magicoperand.cpp \
-    MagicExpression/magicconst.cpp \
     MagicExpression/magicoperation.cpp \
     MagicExpression/magicreference.cpp
 
@@ -50,7 +49,6 @@ HEADERS  += mainwindow.h \
     MagicExpression/magicvarient.h \
     MagicExpression/magicgoto.h \
     MagicExpression/magicoperand.h \
-    MagicExpression/magicconst.h \
     MagicExpression/magicoperation.h \
     MagicExpression/magicreference.h
 

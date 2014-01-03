@@ -22,6 +22,7 @@ class MagicMap : public MagicDisplayObject
     MagicFloor *floor[121];
 
     QList<MagicDisplayObject *> displayList;
+    QList<MagicObject *> objectList;
     int animateState;
 
 public:
@@ -30,6 +31,7 @@ public:
     void loadMap(QFile * = NULL);
     virtual void paint(QPainter *);
     void keyPressEvent(QKeyEvent *);
+    QList<MagicObject *> findObject(QString, QString, QString);
 };
 
 #endif // MAGICMAP_H
