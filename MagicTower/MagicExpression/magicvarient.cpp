@@ -314,12 +314,9 @@ MagicVarient MagicVarient::input(QString source, int &i)
     else if (source[i] == '\"')
     {
         QString temp("");
-        while(++i <= source.size() && source[i] != '\"')
-        {
+        while (++i <= source.size() && source[i] != '\"')
             temp += source[i];
-            i++;
-        }
-        if(i == source.size())
+        if (i++ == source.size())
             throw("Error: input reaches data end!");
         return MagicVarient(temp);
     }

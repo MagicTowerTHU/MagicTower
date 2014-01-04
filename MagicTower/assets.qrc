@@ -216,6 +216,5 @@
         <file alias="back_3">assets/Sounds/860.wav</file>
         <file>assets/Sounds/streaming.wav</file>
         <file alias="back_1">assets/Sounds/858.wav</file>
-        <file>assets/Images/469_.png</file>
     </qresource>
 </RCC>

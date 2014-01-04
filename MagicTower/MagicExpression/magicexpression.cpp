@@ -48,7 +48,7 @@ void operate()
 
 bool isSymbol(char x)
 {
-    return !(x >= 'a' && x <= 'z' || x >= '0' && x <= '9' || x == '#' || x == '.');
+    return !(x >= 'a' && x <= 'z' || x >= '0' && x <= '9' || x == '#' || x == '.' || x == '\"');
 }
 
 int getOpe(QString buffer, int &p)
@@ -69,14 +69,14 @@ int getOpe(QString buffer, int &p)
     }
 }
 
-MagicOperand *getInt(QString buffer, int &p)
+MagicOperand *getVar(QString buffer, int &p)
 {
-    if (!buffer[p].isDigit()) throw "bad number!";
+    /*if (!buffer[p].isDigit()) throw "bad number!";
     int result = 0;
     while (buffer[p].isDigit())
         result *= 10, result += buffer[p++].toLatin1() - '0';
-
-    return new MagicOperand(result);
+    */
+    return new MagicOperand(MagicVarient::input(buffer, p));
 }
 
 MagicOperand *processLine(QString buffer)
@@ -111,7 +111,7 @@ MagicOperand *processLine(QString buffer)
             stackOpe.push(ope), stackOrd.push(order);
             skipSpaces(buffer, t);
         }else{
-            stackNum.push(getInt(buffer, t));
+            stackNum.push(getVar(buffer, t));
             skipSpaces(buffer, t);
         }
     }
@@ -136,15 +136,11 @@ MagicExpression *MagicExpression::input(QFile *file)
     QTextStream in(file);
     while (!in.atEnd()) {
         QString line = in.readLine();
-        QTextStream(stdout) << line << endl;
         MagicExpression *proceeded = new MagicAssignment(processLine(line));
-        QTextStream(stdout) << proceeded << endl;
-        QTextStream(stdout) << (dynamic_cast<MagicOperation *>(dynamic_cast<MagicAssignment *>(proceeded)->operand)->operand[0]->getValue(NULL) == 3).isTrue() << endl;
         if (!first)
             first = now = proceeded;
         else
             now->setNext(proceeded), now = proceeded;
-        return first;
     }
     return first;
 }
