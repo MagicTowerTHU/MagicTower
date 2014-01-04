@@ -5,10 +5,10 @@
 
 class MagicOperation : public MagicOperand
 {
-    QString mOperator;
-    MagicOperand *operand[2];
 
 public:
+    QString mOperator;
+    MagicOperand *operand[2];
     MagicOperation(MagicOperand *, MagicOperand *, QString);
     MagicOperation(MagicOperand *, QString);
     virtual MagicVarient getValue(MagicMap *);

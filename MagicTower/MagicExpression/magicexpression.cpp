@@ -138,11 +138,13 @@ MagicExpression *MagicExpression::input(QFile *file)
         QString line = in.readLine();
         QTextStream(stdout) << line << endl;
         MagicExpression *proceeded = new MagicAssignment(processLine(line));
+        QTextStream(stdout) << proceeded << endl;
+        QTextStream(stdout) << (dynamic_cast<MagicOperation *>(dynamic_cast<MagicAssignment *>(proceeded)->operand)->operand[0]->getValue(NULL) == 3).isTrue() << endl;
         if (!first)
             first = now = proceeded;
         else
             now->setNext(proceeded), now = proceeded;
+        return first;
     }
-    QTextStream(stdout) << first << endl;
     return first;
 }
