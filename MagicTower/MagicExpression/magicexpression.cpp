@@ -3,6 +3,7 @@
 
 #include <QTextStream>
 #include <QChar>
+#include <iostream>
 
 MagicExpression::MagicExpression()
 {
@@ -128,18 +129,20 @@ MagicExpression *MagicExpression::input(QFile *file)
     stackNum.clear(), stackOpe.clear(), stackOrd.clear();
 
     if (!file->open(QIODevice::ReadOnly | QIODevice::Text))
-        throw "File Cannot Open...";
+        printf("File Cannot Open..."), throw "File Cannot Open...";
 
     MagicExpression *now = NULL, *first = NULL;
 
     QTextStream in(file);
     while (!in.atEnd()) {
         QString line = in.readLine();
+        QTextStream(stdout) << line << endl;
         MagicExpression *proceeded = new MagicAssignment(processLine(line));
         if (!first)
             first = now = proceeded;
         else
             now->setNext(proceeded), now = proceeded;
     }
+    QTextStream(stdout) << first << endl;
     return first;
 }
