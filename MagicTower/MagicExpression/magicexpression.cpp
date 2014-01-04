@@ -141,4 +141,5 @@ MagicExpression *MagicExpression::input(QFile *file)
         else
             now->setNext(proceeded), now = proceeded;
     }
+    return first;
 }

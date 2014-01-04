@@ -29,9 +29,8 @@ void MagicMap::loadMap(QFile *file)
 {
     if (!file)
     {
-        QPoint _p;
-        _p.setX(0), _p.setY(0);
-        mTom->property["position"] = _p;
+        mTom->property["position_x"] = 0;
+        mTom->property["position_y"] = 0;
     }
 }
 
@@ -93,9 +92,9 @@ QList<MagicObject *> MagicMap::findObject(QString objectLabel, QString objectId,
 {
     QList<MagicObject *> objects;
     for (QList<MagicObject *>::iterator i = objectList.begin(); i != objectList.end(); i++)
-        if ((objectLabel == "" || (**i)["label"] == objectLabel) &&
-                (objectId == "" || (**i)["id"] == objectId) &&
-                (objectClass == "" || (**i)["class"] == objectClass))
+        if ((objectLabel == "" || ((**i)["label"] == objectLabel).isTrue()) &&
+                (objectId == "" || ((**i)["id"] == objectId).isTrue()) &&
+                (objectClass == "" || ((**i)["class"] == objectClass).isTrue()))
             objects.append(*i);
     return objects;
 }

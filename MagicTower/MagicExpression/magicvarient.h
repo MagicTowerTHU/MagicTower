@@ -11,6 +11,7 @@ class MagicVarient
 public:
     MagicVarient(int);
     MagicVarient(QString);
+    MagicVarient();
 
     int getInt();
     QString getString();

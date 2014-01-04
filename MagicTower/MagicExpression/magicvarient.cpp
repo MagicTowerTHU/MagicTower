@@ -14,6 +14,12 @@ MagicVarient::MagicVarient(QString data)
     this->type = true;
 }
 
+MagicVarient::MagicVarient()
+{
+    this->data = 0;
+    this->type = false;
+}
+
 int MagicVarient::getInt()
 {
     if(!this->type)
