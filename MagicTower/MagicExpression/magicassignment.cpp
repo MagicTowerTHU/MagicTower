@@ -1,12 +1,13 @@
 #include "magicassignment.h"
 
-MagicAssignment::MagicAssignment()
+MagicAssignment::MagicAssignment(MagicOperand *operand)
 {
     next = NULL;
+    this->operand = operand;
 }
 
 void MagicAssignment::run(MagicMap *map)
 {
     operand->getValue(map);
-    next->run();
+    next->run(map);
 }

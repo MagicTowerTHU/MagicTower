@@ -6,7 +6,7 @@
 
 class MagicOperand
 {
-    MagicVarient value;
+    MagicVarient *value;
 public:
     MagicOperand();
     MagicOperand(MagicVarient);

@@ -10,6 +10,7 @@ class MagicOperation : public MagicOperand
 
 public:
     MagicOperation(MagicOperand *, MagicOperand *, QString);
+    MagicOperation(MagicOperand *, QString);
     virtual MagicVarient getValue(MagicMap *);
 };
 

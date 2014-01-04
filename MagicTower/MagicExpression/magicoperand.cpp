@@ -2,9 +2,10 @@
 
 MagicOperand::MagicOperand()
 {
+    value = NULL;
 }
 
 MagicOperand::MagicOperand(MagicVarient value)
 {
-    this->value = value;
+    this->value = new MagicVarient(value);
 }

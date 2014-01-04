@@ -9,6 +9,7 @@
 
 class MagicExpression
 {
+protected:
     MagicExpression *next;
 public:
     MagicExpression();

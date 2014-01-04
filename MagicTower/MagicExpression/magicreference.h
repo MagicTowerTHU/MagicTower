@@ -8,11 +8,10 @@
 
 class MagicReference : public MagicOperand
 {
-    QString objectLabel, objectId, property;
-    QList<QString> objectClass;
+    QString objectLabel, objectId, objectClass, property;
 
 public:
-    MagicReference(QString, QString, QList<QString>, QString);
+    MagicReference(QString, QString, QString, QString);
 
     virtual MagicVarient getValue(MagicMap *);
     void setValue(MagicVarient, MagicMap *);

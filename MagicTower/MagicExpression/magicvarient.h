@@ -40,7 +40,7 @@ public:
     MagicVarient &operator/=(MagicVarient);
     MagicVarient &operator%=(MagicVarient);
 
-    static MagicVarient input(QString, int);
+    static MagicVarient input(QString, int &);
 };
 
 

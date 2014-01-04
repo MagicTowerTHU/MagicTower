@@ -1,6 +1,8 @@
 #include "magicexpression.h"
+#include "magicassignment.h"
 
 #include <QTextStream>
+#include <QChar>
 
 MagicExpression::MagicExpression()
 {
@@ -21,7 +23,7 @@ QStack<int> stackOpe, stackOrd;
 
 void skipSpaces(QString buffer, int &p)
 {
-    while (buffer[p] == ' ' || buffer[p] = '\t') p++;
+    while (buffer[p] == ' ' || buffer[p] == '\t') p++;
 }
 
 void operate()
@@ -48,6 +50,34 @@ bool isSymbol(char x)
     return !(x >= 'a' && x <= 'z' || x >= '0' && x <= '9' || x == '#' || x == '.');
 }
 
+int getOpe(QString buffer, int &p)
+{
+    switch (buffer[p++].toLatin1())
+    {
+        case '+': return 0;
+        case '-': return 1;
+        case '*': return 2;
+        case '/': return 3;
+        case '%': return 4;
+        case '^': return 5;
+        case '&': return 6;
+        case '<': if (buffer[p++] == '<') return 7; else throw "bad operator!";
+        case '>': if (buffer[p++] == '>') return 8; else throw "bad operator!";
+        case '~': return 9;
+        default: throw "bad operator!";
+    }
+}
+
+MagicOperand *getInt(QString buffer, int &p)
+{
+    if (!buffer[p].isDigit()) throw "bad number!";
+    int result = 0;
+    while (buffer[p].isDigit())
+        result *= 10, result += buffer[p++].toLatin1() - '0';
+
+    return new MagicOperand(result);
+}
+
 MagicOperand *processLine(QString buffer)
 {
     stackNum.clear(), stackOpe.clear(), stackOrd.clear();
@@ -57,9 +87,9 @@ MagicOperand *processLine(QString buffer)
 
     int level = 0;
 
-    while (buffer[t])
+    while (t < buffer.length())
     {
-        if (isSymbol(buffer[t]))
+        if (isSymbol(buffer[t].toLatin1()))
         {
             if (buffer[t] == '(')
             {
@@ -88,24 +118,24 @@ MagicOperand *processLine(QString buffer)
     while (!stackOpe.empty())
         operate();
 
-    return stackNum[0];
+    return stackNum.pop();
 }
 
-static MagicExpression *MagicExpression::input(QFile *file)
+MagicExpression *MagicExpression::input(QFile *file)
 {
     QStack<QHash<QString, MagicExpression *> > labelStack;
 
     stackNum.clear(), stackOpe.clear(), stackOrd.clear();
 
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    if (!file->open(QIODevice::ReadOnly | QIODevice::Text))
         throw "File Cannot Open...";
 
     MagicExpression *now = NULL, *first = NULL;
 
-    QTextStream in(&file);
+    QTextStream in(file);
     while (!in.atEnd()) {
         QString line = in.readLine();
-        MagicExpression *proceeded = processLine(line);
+        MagicExpression *proceeded = new MagicAssignment(processLine(line));
         if (!first)
             first = now = proceeded;
         else
