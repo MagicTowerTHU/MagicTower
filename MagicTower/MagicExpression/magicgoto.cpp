@@ -1,8 +1,8 @@
 #include "magicgoto.h"
 
-MagicGoto::MagicGoto(MagicExpression *target)
+MagicGoto::MagicGoto(QString label)
 {
-    setNext(target);
+    this->label = label;
 }
 
 void MagicGoto::run(MagicMap *map)

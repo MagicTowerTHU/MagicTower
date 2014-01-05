@@ -9,13 +9,12 @@
 
 class MagicExpression
 {
-protected:
-    MagicExpression *next;
 public:
+    MagicExpression *next;
     MagicExpression();
     virtual void run(MagicMap *) = 0;
     void setNext(MagicExpression *);
-    static MagicExpression *input(QFile *);
+    static MagicExpression *input(QFile *, MagicMap *);
 };
 
 #endif // MAGICEXPRESSION_H

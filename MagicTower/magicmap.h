@@ -32,6 +32,7 @@ public:
     virtual void paint(QPainter *);
     void keyPressEvent(QKeyEvent *);
     QList<MagicObject *> findObject(QString, QString, QString);
+    QList<MagicDisplayObject *> findDisplayObject(QString, QString, QString);
 };
 
 #endif // MAGICMAP_H

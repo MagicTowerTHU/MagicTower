@@ -1,5 +1,6 @@
 #include "magicexpression.h"
 #include "magicassignment.h"
+#include "magicgoto.h"
 
 #include <QTextStream>
 #include <QChar>
@@ -82,10 +83,18 @@ MagicOperand *getVar(QString buffer, int &p)
         return new MagicOperand(MagicVarient::input(buffer, p));
     else
     {
-        QRegExp rx("^(\\w*)?(#\\w*)?(.\\w*)?\s->\s(\w*)");
+        QRegExp rx("^(\\w*)?(#\\w*)?(.\\w*)?\\s*->\\s*(\\w*)");
         rx.indexIn(buffer, p);
+        p += rx.captureCount();
         return new MagicReference(rx.cap(1), rx.cap(2), rx.cap(3), rx.cap(4));
     }
+}
+
+QList<MagicDisplayObject *> getObj(QString buffer, int p, MagicMap *map)
+{
+    QRegExp rx("^(\\w*)?(#\\w*)?(.\\w*)?");
+    rx.indexIn(buffer, p);
+    return map->findDisplayObject(rx.cap(1), rx.cap(2), rx.cap(3));
 }
 
 MagicOperand *processLine(QString buffer)
@@ -131,34 +140,70 @@ MagicOperand *processLine(QString buffer)
     return stackNum.pop();
 }
 
-MagicExpression *MagicExpression::input(QFile *file)
+MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
 {
-    QStack<QHash<QString, MagicExpression *> > labelStack;
+    QStack<QHash<QString, MagicExpression *>> labelStack;
+    labelStack.push(QHash<QString, MagicExpression *>());
+    QStack<QList<MagicGoto *>> gotoStack;
+    gotoStack.push(QList<MagicGoto *>());
+    QStack<MagicExpression *>firstStack, nowStack;
+    firstStack.push(NULL); nowStack.push(NULL);
+
+    QList<MagicDisplayObject *> targetObjects;
 
     stackNum.clear(), stackOpe.clear(), stackOrd.clear();
 
     if (!file->open(QIODevice::ReadOnly | QIODevice::Text))
         printf("File Cannot Open..."), throw "File Cannot Open...";
 
-    MagicExpression *now = NULL, *first = NULL;
-
     QTextStream in(file);
     while (!in.atEnd()) {
-        QString line = in.readLine();
+        QString line = in.readLine().trimmed();
+        if (line.length() == 0)
+            continue;
 
         try
         {
-            MagicExpression *proceeded = new MagicAssignment(processLine(line));
-            if (!first)
-                first = now = proceeded;
+            if (line.startsWith("goto"))
+                gotoStack.top().append(new MagicGoto(line.mid(5).trimmed()));
+            else if (line.startsWith(":"))
+                labelStack.top()[line.mid(1).trimmed()] = nowStack.top();
+            else if (line.startsWith("{"))
+            {
+                targetObjects = getObj(line, 1, map);
+                labelStack.push(QHash<QString, MagicExpression *>());
+                gotoStack.push(QList<MagicGoto *>());
+                firstStack.push(NULL), nowStack.push(NULL);
+            }
+            else if (line.startsWith("}"))
+            {
+                for (auto i = targetObjects.begin(); i != targetObjects.end(); i++)
+                    (*i)->setAction(firstStack.top());
+                for (auto i = gotoStack.top().begin(); i != gotoStack.top().end(); i++)
+                    (*i)->setNext(labelStack.top()[(*i)->label]->next);
+                labelStack.pop();
+                gotoStack.pop();
+            }
             else
-                now->setNext(proceeded), now = proceeded;
-            qDebug() << line << " => " << dynamic_cast<MagicAssignment *>(now)->operand->getValue(NULL).getString() << endl;
+            {
+                MagicExpression *proceeded = new MagicAssignment(processLine(line));
+                if (!firstStack.top())
+                    firstStack.top() = nowStack.top() = proceeded;
+                else
+                    nowStack.top()->setNext(proceeded), nowStack.top() = proceeded;
+                qDebug() << line << " => " << dynamic_cast<MagicAssignment *>(nowStack.top())->operand->getValue(NULL).getString() << endl;
+            }
         }
         catch (const char *e)
         {
             qDebug() << "Exception : " << e;
         }
     }
-    return first;
+
+    for (auto i = gotoStack.top().begin(); i != gotoStack.top().end(); i++)
+        (*i)->setNext(labelStack.top()[(*i)->label]->next);
+    gotoStack.pop();
+    labelStack.pop();
+
+    return firstStack.pop();
 }

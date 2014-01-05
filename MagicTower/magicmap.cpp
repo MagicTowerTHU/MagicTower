@@ -91,7 +91,18 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
 QList<MagicObject *> MagicMap::findObject(QString objectLabel, QString objectId, QString objectClass)
 {
     QList<MagicObject *> objects;
-    for (QList<MagicObject *>::iterator i = objectList.begin(); i != objectList.end(); i++)
+    for (auto i = objectList.begin(); i != objectList.end(); i++)
+        if ((objectLabel == "" || ((**i)["label"] == objectLabel).isTrue()) &&
+                (objectId == "" || ((**i)["id"] == objectId).isTrue()) &&
+                (objectClass == "" || ((**i)["class"] == objectClass).isTrue()))
+            objects.append(*i);
+    return objects;
+}
+
+QList<MagicDisplayObject *> MagicMap::findDisplayObject(QString objectLabel, QString objectId, QString objectClass)
+{
+    QList<MagicDisplayObject *> objects;
+    for (auto i = displayList.begin(); i != displayList.end(); i++)
         if ((objectLabel == "" || ((**i)["label"] == objectLabel).isTrue()) &&
                 (objectId == "" || ((**i)["id"] == objectId).isTrue()) &&
                 (objectClass == "" || ((**i)["class"] == objectClass).isTrue()))

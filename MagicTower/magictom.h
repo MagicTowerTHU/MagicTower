@@ -25,7 +25,7 @@ public:
     void moveTo(int, int);
     bool setStep(int, int);
     int direction();
-    void move();
+    virtual bool move();
     void show();
 };
 

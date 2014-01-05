@@ -6,7 +6,8 @@
 class MagicGoto : public MagicExpression
 {
 public:
-    MagicGoto(MagicExpression *);
+    QString label;
+    MagicGoto(QString);
     virtual void run(MagicMap *);
 };
 

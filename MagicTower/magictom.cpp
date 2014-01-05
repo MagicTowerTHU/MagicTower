@@ -63,7 +63,7 @@ int MagicTom::direction()
     else return 4;
 }
 
-void MagicTom::move()
+bool MagicTom::move()
 {
     x += dx, y += dy;
 }
