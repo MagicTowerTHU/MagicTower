@@ -5,7 +5,7 @@
 
 MagicReference::MagicReference(QString Label, QString Id, QString Class, QString property)
 {
-    objectLabel = Label, objectId = Id, objectClass = Class, this->property = property;
+    objectLabel = Label, objectId = Id.right(Id.length() - 1), objectClass = Class.right(Class.length() - 1), this->property = property;
 }
 
 MagicVarient MagicReference::getValue(MagicMap *map)

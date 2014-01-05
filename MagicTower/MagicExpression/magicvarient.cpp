@@ -297,10 +297,10 @@ MagicVarient & MagicVarient::operator%=(MagicVarient a)
 
 MagicVarient MagicVarient::input(QString source, int &i)
 {
-    if(source[i] >= '0' && source[i] <= '9')
+    if (source[i] >= '0' && source[i] <= '9')
     {
         int temp = 0;
-        while(source[i] >= '0' && source[i] <= '9' && i < source.size())
+        while (source[i] >= '0' && source[i] <= '9' && i < source.size())
         {
             temp *= 10;
             temp += source[i].digitValue();
@@ -317,5 +317,5 @@ MagicVarient MagicVarient::input(QString source, int &i)
             throw("Error: input reaches data end!");
         return MagicVarient(temp);
     }
+    throw "Invalid number or string...";
 }
-

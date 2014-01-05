@@ -78,7 +78,14 @@ MagicOperand *getVar(QString buffer, int &p)
     while (buffer[p].isDigit())
         result *= 10, result += buffer[p++].toLatin1() - '0';
     */
-    return new MagicOperand(MagicVarient::input(buffer, p));
+    if (buffer[p].isDigit() || buffer[p] == '\"')
+        return new MagicOperand(MagicVarient::input(buffer, p));
+    else
+    {
+        QRegExp rx("^(\\w*)?(#\\w*)?(.\\w*)?\s->\s(\w*)");
+        rx.indexIn(buffer, p);
+        return new MagicReference(rx.cap(1), rx.cap(2), rx.cap(3), rx.cap(4));
+    }
 }
 
 MagicOperand *processLine(QString buffer)
@@ -112,7 +119,7 @@ MagicOperand *processLine(QString buffer)
                 operate();
             stackOpe.push(ope), stackOrd.push(order);
             skipSpaces(buffer, t);
-        }else{
+        } else {
             stackNum.push(getVar(buffer, t));
             skipSpaces(buffer, t);
         }
