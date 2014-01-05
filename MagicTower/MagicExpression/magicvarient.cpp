@@ -36,10 +36,7 @@ QString MagicVarient::getString()
     if(this->type)
         return *((QString*)this->data);
     else
-    {
-        throw("Error: Trying to get string value from int MagicVatirnt.");
-        return NULL;
-    }
+        return QString("<Number>") + QString::number(getInt());
 }
 
 bool MagicVarient::isTrue()
@@ -302,7 +299,7 @@ MagicVarient MagicVarient::input(QString source, int &i)
 {
     if(source[i] >= '0' && source[i] <= '9')
     {
-        int temp;
+        int temp = 0;
         while(source[i] >= '0' && source[i] <= '9' && i < source.size())
         {
             temp *= 10;
@@ -314,7 +311,7 @@ MagicVarient MagicVarient::input(QString source, int &i)
     else if (source[i] == '\"')
     {
         QString temp("");
-        while (++i <= source.size() && source[i] != '\"')
+        while (++i < source.size() && source[i] != '\"')
             temp += source[i];
         if (i++ == source.size())
             throw("Error: input reaches data end!");

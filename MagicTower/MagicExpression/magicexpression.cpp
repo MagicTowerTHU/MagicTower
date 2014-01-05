@@ -3,7 +3,9 @@
 
 #include <QTextStream>
 #include <QChar>
+#include <QtDebug>
 #include <iostream>
+#include <typeinfo>
 
 MagicExpression::MagicExpression()
 {
@@ -136,11 +138,20 @@ MagicExpression *MagicExpression::input(QFile *file)
     QTextStream in(file);
     while (!in.atEnd()) {
         QString line = in.readLine();
-        MagicExpression *proceeded = new MagicAssignment(processLine(line));
-        if (!first)
-            first = now = proceeded;
-        else
-            now->setNext(proceeded), now = proceeded;
+
+        try
+        {
+            MagicExpression *proceeded = new MagicAssignment(processLine(line));
+            if (!first)
+                first = now = proceeded;
+            else
+                now->setNext(proceeded), now = proceeded;
+            qDebug() << line << " => " << dynamic_cast<MagicAssignment *>(now)->operand->getValue(NULL).getString() << endl;
+        }
+        catch (const char *e)
+        {
+            qDebug() << "Exception : " << e;
+        }
     }
     return first;
 }
