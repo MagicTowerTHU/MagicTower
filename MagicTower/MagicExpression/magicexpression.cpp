@@ -1,6 +1,7 @@
 #include "magicexpression.h"
 #include "magicassignment.h"
 #include "magicgoto.h"
+#include "magiccondition.h"
 
 #include <QTextStream>
 #include <QChar>
@@ -13,6 +14,7 @@ MagicExpression::MagicExpression()
 
 void MagicExpression::run(MagicMap *) // halt
 {
+    qDebug() << "MagicExpression::run() terminates";
 }
 
 void MagicExpression::setNext(MagicExpression *next)
@@ -143,16 +145,101 @@ MagicOperand *processLine(QString buffer)
     return stackNum.pop();
 }
 
+MagicOperand *getCondition(QString buffer, int p)
+{
+    QRegExp rx("^*(.*)$");
+    rx.indexIn(buffer.trimmed(), p);
+    return processLine(rx.cap(1));
+}
+
+QStack<QHash<QString, MagicExpression *>> labelStack;
+QStack<QList<MagicGoto *>> gotoStack;
+
+QStack<MagicExpression *>firstStack, nowStack;
+QStack<int>ifFlagStack; // 0 nothing, 1 expecting expression, 2 expecting else, 3 expecting else expression.
+int ifFlag;
+QStack<MagicCondition *>ifStack;
+
+QList<MagicDisplayObject *> targetObjects;
+
+MagicExpression *head;
+MagicExpression *tail;
+
+inline void newBlock()
+{
+    labelStack.push(QHash<QString, MagicExpression *>());
+    gotoStack.push(QList<MagicGoto *>());
+    firstStack.push(NULL);
+    nowStack.push(NULL);
+    ifFlagStack.push(ifFlag);
+    ifFlag = 0;
+}
+
+inline void backBlock()
+{
+    for (auto i = targetObjects.begin(); i != targetObjects.end(); i++)
+        (*i)->setAction(firstStack.top());
+    for (auto i = gotoStack.top().begin(); i != gotoStack.top().end(); i++)
+        (*i)->setNext(labelStack.top()[(*i)->label]->next);
+    labelStack.pop();
+    gotoStack.pop();
+    head = firstStack.pop();
+    tail = nowStack.pop();
+    ifFlag = ifFlagStack.pop();
+}
+
+void singleLine()
+{
+    MagicExpression *savedHead = NULL, *savedTail = NULL;
+    if (ifFlag == 2)
+    {
+        savedHead = head, savedTail = tail;
+        head = tail = ifStack.pop();
+    }
+    ifFlag = 0;
+    if (!firstStack.top()) // Oh no, goto should have another next entry...
+        firstStack.top() = head, nowStack.top() = tail;
+    else
+        nowStack.top()->setNext(head), nowStack.top() = tail;
+
+    if (!ifFlagStack.empty() && ifFlagStack.top() % 2) // closing this expression
+    {
+        backBlock();
+
+        MagicCondition *condition = ifStack.top();
+        if (!condition)
+            throw "not a if block?!!";
+        if (ifFlag == 1)
+        {
+            condition->pushTrueBranch(head, tail);
+            ifFlag = 2;
+        }
+        if (ifFlag == 3)
+        {
+            condition->pushFalseBranch(head, tail);
+            head = tail = ifStack.pop();
+            singleLine(); // ifFlag => 0
+        }
+    }
+
+    if (savedHead && savedTail)
+    {
+        head = savedHead;
+        tail = savedTail;
+        singleLine();
+    }
+}
+
 MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
 {
-    QStack<QHash<QString, MagicExpression *>> labelStack;
+    labelStack.clear();
     labelStack.push(QHash<QString, MagicExpression *>());
-    QStack<QList<MagicGoto *>> gotoStack;
+    gotoStack.clear();
     gotoStack.push(QList<MagicGoto *>());
-    QStack<MagicExpression *>firstStack, nowStack;
-    firstStack.push(NULL); nowStack.push(NULL);
 
-    QList<MagicDisplayObject *> targetObjects;
+    firstStack.clear();
+    firstStack.push(NULL); nowStack.push(NULL);
+    ifFlag = 0;
 
     stackNum.clear(), stackOpe.clear(), stackOrd.clear();
 
@@ -162,47 +249,72 @@ MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
     QTextStream in(file);
     while (!in.atEnd()) {
         QString line = in.readLine().trimmed();
-        if (line.length() == 0)
+        if (line.isEmpty())
             continue;
 
         try
         {
             if (line.startsWith("goto"))
-                gotoStack.top().append(new MagicGoto(line.mid(5).trimmed()));
+                gotoStack.top().append(new MagicGoto(line.mid(4).trimmed()));
             else if (line.startsWith(":"))
+            {
                 labelStack.top()[line.mid(1).trimmed()] = nowStack.top();
+                continue;
+            }
+            else if (line.startsWith("if"))
+            {
+                MagicOperand *condition = getCondition(line, 2);
+                ifStack.push(new MagicCondition(condition));
+                ifFlag = 1;
+                newBlock();
+                continue;
+            }
+            else if (line.startsWith("else"))
+            {
+                if (ifFlag == 2)
+                {
+                    ifFlag = 3;
+                    newBlock();
+                }
+                else
+                    throw "not expecting 'else'";
+                continue;
+            }
+            else if (line.startsWith("on"))
+            {
+                targetObjects = getObj(line, 2, map);
+                // TODO: claim to expect block;
+                // What is this? [targetObjects = getObj(line, 1, map);]
+            }
             else if (line.startsWith("{"))
             {
-                targetObjects = getObj(line, 1, map);
-                labelStack.push(QHash<QString, MagicExpression *>());
-                gotoStack.push(QList<MagicGoto *>());
-                firstStack.push(NULL), nowStack.push(NULL);
+                newBlock();
+                continue;
             }
             else if (line.startsWith("}"))
             {
-                for (auto i = targetObjects.begin(); i != targetObjects.end(); i++)
-                    (*i)->setAction(firstStack.top());
-                for (auto i = gotoStack.top().begin(); i != gotoStack.top().end(); i++)
-                    (*i)->setNext(labelStack.top()[(*i)->label]->next);
-                labelStack.pop();
-                gotoStack.pop();
-                firstStack.pop();
-                nowStack.pop()->setNext(new MagicExpression());
+                backBlock();
             }
             else
             {
-                MagicExpression *proceeded = new MagicAssignment(processLine(line));
-                if (!firstStack.top())
-                    firstStack.top() = nowStack.top() = proceeded;
-                else
-                    nowStack.top()->setNext(proceeded), nowStack.top() = proceeded;
-                qDebug() << line << " => " << dynamic_cast<MagicAssignment *>(nowStack.top())->operand->getValue(NULL).getString() << endl;
+                head = tail = new MagicAssignment(processLine(line));
+                //qDebug() << line << " => " << dynamic_cast<MagicAssignment *>(nowStack.top())->operand->getValue(NULL).getString() << endl;
             }
+
+            // Processing single line;
+            singleLine();
         }
         catch (const char *e)
         {
             qDebug() << "Exception : " << e;
         }
+    }
+
+    if (!ifStack.empty())
+    {
+        backBlock();
+        head = tail = ifStack.pop();
+        singleLine();
     }
 
     for (auto i = gotoStack.top().begin(); i != gotoStack.top().end(); i++)

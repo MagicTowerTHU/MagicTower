@@ -15,12 +15,21 @@ void MagicCondition::run(MagicMap *map)
         falseBranch->run(map);
 }
 
-void MagicCondition::pushTrueBranch(MagicExpression *trueBranch)
+void MagicCondition::setNext(MagicExpression *next)
 {
-    this->trueBranch = trueBranch;
+    this->next = next;
+    trueTail->setNext(next);
+    falseTail->setNext(next);
 }
 
-void MagicCondition::pushFalseBranch(MagicExpression *falseBranch)
+void MagicCondition::pushTrueBranch(MagicExpression *branch, MagicExpression *tail)
 {
-    this->falseBranch = falseBranch;
+    trueBranch = branch;
+    trueTail = tail;
+}
+
+void MagicCondition::pushFalseBranch(MagicExpression *branch, MagicExpression *tail)
+{
+    falseBranch = branch;
+    falseTail = tail;
 }
