@@ -12,7 +12,7 @@ class MagicExpression
 public:
     MagicExpression *next;
     MagicExpression();
-    virtual void run(MagicMap *) = 0;
+    virtual void run(MagicMap *);
     void setNext(MagicExpression *);
     static MagicExpression *input(QFile *, MagicMap *);
 };

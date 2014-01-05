@@ -6,9 +6,12 @@
 #include <QChar>
 #include <QtDebug>
 #include <iostream>
-#include <typeinfo>
 
 MagicExpression::MagicExpression()
+{
+}
+
+void MagicExpression::run(MagicMap *) // halt
 {
 }
 
@@ -183,6 +186,8 @@ MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
                     (*i)->setNext(labelStack.top()[(*i)->label]->next);
                 labelStack.pop();
                 gotoStack.pop();
+                firstStack.pop();
+                nowStack.pop()->setNext(new MagicExpression());
             }
             else
             {
@@ -202,8 +207,9 @@ MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
 
     for (auto i = gotoStack.top().begin(); i != gotoStack.top().end(); i++)
         (*i)->setNext(labelStack.top()[(*i)->label]->next);
+
     gotoStack.pop();
     labelStack.pop();
-
+    nowStack.pop()->setNext(new MagicExpression());
     return firstStack.pop();
 }
