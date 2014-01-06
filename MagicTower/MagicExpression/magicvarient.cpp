@@ -56,11 +56,10 @@ MagicVarient MagicVarient::operator==(MagicVarient a)
     }
     if(this->type && a.type)
     {
-        *((int*)temp.data) = *((QString*)(this->data)) == *((QString *)(a.data));
+        *((QString*)temp.data) = *((QString*)(this->data)) == *((QString *)(a.data));
         return temp;
     }
-    throw("Error: Invalid use of operator ==");
-    return NULL;
+    return MagicVarient(-1);
 }
 
 MagicVarient MagicVarient::operator!=(MagicVarient a)

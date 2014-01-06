@@ -36,7 +36,7 @@ void MagicMap::loadMap(QFile *file)
 
 void MagicMap::paint(QPainter *painter)
 {
-    for (QList<MagicDisplayObject *>::iterator i = displayList.begin(); i != displayList.end(); i++)
+    for (auto i = displayList.begin(); i != displayList.end(); i++)
         (*i)->paint(painter);
 
     if (animateState > 0)
@@ -103,9 +103,9 @@ QList<MagicDisplayObject *> MagicMap::findDisplayObject(QString objectLabel, QSt
 {
     QList<MagicDisplayObject *> objects;
     for (auto i = displayList.begin(); i != displayList.end(); i++)
-        if ((objectLabel == "" || ((**i)["label"] == objectLabel).isTrue()) &&
-                (objectId == "" || ((**i)["id"] == objectId).isTrue()) &&
-                (objectClass == "" || ((**i)["class"] == objectClass).isTrue()))
+        if ((objectLabel == "" || ((**i)["label"] == MagicVarient(objectLabel)).isTrue()) &&
+                (objectId == "" || ((**i)["id"] == MagicVarient(objectId)).isTrue()) &&
+                (objectClass == "" || ((**i)["class"] == MagicVarient(objectClass)).isTrue()))
             objects.append(*i);
     return objects;
 }

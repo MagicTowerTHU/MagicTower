@@ -26,6 +26,11 @@ MainWindow::MainWindow(QWidget *parent)
     timer->start(20);
 }
 
+MagicMap *MainWindow::getMap()
+{
+    return mWidget->getMap();
+}
+
 MainWindow::~MainWindow()
 {
 }

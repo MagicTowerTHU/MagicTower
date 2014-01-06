@@ -95,10 +95,10 @@ MagicOperand *getVar(QString buffer, int &p)
     }
 }
 
-QList<MagicDisplayObject *> getObj(QString buffer, int p, MagicMap *map)
+QList<MagicDisplayObject *> getObj(QString buffer, MagicMap *map)
 {
     QRegExp rx("^(\\w*)?(#\\w*)?(.\\w*)?");
-    rx.indexIn(buffer, p);
+    rx.indexIn(buffer);
     return map->findDisplayObject(rx.cap(1), rx.cap(2), rx.cap(3));
 }
 
@@ -147,8 +147,8 @@ MagicOperand *processLine(QString buffer)
 
 MagicOperand *getCondition(QString buffer, int p)
 {
-    QRegExp rx("^*(.*)$");
-    rx.indexIn(buffer.trimmed(), p);
+    QRegExp rx("^\\s*\\((.*)\\)$");
+    rx.indexIn(buffer.mid(2));
     return processLine(rx.cap(1));
 }
 
@@ -161,6 +161,7 @@ int ifFlag;
 QStack<MagicCondition *>ifStack;
 
 QList<MagicDisplayObject *> targetObjects;
+bool targetFlag;
 
 MagicExpression *head;
 MagicExpression *tail;
@@ -228,6 +229,16 @@ void singleLine()
         tail = savedTail;
         singleLine();
     }
+
+    if (ifFlagStack.size() == 1 && targetFlag) // processing <on> block
+    {
+        backBlock();
+        targetFlag = false;
+        for (auto i = targetObjects.begin(); i != targetObjects.end(); i++)
+            (*i)->setAction(head);
+        tail->setNext(new MagicExpression());
+        return;
+    }
 }
 
 MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
@@ -240,6 +251,8 @@ MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
     firstStack.clear();
     firstStack.push(NULL); nowStack.push(NULL);
     ifFlag = 0;
+
+    targetFlag = false;
 
     stackNum.clear(), stackOpe.clear(), stackOrd.clear();
 
@@ -275,6 +288,7 @@ MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
                 {
                     ifFlag = 3;
                     newBlock();
+                    continue;
                 }
                 else
                     throw "not expecting 'else'";
@@ -282,9 +296,15 @@ MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
             }
             else if (line.startsWith("on"))
             {
-                targetObjects = getObj(line, 2, map);
-                // TODO: claim to expect block;
-                // What is this? [targetObjects = getObj(line, 1, map);]
+                if (firstStack.size() > 1)
+                    throw "bad 'on' symbol: cannot be inside any blocks.";
+
+                QRegExp rx("^\\s*\\((.*)\\)$");
+                rx.indexIn(line.mid(2));
+                targetObjects = getObj(rx.cap(1).trimmed(), map);
+                targetFlag = true;
+                newBlock();
+                continue;
             }
             else if (line.startsWith("{"))
             {
@@ -304,24 +324,21 @@ MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
             // Processing single line;
             singleLine();
         }
-        catch (const char *e)
+        /*catch (const char *e)
         {
             qDebug() << "Exception : " << e;
-        }
+        }*/
+        catch (int x) {}
     }
 
-    if (!ifStack.empty())
-    {
-        backBlock();
-        head = tail = ifStack.pop();
-        singleLine();
-    }
+    head = tail = new MagicExpression();
+    singleLine();
 
     for (auto i = gotoStack.top().begin(); i != gotoStack.top().end(); i++)
         (*i)->setNext(labelStack.top()[(*i)->label]->next);
 
     gotoStack.pop();
     labelStack.pop();
-    nowStack.pop()->setNext(new MagicExpression());
+    nowStack.pop();
     return firstStack.pop();
 }
