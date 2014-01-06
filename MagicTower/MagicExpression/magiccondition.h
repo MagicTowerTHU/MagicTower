@@ -7,14 +7,16 @@
 class MagicCondition : public MagicExpression
 {
     MagicExpression *trueBranch, *falseBranch;
+    MagicExpression *trueTail, *falseTail;
     MagicOperand *condition;
 
 public:
     MagicCondition(MagicOperand *);
     virtual void run(MagicMap *);
+    virtual void setNext(MagicExpression *);
 
-    void pushTrueBranch(MagicExpression *);
-    void pushFalseBranch(MagicExpression *);
+    void pushTrueBranch(MagicExpression *, MagicExpression *);
+    void pushFalseBranch(MagicExpression *, MagicExpression *);
 };
 
 #endif // MAGICCONDITION_H

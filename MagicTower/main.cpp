@@ -7,7 +7,7 @@ void test()
 {
     printf("Hello test!\n");
     MagicExpression *k = MagicExpression::input(new QFile("/home/jimmy/Documents/MagicTower/MagicTower/map/test.txt"), NULL);
-    delete k;
+    k->run(NULL);
 }
 
 int main(int argc, char *argv[])
