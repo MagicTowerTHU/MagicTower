@@ -5,6 +5,7 @@
 #include "magictom.h"
 #include "magicdisplayobject.h"
 #include "magicbacksound.h"
+#include "MagicAnimate/magicanimate.h"
 
 #include <QMutex>
 #include <QTimer>
@@ -23,6 +24,7 @@ class MagicMap : public MagicDisplayObject
 
     QList<MagicDisplayObject *> displayList;
     QList<MagicObject *> objectList;
+    QList<MagicAnimate *> animateList;
     int animateState;
 
 public:

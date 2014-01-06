@@ -16,6 +16,7 @@ public:
 
     MagicVarient &operator[](QString);
     const MagicVarient &operator[](QString) const;
+    virtual void setProperty(QString, MagicVarient);
 };
 
 #endif // MAGICOBJECT_H

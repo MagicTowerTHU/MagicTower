@@ -29,15 +29,18 @@ void MagicMap::loadMap(QFile *file)
 {
     if (!file)
     {
-        mTom->property["position_x"] = 0;
-        mTom->property["position_y"] = 0;
+        (*mTom)["position_x"] = 0;
+        (*mTom)["position_y"] = 0;
     }
 }
 
 void MagicMap::paint(QPainter *painter)
 {
-    for (QList<MagicDisplayObject *>::iterator i = displayList.begin(); i != displayList.end(); i++)
+    for (auto i = displayList.begin(); i != displayList.end(); i++)
         (*i)->paint(painter);
+    for (QList<MagicAnimate *>::iterator i = animateList.begin(); i != animateList.end(); i++)
+        if ((*i)->paint(painter) == false)
+            i = animateList.erase(i);
 
     if (animateState > 0)
     {
