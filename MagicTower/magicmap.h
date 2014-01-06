@@ -12,20 +12,22 @@
 #include <QFile>
 #include <QKeyEvent>
 #include <QList>
+#include <QWaitCondition>
 
 class MagicMap
 {
     MagicTom *mTom;
-    QMutex *animateLock;
-    QTimer *animateTimer;
     MagicBackSound *mBackSound;
 
     MagicFloor *floor[121];
 
     QList<MagicDisplayObject *> displayList;
     QList<MagicObject *> objectList;
+    QMutex animateLock;
+    QTimer *animateTimer;
     QList<MagicAnimate *> animateList;
-    int animateState;
+    QMutex animateListLock;
+    QWaitCondition appendingAnimate;
 
 public:
     MagicMap();
@@ -33,6 +35,9 @@ public:
     void loadMap(QFile * = NULL);
     virtual void paint(QPainter *);
     void keyPressEvent(QKeyEvent *);
+
+    void appendAnimate(MagicAnimate *, bool = true);
+
     QList<MagicObject *> findObject(QString, QString, QString);
     QList<MagicDisplayObject *> findDisplayObject(QString, QString, QString);
 };

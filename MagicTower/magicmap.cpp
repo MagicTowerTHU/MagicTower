@@ -34,34 +34,48 @@ void MagicMap::loadMap(QFile *file)
 
 void MagicMap::paint(QPainter *painter)
 {
+    animateListLock.lock();
+    for (QList<MagicAnimate *>::iterator i = animateList.begin(); i != animateList.end(); i++)
+    {
+        (*i)->lock();
+        if ((*i)->paint(painter) == false)
+        {
+            (*i)->wakeAll();
+            i = animateList.erase(i);
+            if (animateList.empty())
+            {
+                animateLock.unlock();
+                break;
+            }
+        }
+    }
+
+    if (!animateList.empty())
+    {
+        animateLock.lock();
+    }
+    animateListLock.unlock();
+
     for (auto i = displayList.begin(); i != displayList.end(); i++)
         (*i)->paint(painter);
-    for (QList<MagicAnimate *>::iterator i = animateList.begin(); i != animateList.end(); i++)
-        if ((*i)->paint(painter) == false)
-            i = animateList.erase(i);
+}
 
-    if (animateState > 0)
+void MagicMap::appendAnimate(MagicAnimate *animate, bool block)
+{
+    animateListLock.lock();
+    animateList.append(animate);
+    if (block)
     {
-        mTom->move();
-        mTom->animateState = animateState;
-        mTom->show();
-        animateState --;
-        //if(animateState == 1) animateLock->unlock();
+        animate->wait(&animateListLock);
     }
-    else if (animateState == 0)
-    {
-        animateState = -1;
-        mTom->animateState = animateState;
-        mTom->show();
-        //if(animateState == 1)
-        animateLock->unlock();
-    }
+    animateListLock.unlock();
 }
 
 void MagicMap::keyPressEvent(QKeyEvent *e)
 {
-    if (animateLock->tryLock())
+    if (animateLock.tryLock())
     {
+        animateLock.unlock();
         switch(e->key())
         {
         case Qt::Key_Left:

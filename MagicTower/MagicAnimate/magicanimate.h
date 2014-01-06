@@ -3,10 +3,10 @@
 
 class MagicMap;
 
-#include <QMutex>
+#include <QWaitCondition>
 #include <QPainter>
 
-class MagicAnimate : public QMutex
+class MagicAnimate : public QWaitCondition
 {
     MagicMap *parent;
 public:
