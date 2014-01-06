@@ -1,6 +1,4 @@
 #include "magicmap.h"
-#include "magictom.h"
-#include "magicfloor.h"
 
 #include <QPoint>
 #include <QMutex>

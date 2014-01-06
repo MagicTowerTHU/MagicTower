@@ -1,9 +1,9 @@
 #ifndef MAGICMAP_H
 #define MAGICMAP_H
 
-#include "magicfloor.h"
-#include "magictom.h"
-#include "magicdisplayobject.h"
+#include "MagicDisplayObject/magicfloor.h"
+#include "MagicDisplayObject/magictom.h"
+#include "MagicDisplayObject/magicdisplayobject.h"
 #include "magicbacksound.h"
 #include "MagicAnimate/magicanimate.h"
 

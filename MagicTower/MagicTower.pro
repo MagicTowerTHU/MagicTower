@@ -33,7 +33,11 @@ SOURCES += main.cpp\
     MagicExpression/magicoperand.cpp \
     MagicExpression/magicoperation.cpp \
     MagicExpression/magicreference.cpp \
-    MagicAnimate/magicanimate.cpp
+    MagicAnimate/magicanimate.cpp \
+    MagicDisplayObject/magicdisplayobject.cpp \
+    MagicDisplayObject/magicfloor.cpp \
+    MagicDisplayObject/magictom.cpp \
+    MagicDisplayObject/magicwall.cpp
 
 HEADERS  += mainwindow.h \
     widget.h \
@@ -53,7 +57,11 @@ HEADERS  += mainwindow.h \
     MagicExpression/magicoperand.h \
     MagicExpression/magicoperation.h \
     MagicExpression/magicreference.h \
-    MagicAnimate/magicanimate.h
+    MagicAnimate/magicanimate.h \
+    MagicDisplayObject/magicdisplayobject.h \
+    MagicDisplayObject/magicfloor.h \
+    MagicDisplayObject/magictom.h \
+    MagicDisplayObject/magicwall.h
 
 RESOURCES += \
     assets.qrc
