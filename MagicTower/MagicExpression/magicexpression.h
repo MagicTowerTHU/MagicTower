@@ -13,7 +13,7 @@ public:
     MagicExpression *next;
     MagicExpression();
     virtual void run(MagicMap *);
-    void setNext(MagicExpression *);
+    virtual void setNext(MagicExpression *);
     static MagicExpression *input(QFile *, MagicMap *);
 };
 

@@ -19,7 +19,10 @@ void MagicCondition::setNext(MagicExpression *next)
 {
     this->next = next;
     trueTail->setNext(next);
-    falseTail->setNext(next);
+    if (falseBranch)
+        falseTail->setNext(next);
+    else
+        falseBranch = next;
 }
 
 void MagicCondition::pushTrueBranch(MagicExpression *branch, MagicExpression *tail)
