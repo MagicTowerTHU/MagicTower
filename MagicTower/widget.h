@@ -13,6 +13,7 @@ class Widget : public QWidget
 public:
     Widget(QWidget *parent);
     void keyPressEvent(QKeyEvent *);
+    MagicMap *getMap();
 
 public slots:
     void animate();

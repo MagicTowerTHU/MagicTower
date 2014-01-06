@@ -13,6 +13,11 @@ Widget::Widget(QWidget *parent)
     mMap = new MagicMap();
 }
 
+MagicMap *Widget::getMap()
+{
+    return mMap;
+}
+
 void Widget::animate()
 {
     elapsed = (elapsed + qobject_cast<QTimer*>(sender())->interval()) % 1000;
