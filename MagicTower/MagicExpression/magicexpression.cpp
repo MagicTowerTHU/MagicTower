@@ -95,7 +95,7 @@ MagicOperand *getVar(QString buffer, int &p)
     }
 }
 
-QList<MagicDisplayObject *> getObj(QString buffer, MagicMap *map)
+QList<MagicObject *> getObj(QString buffer, MagicMap *map)
 {
     QRegExp rx("^(\\w*)?(#\\w*)?(.\\w*)?");
     rx.indexIn(buffer);
@@ -160,7 +160,7 @@ QStack<int>ifFlagStack; // 0 nothing, 1 expecting expression, 2 expecting else, 
 int ifFlag;
 QStack<MagicCondition *>ifStack;
 
-QList<MagicDisplayObject *> targetObjects;
+QList<MagicObject *> targetObjects;
 bool targetFlag;
 
 MagicExpression *head;
@@ -179,7 +179,7 @@ inline void newBlock()
 inline void backBlock()
 {
     for (auto i = targetObjects.begin(); i != targetObjects.end(); i++)
-        (*i)->setAction(firstStack.top());
+        dynamic_cast<MagicDisplayObject *>(*i)->setAction(firstStack.top());
     for (auto i = gotoStack.top().begin(); i != gotoStack.top().end(); i++)
         (*i)->setNext(labelStack.top()[(*i)->label]->next);
     labelStack.pop();
@@ -235,7 +235,7 @@ void singleLine()
         backBlock();
         targetFlag = false;
         for (auto i = targetObjects.begin(); i != targetObjects.end(); i++)
-            (*i)->setAction(head);
+            dynamic_cast<MagicDisplayObject *>(*i)->setAction(head);
         tail->setNext(new MagicExpression());
         return;
     }

@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT += core gui
 QT += multimedia
 CONFIG += c++11
 
@@ -18,13 +18,9 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     widget.cpp \
     magicobject.cpp \
-    magicdisplayobject.cpp \
-    magictom.cpp \
     magicsoundobject.cpp \
     magicbacksound.cpp \
     magicmap.cpp \
-    magicwall.cpp \
-    magicfloor.cpp \
     MagicExpression/magicexpression.cpp \
     MagicExpression/magicassignment.cpp \
     MagicExpression/magiccondition.cpp \
@@ -42,13 +38,9 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h \
     widget.h \
     magicobject.h \
-    magicdisplayobject.h \
-    magictom.h \
     magicsoundobject.h \
     magicbacksound.h \
     magicmap.h \
-    magicwall.h \
-    magicfloor.h \
     MagicExpression/magicexpression.h \
     MagicExpression/magicassignment.h \
     MagicExpression/magiccondition.h \

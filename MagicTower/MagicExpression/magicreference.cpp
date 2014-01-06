@@ -10,7 +10,7 @@ MagicReference::MagicReference(QString Label, QString Id, QString Class, QString
 
 MagicVarient MagicReference::getValue(MagicMap *map)
 {
-    QList<MagicObject *>target = map->findObject(objectLabel, objectId, objectClass);
+    QList<MagicObject *>target = map->findDisplayObject(objectLabel, objectId, objectClass);
     if (!target.empty())
         return (*target.first())[property];
     else
@@ -22,7 +22,7 @@ MagicVarient MagicReference::getValue(MagicMap *map)
 
 void MagicReference::setValue(MagicVarient x, MagicMap *map)
 {
-    QList<MagicObject *>target = map->findObject(objectLabel, objectId, objectClass);
+    QList<MagicObject *>target = map->findDisplayObject(objectLabel, objectId, objectClass);
     if (!target.empty())
         for (QList<MagicObject *>::iterator i = target.begin(); i != target.end(); i++)
             (**i)[property] = x;

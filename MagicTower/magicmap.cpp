@@ -7,13 +7,12 @@
 
 MagicMap::MagicMap()
 {
-    animateLock = new QMutex();
     animateTimer = new QTimer();
     //property["Tom"] = (long)(void *)
     mTom = new MagicTom();
     displayList.push_front(mTom);
     property["level"] = 1;
-    animateState = -1;
+    //animateState = -1;
 
     for (int i = 0; i < 11; i++)
         for (int j = 0; j < 11; j++)
@@ -36,8 +35,6 @@ void MagicMap::paint(QPainter *painter)
 {
     animateListLock.lock();
     for (QList<MagicAnimate *>::iterator i = animateList.begin(); i != animateList.end(); i++)
-    {
-        (*i)->lock();
         if ((*i)->paint(painter) == false)
         {
             (*i)->wakeAll();
@@ -48,7 +45,6 @@ void MagicMap::paint(QPainter *painter)
                 break;
             }
         }
-    }
 
     if (!animateList.empty())
     {
@@ -76,7 +72,7 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
     if (animateLock.tryLock())
     {
         animateLock.unlock();
-        switch(e->key())
+        /*switch(e->key())
         {
         case Qt::Key_Left:
             animateState =  (mTom->setStep(-4, 0)) ? 8 : 0;
@@ -92,7 +88,7 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
             break;
         default:
             animateState = 0;
-        }
+        }*/
         switch(e->key())
         {
         case Qt::Key_0: mBackSound->change(0); break;
@@ -103,20 +99,9 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
     }
 }
 
-QList<MagicObject *> MagicMap::findObject(QString objectLabel, QString objectId, QString objectClass)
+QList<MagicObject *> MagicMap::findDisplayObject(QString objectLabel, QString objectId, QString objectClass)
 {
     QList<MagicObject *> objects;
-    for (auto i = objectList.begin(); i != objectList.end(); i++)
-        if ((objectLabel == "" || ((**i)["label"] == objectLabel).isTrue()) &&
-                (objectId == "" || ((**i)["id"] == objectId).isTrue()) &&
-                (objectClass == "" || ((**i)["class"] == objectClass).isTrue()))
-            objects.append(*i);
-    return objects;
-}
-
-QList<MagicDisplayObject *> MagicMap::findDisplayObject(QString objectLabel, QString objectId, QString objectClass)
-{
-    QList<MagicDisplayObject *> objects;
     for (auto i = displayList.begin(); i != displayList.end(); i++)
         if ((objectLabel == "" || ((**i)["label"] == MagicVarient(objectLabel)).isTrue()) &&
                 (objectId == "" || ((**i)["id"] == MagicVarient(objectId)).isTrue()) &&

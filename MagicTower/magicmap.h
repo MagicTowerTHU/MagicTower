@@ -14,7 +14,7 @@
 #include <QList>
 #include <QWaitCondition>
 
-class MagicMap
+class MagicMap : public MagicObject
 {
     MagicTom *mTom;
     MagicBackSound *mBackSound;
@@ -22,7 +22,6 @@ class MagicMap
     MagicFloor *floor[121];
 
     QList<MagicDisplayObject *> displayList;
-    QList<MagicObject *> objectList;
     QMutex animateLock;
     QTimer *animateTimer;
     QList<MagicAnimate *> animateList;
@@ -33,13 +32,12 @@ public:
     MagicMap();
 
     void loadMap(QFile * = NULL);
-    virtual void paint(QPainter *);
+    void paint(QPainter *);
     void keyPressEvent(QKeyEvent *);
 
     void appendAnimate(MagicAnimate *, bool = true);
 
-    QList<MagicObject *> findObject(QString, QString, QString);
-    QList<MagicDisplayObject *> findDisplayObject(QString, QString, QString);
+    QList<MagicObject *> findDisplayObject(QString, QString, QString);
 };
 
 #endif // MAGICMAP_H
