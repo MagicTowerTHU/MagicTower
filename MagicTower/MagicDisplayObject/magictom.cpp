@@ -66,6 +66,7 @@ int MagicTom::direction()
 bool MagicTom::move()
 {
     x += dx, y += dy;
+    return true;
 }
 
 

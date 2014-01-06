@@ -1,7 +1,7 @@
 #ifndef MAGICDISPLAYOBJECT_H
 #define MAGICDISPLAYOBJECT_H
 
-#include "magicobject.h"
+#include "../magicobject.h"
 
 #include <QPainter>
 

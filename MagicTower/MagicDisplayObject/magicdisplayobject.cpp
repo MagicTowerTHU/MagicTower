@@ -1,5 +1,5 @@
 #include "magicdisplayobject.h"
-#include "MagicExpression/magicvarient.h"
+#include "../MagicExpression/magicvarient.h"
 
 MagicDisplayObject::MagicDisplayObject()
 {
