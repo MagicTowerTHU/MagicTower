@@ -213,8 +213,8 @@
         <file>assets/Sounds/853.wav</file>
         <file alias="back_0">assets/Sounds/857.wav</file>
         <file alias="back_2">assets/Sounds/859.wav</file>
-        <file alias="back_3">assets/Sounds/860.wav</file>
         <file>assets/Sounds/streaming.wav</file>
         <file alias="back_1">assets/Sounds/858.wav</file>
+        <file alias="back_3">assets/Sounds/860.wav</file>
     </qresource>
 </RCC>

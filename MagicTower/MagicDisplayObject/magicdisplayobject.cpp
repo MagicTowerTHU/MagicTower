@@ -1,4 +1,5 @@
 #include "magicdisplayobject.h"
+#include "../MagicExpression/magicexpression.h"
 #include "../MagicExpression/magicvarient.h"
 
 MagicDisplayObject::MagicDisplayObject()
@@ -14,5 +15,7 @@ void MagicDisplayObject::setAction(MagicExpression *action)
 
 bool MagicDisplayObject::move()
 {
+    MagicExpression::setEnvironment(this);
+    MagicExpression::setEnvironment(NULL);
     return true;
 }

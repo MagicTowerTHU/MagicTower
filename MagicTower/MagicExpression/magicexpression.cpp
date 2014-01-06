@@ -63,17 +63,18 @@ int getOpe(QString buffer, int &p)
 {
     switch (buffer[p++].toLatin1())
     {
-        case '+': return 0;
-        case '-': return 1;
-        case '*': return 2;
-        case '/': return 3;
-        case '%': return 4;
-        case '^': return 5;
-        case '&': return 6;
-        case '<': if (buffer[p++] == '<') return 7; else throw "bad operator!";
-        case '>': if (buffer[p++] == '>') return 8; else throw "bad operator!";
-        case '~': return 9;
-        default: throw "bad operator!";
+    case '+': return 0;
+    case '-': return 1;
+    case '*': return 2;
+    case '/': return 3;
+    case '%': return 4;
+    case '^': return 5;
+    case '&': return 6;
+    case '<': if (buffer[p++] == '<') return 7; else throw "bad operator!";
+    case '>': if (buffer[p++] == '>') return 8; else throw "bad operator!";
+    case '~': return 9;
+    case '=': return 10;
+    default: throw "bad operator!";
     }
 }
 
@@ -89,8 +90,8 @@ MagicOperand *getVar(QString buffer, int &p)
     else
     {
         QRegExp rx("^(\\w*)?(#\\w*)?(.\\w*)?\\s*->\\s*(\\w*)");
-        rx.indexIn(buffer, p);
-        p += rx.captureCount();
+        rx.indexIn(buffer.mid(p));
+        p += rx.matchedLength();
         return new MagicReference(rx.cap(1), rx.cap(2), rx.cap(3), rx.cap(4));
     }
 }
@@ -355,4 +356,11 @@ MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
     labelStack.pop();
     nowStack.pop();
     return firstStack.pop();
+}
+
+MagicDisplayObject *MagicExpression::environment = NULL;
+
+void MagicExpression::setEnvironment(MagicDisplayObject *environment)
+{
+    MagicExpression::environment = environment;
 }
