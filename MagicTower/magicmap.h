@@ -13,7 +13,7 @@
 #include <QKeyEvent>
 #include <QList>
 
-class MagicMap : public MagicDisplayObject
+class MagicMap
 {
     MagicTom *mTom;
     QMutex *animateLock;
