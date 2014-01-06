@@ -24,3 +24,10 @@ on (label#id.class)
   213453
 }
 
+10
+goto label1
+20
+:label1
+30
+40
+

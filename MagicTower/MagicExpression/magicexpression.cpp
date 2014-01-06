@@ -166,24 +166,35 @@ bool targetFlag;
 MagicExpression *head;
 MagicExpression *tail;
 
-inline void newBlock()
+inline void newBlock(bool label = false)
 {
-    labelStack.push(QHash<QString, MagicExpression *>());
-    gotoStack.push(QList<MagicGoto *>());
+    if (label)
+    {
+        labelStack.push(QHash<QString, MagicExpression *>());
+        gotoStack.push(QList<MagicGoto *>());
+    }
     firstStack.push(NULL);
     nowStack.push(NULL);
     ifFlagStack.push(ifFlag);
     ifFlag = 0;
 }
 
-inline void backBlock()
+inline void backBlock(bool label = false)
 {
-    for (auto i = targetObjects.begin(); i != targetObjects.end(); i++)
-        dynamic_cast<MagicDisplayObject *>(*i)->setAction(firstStack.top());
-    for (auto i = gotoStack.top().begin(); i != gotoStack.top().end(); i++)
-        (*i)->setNext(labelStack.top()[(*i)->label]->next);
-    labelStack.pop();
-    gotoStack.pop();
+    if (label)
+    {
+        for (auto i = targetObjects.begin(); i != targetObjects.end(); i++)
+            dynamic_cast<MagicDisplayObject *>(*i)->setAction(firstStack.top());
+        for (auto i = gotoStack.top().begin(); i != gotoStack.top().end(); i++)
+        {
+            auto position = labelStack.top().find((*i)->label);
+            if (position == labelStack.top().end())
+                throw "symbol not found :'" + (*i)->label + "'";
+            (*i)->setNext((*position)->next);
+        }
+        labelStack.pop();
+        gotoStack.pop();
+    }
     head = firstStack.pop();
     tail = nowStack.pop();
     ifFlag = ifFlagStack.pop();
@@ -232,7 +243,7 @@ void singleLine()
 
     if (ifFlagStack.size() == 1 && targetFlag) // processing <on> block
     {
-        backBlock();
+        backBlock(true);
         targetFlag = false;
         for (auto i = targetObjects.begin(); i != targetObjects.end(); i++)
             dynamic_cast<MagicDisplayObject *>(*i)->setAction(head);
@@ -268,7 +279,10 @@ MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
         try
         {
             if (line.startsWith("goto"))
-                gotoStack.top().append(new MagicGoto(line.mid(4).trimmed()));
+            {
+                head = tail = new MagicGoto(line.mid(4).trimmed());
+                gotoStack.top().append(dynamic_cast<MagicGoto *>(head));
+            }
             else if (line.startsWith(":"))
             {
                 labelStack.top()[line.mid(1).trimmed()] = nowStack.top();
@@ -303,7 +317,7 @@ MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
                 rx.indexIn(line.mid(2));
                 targetObjects = getObj(rx.cap(1).trimmed(), map);
                 targetFlag = true;
-                newBlock();
+                newBlock(true);
                 continue;
             }
             else if (line.startsWith("{"))
