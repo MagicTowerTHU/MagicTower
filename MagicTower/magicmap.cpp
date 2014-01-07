@@ -80,19 +80,19 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
         {
         case Qt::Key_Down:
             if (move(0))
-                appendAnimate(new MagicMove(this, 0, 1, mTom));
+                appendAnimate(new MagicMove(this, 0, 1, mTom), false);
             break;
         case Qt::Key_Left:
             if (move(1))
-                appendAnimate(new MagicMove(this, 1, 1, mTom));
+                appendAnimate(new MagicMove(this, 1, 1, mTom), false);
             break;
         case Qt::Key_Up:
             if (move(2))
-                appendAnimate(new MagicMove(this, 2, 1, mTom));
+                appendAnimate(new MagicMove(this, 2, 1, mTom), false);
             break;
         case Qt::Key_Right:
             if (move(3))
-                appendAnimate(new MagicMove(this, 3, 1, mTom));
+                appendAnimate(new MagicMove(this, 3, 1, mTom), false);
             break;
         default:
             break;
