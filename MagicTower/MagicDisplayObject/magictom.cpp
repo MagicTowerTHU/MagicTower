@@ -3,9 +3,9 @@
 #include <QBitmap>
 
 QString Pix_string[4][3] = {  {":/images/Tom_face1", ":/images/Tom_face2", ":/images/Tom_face"},
-                                {":/images/Tom_left1", ":/images/Tom_left2", ":/images/Tom_left"},
-                                {":/images/Tom_back1", ":/images/Tom_back2", ":/images/Tom_back"},
-                                {":/images/Tom_right1", ":/images/Tom_right2", ":/images/Tom_right"}};
+                              {":/images/Tom_left1", ":/images/Tom_left2", ":/images/Tom_left"},
+                              {":/images/Tom_back1", ":/images/Tom_back2", ":/images/Tom_back"},
+                              {":/images/Tom_right1", ":/images/Tom_right2", ":/images/Tom_right"}};
 
 MagicTom::MagicTom()
 {

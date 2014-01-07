@@ -39,19 +39,16 @@ void MagicMap::paint(QPainter *painter)
     for (QList<MagicAnimate *>::iterator i = animateList.begin(); i != animateList.end(); i++)
         if ((*i)->paint(painter) == false)
         {
+            (*i)->lock();
             (*i)->wakeAll();
+            (*i)->unlock();
             i = animateList.erase(i);
             if (animateList.empty())
             {
-                animateLock.unlock();
+                animateFlag = false;
                 break;
             }
         }
-
-    if (!animateList.empty())
-    {
-        animateLock.lock();
-    }
     animateListLock.unlock();
 
     for (auto i = displayList.begin(); i != displayList.end(); i++)
@@ -61,20 +58,24 @@ void MagicMap::paint(QPainter *painter)
 
 void MagicMap::appendAnimate(MagicAnimate *animate, bool block)
 {
+    if (block)
+        animate->lock();
     animateListLock.lock();
     animateList.append(animate);
+    animateFlag = true;
+    animateListLock.unlock();
     if (block)
     {
-        animate->wait(&animateListLock);
+        animate->wait(animate);
+        animate->unlock();
     }
-    animateListLock.unlock();
 }
 
 void MagicMap::keyPressEvent(QKeyEvent *e)
 {
-    if (animateLock.tryLock())
+    if (!animateFlag)
     {
-        animateLock.unlock();
+        MagicMove *p;
         switch (e->key())
         {
         case Qt::Key_Down:
@@ -83,15 +84,15 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
             break;
         case Qt::Key_Left:
             if (move(1, 1))
-                appendAnimate(new MagicMove(this, 1, 1, mTom));
+                appendAnimate(new MagicMove(this, 1, 1, mTom), false);
             break;
         case Qt::Key_Up:
             if (move(2, 1))
-                appendAnimate(new MagicMove(this, 2, 1, mTom));
+                appendAnimate(new MagicMove(this, 2, 1, mTom), false);
             break;
         case Qt::Key_Right:
             if (move(3, 1))
-                appendAnimate(new MagicMove(this, 3, 1, mTom));
+                appendAnimate(new MagicMove(this, 3, 1, mTom), false);
             break;
         default:
             break;

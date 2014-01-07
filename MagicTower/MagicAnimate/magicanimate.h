@@ -4,9 +4,10 @@
 class MagicMap;
 
 #include <QWaitCondition>
+#include <QMutex>
 #include <QPainter>
 
-class MagicAnimate : public QWaitCondition
+class MagicAnimate : public QWaitCondition, public QMutex
 {
     MagicMap *parent;
 public:
