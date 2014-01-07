@@ -39,19 +39,16 @@ void MagicMap::paint(QPainter *painter)
     for (QList<MagicAnimate *>::iterator i = animateList.begin(); i != animateList.end(); i++)
         if ((*i)->paint(painter) == false)
         {
+            (*i)->lock();
             (*i)->wakeAll();
+            (*i)->unlock();
             i = animateList.erase(i);
             if (animateList.empty())
             {
-                animateLock.unlock();
+                animateFlag = false;
                 break;
             }
         }
-
-    if (!animateList.empty())
-    {
-        animateLock.lock();
-    }
     animateListLock.unlock();
 
     for (auto i = displayList.begin(); i != displayList.end(); i++)
@@ -61,20 +58,24 @@ void MagicMap::paint(QPainter *painter)
 
 void MagicMap::appendAnimate(MagicAnimate *animate, bool block)
 {
+    if (block)
+        animate->lock();
     animateListLock.lock();
     animateList.append(animate);
+    animateFlag = true;
+    animateListLock.unlock();
     if (block)
     {
-        animate->wait(&animateListLock);
+        animate->wait(animate);
+        animate->unlock();
     }
-    animateListLock.unlock();
 }
 
 void MagicMap::keyPressEvent(QKeyEvent *e)
 {
-    if (animateLock.tryLock())
+    if (!animateFlag)
     {
-        animateLock.unlock();
+        MagicMove *p;
         switch (e->key())
         {
         case Qt::Key_Down:
