@@ -79,19 +79,19 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
         switch (e->key())
         {
         case Qt::Key_Down:
-            if (move(0))
+            if (move(0, 1))
                 appendAnimate(new MagicMove(this, 0, 1, mTom), false);
             break;
         case Qt::Key_Left:
-            if (move(1))
+            if (move(1, 1))
                 appendAnimate(new MagicMove(this, 1, 1, mTom), false);
             break;
         case Qt::Key_Up:
-            if (move(2))
+            if (move(2, 1))
                 appendAnimate(new MagicMove(this, 2, 1, mTom), false);
             break;
         case Qt::Key_Right:
-            if (move(3))
+            if (move(3, 1))
                 appendAnimate(new MagicMove(this, 3, 1, mTom), false);
             break;
         default:
@@ -110,10 +110,10 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
 int dx[] = {0, -1, 0, 1};
 int dy[] = {1, 0, -1, 0};
 
-bool MagicMap::move(int direction)
+bool MagicMap::move(int direction, int distance)
 {
-    int target_x = (*mTom)["position_x"].getInt() + dx[direction],
-        target_y = (*mTom)["position_y"].getInt() + dy[direction];
+    int target_x = (*mTom)["position_x"].getInt() + dx[direction] * distance,
+        target_y = (*mTom)["position_y"].getInt() + dy[direction] * distance;
 
     if (target_x < 0 || target_x > 10 || target_y < 0 || target_y > 10)
     {
