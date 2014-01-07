@@ -2,6 +2,7 @@
 #include "MagicAnimate/magicanimate.h"
 #include "MagicAnimate/magicmove.h"
 #include "MagicDisplayObject/magicenemy.h"
+#include "MagicDisplayObject/magicstairs.h"
 
 #include <QPoint>
 #include <QMutex>
@@ -20,6 +21,8 @@ MagicMap::MagicMap()
     animateFlag = false;
 
     displayList.push_front(new MagicEnemy(3, 4, "enemy1"));
+    displayList.push_front(new MagicStairs(0, 10, 1));
+    displayList.push_front(new MagicStairs(10, 0, -1));
 
     for (int i = 0; i < 11; i++)
         for (int j = 0; j < 11; j++)
