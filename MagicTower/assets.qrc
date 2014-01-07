@@ -199,7 +199,7 @@
         <file>assets/Sounds/7.wav</file>
         <file>assets/Sounds/8.wav</file>
         <file>assets/Sounds/9.wav</file>
-        <file>assets/Sounds/10.wav</file>
+        <file alias="attack">assets/Sounds/10.wav</file>
         <file>assets/Sounds/11.wav</file>
         <file>assets/Sounds/12.wav</file>
         <file>assets/Sounds/13.wav</file>

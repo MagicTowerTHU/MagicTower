@@ -60,4 +60,5 @@ HEADERS  += mainwindow.h \
     MagicDisplayObject/magicenemy.h
 
 RESOURCES += \
-    assets.qrc
+    assets.qrc \
+    maps.qrc

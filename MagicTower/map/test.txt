@@ -1,8 +1,8 @@
 
-global->var = 3
+var = 3
   3*(4 - 7) +5
 "fsdwqef"+"32428fuds"
-if (global->var - 4 * 1)
+if (var - 4 * 1)
   if (1)
   {
     1
@@ -29,12 +29,15 @@ on (label#id.class)
 on (floor)
 {
   "on floor!"
-  this->position_x
-  this->position_y
+  this->position_x * 10 + this->position_y
   goto exit
   global->return = 0
 :exit
-  0
+}
+
+on (enemy)
+{
+  sound = ":/sounds/attack"
 }
 
 10
@@ -49,11 +52,11 @@ else
 40
 
 "-------------------"
-global->i=5
+i=5
 :for_1
-if (global->i)
+if (i)
 {
-  map->i = global->i-1
+  i = i-1
   goto for_1
 }
 "End..."

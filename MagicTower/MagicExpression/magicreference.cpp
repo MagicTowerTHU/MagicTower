@@ -24,20 +24,21 @@ MagicVarient MagicReference::getValue(MagicMap *map)
     }
 }
 
-void MagicReference::setValue(MagicVarient x, MagicMap *map)
+MagicVarient MagicReference::setValue(MagicVarient x, MagicMap *map)
 {
     if (objectLabel == "this")
     {
         (*(MagicExpression::environment))[property] = x;
-        return;
+        return x;
     }
     QList<MagicObject *>target = map->findDisplayObject(objectLabel, objectId, objectClass);
     if (!target.empty())
         for (QList<MagicObject *>::iterator i = target.begin(); i != target.end(); i++)
-            (**i)[property] = x;
+            (**i).setProperty(property, x);
     else
     {
         QString err = "<MagicReference::setValue(MagicMap *)> Cannot find object : " + objectLabel + (objectId != "" ? "#" + objectId : "") + (objectClass != "" ? "." + objectClass : "");
         throw err;
     }
+    return x;
 }

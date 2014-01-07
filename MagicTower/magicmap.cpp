@@ -7,6 +7,7 @@
 #include <QMutex>
 #include <QTimer>
 #include <QPointer>
+#include <QSound>
 
 MagicMap::MagicMap()
 {
@@ -15,7 +16,8 @@ MagicMap::MagicMap()
     mTom = new MagicTom();
     displayList.push_front(mTom);
     property["level"] = 1;
-    //animateState = -1;
+
+    animateFlag = false;
 
     displayList.push_front(new MagicEnemy(3, 4, "enemy1"));
 
@@ -153,4 +155,14 @@ QList<MagicObject *> MagicMap::findDisplayObject(QString objectLabel, QString ob
                 (objectClass == "" || ((**i)["class"] == MagicVarient(objectClass)).isTrue()))
             objects.append(*i);
     return objects;
+}
+
+void MagicMap::setProperty(QString propertyName, MagicVarient propertyValue)
+{
+    if (propertyName == "sound")
+    {
+        (new QSound(propertyValue.getString()))->play();
+        return;
+    }
+    MagicObject::setProperty(propertyName, propertyValue);
 }

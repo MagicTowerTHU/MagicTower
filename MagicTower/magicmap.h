@@ -22,7 +22,7 @@ class MagicMap : public MagicObject
     MagicFloor *floor[121];
 
     QList<MagicDisplayObject *> displayList;
-    bool animateFlag = false;
+    bool animateFlag;
     QTimer *animateTimer;
     QList<MagicAnimate *> animateList;
     QMutex animateListLock;
@@ -40,6 +40,8 @@ public:
     void appendAnimate(MagicAnimate *, bool = true);
 
     QList<MagicObject *> findDisplayObject(QString, QString, QString);
+
+    virtual void setProperty(QString, MagicVarient);
 };
 
 #endif // MAGICMAP_H

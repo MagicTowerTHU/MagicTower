@@ -38,8 +38,7 @@ MagicVarient MagicOperation::getValue(MagicMap *map)
         MagicReference *x = dynamic_cast<MagicReference *>(operand[0]);
         if (!x)
             throw "Non-reference operand cannot be assigned any value.";
-        x->setValue(operand[1]->getValue(map), map);
-        return x->getValue(map);
+        return x->setValue(operand[1]->getValue(map), map);
     }
     throw "Invalid operation \"" + mOperator + "\"";
 }

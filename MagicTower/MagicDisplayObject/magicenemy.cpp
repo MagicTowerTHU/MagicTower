@@ -14,9 +14,10 @@ MagicEnemy::MagicEnemy(int x, int y, QString label)
 
 void MagicEnemy::paint(QPainter *painter)
 {
-    static int cnt = 16;
-    painter->drawPixmap(x, y, cnt-- > 8 ? *pix[0] : *pix[1]);
-    if (cnt <= 0) cnt = 16;
+
+    static int cnt = 12;
+    painter->drawPixmap(x, y, cnt-- > 6 ? *pix[0] : *pix[1]);
+    if (cnt <= 0) cnt = 12;
 }
 
 bool MagicEnemy::move(MagicMap *map)

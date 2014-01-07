@@ -10,11 +10,15 @@
 
 MagicExpression::MagicExpression()
 {
+    next = NULL;
 }
 
-void MagicExpression::run(MagicMap *) // halt
+void MagicExpression::run(MagicMap *map) // halt
 {
-    qDebug() << "MagicExpression::run() terminates";
+    if (!next)
+        qDebug() << "MagicExpression::run() terminates";
+    else
+        next->run(map);
 }
 
 void MagicExpression::setNext(MagicExpression *next)
@@ -90,9 +94,20 @@ MagicOperand *getVar(QString buffer, int &p)
     else
     {
         QRegExp rx("^(\\w*)?(#\\w*)?(.\\w*)?\\s*->\\s*(\\w*)");
-        rx.indexIn(buffer.mid(p));
-        p += rx.matchedLength();
-        return new MagicReference(rx.cap(1), rx.cap(2), rx.cap(3), rx.cap(4));
+        if (rx.indexIn(buffer.mid(p)) >= 0)
+        {
+            p += rx.matchedLength();
+            return new MagicReference(rx.cap(1), rx.cap(2), rx.cap(3), rx.cap(4));
+        }
+        else
+        {
+            rx.setPattern("(\\w[a-zA-Z_0-9]*)");
+            if (rx.indexIn(buffer.mid(p)) >= 0)
+            {
+                p += rx.matchedLength();
+                return new MagicReference("global", "", "", rx.cap(1));
+            }
+        }
     }
 }
 

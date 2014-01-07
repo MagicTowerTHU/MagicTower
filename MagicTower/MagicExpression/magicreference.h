@@ -14,7 +14,7 @@ public:
     MagicReference(QString, QString, QString, QString);
 
     virtual MagicVarient getValue(MagicMap *);
-    void setValue(MagicVarient, MagicMap *);
+    MagicVarient setValue(MagicVarient, MagicMap *);
 };
 
 #endif // MAGICREFERENCE_H
