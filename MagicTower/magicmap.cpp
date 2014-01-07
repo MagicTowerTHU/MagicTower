@@ -75,7 +75,6 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
     if (animateLock.tryLock())
     {
         animateLock.unlock();
-        MagicMove *p;
         switch (e->key())
         {
         case Qt::Key_Down:
