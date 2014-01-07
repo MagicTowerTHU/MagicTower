@@ -26,10 +26,18 @@ bool MagicMove::paint(QPainter *)  // false -> please destroy me.
     if (duration > 0)
     {
         MagicTom *tom = dynamic_cast<MagicTom *>(target);
-        //if(tom) tom->change_pic();
+        if(tom) tom->change_pic(direction, duration);
+        target->x += dx[direction];
+        target->y += dy[direction];
         duration--;
+        return true;
     }
     else
     {
+        MagicTom *tom = dynamic_cast<MagicTom *>(target);
+        if(tom) tom->change_pic(direction, duration);
+        (*target)["position_x"] += dx[direction] / step;
+        (*target)["position_y"] += dy[direction] / step;
+        return false;
     }
 }
