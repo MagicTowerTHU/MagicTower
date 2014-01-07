@@ -28,7 +28,7 @@ class MagicMap : public MagicObject
     QMutex animateListLock;
     QWaitCondition appendingAnimate;
 
-    bool move(int); // direction
+    bool move(int, int); // direction
 
 public:
     MagicMap();
