@@ -76,28 +76,28 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
     {
         animateLock.unlock();
         MagicMove *p;
-        switch(e->key())
+        switch (e->key())
         {
         case Qt::Key_Down:
-            if(mTom->setStep(0))
+            if (move(0))
                 appendAnimate(new MagicMove(this, 0, 1, mTom));
             break;
         case Qt::Key_Left:
-            if(mTom->setStep(1))
+            if (move(1))
                 appendAnimate(new MagicMove(this, 1, 1, mTom));
             break;
         case Qt::Key_Up:
-            if(mTom->setStep(2))
+            if (move(2))
                 appendAnimate(new MagicMove(this, 2, 1, mTom));
             break;
         case Qt::Key_Right:
-            if(mTom->setStep(3))
+            if (move(3))
                 appendAnimate(new MagicMove(this, 3, 1, mTom));
             break;
         default:
             break;
         }
-        switch(e->key())
+        switch (e->key())
         {
         case Qt::Key_0: mBackSound->change(0); break;
         case Qt::Key_1: mBackSound->change(1); break;
@@ -107,9 +107,29 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
     }
 }
 
-void MagicMap::move(int direction)
-{
+int dx[] = {0, -1, 0, 1};
+int dy[] = {1, 0, -1, 0};
 
+bool MagicMap::move(int direction)
+{
+    int target_x = (*mTom)["position_x"].getInt() + dx[direction],
+        target_y = (*mTom)["position_y"].getInt() + dy[direction];
+
+    if (target_x < 0 || target_x > 10 || target_y < 0 || target_y > 10)
+    {
+        mTom->mBeep->play();
+        return false;
+    }
+
+    for (auto i = displayList.begin(); i != displayList.end(); i++)
+        if ((**i)["position_x"].getInt() == target_x && (**i)["position_y"].getInt() == target_y)
+            if (!(*i)->move(this))
+            {
+                mTom->mBeep->play();
+                return false;
+            }
+
+    return true;
 }
 
 QList<MagicObject *> MagicMap::findDisplayObject(QString objectLabel, QString objectId, QString objectClass)
