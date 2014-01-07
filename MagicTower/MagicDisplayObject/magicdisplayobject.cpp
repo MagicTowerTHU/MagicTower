@@ -21,7 +21,7 @@ int MagicDisplayObject::runAction(MagicMap *map)
     if (ret != map->property.end())
         map->property.erase(ret);
     MagicExpression::setEnvironment(this);
-    if(!action) action->run(map);
+    if(action) action->run(map);
     MagicExpression::setEnvironment(NULL);
     if ((ret = map->property.find("return")) != map->property.end())
         return (*ret).isTrue();

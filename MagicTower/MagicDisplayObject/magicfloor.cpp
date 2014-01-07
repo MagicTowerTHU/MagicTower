@@ -1,13 +1,8 @@
 #include "magicfloor.h"
 
-MagicFloor::MagicFloor()
-{
-    property["label"] = "floor";
-    pix = new QPixmap(":/images/floor");
-}
-
 MagicFloor::MagicFloor(int x, int y)
 {
+    property["label"] = "floor";
     pix = new QPixmap(":/images/floor");
     this->x = 32 * x, this->y = 32 * y;
     property["position_x"] = x;

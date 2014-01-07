@@ -1,6 +1,7 @@
 #include "magicmap.h"
 #include "MagicAnimate/magicanimate.h"
 #include "MagicAnimate/magicmove.h"
+#include "MagicDisplayObject/magicenemy.h"
 
 #include <QPoint>
 #include <QMutex>
@@ -15,6 +16,8 @@ MagicMap::MagicMap()
     displayList.push_front(mTom);
     property["level"] = 1;
     //animateState = -1;
+
+    displayList.push_front(new MagicEnemy(3, 4));
 
     for (int i = 0; i < 11; i++)
         for (int j = 0; j < 11; j++)
