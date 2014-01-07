@@ -5,7 +5,4 @@ MagicGoto::MagicGoto(QString label)
     this->label = label;
 }
 
-void MagicGoto::run(MagicMap *map)
-{
-    next->run(map);
-}
+// void MagicGoto::run(MagicMap *map) <- inherited from MagicExpression

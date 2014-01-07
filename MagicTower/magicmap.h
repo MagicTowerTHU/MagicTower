@@ -40,6 +40,8 @@ public:
     void appendAnimate(MagicAnimate *, bool = true);
 
     QList<MagicObject *> findDisplayObject(QString, QString, QString);
+
+    virtual void setProperty(QString, MagicVarient);
 };
 
 #endif // MAGICMAP_H

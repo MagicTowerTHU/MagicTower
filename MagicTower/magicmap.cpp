@@ -7,6 +7,7 @@
 #include <QMutex>
 #include <QTimer>
 #include <QPointer>
+#include <QSound>
 
 MagicMap::MagicMap()
 {
@@ -149,4 +150,14 @@ QList<MagicObject *> MagicMap::findDisplayObject(QString objectLabel, QString ob
                 (objectClass == "" || ((**i)["class"] == MagicVarient(objectClass)).isTrue()))
             objects.append(*i);
     return objects;
+}
+
+void MagicMap::setProperty(QString propertyName, MagicVarient propertyValue)
+{
+    if (propertyName == "sound")
+    {
+        (new QSound(propertyValue.getString()))->play();
+        return;
+    }
+    MagicObject::setProperty(propertyName, propertyValue);
 }

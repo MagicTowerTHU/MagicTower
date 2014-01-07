@@ -8,7 +8,7 @@ class MagicGoto : public MagicExpression
 public:
     QString label;
     MagicGoto(QString);
-    virtual void run(MagicMap *);
+    //virtual void run(MagicMap *);
 };
 
 #endif // MAGICGOTO_H

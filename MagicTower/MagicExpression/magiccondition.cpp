@@ -1,5 +1,7 @@
 #include "magiccondition.h"
 
+#include <QDebug>
+
 MagicCondition::MagicCondition(MagicOperand *condition)
 {
     this->condition = condition;
@@ -10,9 +12,15 @@ MagicCondition::MagicCondition(MagicOperand *condition)
 void MagicCondition::run(MagicMap *map)
 {
     if (condition->getValue(map).isTrue())
-        trueBranch->run(map);
+        if (trueBranch)
+            trueBranch->run(map);
+        else
+            qDebug() << "MagicExpression::run() terminates";
     else
-        falseBranch->run(map);
+        if (falseBranch)
+            falseBranch->run(map);
+        else
+            qDebug() << "MagicExpression::run() terminates";
 }
 
 void MagicCondition::setNext(MagicExpression *next)
