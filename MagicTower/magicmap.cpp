@@ -18,7 +18,7 @@ MagicMap::MagicMap()
 
     for (int i = 0; i < 11; i++)
         for (int j = 0; j < 11; j++)
-            displayList.push_front(floor[11 * i + j] = new MagicFloor(32 * i, 32 * j));
+            displayList.push_front(floor[11 * i + j] = new MagicFloor(i, j));
 
     mBackSound = new MagicBackSound();
     mBackSound->play(QSound::Infinite);
