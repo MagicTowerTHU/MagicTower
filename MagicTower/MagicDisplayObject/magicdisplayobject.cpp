@@ -7,6 +7,7 @@ MagicDisplayObject::MagicDisplayObject()
     property["position_x"] = 0;
     property["position_y"] = 0;
     property["enabled"] = 1;
+    action = NULL;
 }
 
 void MagicDisplayObject::setAction(MagicExpression *action)
@@ -20,7 +21,7 @@ int MagicDisplayObject::runAction(MagicMap *map)
     if (ret != map->property.end())
         map->property.erase(ret);
     MagicExpression::setEnvironment(this);
-    action->run(map);
+    if(!action) action->run(map);
     MagicExpression::setEnvironment(NULL);
     if ((ret = map->property.find("return")) != map->property.end())
         return (*ret).isTrue();
