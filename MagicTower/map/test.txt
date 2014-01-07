@@ -26,6 +26,17 @@ on (label#id.class)
   213453
 }
 
+on (floor)
+{
+  "on floor!"
+  this->position_x
+  this->position_y
+  goto exit
+  global->return = 0
+:exit
+  0
+}
+
 10
 if (1)
   goto label1
