@@ -77,8 +77,8 @@
         <file>assets/Images/236.bmp</file>
         <file>assets/Images/239.bmp</file>
         <file>assets/Images/241.bmp</file>
-        <file alias="guai_2">assets/Images/244.bmp</file>
-        <file alias="guai_1">assets/Images/246.bmp</file>
+        <file alias="enemy1.0">assets/Images/244.bmp</file>
+        <file alias="enemy1.1">assets/Images/246.bmp</file>
         <file>assets/Images/249.bmp</file>
         <file>assets/Images/251.bmp</file>
         <file>assets/Images/254.bmp</file>

@@ -49,7 +49,7 @@ bool MagicTom::move(MagicMap *)
 }
 
 
-void MagicTom::change_pic(int direction, int duration)
+void MagicTom::changePic(int direction, int duration)
 {
     if(duration > 0)
         pix = Pix[direction][(duration / 4) % 2];

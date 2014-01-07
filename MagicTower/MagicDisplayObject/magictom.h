@@ -16,7 +16,7 @@ public:
 
     MagicTom();
     virtual void paint(QPainter *painter);
-    void change_pic(int, int);
+    void changePic(int, int);
     bool setStep(int);
     virtual bool move(MagicMap *);
     void show();

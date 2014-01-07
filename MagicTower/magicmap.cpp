@@ -17,7 +17,7 @@ MagicMap::MagicMap()
     property["level"] = 1;
     //animateState = -1;
 
-    displayList.push_front(new MagicEnemy(3, 4));
+    displayList.push_front(new MagicEnemy(3, 4, "enemy1"));
 
     for (int i = 0; i < 11; i++)
         for (int j = 0; j < 11; j++)
@@ -82,18 +82,22 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
         switch (e->key())
         {
         case Qt::Key_Down:
+            mTom->changePic(0,0);
             if (move(0, 1))
                 appendAnimate(new MagicMove(this, 0, 1, mTom), false);
             break;
         case Qt::Key_Left:
+            mTom->changePic(1,0);
             if (move(1, 1))
                 appendAnimate(new MagicMove(this, 1, 1, mTom), false);
             break;
         case Qt::Key_Up:
+            mTom->changePic(2,0);
             if (move(2, 1))
                 appendAnimate(new MagicMove(this, 2, 1, mTom), false);
             break;
         case Qt::Key_Right:
+            mTom->changePic(3,0);
             if (move(3, 1))
                 appendAnimate(new MagicMove(this, 3, 1, mTom), false);
             break;
