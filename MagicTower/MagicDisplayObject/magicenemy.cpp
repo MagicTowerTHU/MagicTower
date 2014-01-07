@@ -22,5 +22,6 @@ void MagicEnemy::paint(QPainter *painter)
 
 bool MagicEnemy::move(MagicMap *map)
 {
+    runAction(map);
     return false;
 }

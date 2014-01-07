@@ -67,7 +67,7 @@
         <file>assets/Images/206.bmp</file>
         <file>assets/Images/210.bmp</file>
         <file>assets/Images/214.bmp</file>
-        <file>assets/Images/218.bmp</file>
+        <file alias="wall">assets/Images/218.bmp</file>
         <file alias="floor">assets/Images/221.bmp</file>
         <file>assets/Images/224.bmp</file>
         <file>assets/Images/226.bmp</file>
