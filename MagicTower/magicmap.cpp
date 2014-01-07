@@ -53,7 +53,8 @@ void MagicMap::paint(QPainter *painter)
     animateListLock.unlock();
 
     for (auto i = displayList.begin(); i != displayList.end(); i++)
-        (*i)->paint(painter);
+        if ((**i)["enabled"].isTrue())
+            (*i)->paint(painter);
 }
 
 void MagicMap::appendAnimate(MagicAnimate *animate, bool block)
@@ -97,6 +98,11 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
         case Qt::Key_3: mBackSound->change(3); break;
         }
     }
+}
+
+void MagicMap::move(int direction)
+{
+
 }
 
 QList<MagicObject *> MagicMap::findDisplayObject(QString objectLabel, QString objectId, QString objectClass)

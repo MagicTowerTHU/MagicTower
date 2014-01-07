@@ -25,7 +25,7 @@ public:
     void moveTo(int, int);
     bool setStep(int, int);
     int direction();
-    virtual bool move();
+    virtual bool move(MagicMap *);
     void show();
 };
 

@@ -41,6 +41,9 @@ public:
     MagicVarient &operator/=(MagicVarient);
     MagicVarient &operator%=(MagicVarient);
 
+    MagicVarient operator=(int);
+    MagicVarient operator=(QString);
+
     static MagicVarient input(QString, int &);
 };
 

@@ -4,6 +4,7 @@
 
 MagicTom::MagicTom()
 {
+    property["label"] = "tom";
     pix_face = new QPixmap(":/images/Tom_face");
     pix_face->setMask(QBitmap(":/images/Tom_face_mask"));
     pix_face_move[0] = new QPixmap(":/images/Tom_face1");
@@ -63,7 +64,7 @@ int MagicTom::direction()
     else return 4;
 }
 
-bool MagicTom::move()
+bool MagicTom::move(MagicMap *map)
 {
     x += dx, y += dy;
     return true;

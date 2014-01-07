@@ -56,7 +56,7 @@ MagicVarient MagicVarient::operator==(MagicVarient a)
     }
     if(this->type && a.type)
     {
-        *((QString*)temp.data) = *((QString*)(this->data)) == *((QString *)(a.data));
+        *((int *)temp.data) = *((QString *)(this->data)) == *((QString *)(a.data));
         return temp;
     }
     return MagicVarient(-1);
@@ -292,6 +292,18 @@ MagicVarient & MagicVarient::operator/=(MagicVarient a)
 MagicVarient & MagicVarient::operator%=(MagicVarient a)
 {
     return *this = *this % a;
+}
+
+MagicVarient MagicVarient::operator=(int x)
+{
+    type = false;
+    data = new int(x);
+}
+
+MagicVarient MagicVarient::operator=(QString x)
+{
+    type = true;
+    data = new QString(x);
 }
 
 MagicVarient MagicVarient::input(QString source, int &i)

@@ -4,8 +4,9 @@
 
 MagicDisplayObject::MagicDisplayObject()
 {
-    property["position_x"] = MagicVarient(0);
-    property["position_y"] = MagicVarient(0);
+    property["position_x"] = 0;
+    property["position_y"] = 0;
+    property["enabled"] = 1;
 }
 
 void MagicDisplayObject::setAction(MagicExpression *action)
@@ -13,9 +14,15 @@ void MagicDisplayObject::setAction(MagicExpression *action)
     this->action = action;
 }
 
-bool MagicDisplayObject::move()
+int MagicDisplayObject::runAction(MagicMap *map)
 {
+    auto ret = map->property.find("return");
+    if (ret != map->property.end())
+        map->property.erase(ret);
     MagicExpression::setEnvironment(this);
+    action->run(map);
     MagicExpression::setEnvironment(NULL);
-    return true;
+    if ((ret = map->property.find("return")) != map->property.end())
+        return (*ret).isTrue();
+    return -1;
 }

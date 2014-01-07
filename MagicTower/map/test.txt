@@ -42,7 +42,7 @@ global->i=5
 :for_1
 if (global->i)
 {
-  map->i = global->i - 1
+  map->i = global->i-1
   goto for_1
 }
 "End..."
