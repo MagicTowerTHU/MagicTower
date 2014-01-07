@@ -1,4 +1,6 @@
 #include "magicmap.h"
+#include "MagicAnimate/magicanimate.h"
+#include "MagicAnimate/magicmove.h"
 
 #include <QPoint>
 #include <QMutex>
@@ -72,23 +74,28 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
     if (animateLock.tryLock())
     {
         animateLock.unlock();
-        /*switch(e->key())
+        MagicMove *p;
+        switch(e->key())
         {
+        case Qt::Key_Down:
+            if(mTom->setStep(0))
+                appendAnimate(new MagicMove(this, 0, 1, mTom));
+            break;
         case Qt::Key_Left:
-            animateState =  (mTom->setStep(-4, 0)) ? 8 : 0;
+            if(mTom->setStep(1))
+                appendAnimate(new MagicMove(this, 1, 1, mTom));
             break;
         case Qt::Key_Up:
-            animateState =  (mTom->setStep(0, -4)) ? 8 : 0;
+            if(mTom->setStep(2))
+                appendAnimate(new MagicMove(this, 2, 1, mTom));
             break;
         case Qt::Key_Right:
-            animateState =  (mTom->setStep(4, 0)) ? 8 : 0;
-            break;
-        case Qt::Key_Down:
-            animateState =  (mTom->setStep(0, 4)) ? 8 : 0;
+            if(mTom->setStep(3))
+                appendAnimate(new MagicMove(this, 3, 1, mTom));
             break;
         default:
-            animateState = 0;
-        }*/
+            break;
+        }
         switch(e->key())
         {
         case Qt::Key_0: mBackSound->change(0); break;

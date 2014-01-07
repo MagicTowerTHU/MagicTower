@@ -10,7 +10,9 @@ class MagicAnimate : public QWaitCondition
 {
     MagicMap *parent;
 public:
-    MagicAnimate(MagicMap *parent);
+    int duration;
+    MagicAnimate(MagicMap *);
+    MagicAnimate(MagicMap *, int);
     virtual bool paint(QPainter *) = 0; // false -> please destroy me.
 };
 

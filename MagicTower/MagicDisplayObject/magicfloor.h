@@ -6,12 +6,12 @@
 class MagicFloor : public MagicDisplayObject
 {
     QPixmap *pix;
-    int x, y;
 
 public:
     MagicFloor();
     MagicFloor(int, int);
     virtual void paint(QPainter *);
+    virtual void show() = 0;
 };
 
 #endif // MAGICFLOOR_H

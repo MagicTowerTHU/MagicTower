@@ -138,7 +138,7 @@
         <file>assets/Images/393.bmp</file>
         <file>assets/Images/395.bmp</file>
         <file>assets/Images/398.bmp</file>
-        <file alias="Tom_face">assets/Images/415.bmp</file>
+        <file>assets/Images/415.bmp</file>
         <file>assets/Images/460.bmp</file>
         <file>assets/Images/462.bmp</file>
         <file>assets/Images/469.bmp</file>
@@ -187,6 +187,7 @@
         <file alias="Tom_left">assets/Images/473_.png</file>
         <file alias="Tom_left1">assets/Images/475_.png</file>
         <file alias="Tom_left2">assets/Images/477_.png</file>
+        <file alias="Tom_face">assets/Images/415_.png</file>
     </qresource>
     <qresource prefix="/sounds">
         <file alias="1.wav">assets/Sounds/1.wav</file>
