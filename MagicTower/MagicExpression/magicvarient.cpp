@@ -298,12 +298,14 @@ MagicVarient MagicVarient::operator=(int x)
 {
     type = false;
     data = new int(x);
+    return *this;
 }
 
 MagicVarient MagicVarient::operator=(QString x)
 {
     type = true;
     data = new QString(x);
+    return *this;
 }
 
 MagicVarient MagicVarient::input(QString source, int &i)

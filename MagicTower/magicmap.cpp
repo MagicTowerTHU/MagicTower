@@ -16,7 +16,8 @@ MagicMap::MagicMap()
     mTom = new MagicTom();
     displayList.push_front(mTom);
     property["level"] = 1;
-    //animateState = -1;
+
+    animateFlag = false;
 
     displayList.push_front(new MagicEnemy(3, 4));
 
