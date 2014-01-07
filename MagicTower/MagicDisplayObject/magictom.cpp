@@ -2,18 +2,25 @@
 
 #include <QBitmap>
 
-QPixmap *MagicTom::Pix[4][3] = {  {new QPixmap(":/images/Tom_face1"), new QPixmap(":/images/Tom_face2"), new QPixmap(":/images/Tom_face")},
-                                {new QPixmap(":/images/Tom_left1"), new QPixmap(":/images/Tom_left2"), new QPixmap(":/images/Tom_left")},
-                                {new QPixmap(":/images/Tom_back1"), new QPixmap(":/images/Tom_back2"), new QPixmap(":/images/Tom_back")},
-                                {new QPixmap(":/images/Tom_right1"), new QPixmap(":/images/Tom_right2"), new QPixmap(":/images/Tom_right")}};
+QString Pix_string[4][3] = {  {":/images/Tom_face1", ":/images/Tom_face2", ":/images/Tom_face"},
+                                {":/images/Tom_left1", ":/images/Tom_left2", ":/images/Tom_left"},
+                                {":/images/Tom_back1", ":/images/Tom_back2", ":/images/Tom_back"},
+                                {":/images/Tom_right1", ":/images/Tom_right2", ":/images/Tom_right"}};
 
 MagicTom::MagicTom()
 {
+    for(int i=0; i<4; i++)
+        for(int j=0; j<3; j++)
+            Pix[i][j] = new QPixmap(Pix_string[i][j]);
+
     pix = Pix[0][2];
+
+    property["label"] = "tom";
+
     x = y = 0;
     mSound = new QSound(":/sounds/step");
     mBeep = new QSound(":/sounds/beep");
-    animateState = -1;
+    //animateState = -1;
 }
 
 void MagicTom::paint(QPainter *painter)
@@ -41,8 +48,24 @@ bool MagicTom::setStep(int direction)
         return true;
     }
 }
+
+bool MagicTom::move(MagicMap *)
+{
+    return true;
+}
+
 /*
-bool MagicTom::move()
+int MagicTom::direction()
+{
+    if(dx > 0 && dy == 0) return 0;
+    if(dx < 0 && dy == 0) return 1;
+    if(dy > 0 && dx == 0) return 2;
+    if(dy < 0 && dx == 0) return 3;
+    else return 4;
+}
+
+bool MagicTom::move(MagicMap *map)
+>>>>>>> 759716628e3561813d36e7d64d08d8d3740ddfbd
 {
     x += dx, y += dy;
     return true;

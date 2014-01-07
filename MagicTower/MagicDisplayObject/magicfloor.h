@@ -11,7 +11,7 @@ public:
     MagicFloor();
     MagicFloor(int, int);
     virtual void paint(QPainter *);
-    virtual void show() = 0;
+    virtual bool move(MagicMap *);
 };
 
 #endif // MAGICFLOOR_H

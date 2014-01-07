@@ -12,6 +12,7 @@ class MagicWall : public MagicDisplayObject
 public:
     MagicWall();
     virtual void paint(QPainter *);
+    virtual bool move(MagicMap *);
 };
 
 #endif // MAGICWALL_H

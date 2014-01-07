@@ -26,7 +26,7 @@ bool MagicMove::paint(QPainter *)  // false -> please destroy me.
     if (duration > 0)
     {
         MagicTom *tom = dynamic_cast<MagicTom *>(target);
-        if(tom) tom->change_pic();
+        //if(tom) tom->change_pic();
         duration--;
     }
     else

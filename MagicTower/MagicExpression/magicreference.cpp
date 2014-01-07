@@ -1,4 +1,5 @@
 #include "magicreference.h"
+#include "magicexpression.h"
 #include "../magicobject.h"
 
 #include <QList>
@@ -10,6 +11,9 @@ MagicReference::MagicReference(QString Label, QString Id, QString Class, QString
 
 MagicVarient MagicReference::getValue(MagicMap *map)
 {
+    if (objectLabel == "this")
+        return (*(MagicExpression::environment))[property];
+
     QList<MagicObject *>target = map->findDisplayObject(objectLabel, objectId, objectClass);
     if (!target.empty())
         return (*target.first())[property];
@@ -22,6 +26,11 @@ MagicVarient MagicReference::getValue(MagicMap *map)
 
 void MagicReference::setValue(MagicVarient x, MagicMap *map)
 {
+    if (objectLabel == "this")
+    {
+        (*(MagicExpression::environment))[property] = x;
+        return;
+    }
     QList<MagicObject *>target = map->findDisplayObject(objectLabel, objectId, objectClass);
     if (!target.empty())
         for (QList<MagicObject *>::iterator i = target.begin(); i != target.end(); i++)

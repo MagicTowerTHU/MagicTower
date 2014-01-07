@@ -1,6 +1,8 @@
+
+global->var = 3
   3*(4 - 7) +5
 "fsdwqef"+"32428fuds"
-if (4-4* 1)
+if (global->var - 4 * 1)
   if (1)
   {
     1
@@ -25,9 +27,23 @@ on (label#id.class)
 }
 
 10
-goto label1
+if (1)
+  goto label1
+else
+  goto label2
 20
-:label1
+:label2
 30
+:label1
 40
+
+"-------------------"
+global->i=5
+:for_1
+if (global->i)
+{
+  map->i = global->i-1
+  goto for_1
+}
+"End..."
 

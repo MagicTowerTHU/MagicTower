@@ -7,21 +7,19 @@
 
 class MagicTom : public MagicDisplayObject
 {
-public:
-    static QPixmap *Pix[4][3];
+    QPixmap *Pix[4][3];
     QPixmap *pix;
-    int animateState;
+public:
 
     QSound *mSound;
     QSound *mBeep;
 
     MagicTom();
     virtual void paint(QPainter *painter);
-    virtual bool move();
     void change_pic(int, int);
-    void moveTo(int, int);
     bool setStep(int);
-    int direction();
+    virtual bool move(MagicMap *);
+    void show();
 };
 
 #endif // MAGICTOM_H

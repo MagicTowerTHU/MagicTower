@@ -55,7 +55,8 @@ void MagicMap::paint(QPainter *painter)
     animateListLock.unlock();
 
     for (auto i = displayList.begin(); i != displayList.end(); i++)
-        (*i)->paint(painter);
+        if ((**i)["enabled"].isTrue())
+            (*i)->paint(painter);
 }
 
 void MagicMap::appendAnimate(MagicAnimate *animate, bool block)
@@ -106,9 +107,19 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
     }
 }
 
+void MagicMap::move(int direction)
+{
+
+}
+
 QList<MagicObject *> MagicMap::findDisplayObject(QString objectLabel, QString objectId, QString objectClass)
 {
     QList<MagicObject *> objects;
+    if (objectLabel == "global" || objectLabel == "map")
+    {
+        objects.append(this);
+        return objects;
+    }
     for (auto i = displayList.begin(); i != displayList.end(); i++)
         if ((objectLabel == "" || ((**i)["label"] == MagicVarient(objectLabel)).isTrue()) &&
                 (objectId == "" || ((**i)["id"] == MagicVarient(objectId)).isTrue()) &&
