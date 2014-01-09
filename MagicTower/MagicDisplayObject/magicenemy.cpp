@@ -2,11 +2,11 @@
 
 #include <QPainter>
 
-MagicEnemy::MagicEnemy(int x, int y, QString label)
+MagicEnemy::MagicEnemy(int x, int y, QString name)
 {
-    property["label"] = label;
-    pix[0] = new QPixmap(":/images/enemy1.0");
-    pix[1] = new QPixmap(":/images/enemy1.1");
+    property["label"] = "enemy_" + name;
+    pix[0] = new QPixmap(":/images/enemy_" + name + ".0");
+    pix[1] = new QPixmap(":/images/enemy_" + name + ".1");
     this->x = 32 * x, this->y = 32 * y;
     property["position_x"] = x;
     property["position_y"] = y;
@@ -14,10 +14,9 @@ MagicEnemy::MagicEnemy(int x, int y, QString label)
 
 void MagicEnemy::paint(QPainter *painter)
 {
-
-    static int cnt = 12;
-    painter->drawPixmap(x, y, cnt-- > 6 ? *pix[0] : *pix[1]);
-    if (cnt <= 0) cnt = 12;
+    static int cnt = 120;
+    painter->drawPixmap(x, y, cnt-- > 60 ? *pix[0] : *pix[1]);
+    if (cnt <= 0) cnt = 120;
 }
 
 bool MagicEnemy::move(MagicMap *map)
