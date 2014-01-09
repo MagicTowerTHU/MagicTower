@@ -176,7 +176,7 @@ bool MagicMap::move(int direction, int distance)
 
     for (auto i = displayList.begin(); i != displayList.end(); i++)
         if ((**i)["position_x"].getInt() == target_x && (**i)["position_y"].getInt() == target_y)
-            if ((**i)["enabled"].getInt() != 0 && !(*i)->move(this))
+            if ((**i)["enabled"].isTrue() && !(*i)->move(this))
             {
                 mTom->mBeep->play();
                 return false;
@@ -211,7 +211,6 @@ void MagicMap::setProperty(QString propertyName, MagicVarient propertyValue)
     MagicObject::setProperty(propertyName, propertyValue);
 }
 
-//seems that this func is not used...
 bool MagicMap::eraseMapObject(QString label, int x, int y)
 {
     for (auto i = displayList.begin(); i != displayList.end(); i++)
