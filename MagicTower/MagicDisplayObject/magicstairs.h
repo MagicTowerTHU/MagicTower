@@ -9,6 +9,7 @@ class MagicStairs : public MagicFloor
 
 public:
     MagicStairs(int, int, int);
+    virtual bool move(MagicMap *);
 };
 
 #endif // MAGICSTAIRS_H

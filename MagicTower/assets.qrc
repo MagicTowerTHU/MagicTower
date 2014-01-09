@@ -60,13 +60,13 @@
         <file>assets/Images/181.bmp</file>
         <file>assets/Images/184.bmp</file>
         <file>assets/Images/187.bmp</file>
-        <file>assets/Images/190.bmp</file>
-        <file>assets/Images/193.bmp</file>
-        <file>assets/Images/196.bmp</file>
-        <file>assets/Images/200.bmp</file>
-        <file>assets/Images/206.bmp</file>
-        <file>assets/Images/210.bmp</file>
-        <file>assets/Images/214.bmp</file>
+        <file alias="key_red">assets/Images/190.bmp</file>
+        <file alias="key_blue">assets/Images/193.bmp</file>
+        <file alias="key_yellow">assets/Images/196.bmp</file>
+        <file alias="door_silver">assets/Images/200.bmp</file>
+        <file alias="door_red">assets/Images/206.bmp</file>
+        <file alias="door_blue">assets/Images/210.bmp</file>
+        <file alias="door_yellow">assets/Images/214.bmp</file>
         <file alias="wall">assets/Images/218.bmp</file>
         <file alias="floor">assets/Images/221.bmp</file>
         <file>assets/Images/224.bmp</file>

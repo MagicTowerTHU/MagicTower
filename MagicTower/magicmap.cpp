@@ -4,12 +4,19 @@
 #include "MagicDisplayObject/magicenemy.h"
 #include "MagicDisplayObject/magicstairs.h"
 #include "MagicDisplayObject/magicwall.h"
+#include "MagicDisplayObject/magicdoor.h"
+#include "MagicDisplayObject/magickey.h"
 
 #include <QPoint>
 #include <QMutex>
 #include <QTimer>
 #include <QPointer>
 #include <QSound>
+
+#define yellow 0
+#define blue 1
+#define red 2
+#define silver 3
 
 MagicMap::MagicMap()
 {
@@ -34,19 +41,30 @@ MagicMap::MagicMap()
     displayList.push_front(new MagicWall(3, 0));
     displayList.push_front(new MagicWall(4, 0));
     displayList.push_front(new MagicWall(5, 0));
+    displayList.push_front(new MagicDoor(2, 2, yellow));
     displayList.push_front(new MagicWall(3, 2));
-    displayList.push_front(new MagicWall(4, 2));
+    displayList.push_front(new MagicDoor(4, 2, yellow));
     displayList.push_front(new MagicWall(5, 2));
-    displayList.push_front(new MagicWall(6, 2));
+    displayList.push_front(new MagicDoor(6, 2, red));
     displayList.push_front(new MagicWall(7, 2));
     displayList.push_front(new MagicWall(7, 1));
-    displayList.push_front(new MagicWall(8, 1));
+    displayList.push_front(new MagicDoor(8, 1, blue));
     displayList.push_front(new MagicWall(9, 1));
-    displayList.push_front(new MagicWall(10, 1));
+    displayList.push_front(new MagicDoor(10, 1, silver));
+
+    displayList.push_front(new MagicKey(2, 1, yellow));
+    displayList.push_front(new MagicKey(3, 1, yellow));
+    displayList.push_front(new MagicKey(4, 1, red));
+    displayList.push_front(new MagicKey(5, 1, blue));
+
 
     for (int i = 0; i < 11; i++)
         for (int j = 0; j < 11; j++)
             displayList.push_front(floor[11 * i + j] = new MagicFloor(i, j));
+
+    for (int i = 12; i < 14; i++)
+        for (int j = 0; j < 12; j++)
+            displayList.push_front(inventory[12 * i + j] = new MagicFloor(j, i));
 
     mBackSound = new MagicBackSound();
     mBackSound->play(QSound::Infinite);
@@ -82,6 +100,9 @@ void MagicMap::paint(QPainter *painter)
     for (auto i = displayList.begin(); i != displayList.end(); i++)
         if ((**i)["enabled"].isTrue())
             (*i)->paint(painter);
+
+    for (auto i = mTom->inventory.begin(); i != mTom->inventory.end(); i++)
+        (*i)->paint(painter);
 }
 
 void MagicMap::appendAnimate(MagicAnimate *animate, bool block)
@@ -155,7 +176,7 @@ bool MagicMap::move(int direction, int distance)
 
     for (auto i = displayList.begin(); i != displayList.end(); i++)
         if ((**i)["position_x"].getInt() == target_x && (**i)["position_y"].getInt() == target_y)
-            if (!(*i)->move(this))
+            if ((**i)["enabled"].getInt() != 0 && !(*i)->move(this))
             {
                 mTom->mBeep->play();
                 return false;
@@ -188,4 +209,23 @@ void MagicMap::setProperty(QString propertyName, MagicVarient propertyValue)
         return;
     }
     MagicObject::setProperty(propertyName, propertyValue);
+}
+
+//seems that this func is not used...
+bool MagicMap::eraseMapObject(QString label, int x, int y)
+{
+    for (auto i = displayList.begin(); i != displayList.end(); i++)
+        if ( ((**i)["label"] == MagicVarient(label)).isTrue() &&
+             (**i)["position_x"].getInt() == x &&
+             (**i)["position_y"].getInt() == y)
+        {
+            i = displayList.erase(i);
+            return true;
+        }
+    return false;
+}
+
+MagicTom * MagicMap::Tom()
+{
+    return this->mTom;
 }

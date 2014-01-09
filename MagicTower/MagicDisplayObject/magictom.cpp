@@ -51,8 +51,40 @@ bool MagicTom::move(MagicMap *)
 
 void MagicTom::changePic(int direction, int duration)
 {
-    if(duration > 0)
+    if (duration > 0)
         pix = Pix[direction][(duration / 4) % 2];
     else
         pix = Pix[direction][2];
+}
+
+
+bool MagicTom::haveInventory(QString label)
+{
+    for (auto i = inventory.begin(); i != inventory.end(); i++)
+        if ( ((**i)["label"] == MagicVarient(label)).isTrue() )
+            return true;
+    return false;
+}
+
+bool MagicTom::consumeInventory(QString label)
+{
+    for (auto i = inventory.begin(); i != inventory.end(); i++)
+        if ( ((**i)["label"] == MagicVarient(label)).isTrue() )
+        {
+            i = inventory.erase(i);
+            return true;
+        }
+    return false;
+}
+
+bool MagicTom::consumeInventory(QString label, int color)
+{
+    for (auto i = inventory.begin(); i != inventory.end(); i++)
+        if ( ((**i)["label"] == MagicVarient(label)).isTrue() &&
+             ((**i)["color"] == MagicVarient(color)).isTrue() )
+        {
+            i = inventory.erase(i);
+            return true;
+        }
+    return false;
 }

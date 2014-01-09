@@ -36,7 +36,10 @@ SOURCES += main.cpp\
     MagicDisplayObject/magicwall.cpp \
     MagicAnimate/magicmove.cpp \
     MagicDisplayObject/magicenemy.cpp \
-    MagicDisplayObject/magicstairs.cpp
+    MagicDisplayObject/magicstairs.cpp \
+    MagicDisplayObject/magicdoor.cpp \
+    MagicDisplayObject/magicinventory.cpp \
+    MagicDisplayObject/magickey.cpp
 
 HEADERS  += mainwindow.h \
     widget.h \
@@ -59,7 +62,10 @@ HEADERS  += mainwindow.h \
     MagicDisplayObject/magicwall.h \
     MagicAnimate/magicmove.h \
     MagicDisplayObject/magicenemy.h \
-    MagicDisplayObject/magicstairs.h
+    MagicDisplayObject/magicstairs.h \
+    MagicDisplayObject/magicdoor.h \
+    MagicDisplayObject/magicinventory.h \
+    MagicDisplayObject/magickey.h
 
 RESOURCES += \
     assets.qrc \
