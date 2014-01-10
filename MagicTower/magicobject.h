@@ -14,8 +14,8 @@ public:
 
     QHash<QString, MagicVarient> property;
 
-    MagicVarient &operator[](QString);
-    const MagicVarient &operator[](QString) const;
+    virtual MagicVarient &operator[](QString);
+    virtual const MagicVarient &operator[](QString) const;
     virtual void setProperty(QString, MagicVarient);
 };
 

@@ -10,10 +10,9 @@
 #include "MagicDisplayObject/magicarmour.h"
 
 #include <QPoint>
-#include <QMutex>
-#include <QTimer>
 #include <QPointer>
 #include <QSound>
+#include <QDebug>
 
 #define yellow 0
 #define blue 1
@@ -23,8 +22,8 @@
 MagicMap::MagicMap()
 {
     animateTimer = new QTimer();
-    //property["Tom"] = (long)(void *)
-    mTom = new MagicTom();
+
+    mTom = new MagicTom(0, 0);
     displayList.push_front(mTom);
     property["level"] = 1;
 
@@ -228,6 +227,11 @@ void MagicMap::setProperty(QString propertyName, MagicVarient propertyValue)
     if (propertyName == "sound")
     {
         (new QSound(propertyValue.getString()))->play();
+        return;
+    }
+    else if (propertyName == "print")
+    {
+        qDebug() << propertyValue.getString();
         return;
     }
     MagicObject::setProperty(propertyName, propertyValue);

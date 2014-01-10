@@ -7,7 +7,7 @@ QString Pix_string[4][3] = {  {":/images/Tom_face1", ":/images/Tom_face2", ":/im
                               {":/images/Tom_back1", ":/images/Tom_back2", ":/images/Tom_back"},
                               {":/images/Tom_right1", ":/images/Tom_right2", ":/images/Tom_right"}};
 
-MagicTom::MagicTom()
+MagicTom::MagicTom(int x, int y)
 {
     for(int i=0; i<4; i++)
         for(int j=0; j<3; j++)
@@ -16,6 +16,10 @@ MagicTom::MagicTom()
     pix = Pix[0][2];
 
     property["label"] = "tom";
+    property["position_x"] = x;
+    property["position_y"] = y;
+    property["level"] = 0;
+    this->x = 32 * x, this->y = 32 * y;
 
     x = y = 0;
     mSound = new QSound(":/sounds/step");

@@ -1,4 +1,7 @@
 
+at (1)
+
+
 var = 3
   3*(4 - 7) +5
 "fsdwqef"+"32428fuds"
@@ -31,13 +34,14 @@ on (floor)
   "on floor!"
   this->position_x * 10 + this->position_y
   goto exit
-  global->return = 0
+  return = 0
 :exit
 }
 
-on (enemy)
+on (.enemy)
 {
   sound = ":/sounds/attack"
+:exit
 }
 
 10
