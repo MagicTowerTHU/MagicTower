@@ -38,6 +38,8 @@ MagicMap::MagicMap()
 
     displayList.push_front(new MagicStairs(0, 10, 1, 1));
     displayList.push_front(new MagicStairs(10, 0, 1, -1));
+    displayList.push_front(new MagicStairs(1, 10, 2, -1));
+    displayList.push_front(new MagicStairs(10, 0, 2, 1));
 
     displayList.push_front(new MagicWall(0, 1, 1));
     displayList.push_front(new MagicWall(0, 2, 1));
@@ -114,7 +116,8 @@ void MagicMap::paint(QPainter *painter)
     animateListLock.unlock();
 
     for (auto i = displayList.begin(); i != displayList.end(); i++)
-        if ((**i)["enabled"].isTrue())
+        if ((**i)["enabled"].isTrue() &&
+                ((**i)["level"] == mTom->property["level"]).isTrue())
             (*i)->paint(painter);
 
     int j = 0;
@@ -198,7 +201,9 @@ bool MagicMap::move(int direction, int distance)
     }
 
     for (auto i = displayList.begin(); i != displayList.end(); i++)
-        if ((**i)["position_x"].getInt() == target_x && (**i)["position_y"].getInt() == target_y)
+        if ((**i)["position_x"].getInt() == target_x &&
+            (**i)["position_y"].getInt() == target_y &&
+            ((**i)["level"] == mTom->property["level"]).isTrue())
             if ((**i)["enabled"].isTrue() && !(*i)->move(this))
             {
                 mTom->mBeep->play();
