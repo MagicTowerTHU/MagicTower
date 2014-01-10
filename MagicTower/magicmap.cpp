@@ -7,6 +7,7 @@
 #include "MagicDisplayObject/magicdoor.h"
 #include "MagicDisplayObject/magickey.h"
 #include "MagicDisplayObject/magicweapon.h"
+#include "MagicDisplayObject/magicarmour.h"
 
 #include <QPoint>
 #include <QMutex>
@@ -67,6 +68,10 @@ MagicMap::MagicMap()
     displayList.push_front(new MagicWeapon(1, 3, "2"));
     displayList.push_front(new MagicWeapon(2, 3, "3"));
 
+    displayList.push_front(new MagicArmour(3, 3, "1"));
+    displayList.push_front(new MagicArmour(4, 3, "2"));
+    displayList.push_front(new MagicArmour(5, 3, "3"));
+
 
     for (int i = 0; i < 11; i++)
         for (int j = 0; j < 11; j++)
@@ -111,8 +116,16 @@ void MagicMap::paint(QPainter *painter)
         if ((**i)["enabled"].isTrue())
             (*i)->paint(painter);
 
+    int j = 0;
     for (auto i = mTom->inventory.begin(); i != mTom->inventory.end(); i++)
+    {
+        int x = j % 12;
+        int y = j / 12 + 12;
+        (**i)["position_x"] = x, (**i)["position_y"] = y;
+        (*i)->x = x * 32, (*i)->y = y * 32;
         (*i)->paint(painter);
+        j++;
+    }
 }
 
 void MagicMap::appendAnimate(MagicAnimate *animate, bool block)

@@ -19,12 +19,7 @@ bool MagicInventory::move(MagicMap *map)
     if (map->Tom()->inventory.size() < 24)
     {
         map->eraseMapObject(property["label"].getString(), property["position_x"].getInt(), property["position_y"].getInt());
-        int y = map->Tom()->inventory.size() / 12 + 12;
-        int x = map->Tom()->inventory.size() % 12;
         map->Tom()->inventory.push_back(this);
-        property["position_x"] = x;
-        property["position_y"] = y;
-        this->x = x * 32, this->y = y * 32;
     }
     return true;
 }
