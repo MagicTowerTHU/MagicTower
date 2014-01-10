@@ -8,12 +8,10 @@
 
 class MagicHelper
 {
-    QHash<QString> alias;
+    static QHash<QString, QString> alias;
 
 public:
-    MagicHelper();
-
-    static MagicObject *createObject(QString);
+    static MagicObject *createObject(QString, int, int);
 };
 
 #endif // MAGICHELPER_H

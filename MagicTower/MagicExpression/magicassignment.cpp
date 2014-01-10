@@ -1,7 +1,5 @@
 #include "magicassignment.h"
 
-#include <QtDebug>
-
 MagicAssignment::MagicAssignment(MagicOperand *operand)
 {
     next = NULL;
@@ -10,7 +8,6 @@ MagicAssignment::MagicAssignment(MagicOperand *operand)
 
 void MagicAssignment::run(MagicMap *map)
 {
-    //operand->getValue(map);
-    qDebug() << operand->getValue(map).getString();
+    operand->getValue(map);
     MagicExpression::run(map);
 }

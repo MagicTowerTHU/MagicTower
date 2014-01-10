@@ -1,5 +1,10 @@
 #include "magickey.h"
 
+const int MagicKey::yellow = 0;
+const int MagicKey::blue = 1;
+const int MagicKey::red = 2;
+const int MagicKey::silver = 3;
+
 MagicKey::MagicKey(int x,int y, int color)
     : MagicInventory(x, y)
 {

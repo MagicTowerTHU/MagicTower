@@ -11,13 +11,12 @@ class MagicTom : public MagicDisplayObject
     QPixmap *pix;
 
 public:
-
     QSound *mSound;
     QSound *mBeep;
 
     QList<MagicDisplayObject *> inventory;
 
-    MagicTom();
+    MagicTom(int, int);
     virtual void paint(QPainter *painter);
     void changePic(int, int);
     bool setStep(int);

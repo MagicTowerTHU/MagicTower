@@ -15,7 +15,7 @@ void MagicDisplayObject::setAction(MagicExpression *action)
     this->action = action;
 }
 
-int MagicDisplayObject::runAction(MagicMap *map)
+bool MagicDisplayObject::runAction(MagicMap *map, bool mask)
 {
     auto ret = map->property.find("return");
     if (ret != map->property.end())
@@ -25,5 +25,5 @@ int MagicDisplayObject::runAction(MagicMap *map)
     MagicExpression::setEnvironment(NULL);
     if ((ret = map->property.find("return")) != map->property.end())
         return (*ret).isTrue();
-    return -1;
+    return mask;
 }

@@ -20,7 +20,7 @@ public:
     virtual bool move(MagicMap *) = 0;
 
     void setAction(MagicExpression *);
-    int runAction(MagicMap *);
+    bool runAction(MagicMap *, bool = true);
 };
 
 #endif // MAGICDISPLAYOBJECT_H

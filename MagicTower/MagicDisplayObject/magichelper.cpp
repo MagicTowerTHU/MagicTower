@@ -12,28 +12,32 @@
 
 #include <QRegExp>
 
-MagicHelper::MagicHelper()
-{
-    alias["a"] = "armour";
-    alias["dr"] = "door";
-    alias["e"] = "enemy";
-    alias["k"] = "key";
-    alias["up"] = "up";
-    alias["dn"] = "down";
-    alias["t"] = "tom";
-    alias["w"] = "wall";
-    alias["s"] = "weapon"; // sword
-}
+QHash<QString, QString> MagicHelper::alias = QHash<QString, QString>();
 
-static MagicObject *MagicHelper::createObject(QString target, int x, int y)
+MagicObject *MagicHelper::createObject(QString target, int x, int y)
 {
+    static bool isFirstTime = 1;
+    if (isFirstTime)
+    {
+        isFirstTime = 0;
+        MagicHelper::alias.clear();
+        alias["a"] = "armour";
+        alias["dr"] = "door";
+        alias["e"] = "enemy";
+        alias["k"] = "key";
+        alias["up"] = "up";
+        alias["dn"] = "down";
+        alias["t"] = "tom";
+        alias["w"] = "wall";
+        alias["s"] = "weapon"; // sword
+    }
     QRegExp rx("^(\\w*)?(#\\w*)?(.\\w*)?");
     rx.indexIn(target);
 
     QString category = rx.cap(1);
     QString detail = rx.cap(2);
-    if (alias.find(tmp) != alias.end())
-        target = category = alias[category] + "_" + ;
+    if (alias.find(category) != alias.end())
+        target = category = alias[category] + "_" + detail;
 
     if (category == "armour")
         return new MagicArmour(x, y, detail);

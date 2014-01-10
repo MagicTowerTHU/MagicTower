@@ -18,6 +18,8 @@ MagicTom::MagicTom(int x, int y)
     property["label"] = "tom";
     property["position_x"] = x;
     property["position_y"] = y;
+    property["level"] = 0;
+    this->x = 32 * x, this->y = 32 * y;
 
     x = y = 0;
     mSound = new QSound(":/sounds/step");

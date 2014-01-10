@@ -16,7 +16,8 @@ MagicExpression::MagicExpression()
 void MagicExpression::run(MagicMap *map) // halt
 {
     if (!next)
-        qDebug() << "MagicExpression::run() terminates";
+        //qDebug() << "MagicExpression::run() terminates";
+        ;
     else
         next->run(map);
 }
@@ -109,6 +110,7 @@ MagicOperand *getVar(QString buffer, int &p)
             }
         }
     }
+    return NULL;
 }
 
 QList<MagicObject *> getObj(QString buffer, MagicMap *map)
