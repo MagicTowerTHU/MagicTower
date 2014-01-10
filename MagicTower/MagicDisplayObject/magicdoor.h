@@ -9,6 +9,7 @@
 */
 
 #include "magicwall.h"
+//#include "../MagicAnimate/magicopen.h"
 
 class MagicDoor : public MagicWall
 {

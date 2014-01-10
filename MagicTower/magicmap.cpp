@@ -147,7 +147,6 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
 {
     if (!animateFlag)
     {
-        MagicMove *p;
         switch (e->key())
         {
         case Qt::Key_Down:

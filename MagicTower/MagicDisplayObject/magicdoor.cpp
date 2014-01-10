@@ -1,5 +1,6 @@
 #include "magicdoor.h"
 #include "../magicmap.h"
+#include "../MagicAnimate/magicopen.h"
 
 #define yellow 0
 #define blue 1
@@ -34,6 +35,7 @@ bool MagicDoor::move(MagicMap *map)
     runAction(map);
     if (map->Tom()->consumeInventory("key", color))
     {
+       // map->appendAnimate(new MagicOpen(map, 0, this, 16), true);
         property["enabled"] = 0;
         return true;
     }
