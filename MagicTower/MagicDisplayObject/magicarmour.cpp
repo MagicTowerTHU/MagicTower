@@ -8,27 +8,27 @@ MagicArmour::MagicArmour(int x, int y, int level, QString name)
 {
     this->name = name;
     property["label"] = "armour_" + name;
-    property["class"] = "armour";
+    appendClass("armour");
     pix = new QPixmap(":/images/armour_" + name);
     switch(name.toInt())
     {
     case 1:
         property["defend"] = 100;
+        break;
     case 2:
         property["defend"] = 200;
+        break;
     default:
-        property["defent"] = 300;
+        property["defend"] = 300;
+        break;
     }
 }
 
 bool MagicArmour::move(MagicMap *map)
 {
-    if ((map->Tom()->property["defend"] < property["defend"]).isTrue())
-    {
-        map->Tom()->property["defend"] = property["defend"].getInt();
-        qDebug() <<"Tom: "<< map->Tom()->property["attack"].getInt() << ' '<<
-                            map->Tom()->property["defend"].getInt() << ' ' <<
-                            map->Tom()->property["health"].getInt() << '\n';
-    }
+    map->Tom()->property["defend"] += property["defend"].getInt();
+    qDebug() <<"Tom: "<< map->Tom()->property["attack"].getInt() << ' '<<
+                         map->Tom()->property["defend"].getInt() << ' ' <<
+                         map->Tom()->property["health"].getInt() << '\n';
     return MagicInventory::move(map);
 }

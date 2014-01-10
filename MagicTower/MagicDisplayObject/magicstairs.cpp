@@ -5,6 +5,7 @@ MagicStairs::MagicStairs(int x, int y, int level, int direction)
     : MagicFloor(x, y, level)
 {
     property["label"] = "stairs";
+    appendClass("stairs");
     this->direction = direction;
     if(direction == 1)
         pix = new QPixmap(":/images/upstairs");

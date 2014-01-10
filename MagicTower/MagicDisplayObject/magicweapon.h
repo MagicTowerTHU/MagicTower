@@ -8,6 +8,7 @@ class MagicWeapon : public MagicInventory
     QString name;
 public:
     MagicWeapon(int, int, int, QString);
+    virtual bool move(MagicMap *);
 };
 
 #endif // MAGICWEAPON_H

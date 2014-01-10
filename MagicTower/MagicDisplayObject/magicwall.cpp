@@ -4,6 +4,7 @@ MagicWall::MagicWall(int x, int y, int level)
     : MagicDisplayObject(x, y, level)
 {
     property["label"] = "wall";
+    appendClass("wall");
     pix = new QPixmap(":/images/wall");
 }
 

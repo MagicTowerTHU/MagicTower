@@ -9,7 +9,7 @@ MagicKey::MagicKey(int x, int y, int level, int color)
     : MagicInventory(x, y, level)
 {
     property["label"] = "key";
-    property["class"] = "key";
+    appendClass("key");
     property["color"] = color;
     this->color = color;
     switch(color)

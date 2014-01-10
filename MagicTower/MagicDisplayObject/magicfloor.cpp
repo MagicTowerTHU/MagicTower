@@ -4,6 +4,7 @@ MagicFloor::MagicFloor(int x, int y, int level)
     : MagicDisplayObject(x, y, level)
 {
     property["label"] = "floor";
+    appendClass("floor");
     pix = new QPixmap(":/images/floor");
 }
 
