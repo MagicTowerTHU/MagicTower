@@ -5,7 +5,7 @@
 MagicEnemy::MagicEnemy(int x, int y, QString name)
 {
     property["label"] = "enemy_" + name;
-    property["class"] = "enemy";
+    appendClass("enemy");
     pix[0] = new QPixmap(":/images/enemy_" + name + ".0");
     pix[1] = new QPixmap(":/images/enemy_" + name + ".1");
     this->x = 32 * x, this->y = 32 * y;

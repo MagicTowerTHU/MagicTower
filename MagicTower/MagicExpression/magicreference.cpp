@@ -4,9 +4,9 @@
 
 #include <QList>
 
-MagicReference::MagicReference(QString Label, QString Id, QString Class, QString property)
+MagicReference::MagicReference(QString Label, QString Id, QList<QString> Class, QString property)
 {
-    objectLabel = Label, objectId = Id.right(Id.length() - 1), objectClass = Class.right(Class.length() - 1), this->property = property;
+    objectLabel = Label, objectId = Id, objectClass = Class, this->property = property;
 }
 
 MagicVarient MagicReference::getValue(MagicMap *map)
@@ -19,7 +19,7 @@ MagicVarient MagicReference::getValue(MagicMap *map)
         return (*target.first())[property];
     else
     {
-        QString err = "<MagicReference::getValue(MagicMap *)> Cannot find object : " + objectLabel + (objectId != "" ? "#" + objectId : "") + (objectClass != "" ? "." + objectClass : "");
+        QString err = "<MagicReference::getValue(MagicMap *)> Cannot find object : " + objectLabel + (objectId != "" ? "#" + objectId : "");// + (objectClass != "" ? "." + objectClass : "");
         throw err;
     }
 }
@@ -37,7 +37,7 @@ MagicVarient MagicReference::setValue(MagicVarient x, MagicMap *map)
             (**i).setProperty(property, x);
     else
     {
-        QString err = "<MagicReference::setValue(MagicMap *)> Cannot find object : " + objectLabel + (objectId != "" ? "#" + objectId : "") + (objectClass != "" ? "." + objectClass : "");
+        QString err = "<MagicReference::setValue(MagicMap *)> Cannot find object : " + objectLabel + (objectId != "" ? "#" + objectId : "");// + (objectClass != "" ? "." + objectClass : "");
         throw err;
     }
     return x;

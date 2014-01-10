@@ -94,11 +94,14 @@ MagicOperand *getVar(QString buffer, int &p)
         return new MagicOperand(MagicVarient::input(buffer, p));
     else
     {
-        QRegExp rx("^(\\w*)?(#\\w*)?(.\\w*)?\\s*->\\s*(\\w*)");
+        QRegExp rx("^((\\w*)?(#(\\w*))?(.\\w*)*)->\\s*(\\w*)");
         if (rx.indexIn(buffer.mid(p)) >= 0)
         {
+            QList<QString> c;
+            for (int i = 3; i < rx.captureCount(); i++)
+                c.append(rx.cap(i).mid(1));
             p += rx.matchedLength();
-            return new MagicReference(rx.cap(1), rx.cap(2), rx.cap(3), rx.cap(4));
+            return new MagicReference(rx.cap(1), rx.cap(2).mid(1), c, rx.cap(4));
         }
         else
         {
@@ -106,7 +109,7 @@ MagicOperand *getVar(QString buffer, int &p)
             if (rx.indexIn(buffer.mid(p)) >= 0)
             {
                 p += rx.matchedLength();
-                return new MagicReference("global", "", "", rx.cap(1));
+                return new MagicReference("global", "", QList<QString>(), rx.cap(1));
             }
         }
     }
@@ -115,9 +118,12 @@ MagicOperand *getVar(QString buffer, int &p)
 
 QList<MagicObject *> getObj(QString buffer, MagicMap *map)
 {
-    QRegExp rx("^(\\w*)?(#\\w*)?(.\\w*)?");
+    QRegExp rx("^(\\w*)?(#\\w*)?(.\\w*)*");
     rx.indexIn(buffer);
-    return map->findDisplayObject(rx.cap(1), rx.cap(2), rx.cap(3));
+    QList<QString> c;
+    for (int i = 3; i <= rx.captureCount(); i++)
+        c.append(rx.cap(i).mid(1));
+    return map->findDisplayObject(rx.cap(1), rx.cap(2).mid(1), c);
 }
 
 MagicOperand *processLine(QString buffer)

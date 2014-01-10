@@ -41,7 +41,7 @@ public:
 
     void appendAnimate(MagicAnimate *, bool = true);
 
-    QList<MagicObject *> findDisplayObject(QString, QString, QString);
+    QList<MagicObject *> findDisplayObject(QString, QString, QList<QString>);
 
     virtual void setProperty(QString, MagicVarient);
     bool eraseMapObject(QString, int, int);
