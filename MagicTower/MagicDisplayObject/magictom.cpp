@@ -22,7 +22,7 @@ MagicTom::MagicTom(int x, int y, int level)
     property["defend"] = 50;
     property["health"] = 500;
 
-    qDebug() <<"Tom: "<< property["attack"].getInt() << ' '<< property["defend"].getInt() << ' ' << property["health"].getInt() << '\n';
+    qDebug() <<"Tom: "<< property["attack"].getInt() << property["defend"].getInt() << property["health"].getInt();
 
     mSound = new QSound(":/sounds/step");
     mBeep = new QSound(":/sounds/beep");

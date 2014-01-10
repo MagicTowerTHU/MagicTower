@@ -1,6 +1,8 @@
 #include "magicenemy.h"
+#include "../magicmap.h"
 
 #include <QPainter>
+#include <QDebug>
 
 MagicEnemy::MagicEnemy(int x, int y, int level, QString name)
     : MagicDisplayObject(x, y, level)
@@ -13,32 +15,34 @@ MagicEnemy::MagicEnemy(int x, int y, int level, QString name)
     {
     case 1:
         property["attack"] = 10;
-        property["defend"] = 10;
+        property["defend"] = 100;
         property["health"] = 100;
+        break;
     case 2:
-        property["attack"] = 10;
-        property["defend"] = 10;
-        property["health"] = 100;
+        property["attack"] = 80;
+        property["defend"] = 200;
+        property["health"] = 200;
+        break;
     case 3:
-        property["attack"] = 10;
-        property["defend"] = 10;
-        property["health"] = 100;
+        property["attack"] = 230;
+        property["defend"] = 100;
+        property["health"] = 300;
+        break;
     case 4:
-        property["attack"] = 10;
-        property["defend"] = 10;
-        property["health"] = 100;
+        property["attack"] = 200;
+        property["defend"] = 130;
+        property["health"] = 400;
+        break;
     case 5:
-        property["attack"] = 10;
-        property["defend"] = 10;
-        property["health"] = 100;
-    case 6:
-        property["attack"] = 10;
-        property["defend"] = 10;
-        property["health"] = 100;
+        property["attack"] = 100;
+        property["defend"] = 200;
+        property["health"] = 500;
+        break;
     default:
-        property["attack"] = 10;
-        property["defend"] = 10;
-        property["health"] = 100;
+        property["attack"] = 70;
+        property["defend"] = 100;
+        property["health"] = 1600;
+        break;
     }
 }
 
@@ -51,5 +55,43 @@ void MagicEnemy::paint(QPainter *painter)
 
 bool MagicEnemy::move(MagicMap *map)
 {
-    return runAction(map, false);
+    qDebug() << property["label"].getString() <<
+                property["attack"].getInt() <<
+                property["defend"].getInt() <<
+                property["health"].getInt();
+    if (map->Tom()->property["attack"].getInt() <= property["defend"].getInt())
+    {
+        qDebug() << "can't break defence!!";
+        return runAction(map, false);
+    }
+    else if(map->Tom()->property["defend"].getInt() >= property["attack"].getInt())
+    {
+        qDebug() << "Tom health left:" << map->Tom()->property["health"].getInt();
+        map->eraseMapObject(property["label"].getString(), property["position_x"].getInt(), property["position_y"].getInt());
+        return runAction(map, true);
+    }
+    else
+    {
+        int kill = map->Tom()->property["attack"].getInt() - property["defend"].getInt();
+        int casualty = property["attack"].getInt() - map->Tom()->property["defend"].getInt();
+        int tomHealth = map->Tom()->property["health"].getInt();
+        int enemyHealth = property["health"].getInt();
+        while (tomHealth > 0 && enemyHealth > 0)
+        {
+            tomHealth -= casualty;
+            enemyHealth -= kill;
+        }
+        if(tomHealth <= 0)
+        {
+            qDebug() << "will die!!";
+            return runAction(map, false);
+        }
+        else
+        {
+            map->Tom()->property["health"] = tomHealth;
+            qDebug() << "Tom health left:" << map->Tom()->property["health"].getInt();
+            map->eraseMapObject(property["label"].getString(), property["position_x"].getInt(), property["position_y"].getInt());
+            return runAction(map, true);
+        }
+    }
 }

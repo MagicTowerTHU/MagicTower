@@ -28,6 +28,6 @@ bool MagicWeapon::move(MagicMap *map)
     map->Tom()->property["attack"] += property["attack"].getInt();
     qDebug() <<"Tom: "<< map->Tom()->property["attack"].getInt() << ' '<<
                          map->Tom()->property["defend"].getInt() << ' ' <<
-                         map->Tom()->property["health"].getInt() << '\n';
+                         map->Tom()->property["health"].getInt();
     return MagicInventory::move(map);
 }
