@@ -7,8 +7,8 @@
 #define red 2
 #define silver 3
 
-MagicDoor::MagicDoor(int x, int y, int color)
-    : MagicWall(x, y)
+MagicDoor::MagicDoor(int x, int y, int level, int color)
+    : MagicWall(x, y, level)
 {
     property["label"] = "door";
     this->color = color;

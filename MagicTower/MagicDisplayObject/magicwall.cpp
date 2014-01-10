@@ -1,12 +1,10 @@
 #include "magicwall.h"
 
-MagicWall::MagicWall(int x, int y)
+MagicWall::MagicWall(int x, int y, int level)
+    : MagicDisplayObject(x, y, level)
 {
     property["label"] = "wall";
     pix = new QPixmap(":/images/wall");
-    this->x = 32 * x, this->y = 32 * y;
-    property["position_x"] = x;
-    property["position_y"] = y;
 }
 
 void MagicWall::paint(QPainter *painter)

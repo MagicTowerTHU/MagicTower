@@ -1,12 +1,10 @@
 #include "magicfloor.h"
 
-MagicFloor::MagicFloor(int x, int y)
+MagicFloor::MagicFloor(int x, int y, int level)
+    : MagicDisplayObject(x, y, level)
 {
     property["label"] = "floor";
     pix = new QPixmap(":/images/floor");
-    this->x = 32 * x, this->y = 32 * y;
-    property["position_x"] = x;
-    property["position_y"] = y;
 }
 
 void MagicFloor::paint(QPainter *painter)

@@ -5,10 +5,11 @@ const int MagicKey::blue = 1;
 const int MagicKey::red = 2;
 const int MagicKey::silver = 3;
 
-MagicKey::MagicKey(int x,int y, int color)
-    : MagicInventory(x, y)
+MagicKey::MagicKey(int x, int y, int level, int color)
+    : MagicInventory(x, y, level)
 {
     property["label"] = "key";
+    property["class"] = "key";
     property["color"] = color;
     this->color = color;
     switch(color)

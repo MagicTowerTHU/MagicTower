@@ -8,7 +8,7 @@ class MagicFloor : public MagicDisplayObject
 
 public:
     QPixmap *pix;
-    MagicFloor(int, int);
+    MagicFloor(int, int, int);
     virtual void paint(QPainter *);
     virtual bool move(MagicMap *);
 };

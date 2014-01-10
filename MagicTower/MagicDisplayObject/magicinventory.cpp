@@ -1,10 +1,9 @@
 #include "magicinventory.h"
 
-MagicInventory::MagicInventory(int x, int y)
+MagicInventory::MagicInventory(int x, int y, int level)
+    : MagicDisplayObject(x, y, level)
 {
-    property["position_x"] = x;
-    property["position_y"] = y;
-    this->x = x * 32, this->y = y * 32;
+
 }
 
 void MagicInventory::paint(QPainter *painter)

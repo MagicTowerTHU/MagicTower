@@ -16,7 +16,7 @@ class MagicDoor : public MagicWall
     int color;
 
 public:
-    MagicDoor(int, int, int);
+    MagicDoor(int, int, int, int);
     virtual bool move(MagicMap *);
 };
 
