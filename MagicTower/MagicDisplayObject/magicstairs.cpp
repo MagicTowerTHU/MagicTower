@@ -23,5 +23,5 @@ bool MagicStairs::move(MagicMap *map)
         map->Tom()->property["level"] -= 1;
         break;
     }
-    return runAction(map, true);
+    return runAction(map, false);
 }

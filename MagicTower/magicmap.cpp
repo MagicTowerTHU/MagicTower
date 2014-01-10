@@ -38,7 +38,7 @@ MagicMap::MagicMap()
 
     displayList.push_front(new MagicStairs(0, 10, 1, 1));
     displayList.push_front(new MagicStairs(10, 0, 1, -1));
-    displayList.push_front(new MagicStairs(1, 10, 2, -1));
+    displayList.push_front(new MagicStairs(0, 10, 2, -1));
     displayList.push_front(new MagicStairs(10, 0, 2, 1));
 
     displayList.push_front(new MagicWall(0, 1, 1));
