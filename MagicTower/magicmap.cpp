@@ -213,7 +213,7 @@ bool MagicMap::move(int direction, int distance)
     return true;
 }
 
-QList<MagicObject *> MagicMap::findDisplayObject(QString objectLabel, QString objectId, QString objectClass)
+QList<MagicObject *> MagicMap::findDisplayObject(QString objectLabel, QString objectId, QList<QString> objectClass)
 {
     QList<MagicObject *> objects;
     if (objectLabel == "global" || objectLabel == "map")
@@ -224,7 +224,7 @@ QList<MagicObject *> MagicMap::findDisplayObject(QString objectLabel, QString ob
     for (auto i = displayList.begin(); i != displayList.end(); i++)
         if ((objectLabel == "" || ((**i)["label"] == MagicVarient(objectLabel)).isTrue()) &&
                 (objectId == "" || ((**i)["id"] == MagicVarient(objectId)).isTrue()) &&
-                (objectClass == "" || ((**i)["class"] == MagicVarient(objectClass)).isTrue()))
+                (objectClass.empty() || ((**i).inClass(objectClass))))
             objects.append(*i);
     return objects;
 }

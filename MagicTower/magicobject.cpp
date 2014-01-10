@@ -18,3 +18,21 @@ void MagicObject::setProperty(QString propertyName, MagicVarient propertyValue)
 {
     property[propertyName] = propertyValue;
 }
+
+bool MagicObject::inClass(QString c)
+{
+    return mClass.contains(c);
+}
+
+bool MagicObject::inClass(QList<QString> c)
+{
+    for (auto i = c.begin(); i != c.end(); i++)
+        if (!mClass.contains(*i))
+            return false;
+    return true;
+}
+
+void MagicObject::appendClass(QString c)
+{
+    mClass.insert(c);
+}
