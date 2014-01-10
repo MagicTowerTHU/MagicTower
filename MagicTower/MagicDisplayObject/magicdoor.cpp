@@ -1,13 +1,14 @@
 #include "magicdoor.h"
 #include "../magicmap.h"
+#include "../MagicAnimate/magicopen.h"
 
 #define yellow 0
 #define blue 1
 #define red 2
 #define silver 3
 
-MagicDoor::MagicDoor(int x, int y, int color)
-    : MagicWall(x, y)
+MagicDoor::MagicDoor(int x, int y, int level, int color)
+    : MagicWall(x, y, level)
 {
     property["label"] = "door";
     this->color = color;
@@ -31,12 +32,12 @@ MagicDoor::MagicDoor(int x, int y, int color)
 
 bool MagicDoor::move(MagicMap *map)
 {
-    runAction(map);
     if (map->Tom()->consumeInventory("key", color))
     {
+       // map->appendAnimate(new MagicOpen(map, 0, this, 16), true);
         property["enabled"] = 0;
-        return true;
+        return runAction(map, true);
     }
-    return false;
+    return runAction(map, false);
 }
 

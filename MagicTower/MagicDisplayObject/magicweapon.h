@@ -7,7 +7,7 @@ class MagicWeapon : public MagicInventory
 {
     QString name;
 public:
-    MagicWeapon(int, int, QString);
+    MagicWeapon(int, int, int, QString);
 };
 
 #endif // MAGICWEAPON_H

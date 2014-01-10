@@ -14,7 +14,7 @@
 
 QHash<QString, QString> MagicHelper::alias = QHash<QString, QString>();
 
-MagicObject *MagicHelper::createObject(QString target, int x, int y)
+MagicObject *MagicHelper::createObject(QString target, int x, int y, int level)
 {
     static bool isFirstTime = 1;
     if (isFirstTime)
@@ -40,21 +40,21 @@ MagicObject *MagicHelper::createObject(QString target, int x, int y)
         target = category = alias[category] + "_" + detail;
 
     if (category == "armour")
-        return new MagicArmour(x, y, detail);
+        return new MagicArmour(x, y, level, detail);
     else if (category == "door")
-        return new MagicDoor(x, y, detail.toInt());
+        return new MagicDoor(x, y, level, detail.toInt());
     else if (category == "enemy")
-        return new MagicEnemy(x, y, detail);
+        return new MagicEnemy(x, y, level, detail);
     else if (category == "key")
-        return new MagicKey(x, y, detail.toInt());
+        return new MagicKey(x, y, level, detail.toInt());
     else if (category == "up")
-        return new MagicStairs(x, y, 1);
+        return new MagicStairs(x, y, level, 1);
     else if (category == "down")
-        return new MagicStairs(x, y, -1);
+        return new MagicStairs(x, y, level, -1);
     else if (category == "tom")
-        return new MagicTom(x, y);
+        return new MagicTom(x, y, level);
     else if (category == "wall")
-        return new MagicWall(x, y);
+        return new MagicWall(x, y, level);
     else if (category == "weapon")
-        return new MagicWeapon(x, y, detail);
+        return new MagicWeapon(x, y, level, detail);
 }

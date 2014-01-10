@@ -42,6 +42,7 @@ SOURCES += main.cpp\
     MagicDisplayObject/magickey.cpp \
     MagicDisplayObject/magicweapon.cpp \
     MagicDisplayObject/magicarmour.cpp \
+    MagicAnimate/magicopen.cpp \
     MagicDisplayObject/magichelper.cpp
 
 HEADERS  += mainwindow.h \
@@ -71,6 +72,7 @@ HEADERS  += mainwindow.h \
     MagicDisplayObject/magickey.h \
     MagicDisplayObject/magicweapon.h \
     MagicDisplayObject/magicarmour.h \
+    MagicAnimate/magicopen.h \
     MagicDisplayObject/magichelper.h
 
 RESOURCES += \

@@ -11,7 +11,7 @@ class MagicHelper
     static QHash<QString, QString> alias;
 
 public:
-    static MagicObject *createObject(QString, int, int);
+    static MagicObject *createObject(QString, int, int, int);
 };
 
 #endif // MAGICHELPER_H

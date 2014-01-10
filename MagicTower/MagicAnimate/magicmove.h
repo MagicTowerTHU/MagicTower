@@ -2,7 +2,6 @@
 #define MAGICMOVE_H
 
 #include "magicanimate.h"
-#include "../MagicDisplayObject/magicdisplayobject.h"
 
 class MagicMove : public MagicAnimate
 {

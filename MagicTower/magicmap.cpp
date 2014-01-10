@@ -23,62 +23,66 @@ MagicMap::MagicMap()
 {
     animateTimer = new QTimer();
 
-    mTom = new MagicTom(0, 0);
+    mTom = new MagicTom(0, 0, 1);
     displayList.push_front(mTom);
     property["level"] = 1;
 
     animateFlag = false;
 
-    displayList.push_front(new MagicEnemy(0, 4, "1"));
-    displayList.push_front(new MagicEnemy(1, 4, "2"));
-    displayList.push_front(new MagicEnemy(2, 4, "3"));
-    displayList.push_front(new MagicEnemy(3, 4, "4"));
-    displayList.push_front(new MagicEnemy(4, 4, "5"));
-    displayList.push_front(new MagicEnemy(5, 4, "6"));
+    displayList.push_front(new MagicEnemy(0, 4, 1, "1"));
+    displayList.push_front(new MagicEnemy(1, 4, 1, "2"));
+    displayList.push_front(new MagicEnemy(2, 4, 1, "3"));
+    displayList.push_front(new MagicEnemy(3, 4, 1, "4"));
+    displayList.push_front(new MagicEnemy(4, 4, 1, "5"));
+    displayList.push_front(new MagicEnemy(5, 4, 1, "6"));
 
-    displayList.push_front(new MagicStairs(0, 10, 1));
-    displayList.push_front(new MagicStairs(10, 0, -1));
+    displayList.push_front(new MagicStairs(0, 10, 1, 1));
+    displayList.push_front(new MagicStairs(10, 0, 1, -1));
+    displayList.push_front(new MagicStairs(1, 10, 2, -1));
+    displayList.push_front(new MagicStairs(10, 0, 2, 1));
 
-    displayList.push_front(new MagicWall(0, 1));
-    displayList.push_front(new MagicWall(0, 2));
-    displayList.push_front(new MagicWall(1, 2));
-    displayList.push_front(new MagicWall(0, 1));
-    displayList.push_front(new MagicWall(2, 0));
-    displayList.push_front(new MagicWall(3, 0));
-    displayList.push_front(new MagicWall(4, 0));
-    displayList.push_front(new MagicWall(5, 0));
-    displayList.push_front(new MagicDoor(2, 2, yellow));
-    displayList.push_front(new MagicWall(3, 2));
-    displayList.push_front(new MagicDoor(4, 2, yellow));
-    displayList.push_front(new MagicWall(5, 2));
-    displayList.push_front(new MagicDoor(6, 2, red));
-    displayList.push_front(new MagicWall(7, 2));
-    displayList.push_front(new MagicWall(7, 1));
-    displayList.push_front(new MagicDoor(8, 1, blue));
-    displayList.push_front(new MagicWall(9, 1));
-    displayList.push_front(new MagicDoor(10, 1, silver));
+    displayList.push_front(new MagicWall(0, 1, 1));
+    displayList.push_front(new MagicWall(0, 2, 1));
+    displayList.push_front(new MagicWall(1, 2, 1));
+    displayList.push_front(new MagicWall(0, 1, 1));
+    displayList.push_front(new MagicWall(2, 0, 1));
+    displayList.push_front(new MagicWall(3, 0, 1));
+    displayList.push_front(new MagicWall(4, 0, 1));
+    displayList.push_front(new MagicWall(5, 0, 1));
+    displayList.push_front(new MagicDoor(2, 2, 1, yellow));
+    displayList.push_front(new MagicWall(3, 2, 1));
+    displayList.push_front(new MagicDoor(4, 2, 1, yellow));
+    displayList.push_front(new MagicWall(5, 2, 1));
+    displayList.push_front(new MagicDoor(6, 2, 1, red));
+    displayList.push_front(new MagicWall(7, 2, 1));
+    displayList.push_front(new MagicWall(7, 1, 1));
+    displayList.push_front(new MagicDoor(8, 1, 1, blue));
+    displayList.push_front(new MagicWall(9, 1, 1));
+    displayList.push_front(new MagicDoor(10, 1, 1, silver));
 
-    displayList.push_front(new MagicKey(2, 1, yellow));
-    displayList.push_front(new MagicKey(3, 1, yellow));
-    displayList.push_front(new MagicKey(4, 1, red));
-    displayList.push_front(new MagicKey(5, 1, blue));
+    displayList.push_front(new MagicKey(2, 1, 1, yellow));
+    displayList.push_front(new MagicKey(3, 1, 1, yellow));
+    displayList.push_front(new MagicKey(4, 1, 1, red));
+    displayList.push_front(new MagicKey(5, 1, 1, blue));
 
-    displayList.push_front(new MagicWeapon(0, 3, "1"));
-    displayList.push_front(new MagicWeapon(1, 3, "2"));
-    displayList.push_front(new MagicWeapon(2, 3, "3"));
+    displayList.push_front(new MagicWeapon(0, 3, 1, "1"));
+    displayList.push_front(new MagicWeapon(1, 3, 1, "2"));
+    displayList.push_front(new MagicWeapon(2, 3, 1, "3"));
 
-    displayList.push_front(new MagicArmour(3, 3, "1"));
-    displayList.push_front(new MagicArmour(4, 3, "2"));
-    displayList.push_front(new MagicArmour(5, 3, "3"));
+    displayList.push_front(new MagicArmour(3, 3, 1, "1"));
+    displayList.push_front(new MagicArmour(4, 3, 1, "2"));
+    displayList.push_front(new MagicArmour(5, 3, 1, "3"));
 
 
     for (int i = 0; i < 11; i++)
         for (int j = 0; j < 11; j++)
-            displayList.push_front(floor[11 * i + j] = new MagicFloor(i, j));
+            for (int k = 0; k < 21; k++)
+                displayList.push_front(floor[11 * i + j] = new MagicFloor(i, j, k+1));
 
     for (int i = 12; i < 14; i++)
         for (int j = 0; j < 12; j++)
-            displayList.push_front(inventory[12 * i + j] = new MagicFloor(j, i));
+            for (int k = 0; k < 21; k++)
+                displayList.push_front(inventory[12 * i + j] = new MagicFloor(j, i, k+1));
 
     mBackSound = new MagicBackSound();
     mBackSound->play(QSound::Infinite);
@@ -112,7 +116,8 @@ void MagicMap::paint(QPainter *painter)
     animateListLock.unlock();
 
     for (auto i = displayList.begin(); i != displayList.end(); i++)
-        if ((**i)["enabled"].isTrue())
+        if ((**i)["enabled"].isTrue() &&
+                ((**i)["level"] == mTom->property["level"]).isTrue())
             (*i)->paint(painter);
 
     int j = 0;
@@ -146,7 +151,6 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
 {
     if (!animateFlag)
     {
-        MagicMove *p;
         switch (e->key())
         {
         case Qt::Key_Down:
@@ -197,7 +201,9 @@ bool MagicMap::move(int direction, int distance)
     }
 
     for (auto i = displayList.begin(); i != displayList.end(); i++)
-        if ((**i)["position_x"].getInt() == target_x && (**i)["position_y"].getInt() == target_y)
+        if ((**i)["position_x"].getInt() == target_x &&
+            (**i)["position_y"].getInt() == target_y &&
+            ((**i)["level"] == mTom->property["level"]).isTrue())
             if ((**i)["enabled"].isTrue() && !(*i)->move(this))
             {
                 mTom->mBeep->play();

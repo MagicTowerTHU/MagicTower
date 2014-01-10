@@ -16,7 +16,7 @@ public:
 
     QList<MagicDisplayObject *> inventory;
 
-    MagicTom(int, int);
+    MagicTom(int, int, int);
     virtual void paint(QPainter *painter);
     void changePic(int, int);
     bool setStep(int);

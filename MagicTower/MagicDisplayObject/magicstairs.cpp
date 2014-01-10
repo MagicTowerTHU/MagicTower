@@ -1,7 +1,8 @@
 #include "magicstairs.h"
+#include "../magicmap.h"
 
-MagicStairs::MagicStairs(int x, int y, int direction)
-    : MagicFloor(x, y)
+MagicStairs::MagicStairs(int x, int y, int level, int direction)
+    : MagicFloor(x, y, level)
 {
     property["label"] = "stairs";
     this->direction = direction;
@@ -13,7 +14,14 @@ MagicStairs::MagicStairs(int x, int y, int direction)
 
 bool MagicStairs::move(MagicMap *map)
 {
-    if (!runAction(map))
-        return false;
-    return true;
+    switch(direction)
+    {
+    case 1:
+        map->Tom()->property["level"] += 1;
+        break;
+    default:
+        map->Tom()->property["level"] -= 1;
+        break;
+    }
+    return runAction(map, true);
 }

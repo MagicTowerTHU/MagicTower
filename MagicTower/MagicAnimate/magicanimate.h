@@ -7,6 +7,8 @@ class MagicMap;
 #include <QMutex>
 #include <QPainter>
 
+#include "../MagicDisplayObject/magicdisplayobject.h"
+
 class MagicAnimate : public QWaitCondition, public QMutex
 {
     MagicMap *parent;

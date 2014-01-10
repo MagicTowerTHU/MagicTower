@@ -1,10 +1,9 @@
 #include "magicinventory.h"
 
-MagicInventory::MagicInventory(int x, int y)
+MagicInventory::MagicInventory(int x, int y, int level)
+    : MagicDisplayObject(x, y, level)
 {
-    property["position_x"] = x;
-    property["position_y"] = y;
-    this->x = x * 32, this->y = y * 32;
+
 }
 
 void MagicInventory::paint(QPainter *painter)
@@ -14,12 +13,10 @@ void MagicInventory::paint(QPainter *painter)
 
 bool MagicInventory::move(MagicMap *map)
 {
-    if (!runAction(map))
-        return false;
     if (map->Tom()->inventory.size() < 24)
     {
         map->eraseMapObject(property["label"].getString(), property["position_x"].getInt(), property["position_y"].getInt());
         map->Tom()->inventory.push_back(this);
     }
-    return true;
+    return runAction(map, true);
 }

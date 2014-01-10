@@ -2,10 +2,12 @@
 #include "../MagicExpression/magicexpression.h"
 #include "../MagicExpression/magicvarient.h"
 
-MagicDisplayObject::MagicDisplayObject()
+MagicDisplayObject::MagicDisplayObject(int x, int y, int level)
 {
-    property["position_x"] = 0;
-    property["position_y"] = 0;
+    property["position_x"] = x;
+    property["position_y"] = y;
+    property["level"] = level;
+    this->x = x * 32, this->y = y * 32;
     property["enabled"] = 1;
     action = NULL;
 }

@@ -9,13 +9,14 @@
 */
 
 #include "magicwall.h"
+//#include "../MagicAnimate/magicopen.h"
 
 class MagicDoor : public MagicWall
 {
     int color;
 
 public:
-    MagicDoor(int, int, int);
+    MagicDoor(int, int, int, int);
     virtual bool move(MagicMap *);
 };
 
