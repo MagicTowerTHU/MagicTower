@@ -32,13 +32,12 @@ MagicDoor::MagicDoor(int x, int y, int color)
 
 bool MagicDoor::move(MagicMap *map)
 {
-    runAction(map);
     if (map->Tom()->consumeInventory("key", color))
     {
        // map->appendAnimate(new MagicOpen(map, 0, this, 16), true);
         property["enabled"] = 0;
-        return true;
+        return runAction(map, true);
     }
-    return false;
+    return runAction(map, false);
 }
 

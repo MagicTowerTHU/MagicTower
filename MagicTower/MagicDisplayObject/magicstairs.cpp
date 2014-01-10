@@ -13,7 +13,5 @@ MagicStairs::MagicStairs(int x, int y, int direction)
 
 bool MagicStairs::move(MagicMap *map)
 {
-    if (!runAction(map))
-        return false;
-    return true;
+    return runAction(map, true);
 }

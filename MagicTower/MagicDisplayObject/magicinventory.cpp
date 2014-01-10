@@ -14,12 +14,10 @@ void MagicInventory::paint(QPainter *painter)
 
 bool MagicInventory::move(MagicMap *map)
 {
-    if (!runAction(map))
-        return false;
     if (map->Tom()->inventory.size() < 24)
     {
         map->eraseMapObject(property["label"].getString(), property["position_x"].getInt(), property["position_y"].getInt());
         map->Tom()->inventory.push_back(this);
     }
-    return true;
+    return runAction(map, true);
 }

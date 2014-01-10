@@ -16,7 +16,5 @@ void MagicFloor::paint(QPainter *painter)
 
 bool MagicFloor::move(MagicMap *map)
 {
-    if (!runAction(map))
-        return false;
-    return true;
+    return runAction(map, true);
 }
