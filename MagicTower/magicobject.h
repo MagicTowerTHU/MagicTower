@@ -20,6 +20,7 @@ public:
     bool inClass(QString);
     bool inClass(QList<QString>);
     void appendClass(QString);
+    void appendClass(QList<QString>);
 
     virtual MagicVarient &operator[](QString);
     virtual const MagicVarient &operator[](QString) const;

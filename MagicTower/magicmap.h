@@ -40,6 +40,7 @@ public:
     void keyPressEvent(QKeyEvent *);
 
     void appendAnimate(MagicAnimate *, bool = true);
+    void appendObject(MagicDisplayObject *);
 
     QList<MagicObject *> findDisplayObject(QString, QString, QList<QString>);
 

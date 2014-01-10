@@ -1,7 +1,7 @@
 #ifndef MAGICHELPER_H
 #define MAGICHELPER_H
 
-#include "magicobject.h"
+#include "magicdisplayobject.h"
 
 #include <QString>
 #include <QHash>
@@ -11,7 +11,7 @@ class MagicHelper
     static QHash<QString, QString> alias;
 
 public:
-    static MagicObject *createObject(QString, int, int, int);
+    static MagicDisplayObject *createObject(QString, QString, QList<QString>, int, int, int);
 };
 
 #endif // MAGICHELPER_H

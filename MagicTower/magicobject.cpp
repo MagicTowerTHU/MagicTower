@@ -1,5 +1,7 @@
 #include "magicobject.h"
 
+#include <QDebug>
+
 MagicObject::MagicObject()
 {
 }
@@ -30,6 +32,12 @@ bool MagicObject::inClass(QList<QString> c)
         if (!mClass.contains(*i))
             return false;
     return true;
+}
+
+void MagicObject::appendClass(QList<QString> c)
+{
+    for (auto i = c.begin(); i != c.end(); i++)
+        mClass.insert(*i);
 }
 
 void MagicObject::appendClass(QString c)

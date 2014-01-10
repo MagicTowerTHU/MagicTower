@@ -2,6 +2,7 @@
 #include "magicassignment.h"
 #include "magicgoto.h"
 #include "magiccondition.h"
+#include "../MagicDisplayObject/magichelper.h"
 
 #include <QTextStream>
 #include <QChar>
@@ -61,7 +62,7 @@ void operate()
 
 bool isSymbol(char x)
 {
-    return !(x >= 'a' && x <= 'z' || x >= '0' && x <= '9' || x == '#' || x == '.' || x == '\"');
+    return !((x >= 'a' && x <= 'z') || (x >= '0' && x <= '9') || x == '#' || x == '.' || x == '\"');
 }
 
 int getOpe(QString buffer, int &p)
@@ -94,14 +95,15 @@ MagicOperand *getVar(QString buffer, int &p)
         return new MagicOperand(MagicVarient::input(buffer, p));
     else
     {
-        QRegExp rx("^((\\w*)?(#(\\w*))?(.\\w*)*)->\\s*(\\w*)");
+        QRegExp rx("^(\\w*)?(#(\\w*))?([.]\\w*)*->\\s*(\\w*)");
         if (rx.indexIn(buffer.mid(p)) >= 0)
         {
             QList<QString> c;
             for (int i = 3; i < rx.captureCount(); i++)
-                c.append(rx.cap(i).mid(1));
+                if (!rx.cap(i).isEmpty())
+                    c.append(rx.cap(i).mid(1));
             p += rx.matchedLength();
-            return new MagicReference(rx.cap(1), rx.cap(2).mid(1), c, rx.cap(4));
+            return new MagicReference(rx.cap(1), rx.cap(2).mid(1), c, rx.cap(5));
         }
         else
         {
@@ -118,11 +120,12 @@ MagicOperand *getVar(QString buffer, int &p)
 
 QList<MagicObject *> getObj(QString buffer, MagicMap *map)
 {
-    QRegExp rx("^(\\w*)?(#\\w*)?(.\\w*)*");
+    QRegExp rx("^(\\w*)?(#\\w*)?([.]\\w*)*");
     rx.indexIn(buffer);
     QList<QString> c;
     for (int i = 3; i <= rx.captureCount(); i++)
-        c.append(rx.cap(i).mid(1));
+        if (!rx.cap(i).isEmpty())
+            c.append(rx.cap(i).mid(1));
     return map->findDisplayObject(rx.cap(1), rx.cap(2).mid(1), c);
 }
 
@@ -296,7 +299,7 @@ MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
 
     QTextStream in(file);
     while (!in.atEnd()) {
-        QString line = in.readLine().trimmed();
+        QString line = in.readLine().replace('\t', ' ').trimmed();
         if (line.isEmpty())
             continue;
 
@@ -352,6 +355,38 @@ MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
             else if (line.startsWith("}"))
             {
                 backBlock();
+            }
+            else if (line.startsWith("at"))
+            {
+                if (firstStack.size() > 1)
+                    throw "bad 'at' symbol: cannot be inside any blocks.";
+
+                QRegExp rx("^\\s*\\((.*)\\)$");
+                rx.indexIn(line.mid(2));
+                int level = rx.cap(1).toInt();
+
+                QString l;
+                for (int i = 0; i < 11; i++)
+                {
+                    while ((l = in.readLine().replace('\t', ' ').trimmed()).isEmpty())
+                        if (in.atEnd())
+                            throw "bad <at> block: less than 11 lines";
+                    QStringList list = l.split(' ', QString::SkipEmptyParts);
+                    if (list.length() != 11)
+                        throw "bad <at> block: less than 11 components in one line";
+                    for (int j = 0; j < 11; j++)
+                    {
+                        QString ll = list.at(j);
+                        if (ll == "." || ll == "0") continue;
+                        QRegExp rx1("^(\\w*)?(#\\w*)?([.]\\w*)*");
+                        rx1.indexIn(ll);
+                        QList<QString> c;
+                        for (int i = 3; i <= rx.captureCount(); i++)
+                            if (!rx1.cap(i).isEmpty())
+                                c.append(rx1.cap(i).mid(1));
+                        map->appendObject(MagicHelper::createObject(rx1.cap(1), rx1.cap(2).mid(1), c, j, i, level));
+                    }
+                }
             }
             else
             {

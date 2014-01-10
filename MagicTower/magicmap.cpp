@@ -29,6 +29,7 @@ MagicMap::MagicMap()
 
     animateFlag = false;
 
+    /*
     displayList.push_front(new MagicEnemy(0, 4, 1, "1"));
     displayList.push_front(new MagicEnemy(1, 4, 1, "2"));
     displayList.push_front(new MagicEnemy(2, 4, 1, "3"));
@@ -72,8 +73,7 @@ MagicMap::MagicMap()
     displayList.push_front(new MagicArmour(3, 3, 1, "1"));
     displayList.push_front(new MagicArmour(4, 3, 1, "2"));
     displayList.push_front(new MagicArmour(5, 3, 1, "3"));
-
-
+*/
     for (int i = 0; i < 11; i++)
         for (int j = 0; j < 11; j++)
             for (int k = 0; k < 21; k++)
@@ -145,6 +145,13 @@ void MagicMap::appendAnimate(MagicAnimate *animate, bool block)
         animate->wait(animate);
         animate->unlock();
     }
+}
+
+void MagicMap::appendObject(MagicDisplayObject *target)
+{
+    if (!target)
+        throw "What are you doing?";
+    displayList.push_back(target);
 }
 
 void MagicMap::keyPressEvent(QKeyEvent *e)
@@ -221,11 +228,15 @@ QList<MagicObject *> MagicMap::findDisplayObject(QString objectLabel, QString ob
         objects.append(this);
         return objects;
     }
-    for (auto i = displayList.begin(); i != displayList.end(); i++)
-        if ((objectLabel == "" || ((**i)["label"] == MagicVarient(objectLabel)).isTrue()) &&
-                (objectId == "" || ((**i)["id"] == MagicVarient(objectId)).isTrue()) &&
+    for (QList<MagicDisplayObject *>::iterator i = displayList.begin(); i != displayList.end(); i++)
+    {
+        /*qDebug() << (void *)(*i);
+        qDebug() << (**i)["label"].getString();*/
+        if ((objectLabel.isEmpty() || ((**i)["label"] == MagicVarient(objectLabel)).isTrue()) &&
+                (objectId.isEmpty() || ((**i)["id"] == MagicVarient(objectId)).isTrue()) &&
                 (objectClass.empty() || ((**i).inClass(objectClass))))
             objects.append(*i);
+    }
     return objects;
 }
 
