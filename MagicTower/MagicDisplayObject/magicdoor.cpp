@@ -11,6 +11,7 @@ MagicDoor::MagicDoor(int x, int y, int level, int color)
     : MagicWall(x, y, level)
 {
     property["label"] = "door";
+    appendClass("door");
     this->color = color;
     switch(color)
     {
