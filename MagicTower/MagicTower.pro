@@ -41,7 +41,8 @@ SOURCES += main.cpp\
     MagicDisplayObject/magicinventory.cpp \
     MagicDisplayObject/magickey.cpp \
     MagicDisplayObject/magicweapon.cpp \
-    MagicDisplayObject/magicarmour.cpp
+    MagicDisplayObject/magicarmour.cpp \
+    MagicDisplayObject/magichelper.cpp
 
 HEADERS  += mainwindow.h \
     widget.h \
@@ -69,7 +70,8 @@ HEADERS  += mainwindow.h \
     MagicDisplayObject/magicinventory.h \
     MagicDisplayObject/magickey.h \
     MagicDisplayObject/magicweapon.h \
-    MagicDisplayObject/magicarmour.h
+    MagicDisplayObject/magicarmour.h \
+    MagicDisplayObject/magichelper.h
 
 RESOURCES += \
     assets.qrc \

@@ -37,7 +37,10 @@ on (floor)
 
 on (enemy)
 {
+  return = 0
+  goto exit
   sound = ":/sounds/attack"
+:exit
 }
 
 10
