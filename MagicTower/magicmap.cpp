@@ -76,13 +76,11 @@ MagicMap::MagicMap()
 
     for (int i = 0; i < 11; i++)
         for (int j = 0; j < 11; j++)
-            for (int k = 0; k < 21; k++)
-                displayList.push_front(floor[11 * i + j] = new MagicFloor(i, j, k+1));
+                displayList.push_front(floor[11 * i + j] = new MagicFloor(i, j, 1));
 
     for (int i = 12; i < 14; i++)
         for (int j = 0; j < 12; j++)
-            for (int k = 0; k < 21; k++)
-                displayList.push_front(inventory[12 * i + j] = new MagicFloor(j, i, k+1));
+                displayList.push_front(inventory[12 * i + j] = new MagicFloor(j, i, 1));
 
     mBackSound = new MagicBackSound();
     mBackSound->play(QSound::Infinite);
@@ -117,7 +115,7 @@ void MagicMap::paint(QPainter *painter)
 
     for (auto i = displayList.begin(); i != displayList.end(); i++)
         if ((**i)["enabled"].isTrue() &&
-                ((**i)["level"] == mTom->property["level"]).isTrue())
+            (((**i)["level"] == mTom->property["level"]).isTrue() || (**i)["label"].getString() == "floor"))
             (*i)->paint(painter);
 
     int j = 0;
