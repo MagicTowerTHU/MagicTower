@@ -1,6 +1,7 @@
 #include "magictom.h"
 
 #include <QBitmap>
+#include <QDebug>
 
 QString Pix_string[4][3] = {  {":/images/Tom_face1", ":/images/Tom_face2", ":/images/Tom_face"},
                               {":/images/Tom_left1", ":/images/Tom_left2", ":/images/Tom_left"},
@@ -17,6 +18,11 @@ MagicTom::MagicTom(int x, int y, int level)
     pix = Pix[0][2];
 
     property["label"] = "tom";
+    property["attack"] = 50;
+    property["defend"] = 50;
+    property["health"] = 500;
+
+    qDebug() <<"Tom: "<< property["attack"].getInt() << ' '<< property["defend"].getInt() << ' ' << property["health"].getInt() << '\n';
 
     mSound = new QSound(":/sounds/step");
     mBeep = new QSound(":/sounds/beep");
