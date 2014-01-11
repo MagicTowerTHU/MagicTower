@@ -16,6 +16,8 @@ MagicWisdom::~MagicWisdom()
 
 bool MagicWisdom::paint(QPainter *painter)
 {
+    static int cnt = 120;
+
     if (wantDelete)
         return false;
     for (int i = 0; i < 10; i++)
@@ -30,23 +32,39 @@ bool MagicWisdom::paint(QPainter *painter)
             painter->drawPixmap(i*32, j*32, *floor);
 
     // painter->drawText(0, 20, QString("MagicTom"));
-    int k = 0, l = 1;
+    int k = 1, l = 1, offset = 20, margin_left = 22, margin_top = 17;
     l++;
-    painter->drawText(l*23 +4, k*32+17+4, QString("attack")); l+=2;
-    painter->drawText(l*23 +4, k*32+17+4, QString("defend")); l+=2;
-    painter->drawText(l*23 +4, k*32+17+4, QString("health")); l+=2;
-    painter->drawText(l*23 +4, k*32+17+4, QString("exp")); l+=2;
-    painter->drawText(l*23 +4, k*32+17+4, QString("money")); l+=2;
-    painter->drawText(l*23 +4, k*32+17+4, QString("damage")); l+=2;
-    /*
+    painter->drawText(l*offset + margin_left +4, k*32+margin_top+4, QString("攻击")); l+=2;
+    painter->drawText(l*offset + margin_left +4, k*32+margin_top+4, QString("防御")); l+=2;
+    painter->drawText(l*offset + margin_left +4, k*32+margin_top+4, QString("生命")); l+=2;
+    painter->drawText(l*offset + margin_left +4, k*32+margin_top+4, QString("经验")); l+=2;
+    painter->drawText(l*offset + margin_left +4, k*32+margin_top+4, QString("金钱")); l+=2;
+    painter->drawText(l*offset + margin_left +4, k*32+margin_top+4, QString("伤害")); l+=2;
+    k++;
     QList<QString> enemySet;
     for (auto i = parent->displayList.begin(); i != parent->displayList.end(); i++)
         if (MagicEnemy *enemy = dynamic_cast<MagicEnemy *>(*i))
-            if (!enemySet.contains(enemy->property["label"].getString()))
+            if (!enemySet.contains(enemy->property["label"].getString()) &&
+                    parent->Tom()->property["level"].getInt() == enemy->property["level"].getInt())
             {
                 enemySet.push_back(enemy->property["label"].getString());
-
+                painter->drawPixmap(32, k*32, cnt-- > 60 ? *(enemy->pix[0]) : *(enemy->pix[1]));
+                l = 2;
+                painter->drawText(l*offset + margin_left +4, k*32+margin_top+4, QString::number(enemy->property["attack"].getInt())); l+=2;
+                painter->drawText(l*offset + margin_left +4, k*32+margin_top+4, QString::number(enemy->property["defend"].getInt())); l+=2;
+                painter->drawText(l*offset + margin_left +4, k*32+margin_top+4, QString::number(enemy->property["health"].getInt())); l+=2;
+                painter->drawText(l*offset + margin_left +4, k*32+margin_top+4, QString::number(enemy->property["exp"].getInt())); l+=2;
+                painter->drawText(l*offset + margin_left +4, k*32+margin_top+4, QString::number(enemy->property["money"].getInt())); l+=2;
+                int damage = enemy->damage(parent);
+                if (damage >= parent->Tom()->property["health"].getInt() ||
+                    enemy->property["defend"].getInt() >= parent->Tom()->property["attack"].getInt())
+                    painter->drawText(l*offset + margin_left +4, k*32+margin_top+4, QString("???"));
+                else
+                    painter->drawText(l*offset + margin_left +4, k*32+margin_top+4, QString::number(damage));
+                l+=2;
+                k++;
             }
-*/
+
+    if(cnt <= 0) cnt = 120;
     return true;
 }

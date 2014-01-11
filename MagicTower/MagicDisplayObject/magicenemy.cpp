@@ -64,6 +64,23 @@ MagicEnemy::~MagicEnemy()
     delete pix[1];
 }
 
+int MagicEnemy::damage(MagicMap *map)
+{
+    int kill = map->Tom()->property["attack"].getInt() - property["defend"].getInt();
+    int casualty = property["attack"].getInt() - map->Tom()->property["defend"].getInt();
+    int tomHealth = map->Tom()->property["health"].getInt();
+    int enemyHealth = property["health"].getInt();
+    int damage = 0;
+    if (casualty <= 0) return 0;
+    while (tomHealth > 0 && enemyHealth > 0)
+    {
+        tomHealth -= casualty;
+        damage += casualty;
+        enemyHealth -= kill;
+    }
+    return damage;
+}
+
 void MagicEnemy::paint(QPainter *painter)
 {
     static int cnt = 120;

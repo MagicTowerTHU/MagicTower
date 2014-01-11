@@ -31,6 +31,8 @@ MagicMap::MagicMap()
 
     animateFlag = false;
 
+    property["wisdomEnabled"] = 0;
+
     for (int i = 0; i < 11; i++)
         for (int j = 0; j < 11; j++)
                 displayList.push_front(floor[11 * i + j] = new MagicFloor(i, j, 1));
@@ -145,12 +147,12 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
         case Qt::Key_2: mBackSound->change(2); break;
         case Qt::Key_3: mBackSound->change(3); break;
         }
-        if (e->key() == Qt::Key_L)
+        if (e->key() == Qt::Key_L && property["wisdomEnabled"].isTrue())
             appendAnimate(new MagicWisdom(this), false);
     }
     else
     {
-        if (e->key() == Qt::Key_L)
+        if (e->key() == Qt::Key_L && property["wisdomEnabled"].isTrue())
             for (auto i = animateList.begin(); i != animateList.end(); i++)
                 if(MagicWisdom *wisdom = dynamic_cast<MagicWisdom *>(*i))
                     wisdom->wantDelete = true;

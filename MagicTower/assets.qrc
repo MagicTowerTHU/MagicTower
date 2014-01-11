@@ -132,7 +132,7 @@
         <file>assets/Images/375.bmp</file>
         <file>assets/Images/378.bmp</file>
         <file>assets/Images/381.bmp</file>
-        <file>assets/Images/384.bmp</file>
+        <file alias="wit">assets/Images/384.bmp</file>
         <file>assets/Images/387.bmp</file>
         <file>assets/Images/390.bmp</file>
         <file>assets/Images/393.bmp</file>

@@ -22,8 +22,6 @@ class MagicMap : public MagicObject
     MagicFloor *floor[121];
     MagicFloor *inventory[24];
 
-    QList<MagicDisplayObject *> displayList;
-
     QList<MagicAnimate *> animateList;
     bool animateFlag;
     QTimer *animateTimer;
@@ -34,6 +32,7 @@ class MagicMap : public MagicObject
 
 public:
     MagicMap();
+    QList<MagicDisplayObject *> displayList;
 
     void loadMap(QFile * = NULL);
     void paint(QPainter *);
