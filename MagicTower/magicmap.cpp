@@ -194,7 +194,7 @@ void MagicMap::appendAnimate(MagicAnimate *animate, bool block)
     if (block)
         animate->lock();
     animateListLock.lock();
-    animateList.append(animate);
+    animateList.push_front(animate);
     animateFlag = true;
     animateListLock.unlock();
     if (block)
@@ -267,8 +267,10 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
             for (auto i = animateList.begin(); i != animateList.end(); i++)
                 if(MagicMessage *message = dynamic_cast<MagicMessage *>(*i))
                     message->wantDelete = true;
-        for (auto i = animateList.begin(); i != animateList.end(); i++)
+        for (QList<MagicAnimate *>::iterator i = animateList.begin(); i != animateList.end(); i++)
         {
+            (*i);
+            qDebug() << (*i);
             MagicInputBox *inputbox = dynamic_cast<MagicInputBox *>(*i);
             if(inputbox)
             {
