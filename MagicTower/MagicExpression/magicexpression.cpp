@@ -415,7 +415,9 @@ void MagicExpression::goForIt(QString line, MagicMap *map, QTextStream *pIn)
                 for (int i = 3; i <= rx.captureCount(); i++)
                     if (!rx1.cap(i).isEmpty())
                         c.append(rx1.cap(i).mid(1));
-                map->appendObject(MagicHelper::createObject(rx1.cap(1), rx1.cap(2).mid(1), c, j, i, level));
+                MagicDisplayObject *ret = MagicHelper::createObject(rx1.cap(1), rx1.cap(2).mid(1), c, j, i, level, map);
+                if (ret)
+                    map->appendObject(ret);
             }
         }
     }

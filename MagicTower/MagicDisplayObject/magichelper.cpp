@@ -13,11 +13,13 @@
 #include "magicwit.h"
 #include "magicmerchant.h"
 
+#include "../magicmap.h"
+
 #include <QRegExp>
 
 QHash<QString, QString> MagicHelper::alias = QHash<QString, QString>();
 
-MagicDisplayObject *MagicHelper::createObject(QString target, QString Id, QList<QString> Class, int x, int y, int level)
+MagicDisplayObject *MagicHelper::createObject(QString target, QString Id, QList<QString> Class, int x, int y, int level, MagicMap *map)
 {
     static bool isFirstTime = 1;
     if (isFirstTime)
@@ -59,7 +61,11 @@ MagicDisplayObject *MagicHelper::createObject(QString target, QString Id, QList<
     else if (category == "down")
         ret = new MagicStairs(x, y, level, -1);
     else if (category == "tom")
-        ret = new MagicTom(x, y, level);
+    {
+        map->Tom()->setProperty("position_x", x);
+        map->Tom()->setProperty("position_y", y);
+        map->Tom()->setProperty("level", level);
+    }
     else if (category == "wall")
         ret = new MagicWall(x, y, level);
     else if (category == "weapon")
@@ -73,8 +79,11 @@ MagicDisplayObject *MagicHelper::createObject(QString target, QString Id, QList<
     else
         throw "No such label...";
 
-    ret->appendClass(Class);
-    (*ret)["id"] = Id;
+    if (ret)
+    {
+        ret->appendClass(Class);
+        (*ret)["id"] = Id;
+    }
 
     return ret;
 }
