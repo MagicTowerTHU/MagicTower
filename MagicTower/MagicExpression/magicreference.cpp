@@ -28,7 +28,7 @@ MagicVarient MagicReference::setValue(MagicVarient x, MagicMap *map)
 {
     if (objectLabel == "this")
     {
-        (*(MagicExpression::environment))[property] = x;
+        (MagicExpression::environment)->setProperty(property, x);
         return x;
     }
     QList<MagicObject *>target = map->findDisplayObject(objectLabel, objectId, objectClass);

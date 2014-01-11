@@ -12,6 +12,16 @@ w   w   w   .   w   w   w   .   .   .   .
 .   w   .   w   .   w   .   w   .   w   .
 .   .   .   w   w   w   .   .   .   .   .
 
+on (.d)
+{
+    this->enabled = 0
+}
+
+on (.a.d)
+{
+    print = "--------"
+}
+
 at(2)
 .   .   e_1 e_2 e_3 e_4 e_5 e_6 .   d_0 dn
 .   .   .   .   .   .   .   .   .   t   .
@@ -68,16 +78,6 @@ on (label#id.class)
 {
   234
   213453
-}
-
-on (floor)
-{
-  print = this->position_x * 10 + this->position_y
-  print = tom->level
-  print = "o------o"
-  goto exit
-  return = 0
-:exit
 }
 
 on (.enemy)
