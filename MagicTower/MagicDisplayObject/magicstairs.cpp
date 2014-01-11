@@ -19,6 +19,8 @@ bool MagicStairs::move(MagicMap *map)
     {
     case 1:
         map->Tom()->property["level"] += 1;
+        for (auto i = map->displayList.begin(); i != map->displayList.end(); i++)
+            if ((**i)["level"])
         break;
     default:
         map->Tom()->property["level"] -= 1;

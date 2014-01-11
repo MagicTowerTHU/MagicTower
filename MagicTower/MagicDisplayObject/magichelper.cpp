@@ -37,7 +37,7 @@ MagicDisplayObject *MagicHelper::createObject(QString target, QString Id, QList<
         alias["m"] = "medicine";
         alias["wi"] = "wit";
         alias["me"] = "merchant";
-        alias["t"] = "teleport";
+        alias["te"] = "teleport";
     }
     QRegExp rx("^([a-zA-Z0-9]*)(_(\\w*))?");
     rx.indexIn(target);
