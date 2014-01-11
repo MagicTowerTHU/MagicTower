@@ -6,8 +6,7 @@
 void test(MainWindow *pW)
 {
     printf("Hello test!\n");
-    MagicExpression *k = MagicExpression::input(new QFile(":/maps/test"), pW->getMap());
-    k->run(pW->getMap());
+    pW->getWidget()->loadMap(":/maps/test");
 }
 
 int main(int argc, char *argv[])

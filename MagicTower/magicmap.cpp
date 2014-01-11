@@ -30,20 +30,7 @@ MagicMap::MagicMap()
 {
     animateTimer = new QTimer();
 
-    mTom = new MagicTom(0, 0, 1);
-    displayList.push_front(mTom);
-
-    animateFlag = false;
-
-    property["wisdomEnabled"] = 0;
-
-    for (int i = 0; i < 11; i++)
-        for (int j = 0; j < 11; j++)
-                displayList.push_front(/*floor[11 * i + j] = */new MagicFloor(i, j, 1));
-
-    for (int i = 12; i < 14; i++)
-        for (int j = 0; j < 12; j++)
-                displayList.push_front(/*inventory[12 * (i - 12) + j] = */new MagicFloor(j, i, 1));
+    initialize();
 
     mBackSound = new MagicBackSound();
     mBackSound->play(QSound::Infinite);
@@ -65,6 +52,24 @@ void MagicMap::destoryList()
     }*/
 }
 
+void MagicMap::initialize()
+{
+    mTom = new MagicTom(0, 0, 1);
+    displayList.push_front(mTom);
+
+    animateFlag = false;
+
+    property["wisdomEnabled"] = 0;
+
+    for (int i = 0; i < 11; i++)
+        for (int j = 0; j < 11; j++)
+                displayList.push_front(/*floor[11 * i + j] = */new MagicFloor(i, j, 1));
+
+    for (int i = 12; i < 14; i++)
+        for (int j = 0; j < 12; j++)
+                displayList.push_front(/*inventory[12 * (i - 12) + j] = */new MagicFloor(j, i, 1));
+}
+
 bool MagicMap::loadMap(QFile *file)
 {
     if (!file)
@@ -77,22 +82,7 @@ bool MagicMap::loadMap(QFile *file)
     {
         destoryList();
 
-        // Initialize:
-        mTom = new MagicTom(0, 0, 1);
-        displayList.push_front(mTom);
-        property["level"] = 1;
-
-        animateFlag = false;
-
-        property["wisdomEnabled"] = 0;
-
-        for (int i = 0; i < 11; i++)
-            for (int j = 0; j < 11; j++)
-                    displayList.push_front(/*floor[11 * i + j] = */new MagicFloor(i, j, 1));
-
-        for (int i = 12; i < 14; i++)
-            for (int j = 0; j < 12; j++)
-                    displayList.push_front(/*inventory[12 * (i - 12) + j] = */new MagicFloor(j, i, 1));
+        initialize();
 
         try
         {
@@ -114,15 +104,16 @@ bool MagicMap::saveRecord(QFile *file)
 
     QTextStream out(file);
 
-    out << MagicExpression::atList.length() << endl;
+    out << MagicExpression::atList.length() + MagicExpression::onList.length() << endl;
     for (auto i = MagicExpression::atList.begin(); i != MagicExpression::atList.end(); i++)
         out << *i << endl;
-    out << MagicExpression::onList.length() << endl;
     for (auto i = MagicExpression::onList.begin(); i != MagicExpression::onList.end(); i++)
         out << *i << endl;
     saveProperty(&out);
     for (auto i = displayList.begin(); i != displayList.end(); i++)
         (*i)->saveProperty(&out);
+
+    return true;
 }
 
 bool MagicMap::loadRecord(QFile *file)
@@ -132,6 +123,11 @@ bool MagicMap::loadRecord(QFile *file)
 
     QTextStream in(file);
 
+    destoryList();
+
+    initialize();
+
+    /*
     int length = in.readLine().toInt();
     MagicExpression::atList.clear();
     for (int i = 0; i < length; i++)
@@ -141,10 +137,17 @@ bool MagicMap::loadRecord(QFile *file)
     MagicExpression::onList.clear();
     for (int i = 0; i < length; i++)
         MagicExpression::onList.append(in.readLine());
+*/
+    MagicExpression::process(in, in.readLine().toInt(), this);
 
     loadProperty(&in);
     for (auto i = displayList.begin(); i != displayList.end(); i++)
-        (*i)->loadProperty(&in);
+        (*i)->loadProperty(&in, this);
+
+    if (!in.atEnd())
+        return false;
+
+    return true;
 }
 
 void MagicMap::paint(QPainter *painter)

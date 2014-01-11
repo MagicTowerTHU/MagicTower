@@ -429,7 +429,7 @@ void MagicExpression::goForIt(QString line, MagicMap *map, QTextStream *pIn)
     singleLine();
 }
 
-MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
+void MagicExpression::initAll()
 {
     labelStack.clear();
     labelStack.push(QHash<QString, MagicExpression *>());
@@ -445,6 +445,12 @@ MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
     stackNum.clear(), stackOpe.clear(), stackOrd.clear();
 
     onList.clear(), atList.clear();
+}
+
+MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
+{
+    initAll();
+
     preprocessing = true;
 
     if (!file->open(QIODevice::ReadOnly | QIODevice::Text))
@@ -485,6 +491,38 @@ MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
         catch (int x) {qDebug() << "Exception : " << x;}
     }
 
+    return final();
+}
+
+void MagicExpression::process(QTextStream &in, int n, MagicMap *map)
+{
+    initAll();
+
+    preprocessing = false;
+
+    for (int i = 0; i < n; i++)
+    {
+        QString line = in.readLine();
+
+        if (targetFlag)
+            onList.append(line);
+
+        try
+        {
+            if (line.startsWith("at"))
+                i += 11;
+            goForIt(line, map, &in);
+        }
+        catch (const char *e)
+        {
+            qDebug() << "Exception : " << e;
+        }
+        catch (int x) {qDebug() << "Exception : " << x;}
+    }
+}
+
+MagicExpression *MagicExpression::final()
+{
     head = tail = new MagicExpression();
     singleLine();
 

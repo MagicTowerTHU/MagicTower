@@ -1,6 +1,8 @@
 #ifndef MAGICOBJECT_H
 #define MAGICOBJECT_H
 
+class MagicMap;
+
 #include "MagicExpression/magicvarient.h"
 
 #include <QHash>
@@ -28,7 +30,7 @@ public:
     virtual void setProperty(QString, MagicVarient);
 
     void saveProperty(QTextStream *);
-    void loadProperty(QTextStream *);
+    void loadProperty(QTextStream *, MagicMap * = NULL);
 };
 
 #endif // MAGICOBJECT_H
