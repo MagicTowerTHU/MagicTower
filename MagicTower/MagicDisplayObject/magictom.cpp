@@ -55,7 +55,6 @@ bool MagicTom::move(MagicMap *)
     return true;
 }
 
-
 void MagicTom::changePic(int direction, int duration)
 {
     if (duration > 0)

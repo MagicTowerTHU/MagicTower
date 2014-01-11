@@ -50,7 +50,10 @@ SOURCES += main.cpp\
     MagicDisplayObject/magicwit.cpp \
     MagicAnimate/magicmessage.cpp \
     MagicDisplayObject/magicmerchant.cpp \
-    MagicAnimate/magicinputbox.cpp
+    MagicAnimate/magicinputbox.cpp \
+    MagicDisplayObject/magicteleport.cpp \
+    MagicAnimate/magictele.cpp \
+    MagicDisplayObject/magicdestination.cpp
 
 HEADERS  += mainwindow.h \
     widget.h \
@@ -87,7 +90,10 @@ HEADERS  += mainwindow.h \
     MagicDisplayObject/magicwit.h \
     MagicAnimate/magicmessage.h \
     MagicDisplayObject/magicmerchant.h \
-    MagicAnimate/magicinputbox.h
+    MagicAnimate/magicinputbox.h \
+    MagicDisplayObject/magicteleport.h \
+    MagicAnimate/magictele.h \
+    MagicDisplayObject/magicdestination.h
 
 RESOURCES += \
     assets.qrc \

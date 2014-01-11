@@ -4,6 +4,7 @@
 #include "MagicAnimate/magicwisdom.h"
 #include "MagicAnimate/magicmessage.h"
 #include "MagicAnimate/magicinputbox.h"
+#include "MagicAnimate/magictele.h"
 #include "MagicDisplayObject/magicenemy.h"
 #include "MagicDisplayObject/magicstairs.h"
 #include "MagicDisplayObject/magicwall.h"
@@ -61,6 +62,7 @@ void MagicMap::initialize()
     animateFlag = false;
 
     property["wisdomEnabled"] = 0;
+    property["teleportEnabled"] = 0;
 
     for (int i = 0; i < 11; i++)
         for (int j = 0; j < 11; j++)
@@ -247,8 +249,12 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
         if (e->key() == Qt::Key_L && property["wisdomEnabled"].isTrue())
             appendAnimate(new MagicWisdom(this), false);
 
+        if (e->key() == Qt::Key_T && property["teleportEnabled"].isTrue())
+            appendAnimate(new MagicTele(this), false);
+
         if (e->key() == Qt::Key_M) //for test
             appendAnimate(new MagicMessage(this, "xfz是二逼.\n 赵锦煦也是"), false);
+
     }
     else
     {
@@ -261,12 +267,23 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
                 if(MagicMessage *message = dynamic_cast<MagicMessage *>(*i))
                     message->wantDelete = true;
         for (auto i = animateList.begin(); i != animateList.end(); i++)
-            if(MagicInputBox *inputbox = dynamic_cast<MagicInputBox *>(*i))
+        {
+            MagicInputBox *inputbox = dynamic_cast<MagicInputBox *>(*i);
+            if(inputbox)
             {
                 if (e->key() == Qt::Key_Escape)
                     inputbox->wantDelete = true;
                 else
                     inputbox->input(e->key());
+            }
+        }
+        for (auto i = animateList.begin(); i != animateList.end(); i++)
+            if(MagicTele *tele = dynamic_cast<MagicTele *>(*i))
+            {
+                if (e->key() == Qt::Key_T)
+                    tele->wantDelete = true;
+                else
+                    tele->input(e->key());
             }
     }
 }
