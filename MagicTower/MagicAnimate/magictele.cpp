@@ -90,7 +90,15 @@ void MagicTele::input(int choice)
     case Qt::Key_Return:
     case Qt::Key_Enter:
         int target = xChoose - 2 + (yChoose - 4) * 6 + 1;
-        parent->Tom()->property["level"] = target;
+        parent->Tom()->setProperty("level", MagicVarient(target));
+        for (QList<MagicDisplayObject *>::iterator i = parent->displayList.begin(); i != parent->displayList.end(); i++)
+            if((**i)["level"].getInt() == parent->Tom()->property["level"].getInt() &&
+               (**i)["label"].getString() == "destination_up")
+            {
+                int x = (**i)["position_x"].getInt(), y = (**i)["position_y"].getInt();
+                parent->Tom()->setProperty("position_x", x);
+                parent->Tom()->setProperty("position_y", y);
+            }
         wantDelete = true;
         break;
     }
