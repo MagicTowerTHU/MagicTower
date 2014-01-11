@@ -5,12 +5,12 @@ MagicDestination::MagicDestination(int x, int y, int level, int from)
 {
     this->from = from;
     appendClass("destination");
-    switch (name)
+    switch (from)
     {
     case 1:
         property["label"] = "destination_down";
         break;
-    default -1;
+    case -1:
         property["label"] = "destination_up";
         break;
     }
