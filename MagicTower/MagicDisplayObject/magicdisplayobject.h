@@ -6,12 +6,13 @@
 class MagicMap;
 
 #include <QPainter>
+#include <QList>
 
 class MagicExpression;
 
 class MagicDisplayObject : public MagicObject
 {
-    MagicExpression *action;
+    QList<MagicExpression *>action;
 
 public:
     int x, y;

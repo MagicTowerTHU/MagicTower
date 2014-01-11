@@ -140,7 +140,7 @@ MagicOperand *getVar(QString buffer, int &p)
         return new MagicOperand(MagicVarient::input(buffer, p));
     else
     {
-        QRegExp rx("^(\\w*)?(#(\\w*))?([.]\\w*)*->\\s*(\\w*)");
+        QRegExp rx("^(\\w*)?(#\\w*)?([.]\\w*)?([.]\\w*)?([.]\\w*)?([.]\\w*)?([.]\\w*)?([.]\\w*)?->\\s*(\\w*)");
         if (rx.indexIn(buffer.mid(p)) >= 0)
         {
             QList<QString> c;
@@ -148,7 +148,7 @@ MagicOperand *getVar(QString buffer, int &p)
                 if (!rx.cap(i).isEmpty())
                     c.append(rx.cap(i).mid(1));
             p += rx.matchedLength();
-            return new MagicReference(rx.cap(1), rx.cap(2).mid(1), c, rx.cap(5));
+            return new MagicReference(rx.cap(1), rx.cap(2).mid(1), c, rx.cap(9));
         }
         else
         {
@@ -165,7 +165,7 @@ MagicOperand *getVar(QString buffer, int &p)
 
 QList<MagicObject *> getObj(QString buffer, MagicMap *map)
 {
-    QRegExp rx("^(\\w*)?(#\\w*)?([.]\\w*)*");
+    QRegExp rx("^(\\w*)?(#\\w*)?([.]\\w*)?([.]\\w*)?([.]\\w*)?([.]\\w*)?([.]\\w*)?([.]\\w*)?");
     rx.indexIn(buffer);
     QList<QString> c;
     for (int i = 3; i <= rx.captureCount(); i++)
@@ -258,8 +258,6 @@ inline void backBlock(bool label = false)
 {
     if (label)
     {
-        for (auto i = targetObjects.begin(); i != targetObjects.end(); i++)
-            dynamic_cast<MagicDisplayObject *>(*i)->setAction(firstStack.top());
         for (auto i = gotoStack.top().begin(); i != gotoStack.top().end(); i++)
         {
             auto position = labelStack.top().find((*i)->label);
@@ -409,17 +407,18 @@ void MagicExpression::goForIt(QString line, MagicMap *map, QTextStream *pIn)
             {
                 QString ll = list.at(j);
                 if (ll == "." || ll == "0") continue;
-                QRegExp rx1("^(\\w*)?(#\\w*)?([.]\\w*)*");
+                QRegExp rx1("^(\\w*)?(#\\w*)?([.]\\w*)?([.]\\w*)?([.]\\w*)?([.]\\w*)?([.]\\w*)?([.]\\w*)?");
                 rx1.indexIn(ll);
                 QList<QString> c;
-                for (int i = 3; i <= rx.captureCount(); i++)
-                    if (!rx1.cap(i).isEmpty())
+                for (int i = 2; i <= rx1.captureCount(); i++)
+                    if (rx1.cap(i).startsWith("."))
                         c.append(rx1.cap(i).mid(1));
                 MagicDisplayObject *ret = MagicHelper::createObject(rx1.cap(1), rx1.cap(2).mid(1), c, j, i, level, map);
                 if (ret)
                     map->appendObject(ret);
             }
         }
+        return;
     }
     else
     {

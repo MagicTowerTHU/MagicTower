@@ -1,6 +1,6 @@
 
 at(1)
-.   .   w   w   w   w   .   .   .   .   up
+.   .   w.d.a w.d w.d w   .   .   .   .   up
 w   t   k_0 .   .   .   .   w   wi  te   .
 w   w   dr_0 w  w   dr_0 dr_2 w dr_1 w  dr_3
 k_0 w   k_1 w   .   .   w   .   m_1 .   .
@@ -11,6 +11,16 @@ w   w   w   .   w   w   w   .   .   .   .
 .   w   .   w   .   w   .   w   .   .   .
 .   w   .   w   .   w   .   w   .   w   .
 .   .   .   w   w   w   .   .   .   .   .
+
+on (.d)
+{
+    this->enabled = 0
+}
+
+on (.a.d)
+{
+    print = "--------"
+}
 
 at(2)
 .   .   e_1 e_2 e_3 e_4 e_5 e_6 .   .   dn
@@ -68,16 +78,6 @@ on (label#id.class)
 {
   234
   213453
-}
-
-on (floor)
-{
-  print = this->position_x * 10 + this->position_y
-  print = tom->level
-  print = "o------o"
-  goto exit
-  return = 0
-:exit
 }
 
 on (.enemy)

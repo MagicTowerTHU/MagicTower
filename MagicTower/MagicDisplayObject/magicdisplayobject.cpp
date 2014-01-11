@@ -10,14 +10,14 @@ MagicDisplayObject::MagicDisplayObject(int x, int y, int level)
     this->x = x * 32, this->y = y * 32;
     property["enabled"] = 1;
     property["picked"] = 0;
-    action = NULL;
 }
 
 
 MagicDisplayObject::~MagicDisplayObject()
 {
-    if (action)
-        delete action;
+    for (auto i = action.begin(); i != action.end(); i++)
+        if (*i)
+            delete *i;
 }
 
 void MagicDisplayObject::setProperty(QString propertyName, MagicVarient propertyValue)
@@ -31,7 +31,7 @@ void MagicDisplayObject::setProperty(QString propertyName, MagicVarient property
 
 void MagicDisplayObject::setAction(MagicExpression *action)
 {
-    this->action = action;
+    this->action.append(action);
 }
 
 bool MagicDisplayObject::runAction(MagicMap *map, bool mask)
@@ -40,7 +40,8 @@ bool MagicDisplayObject::runAction(MagicMap *map, bool mask)
     if (ret != map->property.end())
         map->property.erase(ret);
     MagicExpression::setEnvironment(this);
-    if(action) action->run(map);
+    for (auto i = action.begin(); i != action.end(); i++)
+        (*i)->run(map);
     MagicExpression::setEnvironment(NULL);
     if ((ret = map->property.find("return")) != map->property.end())
         return (*ret).isTrue();
