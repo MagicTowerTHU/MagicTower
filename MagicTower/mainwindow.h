@@ -17,6 +17,33 @@ class MainWindow : public QMainWindow
     Widget *mWidget;
     Status *mStatus;
 
+    void createMenus();
+    QMenu *fileMenu;
+    QMenu *editMenu;
+    QMenu *formatMenu;
+    QMenu *helpMenu;
+
+    QAction *newAct;
+    QAction *openAct;
+    QAction *saveAct;
+    QAction *printAct;
+    QAction *exitAct;
+    QAction *undoAct;
+    QAction *redoAct;
+    QAction *cutAct;
+    QAction *copyAct;
+    QAction *pasteAct;
+    QAction *boldAct;
+    QAction *italicAct;
+    QAction *leftAlignAct;
+    QAction *rightAlignAct;
+    QAction *justifyAct;
+    QAction *centerAct;
+    QAction *setLineSpacingAct;
+    QAction *setParagraphSpacingAct;
+    QAction *aboutAct;
+    QAction *aboutQtAct;
+
 public:
     MainWindow(QWidget *parent = 0);
     QTimer *timer;

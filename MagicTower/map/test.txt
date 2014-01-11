@@ -63,7 +63,7 @@ i=5
 :for_1
 if (i > 3)
 {
-    print = i
+  print = i
   i = i-1
   goto for_1
 }
