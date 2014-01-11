@@ -3,6 +3,7 @@
 #include "magicgoto.h"
 #include "magiccondition.h"
 #include "../MagicDisplayObject/magichelper.h"
+#include "../MagicDisplayObject/magicfloor.h"
 
 #include <QTextStream>
 #include <QChar>
