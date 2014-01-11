@@ -6,9 +6,13 @@
 
 #include <QStack>
 #include <QFile>
+#include <QStringList>
+#include <QTextStream>
 
 class MagicExpression // forgot: why MagicHalt...
 {
+    static void goForIt(QString, MagicMap *, QTextStream *);
+
 public:
     MagicExpression *next;
     MagicExpression();
@@ -19,6 +23,8 @@ public:
 
     static MagicDisplayObject *environment;
     static void setEnvironment(MagicDisplayObject *);
+
+    static QStringList onList, atList;
 };
 
 #endif // MAGICEXPRESSION_H

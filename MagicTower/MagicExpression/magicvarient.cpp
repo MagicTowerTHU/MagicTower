@@ -39,6 +39,21 @@ QString MagicVarient::getString()
         return QString("<Number>") + QString::number(getInt());
 }
 
+QString MagicVarient::getOutput()
+{
+    if (this->type)
+        return "\"" + *((QString*)this->data);
+    else
+        return QString::number(getInt());
+}
+
+MagicVarient MagicVarient::setInput(QString t)
+{
+    if (t.startsWith("\""))
+        return MagicVarient(t.mid(1));
+    return MagicVarient(t.toInt());
+}
+
 bool MagicVarient::isTrue()
 {
     if(this->type && *((QString*)this->data) != "") return true;

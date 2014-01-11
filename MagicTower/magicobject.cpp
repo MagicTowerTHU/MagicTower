@@ -1,4 +1,5 @@
 #include "magicobject.h"
+#include "MagicExpression/magicvarient.h"
 
 #include <QDebug>
 
@@ -43,4 +44,22 @@ void MagicObject::appendClass(QList<QString> c)
 void MagicObject::appendClass(QString c)
 {
     mClass.insert(c);
+}
+
+void MagicObject::saveProperty(QTextStream *out)
+{
+    *out << property.size() << endl;
+    for (QHash<QString, MagicVarient>::iterator i = property.begin(); i != property.end(); i++)
+        *out << i.key() << ':' << i.value().getOutput() << endl;
+}
+
+void MagicObject::loadProperty(QTextStream *in)
+{
+    int length = in->readLine().toInt();
+    for (int i = 0; i < length; i++)
+    {
+        QRegExp rx("^(.*):(.*)$");
+        rx.indexIn(in->readLine());
+        property[rx.cap(1)] = MagicVarient::setInput(rx.cap(2));
+    }
 }

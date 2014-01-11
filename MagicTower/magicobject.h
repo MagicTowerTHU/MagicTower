@@ -7,6 +7,7 @@
 #include <QSet>
 #include <QVariant>
 #include <QObject>
+#include <QTextStream>
 
 class MagicObject : QObject
 {
@@ -25,6 +26,9 @@ public:
     virtual MagicVarient &operator[](QString);
     virtual const MagicVarient &operator[](QString) const;
     virtual void setProperty(QString, MagicVarient);
+
+    void saveProperty(QTextStream *);
+    void loadProperty(QTextStream *);
 };
 
 #endif // MAGICOBJECT_H

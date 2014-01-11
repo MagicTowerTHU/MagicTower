@@ -10,10 +10,13 @@
 #include "MagicDisplayObject/magicarmour.h"
 #include "MagicDisplayObject/magicmedicine.h"
 
+#include "MagicExpression/magicexpression.h"
+
 #include <QPoint>
 #include <QPointer>
 #include <QSound>
 #include <QDebug>
+#include <QTextStream>
 
 #define yellow 0
 #define blue 1
@@ -42,13 +45,102 @@ MagicMap::MagicMap()
     mBackSound->play(QSound::Infinite);
 }
 
-void MagicMap::loadMap(QFile *file)
+void MagicMap::destoryList()
 {
+    animateListLock.lock();
+    for (auto i = animateList.begin(); i != animateList.end(); i++)
+    {
+        delete *i;
+        i = animateList.erase(i);
+    }
+    for (auto i = displayList.begin(); i != displayList.end(); i++)
+    {
+        delete *i;
+        i = displayList.erase(i);
+    }
+    animateListLock.unlock();
+}
+
+bool MagicMap::loadMap(QFile *file)
+{
+    if (animateFlag)
+        return false;
     if (!file)
     {
         (*mTom)["position_x"] = 0;
         (*mTom)["position_y"] = 0;
+        return false;
     }
+    else
+    {
+        destoryList();
+
+        // Initialize:
+        for (int i = 0; i < 11; i++)
+            for (int j = 0; j < 11; j++)
+                    displayList.push_front(/*floor[11 * i + j] = */new MagicFloor(i, j, 1));
+
+        for (int i = 12; i < 14; i++)
+            for (int j = 0; j < 12; j++)
+                    displayList.push_front(/*inventory[12 * (i - 12) + j] = */new MagicFloor(j, i, 1));
+
+        try
+        {
+            MagicExpression::input(file, this)->run(this);
+        }
+        catch (const char *e)
+        {
+            qDebug() << "Exception: " << e;
+            return false;
+        }
+        return true;
+    }
+}
+
+bool MagicMap::saveRecord(QFile *file)
+{
+    if (animateFlag)
+        return false;
+
+    if (!file->open(QIODevice::WriteOnly | QIODevice::Text))
+        printf("File Cannot Open..."), throw "File Cannot Open...";
+
+    QTextStream out(file);
+
+    out << MagicExpression::atList.length() << endl;
+    for (auto i = MagicExpression::atList.begin(); i != MagicExpression::atList.end(); i++)
+        out << *i << endl;
+    out << MagicExpression::onList.length() << endl;
+    for (auto i = MagicExpression::onList.begin(); i != MagicExpression::onList.end(); i++)
+        out << *i << endl;
+    saveProperty(&out);
+    for (auto i = displayList.begin(); i != displayList.end(); i++)
+        (*i)->saveProperty(&out);
+}
+
+bool MagicMap::loadRecord(QFile *file)
+{
+    if (animateFlag)
+        return false;
+
+    if (!file->open(QIODevice::ReadOnly | QIODevice::Text))
+        printf("File Cannot Open..."), throw "File Cannot Open...";
+
+    QTextStream in(file);
+
+    int length = in.readLine().toInt();
+    MagicExpression::atList.clear();
+    for (int i = 0; i < length; i++)
+        MagicExpression::atList.append(in.readLine());
+
+    length = in.readLine().toInt();
+    MagicExpression::onList.clear();
+    for (int i = 0; i < length; i++)
+        MagicExpression::onList.append(in.readLine());
+
+    loadProperty(&in);
+    for (auto i = displayList.begin(); i != displayList.end(); i++)
+        (*i)->loadProperty(&in);
 }
 
 void MagicMap::paint(QPainter *painter)

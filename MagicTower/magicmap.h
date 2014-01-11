@@ -30,12 +30,16 @@ class MagicMap : public MagicObject
     QMutex animateListLock;
     QWaitCondition appendingAnimate;
 
+    void destoryList();
+
     bool move(int, int); // direction
 
 public:
     MagicMap();
 
-    void loadMap(QFile * = NULL);
+    bool loadMap(QFile * = NULL);
+    bool saveRecord(QFile * = NULL);
+    bool loadRecord(QFile * = NULL);
     void paint(QPainter *);
     void keyPressEvent(QKeyEvent *);
 

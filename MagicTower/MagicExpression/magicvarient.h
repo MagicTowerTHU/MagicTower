@@ -15,6 +15,8 @@ public:
 
     int getInt();
     QString getString();
+    QString getOutput();
+    static MagicVarient setInput(QString);
     bool isTrue();
 
     MagicVarient operator==(MagicVarient);

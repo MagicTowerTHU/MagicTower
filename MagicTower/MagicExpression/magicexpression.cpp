@@ -7,6 +7,7 @@
 
 #include <QTextStream>
 #include <QChar>
+#include <QStringList>
 #include <QtDebug>
 #include <iostream>
 
@@ -232,7 +233,10 @@ int ifFlag;
 QStack<MagicCondition *>ifStack;
 
 QList<MagicObject *> targetObjects;
-bool targetFlag;
+bool targetFlag; // <on> block flag
+QStringList MagicExpression::onList;
+QStringList MagicExpression::atList;
+bool preprocessing;
 
 MagicExpression *head;
 MagicExpression *tail;
@@ -316,11 +320,113 @@ void singleLine()
     {
         backBlock(true);
         targetFlag = false;
-        for (auto i = targetObjects.begin(); i != targetObjects.end(); i++)
-            dynamic_cast<MagicDisplayObject *>(*i)->setAction(head);
+        if (!preprocessing)
+            for (auto i = targetObjects.begin(); i != targetObjects.end(); i++)
+                dynamic_cast<MagicDisplayObject *>(*i)->setAction(head);
         tail->setNext(new MagicExpression());
         return;
     }
+}
+
+void MagicExpression::goForIt(QString line, MagicMap *map, QTextStream *pIn)
+{
+    if (line.startsWith("goto"))
+    {
+        head = tail = new MagicGoto(line.mid(4).trimmed());
+        gotoStack.top().append(dynamic_cast<MagicGoto *>(head));
+    }
+    else if (line.startsWith(":"))
+    {
+        labelStack.top()[line.mid(1).trimmed()] = nowStack.top();
+        return;
+    }
+    else if (line.startsWith("if"))
+    {
+        MagicOperand *condition = getCondition(line, 2);
+        ifStack.push(new MagicCondition(condition));
+        ifFlag = 1;
+        newBlock();
+        return;
+    }
+    else if (line.startsWith("else"))
+    {
+        if (ifFlag == 2)
+        {
+            ifFlag = 3;
+            newBlock();
+            return;
+        }
+        else
+            throw "not expecting 'else'";
+        return;
+    }
+    else if (line.startsWith("on"))
+    {
+        if (preprocessing)
+            onList.append(line);
+
+        if (firstStack.size() > 1)
+            throw "bad 'on' symbol: cannot be inside any blocks.";
+
+        QRegExp rx("^\\s*\\((.*)\\)$");
+        rx.indexIn(line.mid(2));
+        targetObjects = getObj(rx.cap(1).trimmed(), map);
+        targetFlag = true;
+        newBlock(true);
+        return;
+    }
+    else if (line.startsWith("{"))
+    {
+        newBlock();
+        return;
+    }
+    else if (line.startsWith("}"))
+    {
+        backBlock();
+    }
+    else if (line.startsWith("at"))
+    {
+        atList.append(line); // atList
+
+        if (firstStack.size() > 1)
+            throw "bad 'at' symbol: cannot be inside any blocks.";
+
+        QRegExp rx("^\\s*\\((.*)\\)$");
+        rx.indexIn(line.mid(2));
+        int level = rx.cap(1).toInt();
+
+        QString l;
+        for (int i = 0; i < 11; i++)
+        {
+            while ((l = pIn->readLine().replace('\t', ' ').trimmed()).isEmpty())
+                if (pIn->atEnd())
+                    throw "bad <at> block: less than 11 lines";
+            atList.append(l); // atList
+            QStringList list = l.split(' ', QString::SkipEmptyParts);
+            if (list.length() != 11)
+                throw "bad <at> block: less than 11 components in one line";
+            for (int j = 0; j < 11; j++)
+            {
+                QString ll = list.at(j);
+                if (ll == "." || ll == "0") continue;
+                QRegExp rx1("^(\\w*)?(#\\w*)?([.]\\w*)*");
+                rx1.indexIn(ll);
+                QList<QString> c;
+                for (int i = 3; i <= rx.captureCount(); i++)
+                    if (!rx1.cap(i).isEmpty())
+                        c.append(rx1.cap(i).mid(1));
+                map->appendObject(MagicHelper::createObject(rx1.cap(1), rx1.cap(2).mid(1), c, j, i, level));
+            }
+        }
+    }
+    else
+    {
+        head = tail = new MagicAssignment(processLine(line));
+        //qDebug() << line << " => " << dynamic_cast<MagicAssignment *>(nowStack.top())->operand->getValue(NULL).getString() << endl;
+    }
+
+    // Processing single line;
+    singleLine();
 }
 
 MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
@@ -338,114 +444,45 @@ MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
 
     stackNum.clear(), stackOpe.clear(), stackOrd.clear();
 
+    onList.clear(), atList.clear();
+    preprocessing = true;
+
     if (!file->open(QIODevice::ReadOnly | QIODevice::Text))
         printf("File Cannot Open..."), throw "File Cannot Open...";
 
     QTextStream in(file);
-    while (!in.atEnd()) {
+    while (!in.atEnd())
+    {
         QString line = in.readLine().replace('\t', ' ').trimmed();
         if (line.isEmpty())
             continue;
 
+        if (targetFlag)
+            onList.append(line);
+
         try
         {
-            if (line.startsWith("goto"))
-            {
-                head = tail = new MagicGoto(line.mid(4).trimmed());
-                gotoStack.top().append(dynamic_cast<MagicGoto *>(head));
-            }
-            else if (line.startsWith(":"))
-            {
-                labelStack.top()[line.mid(1).trimmed()] = nowStack.top();
-                continue;
-            }
-            else if (line.startsWith("if"))
-            {
-                MagicOperand *condition = getCondition(line, 2);
-                ifStack.push(new MagicCondition(condition));
-                ifFlag = 1;
-                newBlock();
-                continue;
-            }
-            else if (line.startsWith("else"))
-            {
-                if (ifFlag == 2)
-                {
-                    ifFlag = 3;
-                    newBlock();
-                    continue;
-                }
-                else
-                    throw "not expecting 'else'";
-                continue;
-            }
-            else if (line.startsWith("on"))
-            {
-                if (firstStack.size() > 1)
-                    throw "bad 'on' symbol: cannot be inside any blocks.";
+            goForIt(line, map, &in);
+        }
+        catch (const char *e)
+        {
+            qDebug() << "Exception : " << e;
+        }
+        catch (int x) {qDebug() << "Exception : " << x;}
+    }
 
-                QRegExp rx("^\\s*\\((.*)\\)$");
-                rx.indexIn(line.mid(2));
-                targetObjects = getObj(rx.cap(1).trimmed(), map);
-                targetFlag = true;
-                newBlock(true);
-                continue;
-            }
-            else if (line.startsWith("{"))
-            {
-                newBlock();
-                continue;
-            }
-            else if (line.startsWith("}"))
-            {
-                backBlock();
-            }
-            else if (line.startsWith("at"))
-            {
-                if (firstStack.size() > 1)
-                    throw "bad 'at' symbol: cannot be inside any blocks.";
-
-                QRegExp rx("^\\s*\\((.*)\\)$");
-                rx.indexIn(line.mid(2));
-                int level = rx.cap(1).toInt();
-
-                QString l;
-                for (int i = 0; i < 11; i++)
-                {
-                    while ((l = in.readLine().replace('\t', ' ').trimmed()).isEmpty())
-                        if (in.atEnd())
-                            throw "bad <at> block: less than 11 lines";
-                    QStringList list = l.split(' ', QString::SkipEmptyParts);
-                    if (list.length() != 11)
-                        throw "bad <at> block: less than 11 components in one line";
-                    for (int j = 0; j < 11; j++)
-                    {
-                        QString ll = list.at(j);
-                        if (ll == "." || ll == "0") continue;
-                        QRegExp rx1("^(\\w*)?(#\\w*)?([.]\\w*)*");
-                        rx1.indexIn(ll);
-                        QList<QString> c;
-                        for (int i = 3; i <= rx.captureCount(); i++)
-                            if (!rx1.cap(i).isEmpty())
-                                c.append(rx1.cap(i).mid(1));
-                        map->appendObject(MagicHelper::createObject(rx1.cap(1), rx1.cap(2).mid(1), c, j, i, level));
-                    }
-                }
-            }
-            else
-            {
-                head = tail = new MagicAssignment(processLine(line));
-                //qDebug() << line << " => " << dynamic_cast<MagicAssignment *>(nowStack.top())->operand->getValue(NULL).getString() << endl;
-            }
-
-            // Processing single line;
-            singleLine();
+    preprocessing = false;
+    for (auto i = onList.begin(); i != onList.end(); i++)
+    {
+        try
+        {
+            goForIt(*i, map, &in);
         }
         /*catch (const char *e)
         {
             qDebug() << "Exception : " << e;
         }*/
-        catch (int x) {}
+        catch (int x) {qDebug() << "Exception : " << x;}
     }
 
     head = tail = new MagicExpression();

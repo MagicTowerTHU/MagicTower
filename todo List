@@ -1,7 +1,7 @@
 ToDo List:
 
-0	exp, money
-1	Shop (exp, money->?)
+v	exp, money
+0	Shop (exp, money->?)
 ?	*Animation
 1	Menu (top of the window): save & load & golden_finger
 	Functionality
@@ -9,3 +9,4 @@ ToDo List:
 0	Destruction
 0	MAPPING
 	
+	map: w(key_3)(e_4)
