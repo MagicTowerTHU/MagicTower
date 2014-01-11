@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "widget.h"
+#include "MagicAnimate/magicmessage.h"
 
 #include <QGridLayout>
 #include <QLabel>
@@ -53,17 +54,30 @@ void MainWindow::createMenus()
 void MainWindow::open()
 {
     QString filename = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("Magic Map++ (*.m++)"));
-    this->mWidget->loadMap(filename);
+    mWidget->loadMap(filename);
 }
 
 void MainWindow::save()
 {
-    QString filename = QFileDialog::getSaveFileName(this, tr("Open File"), "", tr("Magic Record (*.rec)"));
+    QString filename = QFileDialog::getSaveFileName(this, tr("Open File"), "save0", tr("Magic Record (*.rec)"));
+    if (filename.isEmpty())
+        return;
+    try
+    {
+        mWidget->saveRec(filename);
+    }
+    catch (const char *e)
+    {
+        mWidget->getMap()->appendAnimate(new MagicMessage(mWidget->getMap(), QString(e)));
+    }
 }
 
 void MainWindow::load()
 {
-    QString filename = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("Magic Record (*.rec)"));
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open File"), "save0", tr("Magic Record (*.rec)"));
+    if (filename.isEmpty())
+        return;
+    mWidget->loadRec(filename);
 }
 
 MagicMap *MainWindow::getMap()

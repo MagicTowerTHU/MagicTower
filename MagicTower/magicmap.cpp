@@ -32,7 +32,6 @@ MagicMap::MagicMap()
 
     mTom = new MagicTom(0, 0, 1);
     displayList.push_front(mTom);
-    property["level"] = 1;
 
     animateFlag = false;
 
@@ -110,9 +109,6 @@ bool MagicMap::loadMap(QFile *file)
 
 bool MagicMap::saveRecord(QFile *file)
 {
-    if (animateFlag)
-        return false;
-
     if (!file->open(QIODevice::WriteOnly | QIODevice::Text))
         printf("File Cannot Open..."), throw "File Cannot Open...";
 
@@ -131,9 +127,6 @@ bool MagicMap::saveRecord(QFile *file)
 
 bool MagicMap::loadRecord(QFile *file)
 {
-    if (animateFlag)
-        return false;
-
     if (!file->open(QIODevice::ReadOnly | QIODevice::Text))
         printf("File Cannot Open..."), throw "File Cannot Open...";
 

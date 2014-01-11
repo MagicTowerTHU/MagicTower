@@ -16,6 +16,8 @@ public:
     void keyPressEvent(QKeyEvent *);
     MagicMap *getMap();
     void loadMap(QString);
+    void saveRec(QString);
+    void loadRec(QString);
 
 public slots:
     void animate();
@@ -26,6 +28,8 @@ protected:
 private:
     MagicMap *mMap;
     QString mapToLoad;
+    QString recToLoad;
+    QString recToSave;
 };
 
 #endif
