@@ -13,7 +13,9 @@ aw_2	aw_2	aw_2	aw_2	aw_2	t	aw_2	aw_2	aw_2	aw_2	aw_2
 
 on (#fairy)
 {
-	message = "请进!"
+        message = "Hello!"
+        message = "请进!"
+        message = "Thanks!^_^"
 	this->position_x = 4
 }
 

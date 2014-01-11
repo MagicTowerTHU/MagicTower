@@ -11,7 +11,7 @@ class MagicMap;
 #include <QObject>
 #include <QTextStream>
 
-class MagicObject : QObject
+class MagicObject
 {
     QSet<QString> mClass;
 

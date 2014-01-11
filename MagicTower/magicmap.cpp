@@ -216,84 +216,103 @@ void MagicMap::appendObject(MagicDisplayObject *target)
     displayList.push_back(target);
 }
 
+#include <QThread>
+
+class KeyThread : public QThread
+{
+    MagicMap *parent;
+    int key;
+public:
+
+    KeyThread(MagicMap *parent, QKeyEvent *e)
+    {
+        this->parent = parent;
+        key = e->key();
+    }
+
+    void run()
+    {
+        if (!parent->animateFlag)
+        {
+            switch (key)
+            {
+            case Qt::Key_Down:
+                parent->Tom()->changePic(0,0);
+                if (parent->move(0, 1))
+                    parent->appendAnimate(new MagicMove(parent, 0, 1, parent->Tom()), false);
+                break;
+            case Qt::Key_Left:
+                parent->Tom()->changePic(1,0);
+                if (parent->move(1, 1))
+                    parent->appendAnimate(new MagicMove(parent, 1, 1, parent->Tom()), false);
+                break;
+            case Qt::Key_Up:
+                parent->Tom()->changePic(2,0);
+                if (parent->move(2, 1))
+                    parent->appendAnimate(new MagicMove(parent, 2, 1, parent->Tom()), false);
+                break;
+            case Qt::Key_Right:
+                parent->Tom()->changePic(3,0);
+                if (parent->move(3, 1))
+                    parent->appendAnimate(new MagicMove(parent, 3, 1, parent->Tom()), false);
+                break;
+            default:
+                break;
+            }
+            switch (key)
+            {
+            case Qt::Key_0: parent->mBackSound->change(0); break;
+            case Qt::Key_1: parent->mBackSound->change(1); break;
+            case Qt::Key_2: parent->mBackSound->change(2); break;
+            case Qt::Key_3: parent->mBackSound->change(3); break;
+            }
+            if (key == Qt::Key_L && parent->property["wisdomEnabled"].isTrue())
+                parent->appendAnimate(new MagicWisdom(parent), false);
+
+            if (key == Qt::Key_T && parent->property["teleportEnabled"].isTrue())
+                parent->appendAnimate(new MagicTele(parent), false);
+
+            if (key == Qt::Key_M) //for test
+                parent->appendAnimate(new MagicMessage(parent, "xfz是二逼.\n 赵锦煦也是"), false);
+
+        }
+        else
+        {
+            if (key == Qt::Key_L && parent->property["wisdomEnabled"].isTrue())
+                for (auto i = parent->animateList.begin(); i != parent->animateList.end(); i++)
+                    if(MagicWisdom *wisdom = dynamic_cast<MagicWisdom *>(*i))
+                        wisdom->wantDelete = true;
+            if (key == Qt::Key_Enter || key == Qt::Key_Return)
+                for (auto i = parent->animateList.begin(); i != parent->animateList.end(); i++)
+                    if(MagicMessage *message = dynamic_cast<MagicMessage *>(*i))
+                        message->wantDelete = true;
+            for (auto i = parent->animateList.begin(); i != parent->animateList.end(); i++)
+            {
+                MagicInputBox *inputbox = dynamic_cast<MagicInputBox *>(*i);
+                if(inputbox)
+                {
+                    if (key == Qt::Key_Escape)
+                        inputbox->wantDelete = true;
+                    else
+                        inputbox->input(key);
+                }
+            }
+            for (auto i = parent->animateList.begin(); i != parent->animateList.end(); i++)
+                if(MagicTele *tele = dynamic_cast<MagicTele *>(*i))
+                {
+                    if (key == Qt::Key_T)
+                        tele->wantDelete = true;
+                    else
+                        tele->input(key);
+                }
+        }
+    }
+};
+
 void MagicMap::keyPressEvent(QKeyEvent *e)
 {
-    if (!animateFlag)
-    {
-        switch (e->key())
-        {
-        case Qt::Key_Down:
-            mTom->changePic(0,0);
-            if (move(0, 1))
-                appendAnimate(new MagicMove(this, 0, 1, mTom), false);
-            break;
-        case Qt::Key_Left:
-            mTom->changePic(1,0);
-            if (move(1, 1))
-                appendAnimate(new MagicMove(this, 1, 1, mTom), false);
-            break;
-        case Qt::Key_Up:
-            mTom->changePic(2,0);
-            if (move(2, 1))
-                appendAnimate(new MagicMove(this, 2, 1, mTom), false);
-            break;
-        case Qt::Key_Right:
-            mTom->changePic(3,0);
-            if (move(3, 1))
-                appendAnimate(new MagicMove(this, 3, 1, mTom), false);
-            break;
-        default:
-            break;
-        }
-        switch (e->key())
-        {
-        case Qt::Key_0: mBackSound->change(0); break;
-        case Qt::Key_1: mBackSound->change(1); break;
-        case Qt::Key_2: mBackSound->change(2); break;
-        case Qt::Key_3: mBackSound->change(3); break;
-        }
-        if (e->key() == Qt::Key_L && property["wisdomEnabled"].isTrue())
-            appendAnimate(new MagicWisdom(this), false);
-
-        if (e->key() == Qt::Key_T && property["teleportEnabled"].isTrue())
-            appendAnimate(new MagicTele(this), false);
-
-        if (e->key() == Qt::Key_M) //for test
-            appendAnimate(new MagicMessage(this, "xfz是二逼.\n 赵锦煦也是"), false);
-
-    }
-    else
-    {
-        if (e->key() == Qt::Key_L && property["wisdomEnabled"].isTrue())
-            for (auto i = animateList.begin(); i != animateList.end(); i++)
-                if(MagicWisdom *wisdom = dynamic_cast<MagicWisdom *>(*i))
-                    wisdom->wantDelete = true;
-        if (e->key() == Qt::Key_Enter || e->key() == Qt::Key_Return)
-            for (auto i = animateList.begin(); i != animateList.end(); i++)
-                if(MagicMessage *message = dynamic_cast<MagicMessage *>(*i))
-                    message->wantDelete = true;
-        for (QList<MagicAnimate *>::iterator i = animateList.begin(); i != animateList.end(); i++)
-        {
-            (*i);
-            qDebug() << (*i);
-            MagicInputBox *inputbox = dynamic_cast<MagicInputBox *>(*i);
-            if(inputbox)
-            {
-                if (e->key() == Qt::Key_Escape)
-                    inputbox->wantDelete = true;
-                else
-                    inputbox->input(e->key());
-            }
-        }
-        for (auto i = animateList.begin(); i != animateList.end(); i++)
-            if(MagicTele *tele = dynamic_cast<MagicTele *>(*i))
-            {
-                if (e->key() == Qt::Key_T)
-                    tele->wantDelete = true;
-                else
-                    tele->input(e->key());
-            }
-    }
+    KeyThread *thread = new KeyThread(this, e);
+    thread->start();
 }
 
 int dx[] = {0, -1, 0, 1};
@@ -310,7 +329,7 @@ bool MagicMap::move(int direction, int distance)
         return false;
     }
 
-    for (auto i = displayList.begin(); i != displayList.end(); i++)
+    for (QList<MagicDisplayObject *>::iterator i = displayList.begin(); i != displayList.end(); i++)
         if ((**i)["position_x"].getInt() == target_x &&
             (**i)["position_y"].getInt() == target_y &&
             ((**i)["level"] == mTom->property["level"]).isTrue())
@@ -343,6 +362,26 @@ QList<MagicObject *> MagicMap::findDisplayObject(QString objectLabel, QString ob
     return objects;
 }
 
+
+const MagicVarient& MagicMap::operator[](QString propertyName) const
+{
+    if (propertyName.startsWith("input_"))
+    {
+        QString propertyValue = propertyName.mid(6);
+        int len = propertyValue.length();
+        QStringList l = propertyValue.mid(1, len - 2).split(QRegExp("\\\"\\s*,\\s*\\\""));
+        for (auto i = l.begin(); i != l.end(); i++)
+            if ((*i).startsWith("\""))
+                i = l.erase(i);
+
+        QString message = *l.begin();
+        l.erase(l.begin());
+
+        const_cast<MagicMap *>(this)->appendAnimate(new MagicInputBox(const_cast<MagicMap *>(this), message, l), true);
+        return property.find("input").value();
+    }
+}
+
 void MagicMap::setProperty(QString propertyName, MagicVarient propertyValue)
 {
     if (propertyName == "sound")
@@ -353,6 +392,11 @@ void MagicMap::setProperty(QString propertyName, MagicVarient propertyValue)
     else if (propertyName == "print")
     {
         qDebug() << propertyValue.getString();
+        return;
+    }
+    else if (propertyName == "message")
+    {
+        appendAnimate(new MagicMessage(this, propertyValue.getString()), true);
         return;
     }
     MagicObject::setProperty(propertyName, propertyValue);
