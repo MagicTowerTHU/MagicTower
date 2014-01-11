@@ -30,51 +30,6 @@ MagicMap::MagicMap()
 
     animateFlag = false;
 
-    /*
-    displayList.push_front(new MagicEnemy(0, 4, 1, "1"));
-    displayList.push_front(new MagicEnemy(1, 4, 1, "2"));
-    displayList.push_front(new MagicEnemy(2, 4, 1, "3"));
-    displayList.push_front(new MagicEnemy(3, 4, 1, "4"));
-    displayList.push_front(new MagicEnemy(4, 4, 1, "5"));
-    displayList.push_front(new MagicEnemy(5, 4, 1, "6"));
-
-    displayList.push_front(new MagicStairs(0, 10, 1, 1));
-    displayList.push_front(new MagicStairs(10, 0, 1, -1));
-    displayList.push_front(new MagicStairs(0, 10, 2, -1));
-    displayList.push_front(new MagicStairs(10, 0, 2, 1));
-
-    displayList.push_front(new MagicWall(0, 1, 1));
-    displayList.push_front(new MagicWall(0, 2, 1));
-    displayList.push_front(new MagicWall(1, 2, 1));
-    displayList.push_front(new MagicWall(0, 1, 1));
-    displayList.push_front(new MagicWall(2, 0, 1));
-    displayList.push_front(new MagicWall(3, 0, 1));
-    displayList.push_front(new MagicWall(4, 0, 1));
-    displayList.push_front(new MagicWall(5, 0, 1));
-    displayList.push_front(new MagicDoor(2, 2, 1, yellow));
-    displayList.push_front(new MagicWall(3, 2, 1));
-    displayList.push_front(new MagicDoor(4, 2, 1, yellow));
-    displayList.push_front(new MagicWall(5, 2, 1));
-    displayList.push_front(new MagicDoor(6, 2, 1, red));
-    displayList.push_front(new MagicWall(7, 2, 1));
-    displayList.push_front(new MagicWall(7, 1, 1));
-    displayList.push_front(new MagicDoor(8, 1, 1, blue));
-    displayList.push_front(new MagicWall(9, 1, 1));
-    displayList.push_front(new MagicDoor(10, 1, 1, silver));
-
-    displayList.push_front(new MagicKey(2, 1, 1, yellow));
-    displayList.push_front(new MagicKey(3, 1, 1, yellow));
-    displayList.push_front(new MagicKey(4, 1, 1, red));
-    displayList.push_front(new MagicKey(5, 1, 1, blue));
-
-    displayList.push_front(new MagicWeapon(0, 3, 1, "1"));
-    displayList.push_front(new MagicWeapon(1, 3, 1, "2"));
-    displayList.push_front(new MagicWeapon(2, 3, 1, "3"));
-
-    displayList.push_front(new MagicArmour(3, 3, 1, "1"));
-    displayList.push_front(new MagicArmour(4, 3, 1, "2"));
-    displayList.push_front(new MagicArmour(5, 3, 1, "3"));
-*/
     for (int i = 0; i < 11; i++)
         for (int j = 0; j < 11; j++)
                 displayList.push_front(floor[11 * i + j] = new MagicFloor(i, j, 1));
@@ -267,7 +222,7 @@ bool MagicMap::eraseMapObject(QString label, int x, int y)
     return false;
 }
 
-MagicTom * MagicMap::Tom()
+MagicTom *MagicMap::Tom()
 {
     return this->mTom;
 }

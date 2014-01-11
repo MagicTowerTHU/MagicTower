@@ -9,7 +9,7 @@ Widget::Widget(QWidget *parent)
     : QWidget(parent)
 {
     elapsed = 0;
-    setFixedSize(500, 500);
+    setFixedSize(400, 500);
     mMap = new MagicMap();
 }
 

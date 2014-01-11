@@ -27,7 +27,7 @@ int MagicVarient::getInt()
     else
     {
         throw("Error: Trying to get int value from string MagicVatirnt.");
-        return NULL;
+        return 0;
     }
 }
 
@@ -76,7 +76,7 @@ MagicVarient MagicVarient::operator!=(MagicVarient a)
         return temp;
     }
     throw("Error: Invalid use of operator !=");
-    return NULL;
+    return MagicVarient(0);
 }
 
 MagicVarient MagicVarient::operator>(MagicVarient a)
@@ -93,7 +93,7 @@ MagicVarient MagicVarient::operator>(MagicVarient a)
         return temp;
     }
     throw("Error: Invalid use of operator >");
-    return NULL;
+    return MagicVarient(0);
 }
 
 MagicVarient MagicVarient::operator>=(MagicVarient a)
@@ -110,7 +110,7 @@ MagicVarient MagicVarient::operator>=(MagicVarient a)
         return temp;
     }
     throw("Error: Invalid use of operator >=");
-    return NULL;
+    return MagicVarient(0);
 }
 
 MagicVarient MagicVarient::operator<(MagicVarient a)
@@ -127,7 +127,7 @@ MagicVarient MagicVarient::operator<(MagicVarient a)
         return temp;
     }
     throw("Error: Invalid use of operator <");
-    return NULL;
+    return MagicVarient(0);
 }
 
 MagicVarient MagicVarient::operator<=(MagicVarient a)
@@ -144,7 +144,7 @@ MagicVarient MagicVarient::operator<=(MagicVarient a)
         return temp;
     }
     throw("Error: Invalid use of operator <=");
-    return NULL;
+    return MagicVarient(0);
 }
 
 
@@ -164,7 +164,7 @@ MagicVarient MagicVarient:: operator+(MagicVarient a)
         return temp;
     }
     throw("Error: Invalid use of operator +");
-    return NULL;
+    return MagicVarient(0);
 }
 
 MagicVarient MagicVarient::operator-(MagicVarient a)
@@ -176,7 +176,7 @@ MagicVarient MagicVarient::operator-(MagicVarient a)
         return temp;
     }
     throw("Error: Invalid use of operator -");
-    return NULL;
+    return MagicVarient(0);
 }
 
 MagicVarient MagicVarient::operator*(MagicVarient a)
@@ -188,7 +188,7 @@ MagicVarient MagicVarient::operator*(MagicVarient a)
         return temp;
     }
     throw("Error: Invalid use of operator *");
-    return NULL;
+    return MagicVarient(0);
 }
 MagicVarient MagicVarient::operator/(MagicVarient a)
 {
@@ -199,7 +199,7 @@ MagicVarient MagicVarient::operator/(MagicVarient a)
         return temp;
     }
     throw("Error: Invalid use of operator /");
-    return NULL;
+    return MagicVarient(0);
 }
 MagicVarient MagicVarient::operator%(MagicVarient a)
 {
@@ -210,7 +210,7 @@ MagicVarient MagicVarient::operator%(MagicVarient a)
         return temp;
     }
     throw("Error: Invalid use of operator %");
-    return NULL;
+    return MagicVarient(0);
 }
 MagicVarient MagicVarient::operator^(MagicVarient a)
 {
@@ -221,7 +221,7 @@ MagicVarient MagicVarient::operator^(MagicVarient a)
         return temp;
     }
     throw("Error: Invalid use of operator ^");
-    return NULL;
+    return MagicVarient(0);
 }
 MagicVarient MagicVarient::operator&(MagicVarient a)
 {
@@ -232,7 +232,7 @@ MagicVarient MagicVarient::operator&(MagicVarient a)
         return temp;
     }
     throw("Error: Invalid use of operator &");
-    return NULL;
+    return MagicVarient(0);
 }
 
 MagicVarient MagicVarient::operator<<(MagicVarient a)
@@ -244,7 +244,7 @@ MagicVarient MagicVarient::operator<<(MagicVarient a)
         return temp;
     }
     throw("Error: Invalid use of operator <<");
-    return NULL;
+    return MagicVarient(0);
 }
 
 MagicVarient MagicVarient::operator>>(MagicVarient a)
@@ -256,7 +256,7 @@ MagicVarient MagicVarient::operator>>(MagicVarient a)
         return temp;
     }
     throw("Error: Invalid use of operator >>");
-    return NULL;
+    return MagicVarient(0);
 }
 
 MagicVarient MagicVarient::operator~()
@@ -268,7 +268,7 @@ MagicVarient MagicVarient::operator~()
         return temp;
     }
     throw("Error: Invalid use of operator ~");
-    return NULL;
+    return MagicVarient(0);
 }
 
 MagicVarient & MagicVarient::operator+=(MagicVarient a)

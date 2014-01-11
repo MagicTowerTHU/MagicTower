@@ -33,9 +33,9 @@ on (label#id.class)
 
 on (floor)
 {
-  print = "Tom is on level: "
+  print = "walking on the floor"
+  print = this->position_x * 10 + this->position_y
   print = tom->level
-  this->position_x * 10 + this->position_y
   goto exit
   return = 0
 :exit
