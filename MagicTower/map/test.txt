@@ -3,8 +3,8 @@ at(1)
 .   .   w   w   w   w   .   .   .   .   up
 w   .   k_0 .   w   .   .   w   .   .   .
 w   w   dr_0 w  w   dr_0 dr_2 w dr_1 w  dr_3
-k_0 w   .   w   .   .   w   .   m_1 .   .
-k_1 .   s_2 .   w   .   .   .   .   .   .
+k_0 w   k_1 w   .   .   w   .   m_1 .   .
+.   .   s_2 .   w   .   .   .   .   .   .
 w   w   w   .   w   w   w   .   .   .   .
 .   .   .   s_3 .   .   .   .   .   .   .
 .   w   .   w   .   w   w   w   .   .   .
@@ -23,7 +23,7 @@ at(2)
 .   .   .   .   .   .   .   .   .   .   .
 .   .   .   .   .   .   .   .   .   .   .
 .   .   .   .   .   .   .   .   .   .   .
-w  .   .   .   .   .   .   .   .   .   .
+w   .   .   .   .   .   .   .   .   .   .
 
 on (label#id.class)
 {
@@ -33,9 +33,9 @@ on (label#id.class)
 
 on (floor)
 {
-  print = "walking on the floor"
   print = this->position_x * 10 + this->position_y
   print = tom->level
+  print = "o------o"
   goto exit
   return = 0
 :exit
