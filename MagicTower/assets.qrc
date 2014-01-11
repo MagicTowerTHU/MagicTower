@@ -56,8 +56,8 @@
         <file>assets/Images/169.bmp</file>
         <file alias="downstairs">assets/Images/172.bmp</file>
         <file alias="upstairs">assets/Images/175.bmp</file>
-        <file>assets/Images/178.bmp</file>
-        <file>assets/Images/181.bmp</file>
+        <file alias="medicine_2">assets/Images/178.bmp</file>
+        <file alias="medicine_1">assets/Images/181.bmp</file>
         <file>assets/Images/184.bmp</file>
         <file>assets/Images/187.bmp</file>
         <file alias="key_red">assets/Images/190.bmp</file>

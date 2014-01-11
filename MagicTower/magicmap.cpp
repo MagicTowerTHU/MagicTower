@@ -8,6 +8,7 @@
 #include "MagicDisplayObject/magickey.h"
 #include "MagicDisplayObject/magicweapon.h"
 #include "MagicDisplayObject/magicarmour.h"
+#include "MagicDisplayObject/magicmedicine.h"
 
 #include <QPoint>
 #include <QPointer>
