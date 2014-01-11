@@ -24,7 +24,7 @@ void Widget::animate()
     repaint();
 }
 
-void Widget::paintEvent(QPaintEvent *event)
+void Widget::paintEvent(QPaintEvent *)
 {
     QPainter painter;
     painter.begin(this);
