@@ -19,30 +19,16 @@ class MainWindow : public QMainWindow
 
     void createMenus();
     QMenu *fileMenu;
-    QMenu *editMenu;
-    QMenu *formatMenu;
-    QMenu *helpMenu;
 
-    QAction *newAct;
     QAction *openAct;
     QAction *saveAct;
-    QAction *printAct;
+    QAction *loadAct;
     QAction *exitAct;
-    QAction *undoAct;
-    QAction *redoAct;
-    QAction *cutAct;
-    QAction *copyAct;
-    QAction *pasteAct;
-    QAction *boldAct;
-    QAction *italicAct;
-    QAction *leftAlignAct;
-    QAction *rightAlignAct;
-    QAction *justifyAct;
-    QAction *centerAct;
-    QAction *setLineSpacingAct;
-    QAction *setParagraphSpacingAct;
-    QAction *aboutAct;
-    QAction *aboutQtAct;
+
+private slots:
+    void open();
+    void save();
+    void load();
 
 public:
     MainWindow(QWidget *parent = 0);

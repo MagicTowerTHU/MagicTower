@@ -5,6 +5,7 @@
 #include "magicmap.h"
 
 #include <QWidget>
+#include <QString>
 
 class Widget : public QWidget
 {
@@ -14,6 +15,7 @@ public:
     Widget(QWidget *parent);
     void keyPressEvent(QKeyEvent *);
     MagicMap *getMap();
+    void loadMap(QString);
 
 public slots:
     void animate();
@@ -22,8 +24,8 @@ protected:
     void paintEvent(QPaintEvent *event);
 
 private:
-    int elapsed;
     MagicMap *mMap;
+    QString mapToLoad;
 };
 
 #endif

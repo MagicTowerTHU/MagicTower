@@ -8,9 +8,10 @@
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
 {
-    elapsed = 0;
     setFixedSize(400, 500);
     mMap = new MagicMap();
+
+    mapToLoad = "";
 }
 
 MagicMap *Widget::getMap()
@@ -18,10 +19,26 @@ MagicMap *Widget::getMap()
     return mMap;
 }
 
+void Widget::loadMap(QString filename)
+{
+    mapToLoad = filename;
+}
+
+bool loadingFlag = false;
+
 void Widget::animate()
 {
-    elapsed = (elapsed + qobject_cast<QTimer*>(sender())->interval()) % 1000;
-    repaint();
+    if (loadingFlag)
+        return;
+    if (!mapToLoad.isEmpty())
+    {
+        loadingFlag = true;
+        mMap->loadMap(new QFile(mapToLoad));
+        mapToLoad = "";
+        loadingFlag = false;
+    }
+    else
+        repaint();
 }
 
 void Widget::paintEvent(QPaintEvent *)

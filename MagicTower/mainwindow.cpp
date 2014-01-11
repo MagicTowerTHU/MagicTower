@@ -4,6 +4,7 @@
 #include <QGridLayout>
 #include <QLabel>
 #include <QMenuBar>
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -31,58 +32,38 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::createMenus()
 {
-    newAct = new QAction(tr("&Action"), this);
-    openAct = new QAction(tr("Action1"), this);
-    saveAct = new QAction(tr("Action2"), this);
-    printAct = new QAction(tr("Action3"), this);
-    exitAct = new QAction(tr("Action"), this);
-    undoAct = new QAction(tr("Action"), this);
-    redoAct = new QAction(tr("Action"), this);
-    cutAct = new QAction(tr("Action"), this);
-    copyAct = new QAction(tr("Action"), this);
-    pasteAct = new QAction(tr("Action"), this);
-    boldAct = new QAction(tr("Action"), this);
-    italicAct = new QAction(tr("Action"), this);
-    leftAlignAct = new QAction(tr("Action"), this);
-    rightAlignAct = new QAction(tr("Action"), this);
-    justifyAct = new QAction(tr("Action"), this);
-    centerAct = new QAction(tr("Action"), this);
-    setLineSpacingAct = new QAction(tr("Action"), this);
-    setParagraphSpacingAct = new QAction(tr("Action"), this);
-    aboutAct = new QAction(tr("Action"), this);
-    aboutQtAct = new QAction(tr("Action"), this);
+    openAct = new QAction(tr("Load &Map"), this);
+    saveAct = new QAction(tr("&Save record"), this);
+    loadAct = new QAction(tr("L&oad record"), this);
+    exitAct = new QAction(tr("E&xit"), this);
 
     fileMenu = menuBar()->addMenu(tr("&File"));
-    fileMenu->addAction(newAct);
     fileMenu->addAction(openAct);
     fileMenu->addAction(saveAct);
-    fileMenu->addAction(printAct);
+    fileMenu->addAction(loadAct);
     fileMenu->addSeparator();
     fileMenu->addAction(exitAct);
 
-    editMenu = menuBar()->addMenu(tr("&Edit"));
-    editMenu->addAction(undoAct);
-    editMenu->addAction(redoAct);
-    editMenu->addSeparator();
-    editMenu->addAction(cutAct);
-    editMenu->addAction(copyAct);
-    editMenu->addAction(pasteAct);
-    editMenu->addSeparator();
+    connect(exitAct, SIGNAL(triggered()), this, SLOT(close()));
+    connect(openAct, SIGNAL(triggered()), this, SLOT(open()));
+    connect(saveAct, SIGNAL(triggered()), this, SLOT(save()));
+    connect(loadAct, SIGNAL(triggered()), this, SLOT(load()));
+}
 
-    helpMenu = menuBar()->addMenu(tr("&Help"));
-    helpMenu->addAction(aboutAct);
-    helpMenu->addAction(aboutQtAct);
-    formatMenu = editMenu->addMenu(tr("&Format"));
-    formatMenu->addAction(boldAct);
-    formatMenu->addAction(italicAct);
-    formatMenu->addSeparator()->setText(tr("Alignment"));
-    formatMenu->addAction(leftAlignAct);
-    formatMenu->addAction(rightAlignAct);
-    formatMenu->addAction(justifyAct);
-    formatMenu->addAction(centerAct);
-    formatMenu->addSeparator();
-    formatMenu->addAction(setLineSpacingAct);
-    formatMenu->addAction(setParagraphSpacingAct);
+void MainWindow::open()
+{
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("Magic Map++ (*.m++)"));
+    this->mWidget->loadMap(filename);
+}
+
+void MainWindow::save()
+{
+    QString filename = QFileDialog::getSaveFileName(this, tr("Open File"), "", tr("Magic Record (*.rec)"));
+}
+
+void MainWindow::load()
+{
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("Magic Record (*.rec)"));
 }
 
 MagicMap *MainWindow::getMap()

@@ -19,6 +19,7 @@
 #include <QSound>
 #include <QDebug>
 #include <QTextStream>
+#include <QMediaObject>
 
 #define yellow 0
 #define blue 1
@@ -51,7 +52,8 @@ MagicMap::MagicMap()
 
 void MagicMap::destoryList()
 {
-    animateListLock.lock();
+    animateList.clear(), displayList.clear();
+    /*
     for (auto i = animateList.begin(); i != animateList.end(); i++)
     {
         delete *i;
@@ -61,14 +63,11 @@ void MagicMap::destoryList()
     {
         delete *i;
         i = displayList.erase(i);
-    }
-    animateListLock.unlock();
+    }*/
 }
 
 bool MagicMap::loadMap(QFile *file)
 {
-    if (animateFlag)
-        return false;
     if (!file)
     {
         (*mTom)["position_x"] = 0;
@@ -80,6 +79,14 @@ bool MagicMap::loadMap(QFile *file)
         destoryList();
 
         // Initialize:
+        mTom = new MagicTom(0, 0, 1);
+        displayList.push_front(mTom);
+        property["level"] = 1;
+
+        animateFlag = false;
+
+        property["wisdomEnabled"] = 0;
+
         for (int i = 0; i < 11; i++)
             for (int j = 0; j < 11; j++)
                     displayList.push_front(/*floor[11 * i + j] = */new MagicFloor(i, j, 1));
@@ -268,7 +275,7 @@ bool MagicMap::move(int direction, int distance)
 
     if (target_x < 0 || target_x > 10 || target_y < 0 || target_y > 10)
     {
-        mTom->mBeep->play();
+        QSound::play(":/sounds/beep");
         return false;
     }
 
@@ -278,7 +285,7 @@ bool MagicMap::move(int direction, int distance)
             ((**i)["level"] == mTom->property["level"]).isTrue())
             if ((**i)["enabled"].isTrue() && !(*i)->move(this))
             {
-                mTom->mBeep->play();
+                QSound::play(":/sounds/beep");
                 return false;
             }
 
@@ -309,7 +316,7 @@ void MagicMap::setProperty(QString propertyName, MagicVarient propertyValue)
 {
     if (propertyName == "sound")
     {
-        (new QSound(propertyValue.getString()))->play();
+        QSound::play(propertyValue.getString());
         return;
     }
     else if (propertyName == "print")

@@ -1,0 +1,71 @@
+
+at(1)
+.   .   w   w   w   w   .   .   k_2 .   up
+w   .   k_0 .   .   .   .   w   wi  .   .
+w   w   dr_0 w  w   dr_0 dr_2 w dr_1 w  dr_3
+k_0 w   k_1 w   .   .   w   .   m_1 .   .
+.   .   s_2 .   w   .   .   .   .   .   .
+w   w   w   .   w   w   w   .   .   .   .
+.   .   .   s_3 .   .   .   .   .   .   .
+.   w   .   w   .   w   w   w   .   .   .
+.   w   .   w   .   w   .   w   .   .   .
+.   w   .   w   .   w   .   w   .   w   .
+.   .   .   w   w   w   .   .   .   .   .
+
+at(2)
+.   .   e_1 e_2 e_3 e_4 e_5 e_6 .   .   dn
+.   .   .   .   .   .   .   .   .   .   .
+.   .   a_1 a_2 a_3 .   s_3 s_2 .   .   .
+.   .   .   .   .   .   s_3 .   .   .   .
+.   .   .   .   .   .   .   .   .   .   .
+.   .   .   .   .   .   .   .   .   .   .
+.   .   .   .   .   .   .   .   .   .   .
+.   .   .   .   .   .   .   .   .   .   .
+.   .   .   .   .   .   .   .   .   .   .
+.   .   .   .   .   .   .   .   .   .   .
+w   .   .   .   .   .   .   .   .   .   .
+
+on (label#id.class)
+{
+  234
+  213453
+}
+
+on (floor)
+{
+  print = this->position_x * 10 + this->position_y
+  print = tom->level
+  print = "o------o"
+  goto exit
+  return = 0
+:exit
+}
+
+on (.enemy)
+{
+  sound = ":/sounds/attack"
+:exit
+}
+
+10
+if (1)
+  goto label1
+else
+  goto label2
+20
+:label2
+30
+:label1
+40
+
+"-------------------"
+i=5
+:for_1
+if (i > 3)
+{
+  print = i
+  i = i-1
+  goto for_1
+}
+"End..."
+

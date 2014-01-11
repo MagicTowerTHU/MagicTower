@@ -11,9 +11,6 @@ class MagicTom : public MagicDisplayObject
     QPixmap *pix;
 
 public:
-    QSound *mSound;
-    QSound *mBeep;
-
     QList<MagicDisplayObject *> inventory;
 
     MagicTom(int, int, int);
