@@ -1,10 +1,11 @@
 ToDo List:
 
-	exp, money
-	Shop (exp, money->?)
-	*Animation
-	Menu (top of the window)
-	Saving & Loading
-	destruction
-	MAPPING
+0	exp, money
+1	Shop (exp, money->?)
+?	*Animation
+1	Menu (top of the window): save & load & golden_finger
+	Functionality
+1	Saving & Loading
+0	Destruction
+0	MAPPING
 	

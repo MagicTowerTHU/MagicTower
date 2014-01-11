@@ -40,5 +40,17 @@ MagicVarient MagicOperation::getValue(MagicMap *map)
             throw "Non-reference operand cannot be assigned any value.";
         return x->setValue(operand[1]->getValue(map), map);
     }
+    if (mOperator == "<")
+        return operand[0]->getValue(map) < operand[1]->getValue(map);
+    if (mOperator == "<=")
+        return operand[0]->getValue(map) <= operand[1]->getValue(map);
+    if (mOperator == ">")
+        return operand[0]->getValue(map) > operand[1]->getValue(map);
+    if (mOperator == ">=")
+        return operand[0]->getValue(map) >= operand[1]->getValue(map);
+    if (mOperator == "==")
+        return operand[0]->getValue(map) == operand[1]->getValue(map);
+    if (mOperator == "!=")
+        return operand[0]->getValue(map) != operand[1]->getValue(map);
     throw "Invalid operation \"" + mOperator + "\"";
 }
