@@ -68,7 +68,7 @@ void MainWindow::save()
     }
     catch (const char *e)
     {
-        mWidget->getMap()->appendAnimate(new MagicMessage(mWidget->getMap(), QString(e)));
+        mWidget->getMap()->appendAnimate(new MagicMessage(mWidget->getMap(), QString(e)), false);
     }
 }
 
