@@ -47,7 +47,8 @@ SOURCES += main.cpp\
     MagicDisplayObject/magicmedicine.cpp \
     status.cpp \
     MagicAnimate/magicwisdom.cpp \
-    MagicDisplayObject/magicwit.cpp
+    MagicDisplayObject/magicwit.cpp \
+    MagicAnimate/magicmessage.cpp
 
 HEADERS  += mainwindow.h \
     widget.h \
@@ -81,7 +82,8 @@ HEADERS  += mainwindow.h \
     MagicDisplayObject/magicmedicine.h \
     status.h \
     MagicAnimate/magicwisdom.h \
-    MagicDisplayObject/magicwit.h
+    MagicDisplayObject/magicwit.h \
+    MagicAnimate/magicmessage.h
 
 RESOURCES += \
     assets.qrc \

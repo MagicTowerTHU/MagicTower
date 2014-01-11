@@ -33,7 +33,7 @@ void MagicMedicine::paint(QPainter *painter)
 bool MagicMedicine::move(MagicMap *map)
 {
     map->Tom()->property["health"] += property["health"].getInt();
-    map->eraseMapObject(property["label"].getString(), property["position_x"].getInt(), property["position_y"].getInt());
+    property["enabled"] = 0;
     qDebug() <<"Tom:"<< map->Tom()->property["attack"].getInt() <<
                          map->Tom()->property["defend"].getInt() <<
                          map->Tom()->property["health"].getInt();

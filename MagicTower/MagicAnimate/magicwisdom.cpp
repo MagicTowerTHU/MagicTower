@@ -4,13 +4,13 @@
 MagicWisdom::MagicWisdom(MagicMap *parent)
     : MagicAnimate(parent)
 {
-    floor = new QPixmap(":/images/floor");
+    black = new QPixmap(":/images/black");
     wall = new QPixmap(":/images/wall");
 }
 
 MagicWisdom::~MagicWisdom()
 {
-    delete floor;
+    delete black;
     delete wall;
 }
 
@@ -29,7 +29,7 @@ bool MagicWisdom::paint(QPainter *painter)
     }
     for (int i = 1; i < 10; i++)
         for(int j = 1; j < 10; j++)
-            painter->drawPixmap(i*32, j*32, *floor);
+            painter->drawPixmap(i*32, j*32, *black);
 
     // painter->drawText(0, 20, QString("MagicTom"));
     int k = 1, l = 1, offset = 20, margin_left = 22, margin_top = 17;

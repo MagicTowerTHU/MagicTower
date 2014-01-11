@@ -9,6 +9,7 @@ MagicDisplayObject::MagicDisplayObject(int x, int y, int level)
     property["level"] = level;
     this->x = x * 32, this->y = y * 32;
     property["enabled"] = 1;
+    property["picked"] = 0;
     action = NULL;
 }
 

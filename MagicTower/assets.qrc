@@ -188,6 +188,7 @@
         <file alias="Tom_left1">assets/Images/475_.png</file>
         <file alias="Tom_left2">assets/Images/477_.png</file>
         <file alias="Tom_face">assets/Images/415_.png</file>
+        <file alias="black">assets/Images/000.bmp</file>
     </qresource>
     <qresource prefix="/sounds">
         <file alias="1.wav">assets/Sounds/1.wav</file>

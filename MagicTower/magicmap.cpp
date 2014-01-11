@@ -220,7 +220,7 @@ void MagicMap::setProperty(QString propertyName, MagicVarient propertyValue)
     }
     MagicObject::setProperty(propertyName, propertyValue);
 }
-
+/*
 bool MagicMap::eraseMapObject(QString label, int x, int y)
 {
     for (auto i = displayList.begin(); i != displayList.end(); i++)
@@ -233,7 +233,7 @@ bool MagicMap::eraseMapObject(QString label, int x, int y)
         }
     return false;
 }
-
+*/
 MagicTom *MagicMap::Tom()
 {
     return this->mTom;

@@ -6,7 +6,7 @@
 
 class MagicWisdom : public MagicAnimate
 {
-    QPixmap *floor, *wall;
+    QPixmap *black, *wall;
 
 public:
     MagicWisdom(MagicMap *);
