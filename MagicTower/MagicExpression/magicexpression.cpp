@@ -29,10 +29,11 @@ void MagicExpression::setNext(MagicExpression *next)
     this->next = next;
 }
 
-const int OPE_CNT = 11;
-//						   +  -  *  /  %  ^   & << >>  ~   =
-const int ope_order[OPE_CNT] = {5, 5, 4, 4, 4, 10, 9, 6, 6, 2, 15};
-const int ope_assoc[OPE_CNT] = {0, 0, 0, 0, 0,  0, 0, 0, 0, 1,  1};
+const int OPE_CNT = 17;
+//                              0              5               10             15
+//						        +  -  *  /  %  ^   & << >>  ~   =  < <=  > >= == !=
+const int ope_order[OPE_CNT] = {5, 5, 4, 4, 4, 10, 9, 6, 6, 2, 15, 6, 6, 6, 6, 7, 7};
+const int ope_assoc[OPE_CNT] = {0, 0, 0, 0, 0,  0, 0, 0, 0, 1,  1, 0, 0, 0, 0, 0, 0};
 
 QStack<MagicOperand *> stackNum;
 QStack<int> stackOpe, stackOrd;
@@ -45,6 +46,7 @@ void skipSpaces(QString buffer, int &p)
 void operate()
 {
     int ope = stackOpe.pop();
+    stackOrd.pop();
     switch (ope)
     {
     case 0: stackNum.push(new MagicOperation(stackNum.pop(), stackNum.pop(), "+")); break;
@@ -58,6 +60,12 @@ void operate()
     case 8: stackNum.push(new MagicOperation(stackNum.pop(), stackNum.pop(), ">>")); break;
     case 9: stackNum.push(new MagicOperation(stackNum.pop(), "~")); break;
     case 10: stackNum.push(new MagicOperation(stackNum.pop(), stackNum.pop(), "=")); break;
+    case 11: stackNum.push(new MagicOperation(stackNum.pop(), stackNum.pop(), "<")); break;
+    case 12: stackNum.push(new MagicOperation(stackNum.pop(), stackNum.pop(), "<=")); break;
+    case 13: stackNum.push(new MagicOperation(stackNum.pop(), stackNum.pop(), ">")); break;
+    case 14: stackNum.push(new MagicOperation(stackNum.pop(), stackNum.pop(), ">=")); break;
+    case 15: stackNum.push(new MagicOperation(stackNum.pop(), stackNum.pop(), "==")); break;
+    case 16: stackNum.push(new MagicOperation(stackNum.pop(), stackNum.pop(), "!=")); break;
     }
 }
 
@@ -77,12 +85,47 @@ int getOpe(QString buffer, int &p)
     case '%': return 4;
     case '^': return 5;
     case '&': return 6;
-    case '<': if (buffer[p++] == '<') return 7; else throw "bad operator!";
-    case '>': if (buffer[p++] == '>') return 8; else throw "bad operator!";
+    case '<':
+        if (buffer[p] == '<')
+        {
+            p++;
+            return 7;
+        }
+        else if (buffer[p] == '=')
+        {
+            p++;
+            return 12;
+        }
+        else
+            return 11;
+    case '>':
+        if (buffer[p] == '>')
+        {
+            p++;
+            return 8;
+        }
+        else if (buffer[p] == '=')
+        {
+            p++;
+            return 14;
+        }
+            return 13;
     case '~': return 9;
-    case '=': return 10;
+    case '=':
+        if (buffer[p] == '=')
+        {
+            p++;
+            return 15;
+        }
+        else
+            return 10;
+    case '!':
+        if (buffer[p++] == '=')
+            return 16;
     default: throw "bad operator!";
     }
+
+    return 0;
 }
 
 MagicOperand *getVar(QString buffer, int &p)
@@ -157,7 +200,7 @@ MagicOperand *processLine(QString buffer)
                 continue;
             }
             int ope = getOpe(buffer, t), order = (level << 5) - ope_order[ope];
-            while (!stackOpe.empty() && order + ope_assoc[ope] <= stackOrd.top())
+            while (!stackOpe.empty() && (order + ope_assoc[ope] <= stackOrd.top()))
                 operate();
             stackOpe.push(ope), stackOrd.push(order);
             skipSpaces(buffer, t);
