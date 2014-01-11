@@ -6,6 +6,11 @@ MagicInventory::MagicInventory(int x, int y, int level)
 
 }
 
+MagicInventory::~MagicInventory()
+{
+    delete pix;
+}
+
 void MagicInventory::paint(QPainter *painter)
 {
     painter->drawPixmap(x, y, *pix);

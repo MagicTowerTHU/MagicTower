@@ -9,6 +9,7 @@ class MagicMedicine : public MagicDisplayObject
 
 public:
     MagicMedicine(int, int, int, QString);
+    ~MagicMedicine();
     virtual void paint(QPainter *);
     virtual bool move(MagicMap *);
 };

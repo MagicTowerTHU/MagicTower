@@ -12,6 +12,13 @@ MagicDisplayObject::MagicDisplayObject(int x, int y, int level)
     action = NULL;
 }
 
+
+MagicDisplayObject::~MagicDisplayObject()
+{
+    if (action)
+        delete action;
+}
+
 void MagicDisplayObject::setAction(MagicExpression *action)
 {
     this->action = action;

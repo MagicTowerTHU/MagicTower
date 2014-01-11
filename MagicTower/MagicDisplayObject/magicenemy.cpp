@@ -58,6 +58,12 @@ MagicEnemy::MagicEnemy(int x, int y, int level, QString name)
     }
 }
 
+MagicEnemy::~MagicEnemy()
+{
+    delete pix[0];
+    delete pix[1];
+}
+
 void MagicEnemy::paint(QPainter *painter)
 {
     static int cnt = 120;

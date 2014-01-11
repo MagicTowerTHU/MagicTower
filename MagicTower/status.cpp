@@ -14,7 +14,7 @@ void Status::animate()
     repaint();
 }
 
-void Status::paintEvent(QPaintEvent *event)
+void Status::paintEvent(QPaintEvent *)
 {
     QPainter painter;
     painter.begin(this);

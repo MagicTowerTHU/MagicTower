@@ -16,6 +16,7 @@ class MagicDisplayObject : public MagicObject
 public:
     int x, y;
     MagicDisplayObject(int, int, int);
+    ~MagicDisplayObject();
     virtual void paint(QPainter *) = 0;
     virtual bool move(MagicMap *) = 0;
 

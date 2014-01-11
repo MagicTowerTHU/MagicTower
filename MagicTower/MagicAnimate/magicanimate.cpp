@@ -3,6 +3,7 @@
 MagicAnimate::MagicAnimate(MagicMap *parent)
 {
     this->parent = parent;
+    wantDelete = false;
 }
 
 MagicAnimate::MagicAnimate(MagicMap *parent, int duration)

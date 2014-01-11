@@ -9,6 +9,7 @@ class MagicEnemy : public MagicDisplayObject
 
 public:
     MagicEnemy(int, int, int, QString);
+    ~MagicEnemy();
     virtual void paint(QPainter *);
     virtual bool move(MagicMap *);
 };

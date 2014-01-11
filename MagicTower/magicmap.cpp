@@ -1,6 +1,7 @@
 #include "magicmap.h"
 #include "MagicAnimate/magicanimate.h"
 #include "MagicAnimate/magicmove.h"
+#include "MagicAnimate/magicwisdom.h"
 #include "MagicDisplayObject/magicenemy.h"
 #include "MagicDisplayObject/magicstairs.h"
 #include "MagicDisplayObject/magicwall.h"
@@ -53,22 +54,6 @@ void MagicMap::loadMap(QFile *file)
 
 void MagicMap::paint(QPainter *painter)
 {
-    animateListLock.lock();
-    for (QList<MagicAnimate *>::iterator i = animateList.begin(); i != animateList.end(); i++)
-        if ((*i)->paint(painter) == false)
-        {
-            (*i)->lock();
-            (*i)->wakeAll();
-            (*i)->unlock();
-            i = animateList.erase(i);
-            if (animateList.empty())
-            {
-                animateFlag = false;
-                break;
-            }
-        }
-    animateListLock.unlock();
-
     for (auto i = displayList.begin(); i != displayList.end(); i++)
         if ((**i)["enabled"].isTrue() &&
             (((**i)["level"] == mTom->property["level"]).isTrue() || (**i)["label"].getString() == "floor"))
@@ -84,6 +69,22 @@ void MagicMap::paint(QPainter *painter)
         (*i)->paint(painter);
         j++;
     }
+
+    animateListLock.lock();
+    for (QList<MagicAnimate *>::iterator i = animateList.begin(); i != animateList.end(); i++)
+        if ((*i)->paint(painter) == false)
+        {
+            (*i)->lock();
+            (*i)->wakeAll();
+            (*i)->unlock();
+            i = animateList.erase(i);
+            if (animateList.empty())
+            {
+                animateFlag = false;
+                break;
+            }
+        }
+    animateListLock.unlock();
 }
 
 void MagicMap::appendAnimate(MagicAnimate *animate, bool block)
@@ -144,6 +145,15 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
         case Qt::Key_2: mBackSound->change(2); break;
         case Qt::Key_3: mBackSound->change(3); break;
         }
+        if (e->key() == Qt::Key_L)
+            appendAnimate(new MagicWisdom(this), false);
+    }
+    else
+    {
+        if (e->key() == Qt::Key_L)
+            for (auto i = animateList.begin(); i != animateList.end(); i++)
+                if(MagicWisdom *wisdom = dynamic_cast<MagicWisdom *>(*i))
+                    wisdom->wantDelete = true;
     }
 }
 

@@ -20,6 +20,11 @@ MagicMedicine::MagicMedicine(int x, int y, int level, QString name)
     }
 }
 
+MagicMedicine::~MagicMedicine()
+{
+    delete pix;
+}
+
 void MagicMedicine::paint(QPainter *painter)
 {
     painter->drawPixmap(x, y, *pix);
