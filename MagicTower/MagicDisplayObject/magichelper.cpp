@@ -11,6 +11,7 @@
 #include "magicweapon.h"
 #include "magicmedicine.h"
 #include "magicwit.h"
+#include "magicmerchant.h"
 
 #include <QRegExp>
 
@@ -34,6 +35,7 @@ MagicDisplayObject *MagicHelper::createObject(QString target, QString Id, QList<
         alias["s"] = "weapon"; // sword
         alias["m"] = "medicine";
         alias["wi"] = "wit";
+        alias["me"] = "merchant";
     }
     QRegExp rx("^([a-zA-Z0-9]*)(_(\\w*))?");
     rx.indexIn(target);
@@ -66,6 +68,8 @@ MagicDisplayObject *MagicHelper::createObject(QString target, QString Id, QList<
         ret = new MagicMedicine(x, y, level, detail);
     else if (category == "wit")
         ret = new MagicWit(x, y, level);
+    else if (category == "merchant")
+        ret = new MagicMerchant(x, y, level, detail);
     else
         throw "No such label...";
 

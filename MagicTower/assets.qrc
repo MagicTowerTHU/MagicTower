@@ -46,8 +46,8 @@
         <file alias="weapon_3">assets/Images/133.bmp</file>
         <file alias="weapon_4">assets/Images/136.bmp</file>
         <file alias="weapon_5">assets/Images/139.bmp</file>
-        <file>assets/Images/142.bmp</file>
-        <file>assets/Images/145.bmp</file>
+        <file alias="merchant_3.2">assets/Images/142.bmp</file>
+        <file alias="merchant_3.3">assets/Images/145.bmp</file>
         <file>assets/Images/148.bmp</file>
         <file>assets/Images/152.bmp</file>
         <file>assets/Images/156.bmp</file>
@@ -152,12 +152,12 @@
         <file>assets/Images/487.bmp</file>
         <file>assets/Images/489.bmp</file>
         <file>assets/Images/569.bmp</file>
-        <file>assets/Images/637.bmp</file>
-        <file>assets/Images/639.bmp</file>
-        <file>assets/Images/653.bmp</file>
-        <file>assets/Images/655.bmp</file>
-        <file>assets/Images/663.bmp</file>
-        <file>assets/Images/665.bmp</file>
+        <file alias="merchant_3.0">assets/Images/637.bmp</file>
+        <file alias="merchant_3.1">assets/Images/639.bmp</file>
+        <file alias="merchant_1.0">assets/Images/653.bmp</file>
+        <file alias="merchant_1.1">assets/Images/655.bmp</file>
+        <file alias="merchant_2.0">assets/Images/663.bmp</file>
+        <file alias="merchant_2.1">assets/Images/665.bmp</file>
         <file>assets/Images/721.bmp</file>
         <file>assets/Images/723.bmp</file>
         <file>assets/Images/746.bmp</file>
@@ -197,6 +197,9 @@
         <file alias="rightup_angle">assets/Images/006.png</file>
         <file alias="rightdown_angle">assets/Images/007.png</file>
         <file alias="leftdown_angle">assets/Images/008.png</file>
+        <file alias="left_middle">assets/Images/009.png</file>
+        <file alias="right_middle">assets/Images/010.png</file>
+        <file alias="middle">assets/Images/011.bmp</file>
     </qresource>
     <qresource prefix="/sounds">
         <file alias="1.wav">assets/Sounds/1.wav</file>

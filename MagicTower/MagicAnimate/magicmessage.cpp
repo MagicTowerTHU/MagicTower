@@ -34,6 +34,7 @@ bool MagicMessage::paint(QPainter *painter)
 {
     if (wantDelete)
         return false;
+
     painter->drawPixmap(1*32, 2*32, *leftupangle);
     painter->drawPixmap(9*32, 2*32, *rightupangle);
     painter->drawPixmap(1*32, 8*32, *leftdownangle);

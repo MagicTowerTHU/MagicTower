@@ -61,11 +61,16 @@ bool MagicWisdom::paint(QPainter *painter)
                 painter->drawText(l*offset + margin_left +4, k*32+margin_top+4, QString::number(enemy->property["exp"].getInt())); l+=2;
                 painter->drawText(l*offset + margin_left +4, k*32+margin_top+4, QString::number(enemy->property["money"].getInt())); l+=2;
                 int damage = enemy->damage(parent);
-                if (damage >= parent->Tom()->property["health"].getInt() ||
-                    enemy->property["defend"].getInt() >= parent->Tom()->property["attack"].getInt())
+                if (enemy->property["defend"].getInt() >= parent->Tom()->property["attack"].getInt())
                     painter->drawText(l*offset + margin_left +4, k*32+margin_top+4, QString("???"));
+                else if (damage >= parent->Tom()->property["health"].getInt())
+                {
+                    painter->setPen("red");
+                    painter->drawText(l*offset + margin_left +4, k*32+margin_top+4, QString::number(enemy->damage(parent)));
+                    painter->setPen("white");
+                }
                 else
-                    painter->drawText(l*offset + margin_left +4, k*32+margin_top+4, QString::number(damage));
+                    painter->drawText(l*offset + margin_left +4, k*32+margin_top+4, QString::number(enemy->damage(parent)));
                 l+=2;
                 k++;
             }

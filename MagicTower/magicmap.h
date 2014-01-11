@@ -42,7 +42,7 @@ public:
     void paint(QPainter *);
     void keyPressEvent(QKeyEvent *);
 
-    void appendAnimate(MagicAnimate *, bool = true);
+    void appendAnimate(MagicAnimate *, bool);
     void appendObject(MagicDisplayObject *);
 
     QList<MagicObject *> findDisplayObject(QString, QString, QList<QString>);
