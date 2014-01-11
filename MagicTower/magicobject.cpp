@@ -1,5 +1,6 @@
 #include "magicobject.h"
 #include "MagicExpression/magicvarient.h"
+#include "magicmap.h"
 
 #include <QDebug>
 
@@ -53,7 +54,7 @@ void MagicObject::saveProperty(QTextStream *out)
         *out << i.key() << ':' << i.value().getOutput() << endl;
 }
 
-void MagicObject::loadProperty(QTextStream *in)
+void MagicObject::loadProperty(QTextStream *in, MagicMap *map)
 {
     int length = in->readLine().toInt();
     for (int i = 0; i < length; i++)
@@ -61,5 +62,11 @@ void MagicObject::loadProperty(QTextStream *in)
         QRegExp rx("^(.*):(.*)$");
         rx.indexIn(in->readLine());
         property[rx.cap(1)] = MagicVarient::setInput(rx.cap(2));
+        if (rx.cap(1) == "picked" && rx.cap(2) != "0")
+            map->Tom()->inventory.push_back(dynamic_cast<MagicDisplayObject *>(this));
+        else if (rx.cap(1) == "position_x")
+            dynamic_cast<MagicDisplayObject *>(this)->x = rx.cap(2).toInt() * 32;
+        else if (rx.cap(1) == "position_y")
+            dynamic_cast<MagicDisplayObject *>(this)->y = rx.cap(2).toInt() * 32;
     }
 }

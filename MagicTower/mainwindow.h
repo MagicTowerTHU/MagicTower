@@ -34,6 +34,7 @@ public:
     MainWindow(QWidget *parent = 0);
     QTimer *timer;
     MagicMap *getMap();
+    Widget *getWidget();
 
     ~MainWindow();
     void keyPressEvent(QKeyEvent *);

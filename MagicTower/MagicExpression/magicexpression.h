@@ -12,6 +12,8 @@
 class MagicExpression // forgot: why MagicHalt...
 {
     static void goForIt(QString, MagicMap *, QTextStream *);
+    static void initAll();
+    static MagicExpression *final();
 
 public:
     MagicExpression *next;
@@ -20,6 +22,7 @@ public:
     virtual void setNext(MagicExpression *);
 
     static MagicExpression *input(QFile *, MagicMap *);
+    static void process(QTextStream &, int, MagicMap *);
 
     static MagicDisplayObject *environment;
     static void setEnvironment(MagicDisplayObject *);

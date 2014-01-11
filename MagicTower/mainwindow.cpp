@@ -59,7 +59,7 @@ void MainWindow::open()
 
 void MainWindow::save()
 {
-    QString filename = QFileDialog::getSaveFileName(this, tr("Open File"), "save0", tr("Magic Record (*.rec)"));
+    QString filename = QFileDialog::getSaveFileName(this, tr("Open File"), "save0.rec", tr("Magic Record (*.rec)"));
     if (filename.isEmpty())
         return;
     try
@@ -74,7 +74,7 @@ void MainWindow::save()
 
 void MainWindow::load()
 {
-    QString filename = QFileDialog::getOpenFileName(this, tr("Open File"), "save0", tr("Magic Record (*.rec)"));
+    QString filename = QFileDialog::getOpenFileName(this, tr("Open File"), "save0.rec", tr("Magic Record (*.rec)"));
     if (filename.isEmpty())
         return;
     mWidget->loadRec(filename);
@@ -83,6 +83,11 @@ void MainWindow::load()
 MagicMap *MainWindow::getMap()
 {
     return mWidget->getMap();
+}
+
+Widget *MainWindow::getWidget()
+{
+    return mWidget;
 }
 
 MainWindow::~MainWindow()

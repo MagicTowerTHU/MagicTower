@@ -29,6 +29,7 @@ class MagicMap : public MagicObject
     QWaitCondition appendingAnimate;
 
     void destoryList();
+    void initialize();
 
     bool move(int, int); // direction
 
