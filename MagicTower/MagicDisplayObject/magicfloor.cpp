@@ -1,7 +1,7 @@
 #include "magicfloor.h"
 
-MagicFloor::MagicFloor(int x, int y, int level)
-    : MagicDisplayObject(x, y, level)
+MagicFloor::MagicFloor(int x, int y, int level, MagicMap * parent)
+    : MagicDisplayObject(x, y, level, parent)
 {
     property["label"] = "floor";
     appendClass("floor");

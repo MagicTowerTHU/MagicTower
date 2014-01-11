@@ -9,7 +9,7 @@ class MagicMerchant : public MagicDisplayObject
     QPixmap *pix[2];
 
 public:
-    MagicMerchant(int, int, int, QString);
+    MagicMerchant(int, int, int, QString, MagicMap *);
     ~MagicMerchant();
     virtual void paint(QPainter *);
     virtual bool move(MagicMap *);

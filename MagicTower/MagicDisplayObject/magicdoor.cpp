@@ -6,9 +6,10 @@
 #define blue 1
 #define red 2
 #define silver 3
+#define lock 4
 
-MagicDoor::MagicDoor(int x, int y, int level, int color)
-    : MagicWall(x, y, level)
+MagicDoor::MagicDoor(int x, int y, int level, MagicMap *parent, int color)
+    : MagicWall(x, y, level, parent)
 {
     property["label"] = "door";
     appendClass("door");
@@ -23,6 +24,9 @@ MagicDoor::MagicDoor(int x, int y, int level, int color)
         break;
     case blue:
         pix = new QPixmap(":/images/door_blue");
+        break;
+    case lock:
+        pix = new QPixmap(":/images/door_lock");
         break;
     default:
         pix = new QPixmap(":/images/door_silver");

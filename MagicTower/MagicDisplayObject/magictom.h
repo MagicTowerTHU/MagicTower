@@ -11,9 +11,9 @@ class MagicTom : public MagicDisplayObject
     QPixmap *pix;
 
 public:
+    MagicTom(int, int, int, MagicMap *);
     QList<MagicDisplayObject *> inventory;
 
-    MagicTom(int, int, int);
     virtual void paint(QPainter *painter);
     void changePic(int, int);
     bool setStep(int);

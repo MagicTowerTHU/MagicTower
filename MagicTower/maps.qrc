@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/maps">
         <file alias="test">map/test.txt</file>
+        <file alias="beta">map/MagicTower21.m++</file>
     </qresource>
 </RCC>

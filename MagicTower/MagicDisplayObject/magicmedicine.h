@@ -8,7 +8,7 @@ class MagicMedicine : public MagicDisplayObject
     QPixmap *pix;
 
 public:
-    MagicMedicine(int, int, int, QString);
+    MagicMedicine(int, int, int, QString, MagicMap *);
     ~MagicMedicine();
     virtual void paint(QPainter *);
     virtual bool move(MagicMap *);

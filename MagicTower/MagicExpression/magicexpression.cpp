@@ -476,6 +476,10 @@ MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
             qDebug() << "Exception : " << e;
         }
         catch (int x) {qDebug() << "Exception : " << x;}
+        catch (QString x)
+        {
+            qDebug() << x;
+        }
     }
 
     preprocessing = false;

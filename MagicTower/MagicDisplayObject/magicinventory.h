@@ -9,7 +9,7 @@ class MagicInventory : public MagicDisplayObject
 
 public:
     QPixmap *pix;
-    MagicInventory(int, int, int);
+    MagicInventory(int, int, int, MagicMap *);
     ~MagicInventory();
     virtual void paint(QPainter *);
     virtual bool move(MagicMap *);

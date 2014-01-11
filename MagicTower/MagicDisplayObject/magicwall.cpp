@@ -1,7 +1,7 @@
 #include "magicwall.h"
 
-MagicWall::MagicWall(int x, int y, int level)
-    : MagicDisplayObject(x, y, level)
+MagicWall::MagicWall(int x, int y, int level, MagicMap *parent)
+    : MagicDisplayObject(x, y, level, parent)
 {
     property["label"] = "wall";
     appendClass("wall");

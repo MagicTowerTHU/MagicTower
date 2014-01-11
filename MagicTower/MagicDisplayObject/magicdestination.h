@@ -8,7 +8,7 @@ class MagicDestination : public MagicFloor
     int from;
 
 public:
-    MagicDestination(int, int, int, int);
+    MagicDestination(int, int, int, int, MagicMap *);
 };
 
 #endif // MAGICDESTINATION_H

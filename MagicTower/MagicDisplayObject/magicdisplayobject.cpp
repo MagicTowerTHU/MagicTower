@@ -2,14 +2,16 @@
 #include "../MagicExpression/magicexpression.h"
 #include "../MagicExpression/magicvarient.h"
 
-MagicDisplayObject::MagicDisplayObject(int x, int y, int level)
+MagicDisplayObject::MagicDisplayObject(int x, int y, int level, MagicMap *parent)
 {
     property["position_x"] = x;
     property["position_y"] = y;
     property["level"] = level;
     this->x = x * 32, this->y = y * 32;
+    this->parent = parent;
     property["enabled"] = 1;
     property["picked"] = 0;
+
 }
 
 
@@ -26,6 +28,8 @@ void MagicDisplayObject::setProperty(QString propertyName, MagicVarient property
         x = propertyValue.getInt() * 32;
     if (propertyName == "position_y")
         y = propertyValue.getInt() * 32;
+    if (propertyName == "picked")
+        parent->Tom()->inventory.push_back(this);
     MagicObject::setProperty(propertyName, propertyValue);
 }
 

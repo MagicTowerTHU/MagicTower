@@ -2,8 +2,8 @@
 
 #include <QDebug>
 
-MagicWeapon::MagicWeapon(int x, int y, int level, QString name)
-    : MagicInventory(x, y, level)
+MagicWeapon::MagicWeapon(int x, int y, int level, QString name, MagicMap *parent)
+    : MagicInventory(x, y, level, parent)
 {
     this->name = name;
     property["label"] = "weapon_" + name;

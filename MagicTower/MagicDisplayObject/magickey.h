@@ -8,7 +8,7 @@ class MagicKey : public MagicInventory
     int color;
 
 public:
-    MagicKey(int, int, int , int);
+    MagicKey(int, int, int, MagicMap *, int);
 
     static const int yellow, blue, red, silver;
 };

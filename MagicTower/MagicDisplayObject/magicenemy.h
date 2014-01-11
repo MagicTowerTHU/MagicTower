@@ -8,7 +8,7 @@ class MagicEnemy : public MagicDisplayObject
 
 public:
     QPixmap *pix[2];
-    MagicEnemy(int, int, int, QString);
+    MagicEnemy(int, int, int, MagicMap *, QString);
     ~MagicEnemy();
     int damage(MagicMap *);
     virtual void paint(QPainter *);

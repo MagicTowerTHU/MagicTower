@@ -1,7 +1,7 @@
 #include "magicdestination.h"
 
-MagicDestination::MagicDestination(int x, int y, int level, int from)
-    : MagicFloor(x, y, level)
+MagicDestination::MagicDestination(int x, int y, int level, int from, MagicMap *parent)
+    : MagicFloor(x, y, level, parent)
 {
     this->from = from;
     appendClass("destination");

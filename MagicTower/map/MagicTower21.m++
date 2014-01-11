@@ -1,1 +1,62 @@
 at(0)
+w	aw_1	aw_1	aw_1	aw_1	up	aw_1	aw_1	aw_1	aw_1	w
+w	aw_1	aw_1	aw_1	aw_1	.	aw_1	aw_1	aw_1	aw_1	w
+w	aw_1	aw_1	aw_1	aw_1	.	aw_1	aw_1	aw_1	aw_1	w
+w	aw_1	aw_1	aw_1	aw_1	.	aw_1	aw_1	aw_1	aw_1	w
+w	aw_1	aw_1	aw_1	aw_1	k_0.ini	aw_1	aw_1	aw_1	aw_1	w
+w	aw_1	aw_1	aw_1	aw_1	k_0.ini	aw_1	aw_1	aw_1	aw_1	w
+w	w	aw_1	aw_1	aw_1	k_0.ini	aw_1	aw_1	aw_1	w	w
+w	w	w	w	w	dr_0	w	w	w	w	w
+aw_2	w	aw_2	w	.	me_4#fairy	.	w	aw_2	w	aw_2
+aw_2	aw_2	aw_2	aw_2	aw_2	.	aw_2	aw_2	aw_2	aw_2	aw_2
+aw_2	aw_2	aw_2	aw_2	aw_2	t	aw_2	aw_2	aw_2	aw_2	aw_2
+
+on (#fairy)
+{
+	message = "请进!"
+	this->position_x = 4
+}
+
+.ini->picked = 1
+.ini->enabled = 0
+
+at(1)
+up	d_1	k_0	e_29	e_28	e_29	.	.	.	.	.
+w	w	w	w	w	w	w	w	w	w	.
+m_1	.	e_25	dr_0	.	w	m_1	k_0	m_1	w	.
+k_0	e_25	m_3	w	.	w	m_1	k_0	m_1	w	.
+w	dr_0	w	w	.	w	w	w	e_26	w	.
+k_0	e_24	.	w	.	dr_0	e_8	e_29	e_21	w	.
+m_4	.	k_1	w	.	w	w	w	w	w	.
+w	dr_0	w	w	.	.	.	.	.	.	.
+.	e_24	.	w	w	dr_2	w	w	w	dr_0	w
+m_1	m_2	k_0	w	k_2	d_0	.	w	k_0	e_23	k_1
+m_1	wi	k_0	w	.	dn	.	w	k_0	k_0	k_0
+
+medicine_1->health = 200
+
+enemy_23->health = 300
+enemy_23->attack = 75
+enemy_23->defend = 45
+enemy_23->money = 13
+enemy_23->exp = 10
+
+at(2)
+dn	w	.	e_15	.	w	m_3	m_4	k_0	k_2	w
+d_0	w	m_4	w	m_2	w	m_3	m_4	k_0	k_1	w
+.	w	k_0	w	k_0	w	m_3	m_4	k_0	e_16	w
+.	w	k_0	w	k_0	w	w	w	w	dr_0	w
+.	w	.	w	.	.	.	dr_0	.	.	w
+.	w	dr_0	w	w	dr_0	w	w	dr_0	w	w
+.	.	.	.	.	.	w	.	e_16	.	w
+.	w	dr_0	w	w	dr_1	w	dr_4.fr	w	dr_4.fr	w
+.	w	k_0	w	m_2	m_1	w	.	w	.	w
+d_1	w	k_0	w	m_2	m_1	w	.	w	.	w
+up	w	m_3	w	m_2	m_1	w	me_2.f2	w	me_1.f2	w
+
+wisdomEnabled = 1
+teleportEnabled = 1
+
+tom->defend = 10000
+tom->attack = 10000
+tom->health = 10000

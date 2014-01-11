@@ -10,7 +10,7 @@ class MagicWall : public MagicDisplayObject
 
 public:
     QPixmap *pix;
-    MagicWall(int, int, int);
+    MagicWall(int, int, int, MagicMap *);
     ~MagicWall();
     virtual void paint(QPainter *);
     virtual bool move(MagicMap *);

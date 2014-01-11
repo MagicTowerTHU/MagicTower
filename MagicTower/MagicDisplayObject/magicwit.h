@@ -6,7 +6,7 @@
 class MagicWit : public MagicInventory
 {
 public:
-    MagicWit(int, int, int);
+    MagicWit(int, int, int, MagicMap *);
     virtual bool move(MagicMap *);
 };
 

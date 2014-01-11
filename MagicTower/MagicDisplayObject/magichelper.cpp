@@ -14,6 +14,7 @@
 #include "magicmerchant.h"
 #include "magicteleport.h"
 #include "magicdestination.h"
+#include "magicaltwall.h"
 
 #include "../magicmap.h"
 
@@ -42,6 +43,7 @@ MagicDisplayObject *MagicHelper::createObject(QString target, QString Id, QList<
         alias["me"] = "merchant";
         alias["te"] = "teleport";
         alias["d"] = "destination";
+        alias["aw"] = "altwall";
     }
     QRegExp rx("^([a-zA-Z0-9]*)(_(\\S*))?");
     rx.indexIn(target);
@@ -53,17 +55,17 @@ MagicDisplayObject *MagicHelper::createObject(QString target, QString Id, QList<
 
     MagicDisplayObject *ret = NULL;
     if (category == "armour")
-        ret = new MagicArmour(x, y, level, detail);
+        ret = new MagicArmour(x, y, level, detail, map);
     else if (category == "door")
-        ret = new MagicDoor(x, y, level, detail.toInt());
+        ret = new MagicDoor(x, y, level, map, detail.toInt());
     else if (category == "enemy")
-        ret = new MagicEnemy(x, y, level, detail);
+        ret = new MagicEnemy(x, y, level, map, detail);
     else if (category == "key")
-        ret = new MagicKey(x, y, level, detail.toInt());
+        ret = new MagicKey(x, y, level, map, detail.toInt());
     else if (category == "up")
-        ret = new MagicStairs(x, y, level, 1);
+        ret = new MagicStairs(x, y, level, map, 1);
     else if (category == "down")
-        ret = new MagicStairs(x, y, level, -1);
+        ret = new MagicStairs(x, y, level, map, -1);
     else if (category == "tom")
     {
         map->Tom()->setProperty("position_x", x);
@@ -71,19 +73,21 @@ MagicDisplayObject *MagicHelper::createObject(QString target, QString Id, QList<
         map->Tom()->setProperty("level", level);
     }
     else if (category == "wall")
-        ret = new MagicWall(x, y, level);
+        ret = new MagicWall(x, y, level, map);
     else if (category == "weapon")
-        ret = new MagicWeapon(x, y, level, detail);
+        ret = new MagicWeapon(x, y, level, detail, map);
     else if (category == "medicine")
-        ret = new MagicMedicine(x, y, level, detail);
+        ret = new MagicMedicine(x, y, level, detail, map);
     else if (category == "wit")
-        ret = new MagicWit(x, y, level);
+        ret = new MagicWit(x, y, level, map);
     else if (category == "merchant")
-        ret = new MagicMerchant(x, y, level, detail);
+        ret = new MagicMerchant(x, y, level, detail, map);
     else if (category == "teleport")
-        ret = new MagicTeleport(x, y, level);
+        ret = new MagicTeleport(x, y, level, map);
     else if (category == "destination")
-        ret = new MagicDestination(x, y, level, detail.toInt());
+        ret = new MagicDestination(x, y, level, detail.toInt(), map);
+    else if (category == "altwall")
+        ret = new MagicAltWall(x, y, level, map, detail);
     else
         throw "No such label...";
 

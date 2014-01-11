@@ -8,8 +8,8 @@ QString Pix_string[4][3] = {  {":/images/Tom_face1", ":/images/Tom_face2", ":/im
                               {":/images/Tom_back1", ":/images/Tom_back2", ":/images/Tom_back"},
                               {":/images/Tom_right1", ":/images/Tom_right2", ":/images/Tom_right"}};
 
-MagicTom::MagicTom(int x, int y, int level)
-    : MagicDisplayObject(x, y, level)
+MagicTom::MagicTom(int x, int y, int level, MagicMap *parent)
+    : MagicDisplayObject(x, y, level, parent)
 {
     for(int i=0; i<4; i++)
         for(int j=0; j<3; j++)
