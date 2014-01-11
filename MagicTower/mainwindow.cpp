@@ -40,6 +40,7 @@ void MainWindow::createMenus()
 
     fileMenu = menuBar()->addMenu(tr("&File"));
     fileMenu->addAction(openAct);
+    fileMenu->addSeparator();
     fileMenu->addAction(saveAct);
     fileMenu->addAction(loadAct);
     fileMenu->addSeparator();
