@@ -41,6 +41,18 @@ enemy_23->defend = 45
 enemy_23->money = 13
 enemy_23->exp = 10
 
+enemy_15->health = 900
+enemy_15->attack = 750
+enemy_15->defend = 650
+enemy_15->money = 77
+enemy_15->exp = 70
+
+enemy_16->health = 850
+enemy_16->attack = 350
+enemy_16->defend = 200
+enemy_16->money = 45
+enemy_16->exp = 40
+
 at(2)
 dn	w	.	e_15	.	w	m_3	m_4	k_0	k_2	w
 d_0	w	m_4	w	m_2	w	m_3	m_4	k_0	k_1	w
