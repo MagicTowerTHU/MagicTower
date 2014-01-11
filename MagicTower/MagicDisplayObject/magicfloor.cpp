@@ -8,6 +8,11 @@ MagicFloor::MagicFloor(int x, int y, int level)
     pix = new QPixmap(":/images/floor");
 }
 
+MagicFloor::~MagicFloor()
+{
+    delete pix;
+}
+
 void MagicFloor::paint(QPainter *painter)
 {
     painter->drawPixmap(x, y, *pix);

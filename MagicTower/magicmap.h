@@ -22,8 +22,6 @@ class MagicMap : public MagicObject
     MagicFloor *floor[121];
     MagicFloor *inventory[24];
 
-    QList<MagicDisplayObject *> displayList;
-
     QList<MagicAnimate *> animateList;
     bool animateFlag;
     QTimer *animateTimer;
@@ -36,6 +34,7 @@ class MagicMap : public MagicObject
 
 public:
     MagicMap();
+    QList<MagicDisplayObject *> displayList;
 
     bool loadMap(QFile * = NULL);
     bool saveRecord(QFile * = NULL);
@@ -49,7 +48,7 @@ public:
     QList<MagicObject *> findDisplayObject(QString, QString, QList<QString>);
 
     virtual void setProperty(QString, MagicVarient);
-    bool eraseMapObject(QString, int, int);
+    //bool eraseMapObject(QString, int, int);
 
     MagicTom *Tom();
 };

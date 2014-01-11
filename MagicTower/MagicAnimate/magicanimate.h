@@ -11,8 +11,10 @@ class MagicMap;
 
 class MagicAnimate : public QWaitCondition, public QMutex
 {
+protected:
     MagicMap *parent;
 public:
+    bool wantDelete;
     int duration;
     MagicAnimate(MagicMap *);
     MagicAnimate(MagicMap *, int);

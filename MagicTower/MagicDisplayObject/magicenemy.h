@@ -5,10 +5,12 @@
 
 class MagicEnemy : public MagicDisplayObject
 {
-    QPixmap *pix[2];
 
 public:
+    QPixmap *pix[2];
     MagicEnemy(int, int, int, QString);
+    ~MagicEnemy();
+    int damage(MagicMap *);
     virtual void paint(QPainter *);
     virtual bool move(MagicMap *);
 };

@@ -58,6 +58,29 @@ MagicEnemy::MagicEnemy(int x, int y, int level, QString name)
     }
 }
 
+MagicEnemy::~MagicEnemy()
+{
+    delete pix[0];
+    delete pix[1];
+}
+
+int MagicEnemy::damage(MagicMap *map)
+{
+    int kill = map->Tom()->property["attack"].getInt() - property["defend"].getInt();
+    int casualty = property["attack"].getInt() - map->Tom()->property["defend"].getInt();
+    int tomHealth = map->Tom()->property["health"].getInt();
+    int enemyHealth = property["health"].getInt();
+    int damage = 0;
+    if (casualty <= 0) return 0;
+    while (tomHealth > 0 && enemyHealth > 0)
+    {
+        tomHealth -= casualty;
+        damage += casualty;
+        enemyHealth -= kill;
+    }
+    return damage;
+}
+
 void MagicEnemy::paint(QPainter *painter)
 {
     static int cnt = 120;
@@ -81,7 +104,7 @@ bool MagicEnemy::move(MagicMap *map)
         qDebug() << "Tom health left:" << map->Tom()->property["health"].getInt();
         map->Tom()->property["exp"] += property["exp"].getInt();
         map->Tom()->property["money"] += property["money"].getInt();
-        map->eraseMapObject(property["label"].getString(), property["position_x"].getInt(), property["position_y"].getInt());
+        property["enabled"] = 0;
         return runAction(map, true);
     }
     else
@@ -106,7 +129,7 @@ bool MagicEnemy::move(MagicMap *map)
             map->Tom()->property["exp"] += property["exp"].getInt();
             map->Tom()->property["money"] += property["money"].getInt();
             qDebug() << "Tom health left:" << map->Tom()->property["health"].getInt();
-            map->eraseMapObject(property["label"].getString(), property["position_x"].getInt(), property["position_y"].getInt());
+            property["enabled"] = 0;
             return runAction(map, true);
         }
     }
