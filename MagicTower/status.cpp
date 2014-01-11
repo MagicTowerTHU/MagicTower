@@ -20,7 +20,7 @@ void Status::paintEvent(QPaintEvent *event)
     painter.begin(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
-    painter.drawText(0, 30, QString("MagicTom"));
+    painter.drawText(0, 20, QString("MagicTom"));
     painter.drawText(0, 60, QString("Health: ") + QString::number((*mMap->Tom())["health"].getInt()));
     painter.drawText(0, 90, QString("Attack: ") + QString::number((*mMap->Tom())["attack"].getInt()));
     painter.drawText(0, 120, QString("Defend: ") + QString::number((*mMap->Tom())["defend"].getInt()));
