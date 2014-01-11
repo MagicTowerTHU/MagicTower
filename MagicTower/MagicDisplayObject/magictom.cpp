@@ -21,6 +21,8 @@ MagicTom::MagicTom(int x, int y, int level)
     property["attack"] = 50;
     property["defend"] = 50;
     property["health"] = 500;
+    property["exp"] = 0;
+    property["money"] = 0;
 
     qDebug() <<"Tom: "<< property["attack"].getInt() << property["defend"].getInt() << property["health"].getInt();
 

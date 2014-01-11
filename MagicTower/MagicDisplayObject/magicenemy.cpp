@@ -17,31 +17,43 @@ MagicEnemy::MagicEnemy(int x, int y, int level, QString name)
         property["attack"] = 10;
         property["defend"] = 100;
         property["health"] = 100;
+        property["exp"] = 100;
+        property["money"] = 100;
         break;
     case 2:
         property["attack"] = 80;
         property["defend"] = 200;
         property["health"] = 200;
+        property["exp"] = 200;
+        property["money"] = 200;
         break;
     case 3:
         property["attack"] = 230;
         property["defend"] = 100;
         property["health"] = 300;
+        property["exp"] = 300;
+        property["money"] = 300;
         break;
     case 4:
         property["attack"] = 200;
         property["defend"] = 130;
         property["health"] = 400;
+        property["exp"] = 400;
+        property["money"] = 400;
         break;
     case 5:
         property["attack"] = 100;
         property["defend"] = 200;
         property["health"] = 500;
+        property["exp"] = 500;
+        property["money"] = 500;
         break;
     default:
         property["attack"] = 70;
         property["defend"] = 100;
-        property["health"] = 1600;
+        property["health"] = 16000;
+        property["exp"] = 600;
+        property["money"] = 600;
         break;
     }
 }
@@ -67,6 +79,8 @@ bool MagicEnemy::move(MagicMap *map)
     else if(map->Tom()->property["defend"].getInt() >= property["attack"].getInt())
     {
         qDebug() << "Tom health left:" << map->Tom()->property["health"].getInt();
+        map->Tom()->property["exp"] += property["exp"].getInt();
+        map->Tom()->property["money"] += property["money"].getInt();
         map->eraseMapObject(property["label"].getString(), property["position_x"].getInt(), property["position_y"].getInt());
         return runAction(map, true);
     }
@@ -89,6 +103,8 @@ bool MagicEnemy::move(MagicMap *map)
         else
         {
             map->Tom()->property["health"] = tomHealth;
+            map->Tom()->property["exp"] += property["exp"].getInt();
+            map->Tom()->property["money"] += property["money"].getInt();
             qDebug() << "Tom health left:" << map->Tom()->property["health"].getInt();
             map->eraseMapObject(property["label"].getString(), property["position_x"].getInt(), property["position_y"].getInt());
             return runAction(map, true);

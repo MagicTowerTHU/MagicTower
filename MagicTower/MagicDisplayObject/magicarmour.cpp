@@ -27,8 +27,8 @@ MagicArmour::MagicArmour(int x, int y, int level, QString name)
 bool MagicArmour::move(MagicMap *map)
 {
     map->Tom()->property["defend"] += property["defend"].getInt();
-    qDebug() <<"Tom: "<< map->Tom()->property["attack"].getInt() << ' '<<
-                         map->Tom()->property["defend"].getInt() << ' ' <<
+    qDebug() <<"Tom:"<< map->Tom()->property["attack"].getInt() <<
+                         map->Tom()->property["defend"].getInt() <<
                          map->Tom()->property["health"].getInt();
     return MagicInventory::move(map);
 }

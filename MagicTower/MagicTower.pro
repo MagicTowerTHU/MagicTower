@@ -44,6 +44,7 @@ SOURCES += main.cpp\
     MagicDisplayObject/magicarmour.cpp \
     MagicAnimate/magicopen.cpp \
     MagicDisplayObject/magichelper.cpp \
+    MagicDisplayObject/magicmedicine.cpp \
     status.cpp
 
 HEADERS  += mainwindow.h \
@@ -75,6 +76,7 @@ HEADERS  += mainwindow.h \
     MagicDisplayObject/magicarmour.h \
     MagicAnimate/magicopen.h \
     MagicDisplayObject/magichelper.h \
+    MagicDisplayObject/magicmedicine.h \
     status.h
 
 RESOURCES += \
