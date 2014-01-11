@@ -27,9 +27,6 @@ MagicTom::MagicTom(int x, int y, int level)
 
     qDebug() <<"Tom: "<< property["attack"].getInt() << property["defend"].getInt() << property["health"].getInt();
     qDebug() <<"Tom: "<< property["label"].getString() << property["level"].getInt() << property["id"].getString();
-
-    mSound = new QSound(":/sounds/step");
-    mBeep = new QSound(":/sounds/beep");
 }
 
 void MagicTom::paint(QPainter *painter)
@@ -43,12 +40,12 @@ bool MagicTom::setStep(int direction)
     int dx[4]={0, -32, 0, 32}, dy[4]={32, 0, -32, 0};
     if (x + dx[direction] > 320 || y + dy[direction] > 320 || x + dx[direction] < 0 || y + dy[direction] < 0)
     {
-        mBeep->play();
+        QSound::play(":/sounds/beep");
         return false;
     }
     else
     {
-        mSound->play();
+        QSound::play(":/sounds/step");
         return true;
     }
 }

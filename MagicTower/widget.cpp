@@ -8,9 +8,12 @@
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
 {
-    elapsed = 0;
     setFixedSize(400, 500);
     mMap = new MagicMap();
+
+    mapToLoad = "";
+    recToLoad = "";
+    recToSave = "";
 }
 
 MagicMap *Widget::getMap()
@@ -18,10 +21,51 @@ MagicMap *Widget::getMap()
     return mMap;
 }
 
+void Widget::saveRec(QString filename)
+{
+    recToSave = filename;
+}
+
+void Widget::loadRec(QString filename)
+{
+    recToLoad = filename;
+}
+
+void Widget::loadMap(QString filename)
+{
+    mapToLoad = filename;
+}
+
+bool loadingFlag = false;
+
 void Widget::animate()
 {
-    elapsed = (elapsed + qobject_cast<QTimer*>(sender())->interval()) % 1000;
-    repaint();
+    if (loadingFlag)
+        return;
+
+    if (!mapToLoad.isEmpty())
+    {
+        loadingFlag = true;
+        mMap->loadMap(new QFile(mapToLoad));
+        mapToLoad = "";
+        loadingFlag = false;
+    }
+    if (!recToLoad.isEmpty())
+    {
+        loadingFlag = true;
+        mMap->loadRecord(new QFile(recToLoad));
+        recToLoad = "";
+        loadingFlag = false;
+    }
+    if (!recToSave.isEmpty())
+    {
+        loadingFlag = true;
+        mMap->saveRecord(new QFile(recToSave));
+        recToSave = "";
+        loadingFlag = false;
+    }
+    else
+        repaint();
 }
 
 void Widget::paintEvent(QPaintEvent *)
