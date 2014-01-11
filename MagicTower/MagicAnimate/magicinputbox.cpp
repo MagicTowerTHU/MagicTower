@@ -20,15 +20,18 @@ MagicInputBox::MagicInputBox(MagicMap *parent, QString content, QStringList entr
     leftmiddle = new QPixmap(":/images/left_middle");
     rightmiddle = new QPixmap(":/images/right_middle");
     middle = new QPixmap(":/images/middle");
+
+    parent->setProperty("input", 0);
 }
 
 void MagicInputBox::input(int choice)
 {
     for (int i = 1; i <= entries.size(); i++)
-        if(choice - Qt::Key_0 == i)
+        if (choice - Qt::Key_0 == i)
         {
             wantDelete = true;
-            parent->appendAnimate(new MagicMessage(parent, "you choosed "+QString::number(i)), false);
+            parent->setProperty("input", i);
+            //parent->appendAnimate(new MagicMessage(parent, "you choosed "+QString::number(i)), false);
         }
 }
 

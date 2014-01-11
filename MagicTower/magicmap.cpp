@@ -159,6 +159,7 @@ void MagicMap::paint(QPainter *painter)
         if ((**i)["enabled"].isTrue() &&
             (((**i)["level"] == mTom->property["level"]).isTrue() || (**i)["label"].getString() == "floor"))
             (*i)->paint(painter);
+    mTom->paint(painter);
 
     int j = 0;
     for (auto i = mTom->inventory.begin(); i != mTom->inventory.end(); i++)

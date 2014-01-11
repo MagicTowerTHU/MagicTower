@@ -13,6 +13,7 @@
 #include "magicwit.h"
 #include "magicmerchant.h"
 #include "magicteleport.h"
+#include "magicdestination.h"
 
 #include "../magicmap.h"
 
@@ -39,9 +40,10 @@ MagicDisplayObject *MagicHelper::createObject(QString target, QString Id, QList<
         alias["m"] = "medicine";
         alias["wi"] = "wit";
         alias["me"] = "merchant";
-        alias["te"]= "teleport";
+        alias["te"] = "teleport";
+        alias["d"] = "destination";
     }
-    QRegExp rx("^([a-zA-Z0-9]*)(_(\\w*))?");
+    QRegExp rx("^([a-zA-Z0-9]*)(_(\\S*))?");
     rx.indexIn(target);
 
     QString category = rx.cap(1);
@@ -80,6 +82,8 @@ MagicDisplayObject *MagicHelper::createObject(QString target, QString Id, QList<
         ret = new MagicMerchant(x, y, level, detail);
     else if (category == "teleport")
         ret = new MagicTeleport(x, y, level);
+    else if (category == "destination")
+        ret = new MagicDestination(x, y, level, detail.toInt());
     else
         throw "No such label...";
 
