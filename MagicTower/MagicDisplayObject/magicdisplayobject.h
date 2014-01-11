@@ -19,6 +19,7 @@ public:
     ~MagicDisplayObject();
     virtual void paint(QPainter *) = 0;
     virtual bool move(MagicMap *) = 0;
+    virtual void setProperty(QString, MagicVarient);
 
     void setAction(MagicExpression *);
     bool runAction(MagicMap *, bool);

@@ -135,7 +135,7 @@
         <file alias="wit">assets/Images/384.bmp</file>
         <file>assets/Images/387.bmp</file>
         <file>assets/Images/390.bmp</file>
-        <file>assets/Images/393.bmp</file>
+        <file alias="teleport">assets/Images/393.bmp</file>
         <file>assets/Images/395.bmp</file>
         <file>assets/Images/398.bmp</file>
         <file>assets/Images/415.bmp</file>
@@ -151,7 +151,7 @@
         <file>assets/Images/485.bmp</file>
         <file>assets/Images/487.bmp</file>
         <file>assets/Images/489.bmp</file>
-        <file>assets/Images/569.bmp</file>
+        <file alias="chosen">assets/Images/569.bmp</file>
         <file alias="merchant_3.0">assets/Images/637.bmp</file>
         <file alias="merchant_3.1">assets/Images/639.bmp</file>
         <file alias="merchant_1.0">assets/Images/653.bmp</file>

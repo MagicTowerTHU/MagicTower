@@ -20,6 +20,15 @@ MagicDisplayObject::~MagicDisplayObject()
         delete action;
 }
 
+void MagicDisplayObject::setProperty(QString propertyName, MagicVarient propertyValue)
+    : MagicObject::setProperty(propertyName, propertyValue)
+{
+    if (propertyName == "position_x")
+        x = propertyValue.getInt() * 32;
+    if (propertyName == "position_y")
+        y = propertyValue.getInt() * 32;
+}
+
 void MagicDisplayObject::setAction(MagicExpression *action)
 {
     this->action = action;

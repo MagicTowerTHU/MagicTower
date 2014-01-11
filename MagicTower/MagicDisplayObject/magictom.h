@@ -18,7 +18,6 @@ public:
     void changePic(int, int);
     bool setStep(int);
     virtual bool move(MagicMap *);
-    void show();
     bool haveInventory(QString);
     bool consumeInventory(QString);
     bool consumeInventory(QString, int);
