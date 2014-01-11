@@ -17,13 +17,10 @@
 class MagicMap : public MagicObject
 {
     MagicTom *mTom;
-    MagicBackSound *mBackSound;
 
     MagicFloor *floor[121];
     MagicFloor *inventory[24];
 
-    QList<MagicAnimate *> animateList;
-    bool animateFlag;
     QTimer *animateTimer;
     QMutex animateListLock;
     QWaitCondition appendingAnimate;
@@ -31,9 +28,13 @@ class MagicMap : public MagicObject
     void destoryList();
     void initialize();
 
+public:
+    bool animateFlag;
+    QList<MagicAnimate *> animateList;
+    MagicBackSound *mBackSound;
+
     bool move(int, int); // direction
 
-public:
     MagicMap();
     QList<MagicDisplayObject *> displayList;
 
@@ -47,6 +48,7 @@ public:
     void appendObject(MagicDisplayObject *);
 
     QList<MagicObject *> findDisplayObject(QString, QString, QList<QString>);
+    const virtual MagicVarient& operator[](QString) const;
 
     virtual void setProperty(QString, MagicVarient);
     //bool eraseMapObject(QString, int, int);

@@ -152,12 +152,15 @@ MagicOperand *getVar(QString buffer, int &p)
         }
         else
         {
-            rx.setPattern("(\\w[a-zA-Z_0-9]*)");
+            rx.setPattern("(\\w*)\\s*(\\((.*)\\))?");
             if (rx.indexIn(buffer.mid(p)) >= 0)
             {
                 p += rx.matchedLength();
+                if (rx.cap(1) == "input")
+                    return new MagicReference("global", "", QList<QString>(), rx.cap(1) + "_" + rx.cap(3));
                 return new MagicReference("global", "", QList<QString>(), rx.cap(1));
             }
+            throw "What variable?";
         }
     }
     return NULL;
@@ -410,7 +413,7 @@ void MagicExpression::goForIt(QString line, MagicMap *map, QTextStream *pIn)
                 QRegExp rx1("^(\\w*)?(#\\w*)?([.]\\w*)?([.]\\w*)?([.]\\w*)?([.]\\w*)?([.]\\w*)?([.]\\w*)?");
                 rx1.indexIn(ll);
                 QList<QString> c;
-                for (int i = 2; i <= rx1.captureCount(); i++)
+                for (int i = 3; i <= rx1.captureCount(); i++)
                     if (rx1.cap(i).startsWith("."))
                         c.append(rx1.cap(i).mid(1));
                 MagicDisplayObject *ret = MagicHelper::createObject(rx1.cap(1), rx1.cap(2).mid(1), c, j, i, level, map);

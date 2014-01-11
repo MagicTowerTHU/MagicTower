@@ -34,6 +34,7 @@ void MagicMerchant::paint(QPainter *painter)
 
 bool MagicMerchant::move(MagicMap *map)
 {
+    /*
     QStringList entries;
     entries.push_back("1. 翔");
     entries.push_back("2. 屎");
@@ -41,5 +42,6 @@ bool MagicMerchant::move(MagicMap *map)
     entries.push_back("4. 粑粑");
     entries.push_back("5. zhaojinxu");
     map->appendAnimate(new MagicInputBox(map, "同学你想吃什么呀~?", entries), false);
+    */
     return runAction(map, false);
 }
