@@ -10,7 +10,7 @@ MagicDestination::MagicDestination(int x, int y, int level, int from)
     case 1:
         property["label"] = "destination_down";
         break;
-    case -1:
+    case 0:
         property["label"] = "destination_up";
         break;
     }
