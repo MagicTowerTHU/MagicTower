@@ -4,8 +4,8 @@
 #include <QPainter>
 #include <QDebug>
 
-MagicEnemy::MagicEnemy(int x, int y, int level, QString name)
-    : MagicDisplayObject(x, y, level)
+MagicEnemy::MagicEnemy(int x, int y, int level, MagicMap *parent, QString name)
+    : MagicDisplayObject(x, y, level, parent)
 {
     property["label"] = "enemy_" + name;
     appendClass("enemy");
@@ -83,9 +83,9 @@ int MagicEnemy::damage(MagicMap *map)
 
 void MagicEnemy::paint(QPainter *painter)
 {
-    static int cnt = 120;
-    painter->drawPixmap(x, y, cnt-- > 60 ? *pix[0] : *pix[1]);
-    if (cnt <= 0) cnt = 120;
+    static int cnt = 12;
+    painter->drawPixmap(x, y, cnt-- > 6 ? *pix[0] : *pix[1]);
+    if (cnt <= 0) cnt = 12;
 }
 
 bool MagicEnemy::move(MagicMap *map)

@@ -1,8 +1,8 @@
 #include "magicwit.h"
 #include "../magicmap.h"
 
-MagicWit::MagicWit(int x, int y, int level)
-    : MagicInventory(x, y, level)
+MagicWit::MagicWit(int x, int y, int level, MagicMap *parent)
+    : MagicInventory(x, y, level, parent)
 {
     pix = new QPixmap(":/images/wit");
     property["label"] = "wit";

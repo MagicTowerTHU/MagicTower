@@ -3,8 +3,8 @@
 
 #include <QDebug>
 
-MagicMedicine::MagicMedicine(int x, int y, int level, QString name)
-    : MagicDisplayObject(x, y, level)
+MagicMedicine::MagicMedicine(int x, int y, int level, QString name, MagicMap *parent)
+    : MagicDisplayObject(x, y, level, parent)
 {
     property["label"] = "medicine_" + name;
     appendClass("medicine");
@@ -14,8 +14,14 @@ MagicMedicine::MagicMedicine(int x, int y, int level, QString name)
     case 1:
         property["health"] = 100;
         break;
-    default:
+    case 2:
         property["health"] = 200;
+        break;
+    case 3:
+        property["attack"] = 200;
+        break;
+    case 4:
+        property["defend"] = 200;
         break;
     }
 }
@@ -32,7 +38,13 @@ void MagicMedicine::paint(QPainter *painter)
 
 bool MagicMedicine::move(MagicMap *map)
 {
-    map->Tom()->property["health"] += property["health"].getInt();
+    if (property["label"].getString() == "medicine_1" || property["label"].getString() == "medicine_2")
+        map->Tom()->property["health"] += property["health"].getInt();
+    else if (property["label"].getString() == "medicine_3")
+        map->Tom()->property["attack"] += property["attack"].getInt();
+    else
+        map->Tom()->property["defend"] += property["defend"].getInt();
+
     property["enabled"] = 0;
     qDebug() <<"Tom:"<< map->Tom()->property["attack"].getInt() <<
                          map->Tom()->property["defend"].getInt() <<

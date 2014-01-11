@@ -6,7 +6,7 @@
 void test(MainWindow *pW)
 {
     printf("Hello test!\n");
-    pW->getWidget()->loadMap(":/maps/test");
+    pW->getWidget()->loadMap(":/maps/beta");
 }
 
 int main(int argc, char *argv[])

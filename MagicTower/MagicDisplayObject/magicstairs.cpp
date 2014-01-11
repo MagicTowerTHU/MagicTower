@@ -1,8 +1,8 @@
 #include "magicstairs.h"
 #include "../magicmap.h"
 
-MagicStairs::MagicStairs(int x, int y, int level, int direction)
-    : MagicFloor(x, y, level)
+MagicStairs::MagicStairs(int x, int y, int level, MagicMap *parent, int direction)
+    : MagicFloor(x, y, level, parent)
 {
     property["label"] = "stairs";
     appendClass("stairs");

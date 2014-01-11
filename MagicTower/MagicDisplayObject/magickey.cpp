@@ -5,8 +5,8 @@ const int MagicKey::blue = 1;
 const int MagicKey::red = 2;
 const int MagicKey::silver = 3;
 
-MagicKey::MagicKey(int x, int y, int level, int color)
-    : MagicInventory(x, y, level)
+MagicKey::MagicKey(int x, int y, int level, MagicMap *parent, int color)
+    : MagicInventory(x, y, level, parent)
 {
     property["label"] = "key";
     appendClass("key");

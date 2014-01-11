@@ -7,7 +7,7 @@ class MagicTeleport : public MagicInventory
 {
 
 public:
-    MagicTeleport(int, int, int);
+    MagicTeleport(int, int, int, MagicMap *);
     virtual bool move(MagicMap *);
 };
 

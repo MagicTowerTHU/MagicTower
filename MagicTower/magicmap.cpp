@@ -56,7 +56,7 @@ void MagicMap::destoryList()
 
 void MagicMap::initialize()
 {
-    mTom = new MagicTom(0, 0, 1);
+    mTom = new MagicTom(0, 0, 1, this);
     displayList.push_front(mTom);
 
     animateFlag = false;
@@ -66,11 +66,11 @@ void MagicMap::initialize()
 
     for (int i = 0; i < 11; i++)
         for (int j = 0; j < 11; j++)
-                displayList.push_front(/*floor[11 * i + j] = */new MagicFloor(i, j, 1));
+                displayList.push_front(/*floor[11 * i + j] = */new MagicFloor(i, j, 1, this));
 
     for (int i = 12; i < 14; i++)
         for (int j = 0; j < 12; j++)
-                displayList.push_front(/*inventory[12 * (i - 12) + j] = */new MagicFloor(j, i, 1));
+                displayList.push_front(/*inventory[12 * (i - 12) + j] = */new MagicFloor(j, i, 1, this));
 }
 
 bool MagicMap::loadMap(QFile *file)
@@ -96,6 +96,11 @@ bool MagicMap::loadMap(QFile *file)
             qDebug() << "Exception: " << e;
             return false;
         }
+        catch (QString x)
+        {
+            qDebug() << "Exception: " << x;
+        }
+
         return true;
     }
 }
@@ -194,7 +199,7 @@ void MagicMap::appendAnimate(MagicAnimate *animate, bool block)
     if (block)
         animate->lock();
     animateListLock.lock();
-    animateList.append(animate);
+    animateList.push_front(animate);
     animateFlag = true;
     animateListLock.unlock();
     if (block)
@@ -328,7 +333,7 @@ bool MagicMap::move(int direction, int distance)
         if ((**i)["position_x"].getInt() == target_x &&
             (**i)["position_y"].getInt() == target_y &&
             ((**i)["level"] == mTom->property["level"]).isTrue())
-            if ((**i)["enabled"].isTrue() && !(*i)->move(this))
+            if ((**i)["enabled"].isTrue() && (**i)["label"].getString() != "floor" && !(*i)->move(this))
             {
                 QSound::play(":/sounds/beep");
                 return false;

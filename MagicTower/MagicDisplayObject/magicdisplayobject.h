@@ -13,10 +13,11 @@ class MagicExpression;
 class MagicDisplayObject : public MagicObject
 {
     QList<MagicExpression *>action;
+    MagicMap *parent;
 
 public:
     int x, y;
-    MagicDisplayObject(int, int, int);
+    MagicDisplayObject(int, int, int, MagicMap *);
     ~MagicDisplayObject();
     virtual void paint(QPainter *) = 0;
     virtual bool move(MagicMap *) = 0;

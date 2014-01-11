@@ -1,7 +1,7 @@
 #include "magicteleport.h"
 
-MagicTeleport::MagicTeleport(int x, int y, int level)
-    : MagicInventory(x, y, level)
+MagicTeleport::MagicTeleport(int x, int y, int level, MagicMap *parent)
+    : MagicInventory(x, y, level, parent)
 {
     property["label"] = "teleport";
     appendClass("teleport");

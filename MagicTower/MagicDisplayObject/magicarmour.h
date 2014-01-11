@@ -7,7 +7,7 @@ class MagicArmour : public MagicInventory
 {
     QString name;
 public:
-    MagicArmour(int, int, int, QString);
+    MagicArmour(int, int, int, QString, MagicMap *);
     virtual bool move(MagicMap *);
 };
 
