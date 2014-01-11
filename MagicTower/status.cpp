@@ -6,7 +6,7 @@ Status::Status(MagicMap *map, QWidget *parent) :
     QWidget(parent)
 {
     mMap = map;
-    setFixedSize(150, 400);
+    setFixedSize(100, 400);
 }
 
 void Status::animate()
@@ -21,12 +21,12 @@ void Status::paintEvent(QPaintEvent *)
     painter.setRenderHint(QPainter::Antialiasing);
 
     painter.drawText(0, 20, QString("MagicTom"));
-    painter.drawText(0, 60, QString("Health: ") + QString::number((*mMap->Tom())["health"].getInt()));
-    painter.drawText(0, 90, QString("Attack: ") + QString::number((*mMap->Tom())["attack"].getInt()));
-    painter.drawText(0, 120, QString("Defend: ") + QString::number((*mMap->Tom())["defend"].getInt()));
-    painter.drawText(0, 150, QString("Level: ") + QString::number((*mMap->Tom())["level"].getInt()));
-    painter.drawText(0, 180, QString("Exp: ") + QString::number((*mMap->Tom())["exp"].getInt()));
-    painter.drawText(0, 210, QString("Money: ") + QString::number((*mMap->Tom())["money"].getInt()));
+    painter.drawText(0, 60, QString("生命: ") + QString::number((*mMap->Tom())["health"].getInt()));
+    painter.drawText(0, 90, QString("攻击: ") + QString::number((*mMap->Tom())["attack"].getInt()));
+    painter.drawText(0, 120, QString("防御: ") + QString::number((*mMap->Tom())["defend"].getInt()));
+    painter.drawText(0, 150, QString("层数: ") + QString::number((*mMap->Tom())["level"].getInt()));
+    painter.drawText(0, 180, QString("经验: ") + QString::number((*mMap->Tom())["exp"].getInt()));
+    painter.drawText(0, 210, QString("金钱: ") + QString::number((*mMap->Tom())["money"].getInt()));
 
     painter.end();
 }

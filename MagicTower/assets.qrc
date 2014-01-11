@@ -189,6 +189,14 @@
         <file alias="Tom_left2">assets/Images/477_.png</file>
         <file alias="Tom_face">assets/Images/415_.png</file>
         <file alias="black">assets/Images/000.bmp</file>
+        <file alias="up_edge">assets/Images/001.png</file>
+        <file alias="down_edge">assets/Images/002.png</file>
+        <file alias="left_edge">assets/Images/003.png</file>
+        <file alias="right_edge">assets/Images/004.png</file>
+        <file alias="leftup_angle">assets/Images/005.png</file>
+        <file alias="rightup_angle">assets/Images/006.png</file>
+        <file alias="rightdown_angle">assets/Images/007.png</file>
+        <file alias="leftdown_angle">assets/Images/008.png</file>
     </qresource>
     <qresource prefix="/sounds">
         <file alias="1.wav">assets/Sounds/1.wav</file>

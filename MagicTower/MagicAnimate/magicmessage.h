@@ -6,7 +6,7 @@
 class MagicMessage : public MagicAnimate
 {
     QString content;
-    QPixmap *black, *wall;
+    QPixmap *black, *wall, *upedge, *downedge, *rightedge, *leftedge, *rightupangle, *leftupangle, *rightdownangle, *leftdownangle;
 
 public:
     MagicMessage(MagicMap *, QString);

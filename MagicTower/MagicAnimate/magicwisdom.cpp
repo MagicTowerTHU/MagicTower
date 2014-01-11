@@ -1,10 +1,11 @@
 #include "magicwisdom.h"
 #include "../MagicDisplayObject/magicenemy.h"
 
+
 MagicWisdom::MagicWisdom(MagicMap *parent)
     : MagicAnimate(parent)
 {
-    black = new QPixmap(":/images/black");
+    black = new QPixmap(":/images/floor");
     wall = new QPixmap(":/images/wall");
 }
 
@@ -17,6 +18,9 @@ MagicWisdom::~MagicWisdom()
 bool MagicWisdom::paint(QPainter *painter)
 {
     static int cnt = 120;
+
+    //QPen *pen = new QPen("white");
+    painter->setPen("white");
 
     if (wantDelete)
         return false;
@@ -32,7 +36,7 @@ bool MagicWisdom::paint(QPainter *painter)
             painter->drawPixmap(i*32, j*32, *black);
 
     // painter->drawText(0, 20, QString("MagicTom"));
-    int k = 1, l = 1, offset = 20, margin_left = 22, margin_top = 17;
+    int k = 1, l = 1, offset = 20, margin_left = 32, margin_top = 17;
     l++;
     painter->drawText(l*offset + margin_left +4, k*32+margin_top+4, QString("攻击")); l+=2;
     painter->drawText(l*offset + margin_left +4, k*32+margin_top+4, QString("防御")); l+=2;
@@ -45,7 +49,8 @@ bool MagicWisdom::paint(QPainter *painter)
     for (auto i = parent->displayList.begin(); i != parent->displayList.end(); i++)
         if (MagicEnemy *enemy = dynamic_cast<MagicEnemy *>(*i))
             if (!enemySet.contains(enemy->property["label"].getString()) &&
-                    parent->Tom()->property["level"].getInt() == enemy->property["level"].getInt())
+                parent->Tom()->property["level"].getInt() == enemy->property["level"].getInt() &&
+                enemy->property["enabled"].isTrue())
             {
                 enemySet.push_back(enemy->property["label"].getString());
                 painter->drawPixmap(32, k*32, cnt-- > 60 ? *(enemy->pix[0]) : *(enemy->pix[1]));

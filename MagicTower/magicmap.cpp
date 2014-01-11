@@ -2,6 +2,7 @@
 #include "MagicAnimate/magicanimate.h"
 #include "MagicAnimate/magicmove.h"
 #include "MagicAnimate/magicwisdom.h"
+#include "MagicAnimate/magicmessage.h"
 #include "MagicDisplayObject/magicenemy.h"
 #include "MagicDisplayObject/magicstairs.h"
 #include "MagicDisplayObject/magicwall.h"
@@ -149,6 +150,8 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
         }
         if (e->key() == Qt::Key_L && property["wisdomEnabled"].isTrue())
             appendAnimate(new MagicWisdom(this), false);
+        if (e->key() == Qt::Key_M)
+            appendAnimate(new MagicMessage(this, "xfz是二逼.\n 赵锦煦也是"), false);
     }
     else
     {
@@ -156,6 +159,10 @@ void MagicMap::keyPressEvent(QKeyEvent *e)
             for (auto i = animateList.begin(); i != animateList.end(); i++)
                 if(MagicWisdom *wisdom = dynamic_cast<MagicWisdom *>(*i))
                     wisdom->wantDelete = true;
+        if (e->key() == Qt::Key_Enter || e->key() == Qt::Key_Return)
+            for (auto i = animateList.begin(); i != animateList.end(); i++)
+                if(MagicMessage *message = dynamic_cast<MagicMessage *>(*i))
+                    message->wantDelete = true;
     }
 }
 
