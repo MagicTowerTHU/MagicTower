@@ -6,7 +6,7 @@ Status::Status(MagicMap *map, QWidget *parent) :
     QWidget(parent)
 {
     mMap = map;
-    setFixedSize(100, 400);
+    setFixedSize(120, 400);
 }
 
 void Status::animate()
@@ -19,6 +19,8 @@ void Status::paintEvent(QPaintEvent *)
     QPainter painter;
     painter.begin(this);
     painter.setRenderHint(QPainter::Antialiasing);
+
+    painter.setFont(QFont("黑体", 15));
 
     painter.drawText(0, 20, QString("MagicTom"));
     painter.drawText(0, 60, QString("生命: ") + QString::number((*mMap->Tom())["health"].getInt()));

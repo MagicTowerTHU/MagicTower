@@ -78,6 +78,24 @@ void MagicTom::setProperty(QString propertyName, MagicVarient propertyValue)
     MagicDisplayObject::setProperty(propertyName, propertyValue);
 }
 
+MagicVarient &MagicTom::operator[](QString propertyName)
+{
+    if (propertyName.startsWith("get_K"))
+    {
+        return *(new MagicVarient(const_cast<MagicTom *>(this)->consumeInventory("key", propertyName.at(5).cell() - '0')));
+    }
+    return MagicDisplayObject::operator [](propertyName);
+}
+
+const MagicVarient &MagicTom::operator[](QString propertyName) const
+{
+    if (propertyName.startsWith("get_K"))
+    {
+        return *(new MagicVarient(const_cast<MagicTom *>(this)->consumeInventory("key", propertyName.at(5).cell() - '0')));
+    }
+    return MagicDisplayObject::operator [](propertyName);
+}
+
 void MagicTom::changePic(int direction, int duration)
 {
     if (duration > 0)

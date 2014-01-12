@@ -23,6 +23,8 @@ public:
     void changePic(int, int);
     virtual bool move(MagicMap *);
     virtual void setProperty(QString, MagicVarient);
+    virtual MagicVarient &operator[](QString);
+    virtual const MagicVarient &operator[](QString) const;
     bool haveInventory(QString);
     bool consumeInventory(QString);
     bool consumeInventory(QString, int);

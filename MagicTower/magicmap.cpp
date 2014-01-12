@@ -348,7 +348,7 @@ bool MagicMap::move(int direction, int distance)
         if ((**i)["position_x"].getInt() == target_x &&
             (**i)["position_y"].getInt() == target_y &&
             ((**i)["level"] == mTom->property["level"]).isTrue())
-            if ((**i)["enabled"].isTrue() && (**i)["label"].getString() != "floor" && !(*i)->move(this))
+            if ((**i)["enabled"].isTrue()  && !(*i)->move(this))
             {
                 this->appendSound(":/sounds/beep");
                 return false;

@@ -9,7 +9,7 @@ w	w	aw_1	aw_1	aw_1	k_0.ini	aw_1	aw_1	aw_1	w	w
 w	w	w	w	w	dr_0	w	w	w	w	w
 aw_2	w	aw_2	w	.	me_4#fairy	.	w	aw_2	w	aw_2
 aw_2	aw_2	aw_2	aw_2	aw_2	.	aw_2	aw_2	aw_2	aw_2	aw_2
-aw_2	aw_2	aw_2	aw_2	aw_2	.	aw_2	aw_2	aw_2	aw_2	aw_2
+aw_2	aw_2	aw_2	aw_2	aw_2	t	aw_2	aw_2	aw_2	aw_2	aw_2
 
 on (#fairy)
 {
@@ -110,11 +110,11 @@ enemy_25->defend = 5
 enemy_25->money = 5
 enemy_25->exp = 4
 
-enemy_24->health = 850
-enemy_24->attack = 350
-enemy_24->defend = 200
-enemy_24->money = 8
-enemy_24->exp = 6
+enemy_14->health = 850
+enemy_14->attack = 350
+enemy_14->defend = 200
+enemy_14->money = 8
+enemy_14->exp = 6
 
 enemy_8->health = 125
 enemy_8->attack = 50
@@ -136,16 +136,16 @@ enemy_26->exp = 5
 
 at(2)
 dn	w	.	e_15	.	w	m_3	m_4	k_0	k_2	w
-d_0	w	m_4	w	m_2	w	m_3	m_4	k_0	k_1	w
+d_0	w	m_4	w	m_2.b	w	m_3	m_4	k_0	k_1	w
 .	w	k_0	w	k_0	w	m_3	m_4	k_0	e_16	w
 .	w	k_0	w	k_0	w	w	w	w	dr_0	w
 .	w	.	w	.	.	.	dr_0	.	.	w
 .	w	dr_0	w	w	dr_0	w	w	dr_0	w	w
 .	dr_3.f2	.	.	.	.	w	.	e_16	.	w
 .	w	dr_0	w	w	dr_1	w	dr_4.fr	w	dr_4.fr	w
-.	w	k_0	w	m_2	m_1	w	.	w	.	w
-d_1	w	k_0	w	m_2	m_1	w	s_2.f2.hid	w	a_2.f2.hid	w
-up	w	m_3	w	m_2	m_1	w	me_2.f2	w	me_1.f2	w
+.	w	k_0	w	m_2.b	m_1.m	w	.	w	.	w
+d_1	w	k_0	w	m_2.b	m_1.m	w	s_2.f2.hid	w	a_2.f2.hid	w
+up	w	m_3.m	w	m_2.b	m_1.m	w	me_2.f2	w	me_1.f2	w
 
 on(.fr)
 {
@@ -191,7 +191,7 @@ e_29	w	w	w	w	w	.	.	.	w	.
 .	.	.	.	.	w	w	dr_0	w	w	.
 w	w	w	w	e_21	w	e_28	.	e_28	w	.
 w	.	.	.	.	w	m_4	e_21	k_0	w	d_1
-dn	d_0	w	w	w	w	m_3	m_2	k_0	w	up
+dn	d_0	w	w	w	w	m_3.m	m_2.b	k_0	w	up
 
 on(merchant_3.f3)
 {
@@ -378,8 +378,8 @@ on(any.f5)
 }
 
 at(6)
-an#f6.fr	e_14	w	m_4	w	k_0	e_18	an#coin.fr	w	m_2	m_2
-e_14	k_0	w	m_3.m	w	.	k_0	e_18	w	e_6	m_2
+an#f6.fr	e_14	w	m_4	w	k_0	e_18	an#coin.fr	w	m_2.b	m_2.b
+e_14	k_0	w	m_3.m	w	.	k_0	e_18	w	e_6	m_2.b
 k_0	e_20	dr_1	.	dr_1	e_20	.	k_0	w	.	e_6
 .	.	w	e_22	w	.	.	.	w	e_17	.
 w	w	w	dr_2	w	w	w	w	w	dr_0	w
@@ -390,11 +390,11 @@ w	w	w	dr_2	w	w	w	w	w	dr_0	w
 .	w	e_21	w	.	.	w	w	.	d_0	w
 .	.	.	w	up	d_1	dr_0	dr_0	.	dn	w
 
-enemy_14->health = 400
-enemy_14->attack = 90
-enemy_14->defend = 50
-enemy_14->money = 15
-enemy_14->exp = 12
+enemy_24->health = 400
+enemy_24->attack = 90
+enemy_24->defend = 50
+enemy_24->money = 15
+enemy_24->exp = 12
 
 enemy_7->health = 100
 enemy_7->attack = 200
@@ -592,20 +592,32 @@ on(merchant_1.f12)
 {
 	choice = input("商人: 如果你缺少金币, 我可以帮你.", "1. 卖出一把黄钥匙($7)", "2. 卖出一把蓝钥匙($35)", "3. 卖出一把红钥匙($70)")
 	if(choice == 1)
+	{
 		if(tom->get_K0 == 1)
 		{
-			tom->money = tom->money - 7
+			tom->money = tom->money + 7
 		}
+		else
+			message = "Are you kidding me?"
+	}
 	if(choice == 2)
+	{
 		if(tom->get_K1 == 1)
 		{
-			tom->money = tom->money - 35
+			tom->money = tom->money + 35
 		}
+		else
+			message = "Are you kidding me?"
+	}
 	if(choice == 3)
+	{
 		if(tom->get_K2 == 1)
 		{
-			tom->money = tom->money - 70
+			tom->money = tom->money + 70
 		}
+		else
+			message = "Are you kidding me?"
+	}
 }
 
 enemy_10->health = 2000
@@ -736,7 +748,7 @@ at(15)
 .	aw_1	aw_1	w	w	w	w	w	aw_1	aw_1	.
 .	aw_1	w	w	me_2.f15	w	me_1.f15	w	w	aw_1	.
 .	aw_1	w	w	m_4	w	m_4	w	w	aw_1	.
-.	aw_1	w	w	m_3	w	m_3	w	w	aw_1	.
+.	aw_1	w	w	m_3.m	w	m_3.m	w	w	aw_1	.
 .	aw_1	aw_1	w	s_4.f15.hid	w	a_4.f15.hid	w	aw_1	aw_1	.
 .	aw_1	aw_1	w	dr_0	w	dr_0	w	aw_1	aw_1	.
 .	aw_1	aw_1	w	.	.	.	w	aw_1	aw_1	.
@@ -766,7 +778,7 @@ aw_1	aw_1	aw_1	aw_1	aw_1	d_0	down	aw_1	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	aw_1	aw_1	.	aw_1	aw_1	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	aw_1	aw_1	t	aw_1	aw_1	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	aw_1	w	dr_2	w	aw_1	aw_1	aw_1	aw_1
-aw_1	aw_1	aw_1	w	w	f#line	w	w	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	w	w	f#line.fr	w	w	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	w	w	e_30.f16	w	w	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	w	w	d_1	w	w	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	w	w	up	w	w	aw_1	aw_1	aw_1
@@ -780,7 +792,7 @@ enemy_30->defend = 1000
 enemy_30->money = 100
 enemy_30->exp = 100
 
-on(floor#line)
+on(#line)
 {
 	message = "魔王: 你终于来了!"
 	message = "勇士: 快把公主交粗来! "
@@ -824,5 +836,6 @@ enemy_1->attack = 1150
 enemy_1->defend = 1050
 enemy_1->money = 92
 enemy_1->exp = 80
+
 
 
