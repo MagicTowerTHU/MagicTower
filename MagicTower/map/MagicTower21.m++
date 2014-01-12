@@ -403,5 +403,58 @@ e_20	w	.	w	w	w	w	dr_0	w	w	k_0
 e_21	w	.	dr_4.fr	d_0	down	w	.	dr_0	e_21	.
 .	w	w	w	w	w	w	dr_0	w	w	.
 .	w	m_1	m_4	m_3	w	.	e_20	.	w	k_0
-.	w	m_1	m_4	m_3	dr_2	e_11	w	e_11	w	k_0
-.	w	m_1	m_4	m_3	w	k_2	w	k_2	w	m_1
+d_1	w	m_1	m_4	m_3	dr_2	e_11	w	e_11	w	k_0
+up	w	m_1	m_4	m_3	w	k_2	w	k_2	w	m_1
+
+at(11)
+m_1	w	k_0	w	k_1	w	k_2	w	m_2	a_3	m_2
+m_1	w	k_0	w	k_1	w	k_2	w	e_3	e_2	e_3
+m_1	w	k_0	w	k_1	w	k_2	w	.	e_3	.
+dr_0	w	dr_0	w	dr_0	w	dr_0	w	w	dr_1	w
+.	.	.	.	.	w	.	.	.	.	.
+dr_0	w	w	dr_1	w	w	w	dr_1	w	w	dr_0
+m_4	w	.	e_3	m_4	e_4	m_4	e_3	.	w	m_3
+m_4	w	e_5	w	w	w	w	w	e_5	w	m_3
+m_4	w	e_5	w	.	me_3	.	w	e_5	w	m_3
+w	w	dr_2	w	m_1	.	m_1	w	dr_2	w	w
+down	d_0	.	.	.	.	.	.	.	d_1	up
+
+at(12)
+me_1	m_4	w	.	e_16	e_15	e_16	.	w	m_2	any#axe.pi
+m_3	.	w	.	w	dr_0	w	.	w	.	m_2
+.	.	w	.	w	e_15	w	.	w	.	.
+.	e_4	w	.	w	k_0	w	.	w	e_12	.
+e_4	e_10	w	.	w	k_0	w	.	w	e_13	e_12
+w	dr_1	w	.	w	m_1	w	.	w	dr_1	w
+.	.	.	.	w	m_1	w	.	.	.	.
+w	w	w	.	w	w	w	.	w	w	w
+m_4	e_4	dr_0	e_3	e_3	e_2	e_3	e_3	dr_0	e_4	m_3
+w	w	w	w	w	dr_1	w	w	w	w	w
+up	d_1	.	.	.	.	.	.	.	d_0	dn
+
+at(13)
+.	e_4	.	.	.	.	.	w	.	e_10	.
+.	w	w	w	w	w	dr_0	w	.	w	.
+.	w	.	.	e_3	.	.	w	.	w	.
+m_2	w	dr_2	w	w	w	.	w	.	w	.
+e_16	w	.	.	e_10	w	e_3	w	m_3	w	.
+e_15	w	.	e_9	dr_4	w	e_2	w	m_3	w	.
+e_16	w	e_10	dr_4.fr	me_2	w	e_3	w	m_3	w	m_4
+.	w	w	w	w	w	.	w	.	w	m_4
+.	e_16	.	w	.	.	.	m_10	.	w	m_4
+w	w	.	w	m_2	w	w	w	w	w	.
+down	d_0	.	dr_1	d_1	up	w	an#up3	e_9	dr_0	.
+
+at(14)
+w	.	e_13	an#key3	up	d_1	k_0.f14	k_1.f14	k_2.f14	.	w
+w	.	m_2	w	w	w	w	w	m_2	.	w
+w	.	w	w	w	w	w	w	w	.	w
+w	.	w	w	w	an#vase.pi	w	w	w	.	w
+w	.	w	w	w	dr_4	w	w	w	.	w
+w	.	m_1	w	w	e_10	w	w	m_1	.	w
+w	.	aw_1	aw_1	w	e_9	w	aw_1	aw_1	.	w
+w	.	aw_1	aw_1	w	e_10	w	aw_1	aw_1	.	w
+w	.	aw_1	aw_1	w	dr_1	w	aw_1	aw_1	.	w
+w	e_3	e_2	e_3	dr_1	d_0	dr_1	e_3	e_2	e_2	w
+w	w	w	w	w	down	w	w	w	w	w
+
