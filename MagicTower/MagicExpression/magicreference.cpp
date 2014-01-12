@@ -1,6 +1,7 @@
 #include "magicreference.h"
 #include "magicexpression.h"
 #include "../magicobject.h"
+#include "MagicAnimate/magicinputbox.h"
 
 #include <QList>
 
@@ -13,6 +14,21 @@ MagicVarient MagicReference::getValue(MagicMap *map)
 {
     if (objectLabel == "this")
         return (*(MagicExpression::environment))[property];
+
+    if (objectLabel == "input")
+    {
+        int len = property.length();
+        QStringList l = property.mid(1, len - 2).split(QRegExp("\\\"\\s*,\\s*\\\""));
+        for (auto i = l.begin(); i != l.end(); i++)
+            if ((*i).startsWith("\""))
+                i = l.erase(i);
+
+        QString message = *l.begin();
+        l.erase(l.begin());
+
+        map->appendAnimate(new MagicInputBox(map, message, l), true);
+        return (*map)["input"];
+    }
 
     QList<MagicObject *>target = map->findDisplayObject(objectLabel, objectId, objectClass);
     if (!target.empty())

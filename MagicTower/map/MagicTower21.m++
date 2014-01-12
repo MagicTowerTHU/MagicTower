@@ -1,3 +1,10 @@
+
+on(merchant_2.f2)
+{
+	print = "1212312"
+	print = input("description", "1", "2")
+}
+
 at(0)
 w	aw_1	aw_1	aw_1	aw_1	up	aw_1	aw_1	aw_1	aw_1	w
 w	aw_1	aw_1	aw_1	aw_1	.	aw_1	aw_1	aw_1	aw_1	w
@@ -232,12 +239,13 @@ on(merchant_5.f4)
 	}
 	if (this->state == 2)
 	{
-
+		0
 	}
+	0
 }
 
 at(5)
-k3	w	m_1	w	m_2	e_8	.	.	e_8	k_0	k_1
+.	w	m_1	w	m_2	e_8	.	.	e_8	k_0	k_1
 .	w	m_3	w	e_8	.	.	.	.	e_8	k_0
 e_21	w	.	w	e_24	.	w	w	dr_0	w	w
 .	dr_0	e_8	w	a_5	e_24	w	.	e_23	e_24	me_1.f5

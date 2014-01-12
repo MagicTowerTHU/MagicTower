@@ -54,7 +54,6 @@ public:
     void appendSound(QString);
 
     QList<MagicObject *> findDisplayObject(QString, QString, QList<QString>);
-    const virtual MagicVarient& operator[](QString) const;
 
     virtual void setProperty(QString, MagicVarient);
     //bool eraseMapObject(QString, int, int);

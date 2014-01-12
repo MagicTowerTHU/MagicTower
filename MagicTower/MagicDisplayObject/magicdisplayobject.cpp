@@ -11,7 +11,6 @@ MagicDisplayObject::MagicDisplayObject(int x, int y, int level, MagicMap *parent
     this->parent = parent;
     property["enabled"] = 1;
     property["picked"] = 0;
-
 }
 
 
