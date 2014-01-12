@@ -358,4 +358,15 @@ e_21	w	e_26	w	.	.	.	w	.	e_20	.
 .	.	e_11	.	.	w	.	e_18	e_19	e_18	.
 
 at(9)
+an#snow	k_0	.	w	w	w	.	.	.	w	.
+k_0	.	e_5	dr_0	.	.	.	w	.	dr_0	e_14
+w	dr_0	w	w	.	w	w	w	.	w	k_0
+.	.	.	w	.	w	d_0	.	.	w	k_0
+.	.	.	dr_2	.	w	down	w	.	w	m_1
+w	dr_1	w	w	.	w	w	w	.	w	w
+m_4	e_17	m_3	w	e_11	w	up	w	.	w	m_1
+w	dr_0	w	w	.	.	d_1	dr_0	.	w	k_0
+e_14	m_1	e_14	w	w	dr_1	w	w	.	w	k_0
+k_1	e_14	m_1	w	e_6	e_11	e_6	w	.	dr_0	e_14
+s_3	k_1	e_14	dr_0	m_2	e_6	m_2	w	.	w	.
 
