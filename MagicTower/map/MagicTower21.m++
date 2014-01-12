@@ -435,3 +435,36 @@ w	.	aw_1	aw_1	w	dr_1	w	aw_1	aw_1	.	w
 w	e_3	e_2	e_3	dr_1	d_0	dr_1	e_3	e_2	e_2	w
 w	w	w	w	w	down	w	w	w	w	w
 
+at(15)
+.	.	.	d_0	down	aw_1	up	d_1	.	.	.
+.	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	.
+.	aw_1	aw_1	w	w	w	w	w	aw_1	aw_1	.
+.	aw_1	w	w	me_2.f15	w	me_1.f15	w	w	aw_1	.
+.	aw_1	w	w	m_4	w	m_4	w	w	aw_1	.
+.	aw_1	w	w	m_3	w	m_3	w	w	aw_1	.
+.	aw_1	aw_1	w	.	w	.	w	aw_1	aw_1	.
+.	aw_1	aw_1	w	dr_0	w	dr_0	w	aw_1	aw_1	.
+.	aw_1	aw_1	w	.	.	.	w	aw_1	aw_1	.
+.	aw_1	aw_1	aw_1	aw_1	dr_2	aw_1	aw_1	aw_1	aw_1	.
+.	.	.	.	.	.	.	.	.	.	.
+
+at(16)
+aw_1	aw_1	aw_1	aw_1	aw_1	d_0	down	aw_1	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	aw_1	aw_1	.	aw_1	aw_1	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	aw_1	aw_1	.	aw_1	aw_1	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	aw_1	w	dr_2	w	aw_1	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	w	w	.	w	w	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	w	w	e_30	w	w	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	w	w	d_1	w	w	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	w	w	up	w	w	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	aw_1	w	w	w	aw_1	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1
+
+
+
+
+
+
+
+
