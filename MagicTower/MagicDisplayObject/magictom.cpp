@@ -1,4 +1,5 @@
 #include "magictom.h"
+#include "magickey.h"
 
 #include <QBitmap>
 #include <QDebug>
@@ -14,6 +15,20 @@ MagicTom::MagicTom(int x, int y, int level, MagicMap *parent)
     for(int i=0; i<4; i++)
         for(int j=0; j<3; j++)
             Pix[i][j] = new QPixmap(Pix_string[i][j]);
+
+    MagicKey *p;
+    for(int i = 0; i < 100; i++)
+    {
+        p = new MagicKey(5, 5, 0, parent, 0);
+        p->property["enabled"] = 0;
+        backupKey0.push_back(p);
+        p = new MagicKey(5, 5, 0, parent, 1);
+        p->property["enabled"] = 0;
+        backupKey1.push_back(p);
+        p = new MagicKey(5, 5, 0, parent, 2);
+        p->property["enabled"] = 0;
+        backupKey2.push_back(p);
+    }
 
     pix = Pix[0][2];
 
@@ -42,6 +57,22 @@ bool MagicTom::move(MagicMap *)
 
 void MagicTom::setProperty(QString propertyName, MagicVarient propertyValue)
 {
+    if (propertyName == "add_K")
+    {
+        switch (propertyValue.getInt())
+        {
+        case 0:
+            backupKey0.takeFirst()->setProperty("picked", 1);
+            break;
+        case 1:
+            backupKey1.takeFirst()->setProperty("picked", 1);
+            break;
+        case 2:
+            backupKey2.takeFirst()->setProperty("picked", 1);
+            break;
+        }
+        return;
+    }
     if (propertyName == "level" && propertyValue.getInt() > property["range"].getInt())
         property["range"] = propertyValue.getInt();
     MagicDisplayObject::setProperty(propertyName, propertyValue);

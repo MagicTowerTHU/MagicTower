@@ -3,12 +3,17 @@
 
 #include "magicdisplayobject.h"
 
+class MagicKey;
+
 #include <QSound>
 
 class MagicTom : public MagicDisplayObject
 {
     QPixmap *Pix[4][3];
     QPixmap *pix;
+    QList<MagicKey *> backupKey0;
+    QList<MagicKey *> backupKey1;
+    QList<MagicKey *> backupKey2;
 
 public:
     MagicTom(int, int, int, MagicMap *);
