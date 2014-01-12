@@ -389,6 +389,12 @@ void MagicExpression::goForIt(QString line, MagicMap *map, QTextStream *pIn)
     }
     else if (line.startsWith("}"))
     {
+        if (ifFlag == 2)
+        {
+            ifFlag = 0;
+            head = tail = ifStack.pop();
+            singleLine();
+        }
         backBlock();
     }
     else if (line.startsWith("at"))
