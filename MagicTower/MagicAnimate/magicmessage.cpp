@@ -56,6 +56,6 @@ bool MagicMessage::paint(QPainter *painter)
 
     int margin_top = 17;
     painter->setPen("white");
-    painter->drawText(4*32, margin_top + 6*32, content);
+    painter->drawText(3*32, margin_top + 4*32, content);
     return true;
 }
