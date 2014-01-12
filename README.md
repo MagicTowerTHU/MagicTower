@@ -39,9 +39,37 @@ virtual void MagicAnimateObject::paint(QPainter *) = 0;
 * 获取对象属性（对象的所有动态属性均在QHash<QString, MagicVariant> MagicObject::property中）
 
 ```c++
-virtual void MagicDisplayObject::setProperty(QString key, MagicVarient value)
+virtual void MagicObject::setProperty(QString key, MagicVarient value)
 {
     property[key] = value;
+}
+```
+
+可用于劫持某些关键属性（比如物体的位置需要与画图坐标同步、用global的message变量接受弹出消息），达到特殊目的：
+
+```c++
+void MagicDisplayObject::setProperty(QString propertyName, MagicVarient propertyValue)
+{
+    if (propertyName == "position_x")
+        x = propertyValue.getInt() * 32;
+    if (propertyName == "position_y")
+        y = propertyValue.getInt() * 32;
+    MagicObject::setProperty(propertyName, propertyValue);
+}
+
+void MagicMap::setProperty(QString propertyName, MagicVarient propertyValue)
+{
+    if (propertyName == "sound")
+    {
+        QSound::play(propertyValue.getString());
+        return;
+    }
+    else if (propertyName == "message")
+    {
+        appendAnimate(new MagicMessage(this, propertyValue.getString()), true);
+        return;
+    }
+    MagicObject::setProperty(propertyName, propertyValue);
 }
 ```
 
@@ -96,21 +124,21 @@ on (wall.mistery)
 
 on (merchant_exp.floor5)
 {
-    input("You can use your extra exp to grow your power, please choose: ", "1. 50 exp -> 10 attack",
+    ret = input("You can use your extra exp to grow your power, please choose: ", "1. 50 exp -> 10 attack",
                 "2. 30 exp -> 7 defend", "3. 100 exp -> {15 attack, 15 defend}", "4. Not this time.")
-    if (input == 1)
+    if (ret == 1)
         if (tom->exp >= 50)
         {
             tom->exp = tom->exp - 50
             tom->attack = tom->attack + 10
         }
-    if (input == 2)
+    if (ret == 2)
         if (tom->exp >= 30)
         {
             tom->exp = tom->exp - 30
             tom->defend = tom->defend + 7
         }
-    if (input == 3)
+    if (ret == 3)
         if (tom->exp >= 100)
         {
             tom->exp = tom->exp - 100
