@@ -343,3 +343,19 @@ on (.pi)
 	this->picked = 1
 	this->enabled = 0
 }
+
+at(8)
+dn	w	.	.	.	.	w	.	k_0	e_14	.
+d_0	w	.	w	w	dr_0	w	dr_0	w	w	.
+.	w	.	w	.	.	dr_1	.	.	w	m_3
+.	w	.	w	e_11	w	w	w	e_21	w	e_26
+e_21	w	.	w	m_1	w	up	d_1	.	w	e_26
+e_20	w	m_4	w	m_1	w	w	w	w	w	.
+e_21	w	e_26	w	.	.	.	w	.	e_20	.
+.	w	e_26	w	w	w	e_22	w	dr_0	w	w
+.	w	.	e_14	.	w	e_14	w	.	.	.
+.	w	w	w	dr_0	w	.	w	w	w	.
+.	.	e_11	.	.	w	.	e_18	e_19	e_18	.
+
+at(9)
+
