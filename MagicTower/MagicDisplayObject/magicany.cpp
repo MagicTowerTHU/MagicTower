@@ -12,10 +12,13 @@ MagicAny::~MagicAny()
     delete pix;
 }
 
+#include <QDebug>
+
 void MagicAny::setProperty(QString propertyName, MagicVarient propertyValue)
 {
     if (propertyName == "pix")
         pix = new QPixmap(propertyValue.getString());
+    //qDebug() << propertyName << ":" << propertyValue.getString();
     MagicDisplayObject::setProperty(propertyName, propertyValue);
 }
 

@@ -371,7 +371,7 @@ QList<MagicObject *> MagicMap::findDisplayObject(QString objectLabel, QString ob
     {
         /*qDebug() << (void *)(*i);
         qDebug() << (**i)["label"].getString();*/
-        if ((objectLabel.isEmpty() || ((**i)["label"] == MagicVarient(objectLabel)).isTrue()) &&
+        if (    (objectLabel.isEmpty() || ((**i)["label"] == MagicVarient(objectLabel)).isTrue()) &&
                 (objectId.isEmpty() || ((**i)["id"] == MagicVarient(objectId)).isTrue()) &&
                 (objectClass.empty() || ((**i).inClass(objectClass))))
             objects.append(*i);

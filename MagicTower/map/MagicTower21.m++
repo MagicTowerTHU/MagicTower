@@ -325,16 +325,32 @@ on(#f6)
 
 at(7)
 up	d_1	.	.	.	.	.	.	w	w	w
-.	.	.	.	.	.	.	.	.	.	.
-.	.	.	.	.	.	.	.	.	.	.
-.	.	.	.	.	.	.	.	.	.	.
-.	.	.	.	.	.	.	.	.	.	.
-.	.	.	.	.	.	.	.	.	.	.
-.	.	.	.	.	.	.	.	.	.	.
-.	.	.	.	.	.	.	.	.	.	.
-.	.	.	.	.	.	.	.	.	.	.
-.	.	.	.	.	.	.	.	.	.	.
-.	.	.	.	.	.	.	.	.	.	.
+w	w	.	e_20	w	dr_1	w	e_14	.	w	w
+w	.	e_20	m_4	w	e_19	w	m_3.m	e_14	.	w
+.	.	w	w	w	dr_4	w	w	w	.	.
+.	.	d_1	e_19	dr_4.fr	an#cross.pi	dr_4	e_19	dr_1	.	.
+.	w	w	w	w	dr_4	w	w	w	w	.
+.	w	m_1.m	m_3.m	w	e_19	w	m_4	m_1.m	w	.
+.	w	k_0	m_1.m	w	dr_1	w	m_1.m	k_0	w	.
+.	w	w	k_1	k_1	m_2.b	k_1	k_1	w	w	.
+.	.	w	w	w	dr_2	w	w	w	.	.
+w	.	.	dr_0	dn	d_0	.	.	.	.	w
+
+enemy_11->health = 250
+enemy_11->attack = 120
+enemy_11->defend = 70
+enemy_11->money = 20
+enemy_11->exp = 17
+
+#cross->pix = ":/images/cross"
+
+on (.pi)
+{
+	this->picked = 1
+	this->enabled = 0
+}
+
+
 
 enemy_19->health = 1300
 enemy_19->attack = 300
