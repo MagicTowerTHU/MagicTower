@@ -322,3 +322,6 @@ on(#f6)
 	tom->attack = tom->attack + 10
 	tom->defend = tom->defend + 10
 }
+
+at(7)
+up	d_1	.	.	.	.	.	.	w	w	w
