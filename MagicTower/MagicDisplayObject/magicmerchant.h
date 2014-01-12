@@ -6,6 +6,7 @@
 
 class MagicMerchant : public MagicDisplayObject
 {
+    int cnt = 0;
     QPixmap *pix[2];
 
 public:

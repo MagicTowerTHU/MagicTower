@@ -158,8 +158,8 @@
         <file alias="merchant_1.1">assets/Images/655.bmp</file>
         <file alias="merchant_2.0">assets/Images/663.bmp</file>
         <file alias="merchant_2.1">assets/Images/665.bmp</file>
-        <file>assets/Images/721.bmp</file>
-        <file>assets/Images/723.bmp</file>
+        <file alias="merchant_5.0">assets/Images/721.bmp</file>
+        <file alias="merchant_5.1">assets/Images/723.bmp</file>
         <file>assets/Images/746.bmp</file>
         <file>assets/Images/748.bmp</file>
         <file>assets/Images/771.bmp</file>

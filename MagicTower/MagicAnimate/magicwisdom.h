@@ -6,6 +6,7 @@
 
 class MagicWisdom : public MagicAnimate
 {
+    int cnt = 0;
     QPixmap *black, *wall;
 
 public:

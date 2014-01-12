@@ -5,6 +5,7 @@
 
 class MagicEnemy : public MagicDisplayObject
 {
+    int cnt = 0;
 
 public:
     QPixmap *pix[2];

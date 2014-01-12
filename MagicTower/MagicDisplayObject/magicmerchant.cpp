@@ -21,14 +21,13 @@ MagicMerchant::~MagicMerchant()
 
 void MagicMerchant::paint(QPainter *painter)
 {
-    static int cnt = 12;
-    painter->drawPixmap(x, y, cnt-- > 6 ? *pix[0] : *pix[1]);
+    painter->drawPixmap(x, y, cnt-- > 10 ? *pix[0] : *pix[1]);
     if (property["label"].getString() == "merchant_3")
     {
         painter->drawPixmap(x-32, y, QPixmap(":/images/merchant_3.2"));
         painter->drawPixmap(x+32, y, QPixmap(":/images/merchant_3.3"));
     }
-    if (cnt <= 0) cnt = 12;
+    if (cnt <= 0) cnt = 20;
 
 }
 

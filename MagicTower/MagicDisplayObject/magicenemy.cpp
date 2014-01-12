@@ -83,9 +83,8 @@ int MagicEnemy::damage(MagicMap *map)
 
 void MagicEnemy::paint(QPainter *painter)
 {
-    static int cnt = 12;
-    painter->drawPixmap(x, y, cnt-- > 6 ? *pix[0] : *pix[1]);
-    if (cnt <= 0) cnt = 12;
+    painter->drawPixmap(x, y, cnt-- > 10 ? *pix[0] : *pix[1]);
+    if (cnt <= 0) cnt = 20;
 }
 
 bool MagicEnemy::move(MagicMap *map)

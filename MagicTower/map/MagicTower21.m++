@@ -3,19 +3,49 @@ w	aw_1	aw_1	aw_1	aw_1	up	aw_1	aw_1	aw_1	aw_1	w
 w	aw_1	aw_1	aw_1	aw_1	.	aw_1	aw_1	aw_1	aw_1	w
 w	aw_1	aw_1	aw_1	aw_1	.	aw_1	aw_1	aw_1	aw_1	w
 w	aw_1	aw_1	aw_1	aw_1	.	aw_1	aw_1	aw_1	aw_1	w
-w	aw_1	aw_1	aw_1	aw_1	k_0.ini	aw_1	aw_1	aw_1	aw_1	w
-w	aw_1	aw_1	aw_1	aw_1	k_0.ini	aw_1	aw_1	aw_1	aw_1	w
+w	aw_1	aw_1	aw_1	aw_1	k_2.ini	aw_1	aw_1	aw_1	aw_1	w
+w	aw_1	aw_1	aw_1	aw_1	k_1.ini	aw_1	aw_1	aw_1	aw_1	w
 w	w	aw_1	aw_1	aw_1	k_0.ini	aw_1	aw_1	aw_1	w	w
 w	w	w	w	w	dr_0	w	w	w	w	w
 aw_2	w	aw_2	w	.	me_4#fairy	.	w	aw_2	w	aw_2
 aw_2	aw_2	aw_2	aw_2	aw_2	.	aw_2	aw_2	aw_2	aw_2	aw_2
-aw_2	aw_2	aw_2	aw_2	aw_2	t	aw_2	aw_2	aw_2	aw_2	aw_2
+aw_2	aw_2	aw_2	aw_2	aw_2	.	aw_2	aw_2	aw_2	aw_2	aw_2
 
 on (#fairy)
 {
-        message = "Hello!"
-        message = "请进!"
-        message = "Thanks!^_^"
+	message = "勇士: ......"
+	message = "仙子: 你醒了!"
+	message = "勇士: 你是谁?我在哪里?"
+	message = "仙子: 我是这里的仙子,刚才被小怪打晕了."
+	message = "勇士: ...剑!我的剑呢?"
+	message = "仙子: 你的剑被他们抢走了."
+	message = "仙子: 我只来得及把你救出来."
+	message = "勇士: 那公主呢?我是来救公主的."
+	message = "仙子: 公主还在里面,你这样进去是打不过小怪的."
+	message = "勇士: 那我咋办呢?"
+	message = "勇士: 我答应过王一定要把公主救出来..."
+	message = "仙子: 放心吧,我借给你力量"
+	message = "仙子: 你就可以打赢那些小怪了."
+	message = "仙子: 不过你得帮我找样东西."
+	message = "勇士: 什么东西?"
+	message = "仙子: 是一个十字架,中间有红色的宝石."
+	message = "勇士: 那东西有什么用吗?"
+	message = "仙子: 我本是这座塔的守护者,"
+	message = "仙子: 从北方来了一批恶魔,"
+	message = "仙子: 他们占领了这座塔,"
+	message = "仙子: 并将我的魔力封在了十字架里."
+	message = "仙子: 如果你能把它带来,"
+	message = "仙子: 那我的魔力就能慢慢恢复,"
+	message = "仙子: 然后就能借你力量救出公主了!"
+	message = "仙子: 要记住,只有用我的魔力才能打开21层的门."
+	message = "勇士: 好吧...我试试看."
+	message = "仙子: 刚才我看过了,"
+	message = "仙子: 你的剑在三楼,盾在五楼."
+	message = "仙子: 十字架在七楼."
+	message = "勇士: 那我要怎么开门呢?"
+	message = "仙子: 我这里有三把钥匙, 你先拿去."
+	message = "仙子: 在塔里面还有很多这种钥匙,你要珍惜使用."
+	message = "仙子: 勇敢的去吧勇士!!"
 	this->position_x = 4
 }
 
@@ -25,17 +55,24 @@ on (#fairy)
 at(1)
 up	d_1	k_0	e_29	e_28	e_29	.	.	.	.	.
 w	w	w	w	w	w	w	w	w	w	.
-m_1	.	e_25	dr_0	.	w	m_1	k_0	m_1	w	.
-k_0	e_25	m_3	w	.	w	m_1	k_0	m_1	w	.
+m_1.s	.	e_25	dr_0	.	w	m_1.m	k_0	m_1.m	w	.
+k_0	e_25	m_3.s	w	.	w	m_1.m	k_0	m_1.m	w	.
 w	dr_0	w	w	.	w	w	w	e_26	w	.
 k_0	e_24	.	w	.	dr_0	e_8	e_29	e_21	w	.
 m_4	.	k_1	w	.	w	w	w	w	w	.
 w	dr_0	w	w	.	.	.	.	.	.	.
 .	e_24	.	w	w	dr_2	w	w	w	dr_0	w
-m_1	m_2	k_0	w	k_2	d_0	.	w	k_0	e_23	k_1
-m_1	wi	k_0	w	.	dn	.	w	k_0	k_0	k_0
+m_1.m	m_2.b	k_0	w	k_2	d_0	.	w	k_0	e_23	k_1
+m_1.m	wi	k_0	w	.	dn	.	w	k_0	k_0	k_0
 
-medicine_1->health = 200
+medicine_1.s->health = 100
+
+medicine_1.m->health = 200
+
+medicine_2.b->health = 500
+
+medicine_4->defend = 3
+medicine_3.s->attack = 1
 
 enemy_23->health = 300
 enemy_23->attack = 75
@@ -55,6 +92,48 @@ enemy_16->defend = 200
 enemy_16->money = 45
 enemy_16->exp = 40
 
+enemy_28->health = 70
+enemy_28->attack = 15
+enemy_28->defend = 2
+enemy_28->money = 2
+enemy_28->exp = 2
+
+enemy_29->health = 50
+enemy_29->attack = 20
+enemy_29->defend = 1
+enemy_29->money = 1
+enemy_29->exp = 1
+
+enemy_25->health = 110
+enemy_25->attack = 25
+enemy_25->defend = 5
+enemy_25->money = 5
+enemy_25->exp = 4
+
+enemy_24->health = 850
+enemy_24->attack = 350
+enemy_24->defend = 200
+enemy_24->money = 8
+enemy_24->exp = 6
+
+enemy_8->health = 125
+enemy_8->attack = 50
+enemy_8->defend = 20
+enemy_8->money = 10
+enemy_8->exp = 7
+
+enemy_21->health = 100
+enemy_21->attack = 20
+enemy_21->defend = 5
+enemy_21->money = 4
+enemy_21->exp = 4
+
+enemy_26->health = 200
+enemy_26->attack = 35
+enemy_26->defend = 10
+enemy_26->money = 5
+enemy_26->exp = 5
+
 at(2)
 dn	w	.	e_15	.	w	m_3	m_4	k_0	k_2	w
 d_0	w	m_4	w	m_2	w	m_3	m_4	k_0	k_1	w
@@ -62,15 +141,111 @@ d_0	w	m_4	w	m_2	w	m_3	m_4	k_0	k_1	w
 .	w	k_0	w	k_0	w	w	w	w	dr_0	w
 .	w	.	w	.	.	.	dr_0	.	.	w
 .	w	dr_0	w	w	dr_0	w	w	dr_0	w	w
-.	.	.	.	.	.	w	.	e_16	.	w
+.	.	.	.	.	.	w	t	e_16	.	w
 .	w	dr_0	w	w	dr_1	w	dr_4.fr	w	dr_4.fr	w
 .	w	k_0	w	m_2	m_1	w	.	w	.	w
 d_1	w	k_0	w	m_2	m_1	w	.	w	.	w
 up	w	m_3	w	m_2	m_1	w	me_2.f2	w	me_1.f2	w
 
+on(.fr)
+{
+	this->enabled = 0
+}
+
 wisdomEnabled = 1
 teleportEnabled = 1
 
-tom->defend = 10000
-tom->attack = 10000
-tom->health = 10000
+tom->defend = 1000
+tom->attack = 1000
+tom->health = 1000
+
+at(3)
+s_1	e_28	k_0	w	.	me_3	.	w	w	w	w
+e_28	k_0	.	w	.	.	.	w	.	e_21	.
+k_0	e_25	.	w	w	dr_0	w	w	.	w	.
+w	dr_0	w	w	.	e_25	.	w	k_0	w	e_28
+.	.	.	w	w	w	.	w	k_0	w	e_21
+e_29	w	.	e_21	e_28	e_21	.	w	k_0	w	e_28
+e_29	w	w	w	w	w	.	.	.	w	.
+.	.	.	.	.	w	w	dr_0	w	w	.
+w	w	w	w	e_21	w	e_28	.	e_28	w	.
+w	.	.	.	.	w	m_4	e_21	k_0	w	d_1
+dn	d_0	w	w	w	w	m_3	m_2	k_0	w	up
+
+at(4)
+.	e_26	.	w	.	me_5.f4	.	w	.	e_26	.
+dr_0	w	dr_0	w	.	.	.	w	dr_0	w	dr_0
+.	w	.	w	w	dr_4.fr	w	w	.	w	.
+.	w	e_25	w	e_21	e_20	e_21	w	e_25	w	.
+e_21	w	m_1.m	w	m_4	e_21	m_4	w	m_1.m	w	e_21
+e_21	w	m_1.m	w	w	dr_2	w	w	m_1.m	w	e_21
+e_28	w	.	w	e_23	e_22	e_23	w	.	w	e_28
+.	w	.	w	m_3.m	e_23	m_3.m	w	.	w	.
+.	w	.	w	w	dr_1	w	w	.	w	.
+d_1	w	.	w	k_0	.	k_0	w	.	w	d_0
+up	w	.	e_26	.	.	.	e_26	.	w	dn
+
+enemy_20->health = 550
+enemy_20->attack = 160
+enemy_20->defend = 90
+enemy_20->money = 25
+enemy_20->exp = 20
+
+enemy_22->health = 450
+enemy_22->attack = 150
+enemy_22->defend = 90
+enemy_22->money = 22
+enemy_22->exp = 19
+
+medicine_3.m->attack = 3
+
+merchant_5.f4->state = 0
+
+on(merchant_5.f4)
+{
+	if (this->state == 0)
+	{
+		message = "勇士: 你已经得救了!"
+		message = "小偷: 啊, 那太好了,我又可以寻宝了!"
+		message = "小偷: 哦, 我还没有自我介绍."
+		message = "小偷: 我叫杰克,是这附近有名的小偷."
+		message = "小偷: 金银财宝样样都偷过."
+		message = "小偷: 不过这次运气不好,刚进来就被抓了."
+		message = "小偷: 现在你帮我开了门,"
+		message = "小偷: 我就帮你做一件事吧!"
+		message = "勇士: 快走吧,外面还有很多怪兽,"
+		message = "勇士: 我可能顾不上你."
+		message = "小偷: 不,不会有事的."
+		message = "小偷: 快说吧,要我做什么?"
+		message = "勇士: ...你会开门吗?"
+		message = "小偷: 那当然."
+		message = "勇士: 那就请你帮我打开第二层的门吧!"
+		message = "小偷: 可以."
+		message = "小偷: 不过如果你能帮我找到一个"
+		message = "小偷: 镶着红宝石的铁榔头的话,"
+		message = "小偷: 我还能帮你打开地十八层的门."
+		message = "勇士: 好吧,我帮你找找."
+		message = "小偷: 非常感谢, 一会我就打开第二层的门."
+		message = "小偷: 如果你找到那个铁榔头的话"
+		message = "小偷: 就来这里找我!"
+		this->state = 1
+	}
+	if (this->state == 2)
+	{
+
+	}
+}
+
+at(5)
+k3	w	m_1	w	m_2	e_8	.	.	e_8	k_0	k_1
+.	w	m_3	w	e_8	.	.	.	.	e_8	k_0
+e_21	w	.	w	e_24	.	w	w	dr_0	w	w
+.	dr_0	e_8	w	a_5	e_24	w	.	e_23	e_24	me_1.f5
+e_21	w	.	w	w	w	w	.	.	.	e_24
+m_3	w	.	.	.	e_21	e_25	.	.	.	.
+m_4	w	w	e_26	w	w	w	w	.	.	.
+.	me_2.f5	w	e_26	w	.	.	.	e_23	e_22	.
+w	w	w	e_21	w	dr_0	w	dr_1	w	dr_0	w
+d_0	.	w	.	w	e_21	w	me_4	dr_0	d_1	w
+dn	.	e_21	.	.	.	w	k_0	w	up	w
+
