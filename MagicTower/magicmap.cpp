@@ -71,11 +71,11 @@ void MagicMap::initialize()
 
     for (int i = 0; i < 11; i++)
         for (int j = 0; j < 11; j++)
-                displayList.push_front(/*floor[11 * i + j] = */new MagicFloor(i, j, 1, this));
+                displayList.push_front(/*floor[11 * i + j] = */new MagicFloor(i, j, 100, this));
 
     for (int i = 12; i <= 14; i++)
         for (int j = 0; j < 11; j++)
-                displayList.push_front(/*inventory[12 * (i - 12) + j] = */new MagicFloor(j, i, 1, this));
+                displayList.push_front(/*inventory[12 * (i - 12) + j] = */new MagicFloor(j, i, 100, this));
 }
 
 bool MagicMap::loadMap(QFile *file)
@@ -177,7 +177,7 @@ void MagicMap::paint(QPainter *painter)
 
     for (auto i = displayList.begin(); i != displayList.end(); i++)
         if ((**i)["enabled"].isTrue() &&
-            (((**i)["level"] == mTom->property["level"]).isTrue() || (**i)["label"].getString() == "floor"))
+            (((**i)["level"] == mTom->property["level"]).isTrue() || (**i)["level"].getInt() == 100))
             (*i)->paint(painter);
     mTom->paint(painter);
 
@@ -355,7 +355,7 @@ bool MagicMap::move(int direction, int distance)
         if ((**i)["position_x"].getInt() == target_x &&
             (**i)["position_y"].getInt() == target_y &&
             ((**i)["level"] == mTom->property["level"]).isTrue())
-            if ((**i)["enabled"].isTrue() && (**i)["label"].getString() != "floor" && !(*i)->move(this))
+            if ((**i)["enabled"].isTrue()  && !(*i)->move(this))
             {
                 this->appendSound(":/sounds/beep");
                 return false;

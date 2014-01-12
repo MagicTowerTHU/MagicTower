@@ -11,68 +11,88 @@ aw_2	w	aw_2	w	.	me_4#fairy	.	w	aw_2	w	aw_2
 aw_2	aw_2	aw_2	aw_2	aw_2	.	aw_2	aw_2	aw_2	aw_2	aw_2
 aw_2	aw_2	aw_2	aw_2	aw_2	t	aw_2	aw_2	aw_2	aw_2	aw_2
 
+#fairy->state = 0
 on (#fairy)
 {
-	message = "勇士: ......"
-	message = "仙子: 你醒了!"
-	message = "勇士: 你是谁?我在哪里?"
-	message = "仙子: 我是这里的仙子,刚才被小怪打晕了."
-	message = "勇士: ...剑!我的剑呢?"
-	message = "仙子: 你的剑被他们抢走了."
-	message = "仙子: 我只来得及把你救出来."
-	message = "勇士: 那公主呢?我是来救公主的."
-	message = "仙子: 公主还在里面,你这样进去是打不过小怪的."
-	message = "勇士: 那我咋办呢?"
-	message = "勇士: 我答应过王一定要把公主救出来..."
-	message = "仙子: 放心吧,我借给你力量"
-	message = "仙子: 你就可以打赢那些小怪了."
-	message = "仙子: 不过你得帮我找样东西."
-	message = "勇士: 什么东西?"
-	message = "仙子: 是一个十字架,中间有红色的宝石."
-	message = "勇士: 那东西有什么用吗?"
-	message = "仙子: 我本是这座塔的守护者,"
-	message = "仙子: 从北方来了一批恶魔,"
-	message = "仙子: 他们占领了这座塔,"
-	message = "仙子: 并将我的魔力封在了十字架里."
-	message = "仙子: 如果你能把它带来,"
-	message = "仙子: 那我的魔力就能慢慢恢复,"
-	message = "仙子: 然后就能借你力量救出公主了!"
-	message = "仙子: 要记住,只有用我的魔力才能打开21层的门."
-	message = "勇士: 好吧...我试试看."
-	message = "仙子: 刚才我看过了,"
-	message = "仙子: 你的剑在三楼,盾在五楼."
-	message = "仙子: 十字架在七楼."
-	message = "勇士: 那我要怎么开门呢?"
-	message = "仙子: 我这里有三把钥匙, 你先拿去."
-	message = "仙子: 在塔里面还有很多这种钥匙,你要珍惜使用."
-	message = "仙子: 勇敢的去吧勇士!!"
-	this->position_x = 4
+	if(this->state == 0)
+	{
+		message = "勇士: ......"
+		message = "仙子: 你醒了!"
+		message = "勇士: 你是谁?我在哪里?"
+		message = "仙子: 我是这里的仙子,刚才被小怪打晕了."
+		message = "勇士: ...剑!我的剑呢?"
+		message = "仙子: 你的剑被他们抢走了."
+		message = "仙子: 我只来得及把你救出来."
+		message = "勇士: 那公主呢?我是来救公主的."
+		message = "仙子: 公主还在里面,你这样进去是打不过小怪的."
+		message = "勇士: 那我咋办呢?"
+		message = "勇士: 我答应过王一定要把公主救出来..."
+		message = "仙子: 放心吧,我借给你力量"
+		message = "仙子: 你就可以打赢那些小怪了."
+		message = "仙子: 不过你得帮我找样东西."
+		message = "勇士: 什么东西?"
+		message = "仙子: 是一个十字架,中间有红色的宝石."
+		message = "勇士: 那东西有什么用吗?"
+		message = "仙子: 我本是这座塔的守护者,"
+		message = "仙子: 从北方来了一批恶魔,"
+		message = "仙子: 他们占领了这座塔,"
+		message = "仙子: 并将我的魔力封在了十字架里."
+		message = "仙子: 如果你能把它带来,"
+		message = "仙子: 那我的魔力就能慢慢恢复,"
+		message = "仙子: 然后就能借你力量救出公主了!"
+		message = "仙子: 要记住,只有用我的魔力才能打开21层的门."
+		message = "勇士: 好吧...我试试看."
+		message = "仙子: 刚才我看过了,"
+		message = "仙子: 你的剑在三楼,盾在五楼."
+		message = "仙子: 十字架在七楼."
+		message = "勇士: 那我要怎么开门呢?"
+		message = "仙子: 我这里有三把钥匙, 你先拿去."
+		message = "仙子: 在塔里面还有很多这种钥匙,你要珍惜使用."
+		message = "仙子: 勇敢的去吧勇士!!"
+		this->position_x = 4
+		this->state = 1
+	}
+	if(this->state == 2)
+	{
+		message = "勇士: 看我找到了什么~ 你的十字架!"
+		message = "仙子: 太好啦! 那么按照约定,我将给予你打败魔王的力量."
+		message = "仙子: 般若波罗蜜~"
+		tom->health = tom->health * 4 / 3
+		tom->attack = tom->attack * 4 / 3
+		tom->defend = tom->defend * 4 / 3
+		message = "仙子: 切记, 没有十足的把握不要挑战大魔王!"
+		#up.f20->enabled = 1
+	}
 }
 
 .ini->picked = 1
 .ini->enabled = 0
 
+enemy_27->health = 100
+enemy_27->attack = 20
+enemy_27->defend = 5
+enemy_27->money = 3
+enemy_27->exp = 3
+
 at(1)
 up	d_1	k_0	e_29	e_28	e_29	.	.	.	.	.
 w	w	w	w	w	w	w	w	w	w	.
-m_1.s	.	e_25	dr_0	.	w	m_1.m	k_0	m_1.m	w	.
-k_0	e_25	m_3.s	w	.	w	m_1.m	k_0	m_1.m	w	.
+m_1	.	e_25	dr_0	.	w	m_1	k_0	m_1	w	.
+k_0	e_25	m_3	w	.	w	m_1	k_0	m_1	w	.
 w	dr_0	w	w	.	w	w	w	e_26	w	.
-k_0	e_24	.	w	.	dr_0	e_8	e_29	e_21	w	.
+k_0	e_24	.	w	.	dr_0	e_8	e_29	e_27	w	.
 m_4	.	k_1	w	.	w	w	w	w	w	.
 w	dr_0	w	w	.	.	.	.	.	.	.
 .	e_24	.	w	w	dr_2	w	w	w	dr_0	w
-m_1.m	m_2.b	k_0	w	k_2	d_0	.	w	k_0	e_23	k_1
-m_1.m	wi	k_0	w	.	dn	.	w	k_0	k_0	k_0
+m_1	m_2	k_0	w	k_2	d_0	.	w	k_0	e_23	k_1
+m_1	wi	k_0	w	.	dn	.	w	k_0	k_0	k_0
 
-medicine_1.s->health = 100
+medicine_1->health = 200
 
-medicine_1.m->health = 200
-
-medicine_2.b->health = 500
+medicine_2->health = 500
 
 medicine_4->defend = 3
-medicine_3.s->attack = 1
+medicine_3->attack = 3
 
 enemy_23->health = 300
 enemy_23->attack = 75
@@ -110,11 +130,11 @@ enemy_25->defend = 5
 enemy_25->money = 5
 enemy_25->exp = 4
 
-enemy_24->health = 850
-enemy_24->attack = 350
-enemy_24->defend = 200
-enemy_24->money = 8
-enemy_24->exp = 6
+enemy_14->health = 850
+enemy_14->attack = 350
+enemy_14->defend = 200
+enemy_14->money = 8
+enemy_14->exp = 6
 
 enemy_8->health = 125
 enemy_8->attack = 50
@@ -122,11 +142,11 @@ enemy_8->defend = 20
 enemy_8->money = 10
 enemy_8->exp = 7
 
-enemy_21->health = 100
-enemy_21->attack = 20
-enemy_21->defend = 5
-enemy_21->money = 4
-enemy_21->exp = 4
+enemy_21->health = 150
+enemy_21->attack = 65
+enemy_21->defend = 30
+enemy_21->money = 10
+enemy_21->exp = 8
 
 enemy_26->health = 200
 enemy_26->attack = 35
@@ -141,12 +161,11 @@ d_0	w	m_4	w	m_2	w	m_3	m_4	k_0	k_1	w
 .	w	k_0	w	k_0	w	w	w	w	dr_0	w
 .	w	.	w	.	.	.	dr_0	.	.	w
 .	w	dr_0	w	w	dr_0	w	w	dr_0	w	w
-.	.	.	.	.	.	w	.	e_16	.	w
+.	dr_3.f2	.	.	.	.	w	.	e_16	.	w
 .	w	dr_0	w	w	dr_1	w	dr_4.fr	w	dr_4.fr	w
 .	w	k_0	w	m_2	m_1	w	.	w	.	w
 d_1	w	k_0	w	m_2	m_1	w	s_2.f2.hid	w	a_2.f2.hid	w
 up	w	m_3	w	m_2	m_1	w	me_2.f2	w	me_1.f2	w
-
 
 on(.fr)
 {
@@ -173,25 +192,28 @@ on(merchant_1.f2)
 }
 
 
-wisdomEnabled = 1
-teleportEnabled = 1
+wisdomEnabled = 0
+teleportEnabled = 0
 
-tom->defend = 10
+tom->defend = 1000
 tom->attack = 10
-tom->health = 1000
+tom->health = 10
+
 
 at(3)
 s_1	e_28	k_0	w	.	me_3.f3	.	w	w	w	w
-e_28	k_0	.	w	.	.	.	w	.	e_21	.
+e_28	k_0	.	w	.	.	.	w	.	e_27	.
 k_0	e_25	.	w	w	dr_0	w	w	.	w	.
 w	dr_0	w	w	.	e_25	.	w	k_0	w	e_28
-.	.	.	w	w	w	.	w	k_0	w	e_21
-e_29	w	.	e_21	e_28	e_21	.	w	k_0	w	e_28
+.	.	.	w	w	w	.	w	k_0	w	e_27
+e_29	w	.	e_27	e_28	e_27	.	w	k_0	w	e_28
 e_29	w	w	w	w	w	.	.	.	w	.
 .	.	.	.	.	w	w	dr_0	w	w	.
-w	w	w	w	e_21	w	e_28	.	e_28	w	.
-w	.	.	.	.	w	m_4	e_21	k_0	w	d_1
+w	w	w	w	e_27	w	e_28	.	e_28	w	.
+w	.	.	.	.	w	m_4	e_27	k_0	w	d_1
 dn	d_0	w	w	w	w	m_3	m_2	k_0	w	up
+
+weapon_1->attack = 10
 
 on(merchant_3.f3)
 {
@@ -222,10 +244,10 @@ at(4)
 dr_0	w	dr_0	w	.	.	.	w	dr_0	w	dr_0
 .	w	.	w	w	dr_4.fr	w	w	.	w	.
 .	w	e_25	w	e_21	e_20	e_21	w	e_25	w	.
-e_21	w	m_1.m	w	m_4	e_21	m_4	w	m_1.m	w	e_21
-e_21	w	m_1.m	w	w	dr_2	w	w	m_1.m	w	e_21
+e_27	w	m_1	w	m_4	e_21	m_4	w	m_1	w	e_27
+e_27	w	m_1	w	w	dr_2	w	w	m_1	w	e_27
 e_28	w	.	w	e_23	e_22	e_23	w	.	w	e_28
-.	w	.	w	m_3.m	e_23	m_3.m	w	.	w	.
+.	w	.	w	m_3	e_23	m_3	w	.	w	.
 .	w	.	w	w	dr_1	w	w	.	w	.
 d_1	w	.	w	k_0	.	k_0	w	.	w	d_0
 up	w	.	e_26	.	.	.	e_26	.	w	dn
@@ -241,8 +263,6 @@ enemy_22->attack = 150
 enemy_22->defend = 90
 enemy_22->money = 22
 enemy_22->exp = 19
-
-medicine_3.m->attack = 3
 
 merchant_5.f4->state = 0
 
@@ -277,22 +297,36 @@ on(merchant_5.f4)
 	}
 	if (this->state == 2)
 	{
-		message = "hahahaha"
+		message = "小偷: 看来你拿到了我需要的."
+		message = "小偷: 我这就去给你开门!"
+		this->position_x = 5
+		this->position_y = 10
+		this->level = 18
+		this->state = 3
+		altwall_1.f18->enabled = 0
+	}
+	else
+	if (this->state == 3)
+	{
+		message = "小偷: 嗨,你来了!"
+		message = "小偷: 你看, 这扇门已经打开了!"
+		message = "小偷: 那么, 后会有期!"
+		this->enabled = 0
 	}
 }
 
 at(5)
-an.f5	w	m_1.m	w	m_2.b	e_8	.	.	e_8	k_0	k_1
-.	w	m_3.m	w	e_8	k_0.f5	k_1.f5	k_2.f5	.	e_8	k_0
+an.f5	w	m_1	w	m_2	e_8	.	.	e_8	k_0	k_1
+.	w	m_3	w	e_8	k_0.f5	k_1.f5	k_2.f5	.	e_8	k_0
 e_21	w	.	w	e_24	.	w	w	dr_0	w	w
 .	dr_0	e_8	w	a_5	e_24	w	.	e_23	e_24	me_1.f5
 e_21	w	.	w	w	w	w	.	.	.	e_24
-m_3.m	w	.	.	.	e_21	e_25	.	.	.	.
+m_3	w	.	.	.	e_27	e_25	.	.	.	.
 m_4	w	w	e_26	w	w	w	w	.	.	.
 .	me_2.f5	w	e_26	w	.	.	.	e_23	e_22	.
-w	w	w	e_21	w	dr_0	w	dr_1	w	dr_0	w
-d_0	.	w	.	w	e_21	w	m_4	dr_0	d_1	w
-dn	.	e_21	.	.	.	w	k_0	w	up	w
+w	w	w	e_27	w	dr_0	w	dr_1	w	dr_0	w
+d_0	.	w	.	w	e_27	w	m_4	dr_0	d_1	w
+dn	.	e_27	.	.	.	w	k_0	w	up	w
 
 
 on(merchant_1.f5)
@@ -331,8 +365,8 @@ on(merchant_2.f5)
 	{
 		if (tom->exp >= 100)
 		{
-			tom->attack = tom->attack + 10
-			tom->defend = tom->defend + 10
+			tom->attack = tom->attack + 7
+			tom->defend = tom->defend + 7
 			tom->health = tom->health + 1000
 			tom->exp = tom->exp - 100
 		}
@@ -366,7 +400,7 @@ on(any.f5)
 
 at(6)
 an#f6.fr	e_14	w	m_4	w	k_0	e_18	an#coin.fr	w	m_2	m_2
-e_14	k_0	w	m_3.m	w	.	k_0	e_18	w	e_6	m_2
+e_14	k_0	w	m_3	w	.	k_0	e_18	w	e_6	m_2
 k_0	e_20	dr_1	.	dr_1	e_20	.	k_0	w	.	e_6
 .	.	w	e_22	w	.	.	.	w	e_17	.
 w	w	w	dr_2	w	w	w	w	w	dr_0	w
@@ -377,11 +411,11 @@ w	w	w	dr_2	w	w	w	w	w	dr_0	w
 .	w	e_21	w	.	.	w	w	.	d_0	w
 .	.	.	w	up	d_1	dr_0	dr_0	.	dn	w
 
-enemy_14->health = 400
-enemy_14->attack = 90
-enemy_14->defend = 50
-enemy_14->money = 15
-enemy_14->exp = 12
+enemy_24->health = 400
+enemy_24->attack = 90
+enemy_24->defend = 50
+enemy_24->money = 15
+enemy_24->exp = 12
 
 enemy_7->health = 100
 enemy_7->attack = 200
@@ -425,13 +459,13 @@ on(#f6)
 at(7)
 up	d_1	.	.	.	.	.	.	w	w	w
 w	w	.	e_20	w	dr_1	w	e_14	.	w	w
-w	.	e_20	m_4	w	e_19	w	m_3.m	e_14	.	w
+w	.	e_20	m_4	w	e_19	w	m_3	e_14	.	w
 .	.	w	w	w	dr_4	w	w	w	.	.
 .	.	d_1	e_19	dr_4.fr	an#cross.pi	dr_4	e_19	dr_1	.	.
 .	w	w	w	w	dr_4	w	w	w	w	.
-.	w	m_1.m	m_3.m	w	e_19	w	m_4	m_1.m	w	.
-.	w	k_0	m_1.m	w	dr_1	w	m_1.m	k_0	w	.
-.	w	w	k_1	k_1	m_2.b	k_1	k_1	w	w	.
+.	w	m_1	m_3	w	e_19	w	m_4	m_1	w	.
+.	w	k_0	m_1	w	dr_1	w	m_1	k_0	w	.
+.	w	w	k_1	k_1	m_2	k_1	k_1	w	w	.
 .	.	w	w	w	dr_2	w	w	w	.	.
 w	.	.	dr_0	dn	d_0	.	.	.	.	w
 
@@ -442,6 +476,11 @@ enemy_11->money = 20
 enemy_11->exp = 17
 
 #cross->pix = ":/images/cross"
+
+on(#cross)
+{
+	#fairy->state = 2
+}
 
 on (.pi)
 {
@@ -460,10 +499,10 @@ enemy_19->exp = 35
 at(8)
 dn	w	.	.	.	.	w	.	k_0	e_14	.
 d_0	w	.	w	w	dr_0	w	dr_0	w	w	.
-.	w	.	w	.	.	dr_1	.	.	w	m_3.m
+.	w	.	w	.	.	dr_1	.	.	w	m_3
 .	w	.	w	e_11	w	w	w	e_21	w	e_26
-e_21	w	.	w	m_1.m	w	up	d_1	.	w	e_26
-e_20	w	m_4	w	m_1.m	w	w	w	w	w	.
+e_21	w	.	w	m_1	w	up	d_1	.	w	e_26
+e_20	w	m_4	w	m_1	w	w	w	w	w	.
 e_21	w	e_26	w	.	.	.	w	.	e_20	.
 .	w	e_26	w	w	w	e_22	w	dr_0	w	w
 .	w	.	e_14	.	w	e_14	w	.	.	.
@@ -476,13 +515,13 @@ an#snow	k_0	.	w	w	w	.	.	.	w	.
 k_0	.	e_5	dr_0	.	.	.	w	.	dr_0	e_14
 w	dr_0	w	w	.	w	w	w	.	w	k_0
 .	.	.	w	.	w	d_0	.	.	w	k_0
-.	.	.	dr_2	.	w	down	w	.	w	m_1.m
+.	.	.	dr_2	.	w	down	w	.	w	m_1
 w	dr_1	w	w	.	w	w	w	.	w	w
-m_4	e_17	m_3.m	w	e_11	w	up	w	.	w	m_1.m
+m_4	e_17	m_3	w	e_11	w	up	w	.	w	m_1
 w	dr_0	w	w	.	.	d_1	dr_0	.	w	k_0
-e_14	m_1.m	e_14	w	w	dr_1	w	w	.	w	k_0
-k_1	e_14	m_1.m	w	e_6	e_11	e_6	w	.	dr_0	e_14
-s_3	k_1	e_14	dr_0	m_2.b	e_6	m_2.b	w	.	w	.
+e_14	m_1	e_14	w	w	dr_1	w	w	.	w	k_0
+k_1	e_14	m_1	w	e_6	e_11	e_6	w	.	dr_0	e_14
+s_3	k_1	e_14	dr_0	m_2	e_6	m_2	w	.	w	.
 
 weapon_3->attack = 70
 
@@ -493,29 +532,29 @@ enemy_5->money = 50
 enemy_5->exp = 50
 
 at(10)
-.	w	w	m_4	e_5	w	e_5	m_3.m	w	w	.
+.	w	w	m_4	e_5	w	e_5	m_3	w	w	.
 .	.	w	w	dr_0	w	dr_0	w	w	.	e_17
-.	.	.	.	.	w	.	.	.	e_17	m_2.b
+.	.	.	.	.	w	.	.	.	e_17	m_2
 .	w	.	w	w	w	w	w	.	w	w
 e_21	w	.	.	k_0	k_0	k_0	.	.	w	k_0
 e_20	w	.	w	w	w	w	dr_0	w	w	k_0
 e_21	w	.	dr_4.fr	d_0	down	w	.	dr_0	e_21	.
 .	w	w	w	w	w	w	dr_0	w	w	.
-.	w	m_1.m	m_4	m_3.m	w	.	e_20	.	w	k_0
-d_1	w	m_1.m	m_4	m_3.m	dr_2	e_11	w	e_11	w	k_0
-up	w	m_1.m	m_4	m_3.m	w	k_2	w	k_2	w	m_1.m
+.	w	m_1	m_4	m_3	w	.	e_20	.	w	k_0
+d_1	w	m_1	m_4	m_3	dr_2	e_11	w	e_11	w	k_0
+up	w	m_1	m_4	m_3	w	k_2	w	k_2	w	m_1
 
 at(11)
-m_1.m	w	k_0	w	k_1	w	k_2	w	m_2.b	a_3	m_2.b
-m_1.m	w	k_0	w	k_1	w	k_2	w	e_3	e_2	e_3
-m_1.m	w	k_0	w	k_1	w	k_2	w	.	e_3	.
+m_1	w	k_0	w	k_1	w	k_2	w	m_2	a_3	m_2
+m_1	w	k_0	w	k_1	w	k_2	w	e_3	e_2	e_3
+m_1	w	k_0	w	k_1	w	k_2	w	.	e_3	.
 dr_0	w	dr_0	w	dr_0	w	dr_0	w	w	dr_1	w
 .	.	.	.	.	w	.	.	.	.	.
 dr_0	w	w	dr_1	w	w	w	dr_1	w	w	dr_0
-m_4	w	.	e_3	m_4	e_4	m_4	e_3	.	w	m_3.m
-m_4	w	e_5	w	w	w	w	w	e_5	w	m_3.m
-m_4	w	e_5	w	.	me_3.f11	.	w	e_5	w	m_3.m
-w	w	dr_2	w	m_1.m	.	m_1.m	w	dr_2	w	w
+m_4	w	.	e_3	m_4	e_4	m_4	e_3	.	w	m_3
+m_4	w	e_5	w	w	w	w	w	e_5	w	m_3
+m_4	w	e_5	w	.	me_3.f11	.	w	e_5	w	m_3
+w	w	dr_2	w	m_1	.	m_1	w	dr_2	w	w
 down	d_0	.	.	.	.	.	.	.	d_1	up
 
 on(merchant_3.f11)
@@ -563,15 +602,15 @@ enemy_4->money = 65
 enemy_4->exp = 75
 
 at(12)
-me_1.f12	m_4	w	.	e_16	e_15	e_16	.	w	m_2.b	any#axe.pi
-m_3.m	.	w	.	w	dr_0	w	.	w	.	m_2.b
+me_1.f12	m_4	w	.	e_16	e_15	e_16	.	w	m_2	any#axe.pi
+m_3	.	w	.	w	dr_0	w	.	w	.	m_2
 .	.	w	.	w	e_15	w	.	w	.	.
 .	e_4	w	.	w	k_0	w	.	w	e_12	.
 e_4	e_10	w	.	w	k_0	w	.	w	e_13	e_12
-w	dr_1	w	.	w	m_1.m	w	.	w	dr_1	w
-.	.	.	.	w	m_1.m	w	.	.	.	.
+w	dr_1	w	.	w	m_1	w	.	w	dr_1	w
+.	.	.	.	w	m_1	w	.	.	.	.
 w	w	w	.	w	w	w	.	w	w	w
-m_4	e_4	dr_0	e_3	e_3	e_2	e_3	e_3	dr_0	e_4	m_3.m
+m_4	e_4	dr_0	e_3	e_3	e_2	e_3	e_3	dr_0	e_4	m_3
 w	w	w	w	w	dr_1	w	w	w	w	w
 up	d_1	.	.	.	.	.	.	.	d_0	dn
 
@@ -629,13 +668,9 @@ enemy_13->exp = 70
 
 on(#axe)
 {
-	message = "have you met theif?"
-	message = merchant_5.f4->state
 	if(merchant_5.f4->state == 1)
 	{
-		message = "inside if"
 		merchant_5.f4->state = 2
-		message = "stated changed"
 	}
 	0
 }
@@ -646,13 +681,13 @@ at(13)
 .	e_4	.	.	.	.	.	w	.	e_10	.
 .	w	w	w	w	w	dr_0	w	.	w	.
 .	w	.	.	e_3	.	.	w	.	w	.
-m_2.b	w	dr_2	w	w	w	.	w	.	w	.
-e_16	w	.	.	e_10	w	e_3	w	m_3.m	w	.
-e_15	w	.	e_9	dr_4	w	e_2	w	m_3.m	w	.
-e_16	w	e_10	dr_4.fr	me_2.f13	w	e_3	w	m_3.m	w	m_4
+m_2	w	dr_2	w	w	w	.	w	.	w	.
+e_16	w	.	.	e_10	w	e_3	w	m_3	w	.
+e_15	w	.	e_9	dr_4	w	e_2	w	m_3	w	.
+e_16	w	e_10	dr_4.fr	me_2.f13	w	e_3	w	m_3	w	m_4
 .	w	w	w	w	w	.	w	.	w	m_4
 .	e_16	.	w	.	.	.	e_10	.	w	m_4
-w	w	.	w	m_2.b	w	w	w	w	w	.
+w	w	.	w	m_2	w	w	w	w	w	.
 down	d_0	.	dr_1	d_1	up	w	an#up3.fr	e_9	dr_0	.
 
 #up3->pix = ":/images/up3"
@@ -671,8 +706,8 @@ on(merchant_2.f13)
 	{
 		if (tom->exp >= 270)
 		{
-			tom->attack = tom->attack + 30
-			tom->defend = tom->defend + 30
+			tom->attack = tom->attack + 21
+			tom->defend = tom->defend + 21
 			tom->health = tom->health + 3000
 			tom->exp = tom->exp - 270
 		}
@@ -696,12 +731,12 @@ on(merchant_2.f13)
 }
 
 at(14)
-w	.	e_13	an#key3	up	d_1	k_0.f14	k_1.f14	k_2.f14	.	w
-w	.	m_2.b	w	w	w	w	w	m_2.b	.	w
+w	.	e_13	an#key3.fr	up	d_1	k_0.f14	k_1.f14	k_2.f14	.	w
+w	.	m_2	w	w	w	w	w	m_2	.	w
 w	.	w	w	w	w	w	w	w	.	w
 w	.	w	w	w	an#vase.pi	w	w	w	.	w
 w	.	w	w	w	dr_4.fr	w	w	w	.	w
-w	.	m_1.m	w	w	e_10	w	w	m_1.m	.	w
+w	.	m_1	w	w	e_10	w	w	m_1	.	w
 w	.	aw_1	aw_1	w	e_9	w	aw_1	aw_1	.	w
 w	.	aw_1	aw_1	w	e_10	w	aw_1	aw_1	.	w
 w	.	aw_1	aw_1	w	dr_1	w	aw_1	aw_1	.	w
@@ -712,8 +747,7 @@ w	w	w	w	w	down	w	w	w	w	w
 
 on(#vase)
 {
-	tom->attack = tom->attack + tom->attack / 5
-	tom->defend = tom->defend + tom->defend / 5
+	tom->health = tom->health * 2
 }
 
 enemy_9->health = 2500
@@ -721,6 +755,13 @@ enemy_9->attack = 900
 enemy_9->defend = 850
 enemy_9->money = 84
 enemy_9->exp = 75
+
+on(#key3)
+{
+	tom->add_K = 0
+	tom->add_K = 1
+	tom->add_K = 2
+}
 
 at(15)
 .	.	.	d_0	down	aw_1	up	d_1	.	.	.
@@ -758,11 +799,177 @@ aw_1	aw_1	aw_1	aw_1	aw_1	d_0	down	aw_1	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	aw_1	aw_1	.	aw_1	aw_1	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	aw_1	aw_1	.	aw_1	aw_1	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	aw_1	w	dr_2	w	aw_1	aw_1	aw_1	aw_1
-aw_1	aw_1	aw_1	w	w	.	w	w	aw_1	aw_1	aw_1
-aw_1	aw_1	aw_1	w	w	e_30	w	w	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	w	w	f#line.fr	w	w	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	w	w	e_30.f16	w	w	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	w	w	d_1	w	w	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	w	w	up	w	w	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	aw_1	w	w	w	aw_1	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1
 
+enemy_30->health = 15000
+enemy_30->attack = 1000
+enemy_30->defend = 1000
+enemy_30->money = 100
+enemy_30->exp = 100
+
+on(#line)
+{
+	message = "魔王: 你终于来了!"
+	message = "勇士: 快把公主交粗来! "
+	message = "魔王: 哼哼, 那要先过我这关."
+}
+
+on(enemy_30.f16)
+{
+	enemy_30->health = enemy_30->health * 4 / 3
+	enemy_30->attack = enemy_30->attack * 4 / 3
+	enemy_30->defend = enemy_30->defend * 4 / 3
+	enemy_30->money = enemy_30->money * 3 / 2
+	enemy_30->exp = enemy_30->exp * 3 / 2
+	enemy_12->health = enemy_12->health * 4 / 3
+	enemy_12->attack = enemy_12->attack * 4 / 3
+	enemy_12->defend = enemy_12->defend * 4 / 3
+	enemy_12->money = enemy_12->money *3 / 2
+	enemy_12->exp = enemy_12->exp * 3 / 2
+	enemy_13->health = enemy_13->health * 4 / 3
+	enemy_13->attack = enemy_13->attack * 4 / 3
+	enemy_13->defend = enemy_13->defend * 4 / 3
+	enemy_13->money = enemy_13->money *3 / 2
+	enemy_13->exp = enemy_13->exp * 3 / 2
+	enemy_9->health = enemy_9->health * 4 / 3
+	enemy_9->attack = enemy_9->attack * 4 / 3
+	enemy_9->defend = enemy_9->defend * 4 / 3
+	enemy_9->money = enemy_9->money *3 / 2
+	enemy_9->exp = enemy_9->exp * 3 / 2
+}
+
+at(17)
+aw_1	e_12	e_9	.	.	.	.	.	.	.	e_12
+aw_1	e_9	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	.
+aw_1	.	aw_1	e_12	.	.	.	.	.	.	e_12
+aw_1	.	aw_1	.	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1
+aw_1	.	aw_1	.	aw_1	e_12	.	.	.	e_12	aw_1
+aw_1	.	aw_1	e_12	.	.	aw_1	aw_1	aw_1	.	aw_1
+aw_1	.	aw_1	aw_1	aw_1	aw_1	aw_1	e_12	.	e_12	aw_1
+aw_1	e_9	aw_1	aw_1	aw_1	dn	aw_1	.	aw_1	aw_1	aw_1
+aw_1	e_12	e_9	.	e_1	d_0	aw_1	e_12	.	.	e_12
+aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	.
+up	d_1	e_9	.	.	.	.	.	.	.	e_12
+
+enemy_1->health = 3100
+enemy_1->attack = 1150
+enemy_1->defend = 1050
+enemy_1->money = 92
+enemy_1->exp = 80
+
+at(18)
+aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	aw_1	w	w	w	aw_1	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	w	w	me_6.f18	w	w	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	w	w	dr_4.fr	w	w	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	w	w	dr_2	w	w	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	aw_1	w	dr_2	w	aw_1	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	aw_1	aw_1	aw_1.f18	aw_1	aw_1	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	aw_1	aw_1	aw_1.f18	aw_1	aw_1	aw_1	aw_1	aw_1
+dn	d_0	.	.	.	.	.	.	.	d_1	up#up.f18
+
+#up.f18->enabled = 0
+merchant_6.f18->state = 0
+
+on(merchant_6.f18)
+{
+	if(this->state == 0)
+	{
+		message = "勇士: 美丽的公主,我来就你了!"
+		message = "公主: 啊, 勇士, 是你!"
+		message = "勇士: 我们快走吧!"
+		message = "公主: ....不, 我还不想走."
+		message = "勇士: ....?!"
+		message = "勇士: 这里到处都是怪物,"
+		message = "勇士: 不作死就不会死,怎么就是不懂呢?"
+		message = "公主: 正是因为都是怪物,才不敢出去."
+		message = "公主: 你去把大魔王杀死吧,"
+		message = "公主: 然后我就跟你走."
+		message = "勇士: 可是我已经杀死了一个魔王了啊?"
+		message = "公主: 那个是假的."
+		message = "公主: 真正的魔王在塔顶."
+		message = "勇士: 好吧, 打败了魔王我就来接你!"
+		message = "公主: 嗯, 我等着你!"
+		#up.f18->enabled = 1
+		this->state = 1
+	}
+}
+
+at(19)
+.	.	.	.	.	.	.	.	.	.	.
+.	aw_1	.	aw_1	aw_1	aw_1	aw_1	aw_1	.	aw_1	.
+.	aw_1	.	aw_1	aw_1	aw_1	aw_1	aw_1	.	aw_1	.
+.	aw_1	.	aw_1	aw_1	up	aw_1	aw_1	.	aw_1	.
+.	aw_1	.	aw_1	aw_1	d_1	aw_1	aw_1	.	aw_1	.
+.	aw_1	e_30	aw_1	aw_1	.	aw_1	aw_1	e_30	aw_1	.
+.	aw_1	dr_4.fr	aw_1	aw_1	e_31.f19	aw_1	aw_1	dr_4.fr	aw_1	.
+.	aw_1	s_5.f19	aw_1	aw_1	.	aw_1	aw_1	a_1.f19	aw_1	.
+.	aw_1	aw_1	aw_1	aw_1	.	aw_1	aw_1	aw_1	aw_1	.
+.	aw_1	aw_1	aw_1	aw_1	.	aw_1	aw_1	aw_1	aw_1	.
+.	.	.	.	.	.	.	.	.	d_0	dn
+
+weapon_5->attack = 150
+armour_1->defend = 190
+
+enemy_31->health = 33333
+enemy_31->attack = 2000
+enemy_31->defend = 1600
+enemy_31->money = 375
+enemy_31->exp = 330
+
+on(enemy_31.f19)
+{
+	message = "勇士: 大魔王! 你的死期到了!"
+	message = "魔王: 哈哈哈哈哈哈哈哈哈"
+	message = "魔王: 想不到你还真能活到这里."
+	message = "魔王: 仙子还真以为你能打败我?"
+	message = "魔王: 你还差得远呢!"
+}
+
+at(20)
+e_1	m_3	e_19	m_1	e_9	k_2	e_9	m_1	e_19	m_3	e_1
+m_2	aw_1	k_0	aw_1	k_2	aw_1	k_2	aw_1	k_0	aw_1	m_2
+aw_1	m_4	e_19	.	e_12	.	e_12	.	e_19	m_4	aw_1
+m_1	aw_1	k_0	aw_1	.	dn	.	aw_1	k_0	aw_1	m_1
+e_9	k_2	e_12	.	.	d_0	.	.	e_12	k_2	e_9
+k_2	aw_1	.	.	.	.	.	.	.	aw_1	k_2
+e_9	k_2	e_12	.	.	d_1	.	.	e_12	k_2	e_9
+m_1	aw_1	k_0	aw_1	.	up#up.f20	.	aw_1	k_0	aw_1	m_1
+aw_1	m_4	e_19	.	e_12	.	e_12	.	e_19	m_4	aw_1
+m_2	aw_1	k_0	aw_1	k_2	aw_1	k_2	aw_1	k_0	aw_1	m_2
+e_1	m_3	e_19	m_1	e_9	k_2	e_9	m_1	e_19	m_3	e_1
+
+
+#up.f20->enabled = 0
+
+at(21)
+aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1
+aw_1	aw_1	.	.	aw_1	e_31#last	aw_1	.	.	aw_1	aw_1
+aw_1	.	.	aw_1	aw_1	e_13	aw_1	aw_1	.	.	aw_1
+aw_1	.	.	.	aw_1	e_13	aw_1	.	.	.	aw_1
+aw_1	aw_1	.	.	.	.	.	.	.	aw_1	aw_1
+aw_1	aw_1	.	.	.	d_0	.	.	.	aw_1	aw_1
+aw_1	aw_1	aw_1	.	.	aw_1	.	.	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	aw_1	dr_4#d4.f21	dn	dr_4#d4.f21	aw_1	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1
+
+#last->health = 45000
+#last->attack = 2550
+#last->defend = 2250
+#last->money = 312
+#last->exp = 275
+
+on(#last)
+{
+	#d4.f21->enabled = 0
+}

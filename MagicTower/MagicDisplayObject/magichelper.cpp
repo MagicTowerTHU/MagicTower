@@ -16,6 +16,7 @@
 #include "magicdestination.h"
 #include "magicaltwall.h"
 #include "magicany.h"
+#include "magicfloor.h"
 
 #include "../magicmap.h"
 
@@ -46,6 +47,7 @@ MagicDisplayObject *MagicHelper::createObject(QString target, QString Id, QList<
         alias["d"] = "destination";
         alias["aw"] = "altwall";
         alias["an"] = "any";
+        alias["f"] = "floor";
     }
     QRegExp rx("^([a-zA-Z0-9]*)(_(\\S*))?");
     rx.indexIn(target);
@@ -92,6 +94,8 @@ MagicDisplayObject *MagicHelper::createObject(QString target, QString Id, QList<
         ret = new MagicAltWall(x, y, level, map, detail);
     else if (category == "any")
         ret = new MagicAny(x, y, level, map);
+    else if (category == "floor")
+        ret = new MagicFloor(x, y, level, map);
     else
         throw "No such label...";
 
