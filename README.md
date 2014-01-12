@@ -25,56 +25,67 @@ powered by QT 5.2.0
 
 > * C语言的基本运算符
 
-        +, -, *, /, %, ^, &, <<, >>, ~, =, <, <=, >, >=, ==, !=
+```c++
++, -, *, /, %, ^, &, <<, >>, ~, =, <, <=, >, >=, ==, !=
+```
 
 > * if分支结构，和goto跳转
 
-        i = 0
-        :for_i
-        i = i + 1
-        if (i <= 3)
-            goto for_i
+```VB
+i = 0
+:for_i
+i = i + 1
+if (i <= 3)
+    goto for_i
+```
 
 > * 对象的属性获取与设置
 
-        tom->health = 10000
-        emeny_3->attack = 300
+```c++
+tom->health = 10000
+emeny_3->attack = 300
+```
         
 > * 像CSS选择器一样好用的对象选择功能
 
-        .hidden->enabled = 0
-        wall.hidden
-        #axe->pix = ":/images/axe"
+```css
+.hidden->enabled = 0
+wall.hidden
+#axe->pix = ":/images/axe"
+```
 
 > * 对象事件触发（主角经过时生效）
 
-        on (.fragile)
+```python
+on (.fragile)
+{
+    this->enabled = 0
+}
+
+on (merchant_exp.floor5)
+{
+    input("You can use your extra exp to grow your power, please choose: ", "1. 50 exp -> 10 attack",
+                "2. 30 exp -> 7 defend", "3. 100 exp -> {15 attack, 15 defend}", "4. Not this time.")
+    if (input == 1)
+        if (tom->exp >= 50)
         {
-            this->enabled = 0
+            tom->exp = tom->exp - 50
+            tom->attack = tom->attack + 10
         }
-        
-        on (#merchant_exp)
+    if (input == 2)
+        if (tom->exp >= 30)
         {
-            input("You can use your extra exp to grow your power, please choose: ", "1. 50 exp -> 10 attack", "2. 30 exp -> 7 defend", "3. 100 exp -> {15 attack, 15 defend}", "4. Not this time.")
-            if (input == 1)
-                if (tom->exp >= 50)
-                {
-                    tom->exp = tom->exp - 50
-                    tom->attack = tom->attack + 10
-                }
-            if (input == 2)
-                if (tom->exp >= 30)
-                {
-                    tom->exp = tom->exp - 30
-                    tom->defend = tom->defend + 7
-                }
-            if (input == 3)
-                if (tom->exp >= 100)
-                {
-                    tom->exp = tom->exp - 100
-                    tom->attack = tom->attack + 15
-                    tom->defend = tom->defend + 15
-                }
+            tom->exp = tom->exp - 30
+            tom->defend = tom->defend + 7
         }
-        
+    if (input == 3)
+        if (tom->exp >= 100)
+        {
+            tom->exp = tom->exp - 100
+            tom->attack = tom->attack + 15
+            tom->defend = tom->defend + 15
+        }
+}
+```
+
         
