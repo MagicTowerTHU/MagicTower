@@ -9,7 +9,7 @@ w	w	aw_1	aw_1	aw_1	k_0.ini	aw_1	aw_1	aw_1	w	w
 w	w	w	w	w	dr_0	w	w	w	w	w
 aw_2	w	aw_2	w	.	me_4#fairy	.	w	aw_2	w	aw_2
 aw_2	aw_2	aw_2	aw_2	aw_2	.	aw_2	aw_2	aw_2	aw_2	aw_2
-aw_2	aw_2	aw_2	aw_2	aw_2	.	aw_2	aw_2	aw_2	aw_2	aw_2
+aw_2	aw_2	aw_2	aw_2	aw_2	t	aw_2	aw_2	aw_2	aw_2	aw_2
 
 on (#fairy)
 {
@@ -176,8 +176,8 @@ on(merchant_1.f2)
 wisdomEnabled = 1
 teleportEnabled = 1
 
-tom->defend = 1000
-tom->attack = 1000
+tom->defend = 10
+tom->attack = 10
 tom->health = 1000
 
 at(3)
@@ -564,7 +564,7 @@ enemy_4->exp = 75
 
 at(12)
 me_1.f12	m_4	w	.	e_16	e_15	e_16	.	w	m_2.b	any#axe.pi
-m_3.m	t	w	.	w	dr_0	w	.	w	.	m_2.b
+m_3.m	.	w	.	w	dr_0	w	.	w	.	m_2.b
 .	.	w	.	w	e_15	w	.	w	.	.
 .	e_4	w	.	w	k_0	w	.	w	e_12	.
 e_4	e_10	w	.	w	k_0	w	.	w	e_13	e_12
