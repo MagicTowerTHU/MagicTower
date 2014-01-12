@@ -418,7 +418,7 @@ e_16	w	.	.	e_10	w	e_3	w	m_3	w	.
 e_15	w	.	e_9	dr_4	w	e_2	w	m_3	w	.
 e_16	w	e_10	dr_4.fr	me_2	w	e_3	w	m_3	w	m_4
 .	w	w	w	w	w	.	w	.	w	m_4
-.	e_16	.	w	.	.	.	m_10	.	w	m_4
+.	e_16	.	w	.	.	.	e_10	.	w	m_4
 w	w	.	w	m_2	w	w	w	w	w	.
 down	d_0	.	dr_1	d_1	up	w	an#up3	e_9	dr_0	.
 
@@ -460,11 +460,4 @@ aw_1	aw_1	aw_1	w	w	up	w	w	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	aw_1	w	w	w	aw_1	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1
-
-
-
-
-
-
-
 
