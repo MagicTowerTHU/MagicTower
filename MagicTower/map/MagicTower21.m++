@@ -181,7 +181,7 @@ tom->attack = 1000
 tom->health = 1000
 
 at(3)
-s_1	e_28	k_0	w	.	me_3	.	w	w	w	w
+s_1	e_28	k_0	w	.	me_3.f3	.	w	w	w	w
 e_28	k_0	.	w	.	.	.	w	.	e_21	.
 k_0	e_25	.	w	w	dr_0	w	w	.	w	.
 w	dr_0	w	w	.	e_25	.	w	k_0	w	e_28
@@ -192,6 +192,30 @@ e_29	w	w	w	w	w	.	.	.	w	.
 w	w	w	w	e_21	w	e_28	.	e_28	w	.
 w	.	.	.	.	w	m_4	e_21	k_0	w	d_1
 dn	d_0	w	w	w	w	m_3	m_2	k_0	w	up
+
+on(merchant_3.f3)
+{
+	choice = input("商人: 用25元换取任意一项:", "1. 增加800点生命", "2. 增加4点攻击", "3. 增加4点防御")
+	if(tom->money >= 25)
+	{
+		if(choice == 1)
+		{
+			tom->health = tom->health + 800
+			tom->money = tom->money - 25
+		}
+		if(choice == 2)
+		{
+			tom->attack = tom->attack + 4
+			tom->money = tom->money - 25
+		}
+		if(choice == 3)
+		{
+			tom->defend = tom->defend + 4
+			tom->money = tom->money - 25
+		}
+
+	}
+}
 
 at(4)
 .	e_26	.	w	.	me_5.f4	.	w	.	e_26	.
@@ -274,7 +298,7 @@ dn	.	e_21	.	.	.	w	k_0	w	up	w
 
 on(merchant_1.f5)
 {
-	choice = input("商人: 只要你有金币,我就可以帮你.", "1. 购买一把黄钥匙($10)", "2. 购买一把蓝钥匙($50)", "3. 购买一把红钥匙($100)")
+	choice = input("商人: 金币换钥匙.", "1. 购买一把黄钥匙($10)", "2. 购买一把蓝钥匙($50)", "3. 购买一把红钥匙($100)")
 	if(choice == 1)
 	{
 		if (tom->money >= 10)
@@ -297,6 +321,37 @@ on(merchant_1.f5)
 		{
 			tom->add_K = 2
 			tom->money = tom->money - 100
+		}
+	}
+}
+
+on(merchant_2.f5)
+{
+	choice = input("商人: 经验换实力.", "1. 提升一级(100经验)", "2. 增加5点攻击(30经验)", "3. 增加5点防御(30点经验)")
+	if(choice == 1)
+	{
+		if (tom->exp >= 100)
+		{
+			tom->attack = tom->attack + 10
+			tom->defend = tom->defend + 10
+			tom->health = tom->health + 1000
+			tom->exp = tom->exp - 100
+		}
+	}
+	if(choice == 2)
+	{
+		if (tom->exp >= 30)
+		{
+			tom->attack = tom->attack + 5
+			tom->exp = tom->exp - 30
+		}
+	}
+	if(choice == 3)
+	{
+		if (tom->exp >= 30)
+		{
+			tom->defend = tom->defend + 5
+			tom->exp = tom->exp - 30
 		}
 	}
 }
@@ -460,9 +515,33 @@ dr_0	w	dr_0	w	dr_0	w	dr_0	w	w	dr_1	w
 dr_0	w	w	dr_1	w	w	w	dr_1	w	w	dr_0
 m_4	w	.	e_3	m_4	e_4	m_4	e_3	.	w	m_3.m
 m_4	w	e_5	w	w	w	w	w	e_5	w	m_3.m
-m_4	w	e_5	w	.	me_3	.	w	e_5	w	m_3.m
+m_4	w	e_5	w	.	me_3.f11	.	w	e_5	w	m_3.m
 w	w	dr_2	w	m_1.m	.	m_1.m	w	dr_2	w	w
 down	d_0	.	.	.	.	.	.	.	d_1	up
+
+on(merchant_3.f11)
+{
+	choice = input("商人: 用100元换取任意一项:", "1. 增加4000点生命", "2. 增加20点攻击", "3. 增加20点防御")
+	if(tom->money >= 100)
+	{
+		if(choice == 1)
+		{
+			tom->health = tom->health + 4000
+			tom->money = tom->money - 100
+		}
+		if(choice == 2)
+		{
+			tom->attack = tom->attack + 20
+			tom->money = tom->money - 100
+		}
+		if(choice == 3)
+		{
+			tom->defend = tom->defend + 20
+			tom->money = tom->money - 100
+		}
+
+	}
+}
 
 armour_3->defend = 85
 
@@ -557,9 +636,9 @@ at(13)
 .	w	w	w	w	w	dr_0	w	.	w	.
 .	w	.	.	e_3	.	.	w	.	w	.
 m_2.b	w	dr_2	w	w	w	.	w	.	w	.
-e_16	w	.	.	e_10	w	e_3	w	m_3.m	w	.
+e_16	w	.	t	e_10	w	e_3	w	m_3.m	w	.
 e_15	w	.	e_9	dr_4	w	e_2	w	m_3.m	w	.
-e_16	w	e_10	dr_4.fr	me_2	w	e_3	w	m_3.m	w	m_4
+e_16	w	e_10	dr_4.fr	me_2.f13	w	e_3	w	m_3.m	w	m_4
 .	w	w	w	w	w	.	w	.	w	m_4
 .	e_16	.	w	.	.	.	e_10	.	w	m_4
 w	w	.	w	m_2.b	w	w	w	w	w	.
@@ -572,6 +651,37 @@ on(#up3)
 	tom->attack = tom->attack + 30
 	tom->defend = tom->defend + 30
 	tom->health = tom->health + 3000
+}
+
+on(merchant_2.f13)
+{
+	choice = input("商人: 经验换实力.", "1. 提升三级(270经验)", "2. 增加17点攻击(95经验)", "3. 增加17点防御(95点经验)")
+	if(choice == 1)
+	{
+		if (tom->exp >= 270)
+		{
+			tom->attack = tom->attack + 30
+			tom->defend = tom->defend + 30
+			tom->health = tom->health + 3000
+			tom->exp = tom->exp - 270
+		}
+	}
+	if(choice == 2)
+	{
+		if (tom->exp >= 95)
+		{
+			tom->attack = tom->attack + 17
+			tom->exp = tom->exp - 95
+		}
+	}
+	if(choice == 3)
+	{
+		if (tom->exp >= 95)
+		{
+			tom->defend = tom->defend + 17
+			tom->exp = tom->exp - 95
+		}
+	}
 }
 
 at(14)
@@ -610,7 +720,7 @@ at(15)
 .	aw_1	w	w	m_3	w	m_3	w	w	aw_1	.
 .	aw_1	aw_1	w	s_4.f15.hid	w	a_4.f15.hid	w	aw_1	aw_1	.
 .	aw_1	aw_1	w	dr_0	w	dr_0	w	aw_1	aw_1	.
-.	aw_1	aw_1	w	.	.	t	w	aw_1	aw_1	.
+.	aw_1	aw_1	w	.	.	.	w	aw_1	aw_1	.
 .	aw_1	aw_1	aw_1	aw_1	dr_2	aw_1	aw_1	aw_1	aw_1	.
 .	.	.	.	.	.	.	.	.	.	.
 
