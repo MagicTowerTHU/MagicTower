@@ -141,12 +141,11 @@ d_0	w	m_4	w	m_2	w	m_3	m_4	k_0	k_1	w
 .	w	k_0	w	k_0	w	w	w	w	dr_0	w
 .	w	.	w	.	.	.	dr_0	.	.	w
 .	w	dr_0	w	w	dr_0	w	w	dr_0	w	w
-.	.	.	.	.	.	w	.	e_16	.	w
+.	dr_3.f2	.	.	.	.	w	.	e_16	.	w
 .	w	dr_0	w	w	dr_1	w	dr_4.fr	w	dr_4.fr	w
 .	w	k_0	w	m_2	m_1	w	.	w	.	w
 d_1	w	k_0	w	m_2	m_1	w	s_2.f2.hid	w	a_2.f2.hid	w
 up	w	m_3	w	m_2	m_1	w	me_2.f2	w	me_1.f2	w
-
 
 on(.fr)
 {
@@ -176,9 +175,10 @@ on(merchant_1.f2)
 wisdomEnabled = 1
 teleportEnabled = 1
 
-tom->defend = 1000
-tom->attack = 1000
-tom->health = 1000
+tom->defend = 5000
+tom->attack = 5000
+tom->health = 5000
+tom->money = 50000
 
 at(3)
 s_1	e_28	k_0	w	.	me_3.f3	.	w	w	w	w
@@ -277,9 +277,21 @@ on(merchant_5.f4)
 	}
 	if (this->state == 2)
 	{
-		message = "hahahaha"
+		message = "小偷: 看来你拿到了我需要的."
+		message = "小偷: 我这就去给你开门!"
+		this->position_x = 0
+		this->position_y = 6
+		this->level = 2
+		this->state = 3
+		dr_3.f2->enabled = 0
 	}
-	0
+	if (this->state == 3)
+	{
+		message = "小偷: 嗨,你来了!"
+		message = "小偷: 你看, 这扇门已经打开了!"
+		message = "小偷: 那么, 后会有期!"
+		this->enabled = 0
+	}
 }
 
 at(5)
@@ -636,7 +648,7 @@ at(13)
 .	w	w	w	w	w	dr_0	w	.	w	.
 .	w	.	.	e_3	.	.	w	.	w	.
 m_2.b	w	dr_2	w	w	w	.	w	.	w	.
-e_16	w	.	t	e_10	w	e_3	w	m_3.m	w	.
+e_16	w	.	.	e_10	w	e_3	w	m_3.m	w	.
 e_15	w	.	e_9	dr_4	w	e_2	w	m_3.m	w	.
 e_16	w	e_10	dr_4.fr	me_2.f13	w	e_3	w	m_3.m	w	m_4
 .	w	w	w	w	w	.	w	.	w	m_4
@@ -685,7 +697,7 @@ on(merchant_2.f13)
 }
 
 at(14)
-w	.	e_13	an#key3	up	d_1	k_0.f14	k_1.f14	k_2.f14	.	w
+w	.	e_13	an#key3.fr	up	d_1	k_0.f14	k_1.f14	k_2.f14	.	w
 w	.	m_2.b	w	w	w	w	w	m_2.b	.	w
 w	.	w	w	w	w	w	w	w	.	w
 w	.	w	w	w	an#vase.pi	w	w	w	.	w
@@ -710,6 +722,13 @@ enemy_9->attack = 900
 enemy_9->defend = 850
 enemy_9->money = 84
 enemy_9->exp = 75
+
+on(#key3)
+{
+	tom->add_K = 0
+	tom->add_K = 1
+	tom->add_K = 2
+}
 
 at(15)
 .	.	.	d_0	down	aw_1	up	d_1	.	.	.
@@ -745,13 +764,65 @@ on(merchant_1.f15)
 at(16)
 aw_1	aw_1	aw_1	aw_1	aw_1	d_0	down	aw_1	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	aw_1	aw_1	.	aw_1	aw_1	aw_1	aw_1	aw_1
-aw_1	aw_1	aw_1	aw_1	aw_1	.	aw_1	aw_1	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	aw_1	aw_1	t	aw_1	aw_1	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	aw_1	w	dr_2	w	aw_1	aw_1	aw_1	aw_1
-aw_1	aw_1	aw_1	w	w	.	w	w	aw_1	aw_1	aw_1
-aw_1	aw_1	aw_1	w	w	e_30	w	w	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	w	w	f#line	w	w	aw_1	aw_1	aw_1
+aw_1	aw_1	aw_1	w	w	e_30.f16	w	w	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	w	w	d_1	w	w	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	w	w	up	w	w	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	aw_1	w	w	w	aw_1	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1
+
+enemy_30->health = 15000
+enemy_30->attack = 1000
+enemy_30->defend = 1000
+enemy_30->money = 100
+enemy_30->exp = 100
+
+on(floor#line)
+{
+	message = "魔王: 你终于来了!"
+	message = "勇士: 快把公主交粗来! "
+	message = "魔王: 哼哼, 那要先过我这关."
+}
+
+on(enemy_30.f16)
+{
+	enemy_30->health = enemy_30->health * 4 / 3
+	enemy_30->attack = enemy_30->attack * 4 / 3
+	enemy_30->defend = enemy_30->defend * 4 / 3
+	enemy_30->money = enemy_30->money * 3 / 2
+	enemy_30->exp = enemy_30->exp * 3 / 2
+	enemy_12->health = enemy_12->health * 4 / 3
+	enemy_12->attack = enemy_12->attack * 4 / 3
+	enemy_12->defend = enemy_12->defend * 4 / 3
+	enemy_12->money = enemy_12->money *3 / 2
+	enemy_12->exp = enemy_12->exp * 3 / 2
+	enemy_9->health = enemy_9->health * 4 / 3
+	enemy_9->attack = enemy_9->attack * 4 / 3
+	enemy_9->defend = enemy_9->defend * 4 / 3
+	enemy_9->money = enemy_9->money *3 / 2
+	enemy_9->exp = enemy_9->exp * 3 / 2
+}
+
+at(17)
+aw_1	e_12.nb	e_9.nb	.	.	.	.	.	.	.	e_12.nb
+aw_1	e_9.nb	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	.
+aw_1	.	aw_1	e_12.nb	.	.	.	.	.	.	e_12.nb
+aw_1	.	aw_1	.	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1
+aw_1	.	aw_1	.	aw_1	e_12.nb	.	.	.	e_12.nb	aw_1
+aw_1	.	aw_1	e_12.nb	.	.	aw_1	aw_1	aw_1	.	aw_1
+aw_1	.	aw_1	aw_1	aw_1	aw_1	aw_1	e_12.nb	.	e_12.nb	aw_1
+aw_1	e_9.nb	aw_1	aw_1	aw_1	dn	aw_1	.	aw_1	aw_1	aw_1
+aw_1	e_12.nb	e_9.nb	.	e_1	d_0	aw_1	e_12.nb	.	.	e_12.nb
+aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	.
+up	d_1	e_9.nb	.	.	.	.	.	.	.	e_12.nb
+
+enemy_1->health = 3100
+enemy_1->attack = 1150
+enemy_1->defend = 1050
+enemy_1->money = 92
+enemy_1->exp = 80
+
 
