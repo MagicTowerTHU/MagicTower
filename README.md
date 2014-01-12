@@ -178,5 +178,5 @@ void MagicMap::setProperty(QString propertyName, MagicVarient propertyValue)
 ---------
 * 多线程在MagicTower中主要用于声音播放（合成）、界面重绘和键盘事件处理。
 * 多线程的好处在于，遇到需要阻塞的动画（比如小人行走），应保证不阻塞进程的消息队列线程。动态地添加线程去完成相应的任务，可以使程序正确处理线程阻塞，并且不引起程序假死。
-    - 在处理阻塞动画时，除了同步某些关键数据时采用了`QMutex`互斥锁，MagicTower还采用了`QWaitCondition`，当动画播放完成，即将删除`MagicAnimate`前，通知正在等待的线程。`MagicAnimate`同时继承了`QMutex`和`QWaitCondition`类，方便单独管理阻塞。
+    - 在处理阻塞动画时，除了同步某些关键数据时采用了`QMutex`互斥锁和`QReadWriteLock`读写锁，MagicTower还采用了`QWaitCondition`处理消息：当动画播放完成，即将删除`MagicAnimate`前，通知正在等待的线程。`MagicAnimate`同时继承了`QMutex`和`QWaitCondition`类，方便单独管理阻塞。
 
