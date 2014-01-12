@@ -169,7 +169,7 @@ void MagicMap::setProperty(QString propertyName, MagicVarient propertyValue)
     m_1.m	wi  	k_0	    w   	.	    down    .	    w	    k_0	    k_0	    k_0
     ```
     ```
-    w->wall, k->key, dr->door, e->enemy, d_0->destionation_upstair, d_1->destionatoin_downstair, m->medicine
+    注释：w->wall, k->key, dr->door, e->enemy, d_0->destionation_upstair, d_1->destionatoin_downstair, m->medicine
     ```
 
 * MagicTower的存档功能与脚本逻辑密不可分。地图的布局、事件选择器与事件、每个对象的属性哈希表可以完备地表达地图状态，所以存储时只需要存储以上信息即可。存档功能暂时还没有进行压缩和加密，所以存档文件的体积相对较大，并且容易被玩家修改。
