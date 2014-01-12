@@ -18,7 +18,7 @@ void MagicInventory::paint(QPainter *painter)
 
 bool MagicInventory::move(MagicMap *map)
 {
-    if (map->Tom()->inventory.size() < 24)
+    //if (map->Tom()->inventory.size() < 33)
     {
         property["enabled"] = 0;
         setProperty("picked", 1);
