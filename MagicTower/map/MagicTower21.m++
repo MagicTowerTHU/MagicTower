@@ -271,9 +271,34 @@ w	w	w	e_21	w	dr_0	w	dr_1	w	dr_0	w
 d_0	.	w	.	w	e_21	w	m_4	dr_0	d_1	w
 dn	.	e_21	.	.	.	w	k_0	w	up	w
 
+
 on(merchant_1.f5)
 {
-	0
+	choice = input("商人: 只要你有金币,我就可以帮你.", "1. 购买一把黄钥匙($10)", "2. 购买一把蓝钥匙($50)", "3. 购买一把红钥匙($100)")
+	if(choice == 1)
+	{
+		if (tom->money >= 10)
+		{
+			tom->add_K = 0
+			tom->money = tom->money - 10
+		}
+	}
+	if(choice == 2)
+	{
+		if (tom->money >= 50)
+		{
+			tom->add_K = 1
+			tom->money = tom->money - 50
+		}
+	}
+	if(choice == 3)
+	{
+		if (tom->money >= 100)
+		{
+			tom->add_K = 2
+			tom->money = tom->money - 100
+		}
+	}
 }
 
 armour_5->defend = 10
