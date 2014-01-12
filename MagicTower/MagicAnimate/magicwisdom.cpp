@@ -18,7 +18,7 @@ MagicWisdom::~MagicWisdom()
 bool MagicWisdom::paint(QPainter *painter)
 {
     painter->setPen("white");
-
+    cnt--;
     if (wantDelete)
         return false;
     for (int i = 0; i < 10; i++)
@@ -50,7 +50,7 @@ bool MagicWisdom::paint(QPainter *painter)
                 enemy->property["enabled"].isTrue())
             {
                 enemySet.push_back(enemy->property["label"].getString());
-                painter->drawPixmap(32, k*32, cnt-- > 10 ? *(enemy->pix[0]) : *(enemy->pix[1]));
+                painter->drawPixmap(32, k*32, cnt > 10 ? *(enemy->pix[0]) : *(enemy->pix[1]));
                 l = 2;
                 painter->drawText(l*offset + margin_left +4, k*32+margin_top+4, QString::number(enemy->property["attack"].getInt())); l+=2;
                 painter->drawText(l*offset + margin_left +4, k*32+margin_top+4, QString::number(enemy->property["defend"].getInt())); l+=2;

@@ -1,3 +1,10 @@
+
+on(merchant_2.f2)
+{
+	print = "1212312"
+	print = input("description", "1", "2")
+}
+
 at(0)
 w	aw_1	aw_1	aw_1	aw_1	up	aw_1	aw_1	aw_1	aw_1	w
 w	aw_1	aw_1	aw_1	aw_1	.	aw_1	aw_1	aw_1	aw_1	w

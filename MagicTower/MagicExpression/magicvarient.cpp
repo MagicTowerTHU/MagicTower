@@ -41,6 +41,8 @@ QString MagicVarient::getString()
 
 QString MagicVarient::getOutput()
 {
+    if (!this->data)
+        return "\"";
     if (this->type)
         return "\"" + *((QString*)this->data);
     else

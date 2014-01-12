@@ -379,27 +379,6 @@ QList<MagicObject *> MagicMap::findDisplayObject(QString objectLabel, QString ob
     return objects;
 }
 
-
-const MagicVarient& MagicMap::operator[](QString propertyName) const
-{
-    if (propertyName.startsWith("input_"))
-    {
-        QString propertyValue = propertyName.mid(6);
-        int len = propertyValue.length();
-        QStringList l = propertyValue.mid(1, len - 2).split(QRegExp("\\\"\\s*,\\s*\\\""));
-        for (auto i = l.begin(); i != l.end(); i++)
-            if ((*i).startsWith("\""))
-                i = l.erase(i);
-
-        QString message = *l.begin();
-        l.erase(l.begin());
-
-        const_cast<MagicMap *>(this)->appendAnimate(new MagicInputBox(const_cast<MagicMap *>(this), message, l), true);
-        return property.find("input").value();
-    }
-    return MagicObject::operator [](propertyName);
-}
-
 void MagicMap::setProperty(QString propertyName, MagicVarient propertyValue)
 {
     if (propertyName == "sound")

@@ -157,7 +157,7 @@ MagicOperand *getVar(QString buffer, int &p)
             {
                 p += rx.matchedLength();
                 if (rx.cap(1) == "input")
-                    return new MagicReference("global", "", QList<QString>(), rx.cap(1) + "_" + rx.cap(3));
+                    return new MagicReference("input", "", QList<QString>(), rx.cap(3));
                 return new MagicReference("global", "", QList<QString>(), rx.cap(1));
             }
             throw "What variable?";
@@ -343,6 +343,12 @@ void MagicExpression::goForIt(QString line, MagicMap *map, QTextStream *pIn)
     }
     else if (line.startsWith("if"))
     {
+        if (ifFlag == 2)
+        {
+            ifFlag = 0;
+            head = tail = ifStack.pop();
+            singleLine();
+        }
         MagicOperand *condition = getCondition(line, 2);
         ifStack.push(new MagicCondition(condition));
         ifFlag = 1;
