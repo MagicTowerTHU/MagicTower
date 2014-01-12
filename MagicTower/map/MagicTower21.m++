@@ -377,13 +377,13 @@ an#snow	k_0	.	w	w	w	.	.	.	w	.
 k_0	.	e_5	dr_0	.	.	.	w	.	dr_0	e_14
 w	dr_0	w	w	.	w	w	w	.	w	k_0
 .	.	.	w	.	w	d_0	.	.	w	k_0
-.	.	.	dr_2	.	w	down	w	.	w	m_1
+.	.	.	dr_2	.	w	down	w	.	w	m_1.m
 w	dr_1	w	w	.	w	w	w	.	w	w
-m_4	e_17	m_3	w	e_11	w	up	w	.	w	m_1
+m_4	e_17	m_3.m	w	e_11	w	up	w	.	w	m_1.m
 w	dr_0	w	w	.	.	d_1	dr_0	.	w	k_0
-e_14	m_1	e_14	w	w	dr_1	w	w	.	w	k_0
-k_1	e_14	m_1	w	e_6	e_11	e_6	w	.	dr_0	e_14
-s_3	k_1	e_14	dr_0	m_2	e_6	m_2	w	.	w	.
+e_14	m_1.m	e_14	w	w	dr_1	w	w	.	w	k_0
+k_1	e_14	m_1.m	w	e_6	e_11	e_6	w	.	dr_0	e_14
+s_3	k_1	e_14	dr_0	m_2.b	e_6	m_2.b	w	.	w	.
 
 
 enemy_5->health = 900
@@ -391,3 +391,5 @@ enemy_5->attack = 450
 enemy_5->defend = 330
 enemy_5->money = 50
 enemy_5->exp = 50
+
+at(10)
