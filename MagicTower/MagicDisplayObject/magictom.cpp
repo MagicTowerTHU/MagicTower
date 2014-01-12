@@ -24,6 +24,7 @@ MagicTom::MagicTom(int x, int y, int level, MagicMap *parent)
     property["exp"] = 0;
     property["money"] = 0;
     property["id"] = "";
+    property["range"] = 0;
 
     qDebug() <<"Tom: "<< property["attack"].getInt() << property["defend"].getInt() << property["health"].getInt();
     qDebug() <<"Tom: "<< property["label"].getString() << property["level"].getInt() << property["id"].getString();
@@ -41,8 +42,8 @@ bool MagicTom::move(MagicMap *)
 
 void MagicTom::setProperty(QString propertyName, MagicVarient propertyValue)
 {
-    if (propertyName == "level" && propertyValue.getInt() > range)
-        range = propertyValue.getInt();
+    if (propertyName == "level" && propertyValue.getInt() > property["range"].getInt())
+        property["range"] = propertyValue.getInt();
     MagicDisplayObject::setProperty(propertyName, propertyValue);
 }
 

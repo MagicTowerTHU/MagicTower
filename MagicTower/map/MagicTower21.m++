@@ -151,13 +151,15 @@ d_0	w	m_4	w	m_2	w	m_3	m_4	k_0	k_1	w
 .	.	.	.	.	.	w	.	e_16	.	w
 .	w	dr_0	w	w	dr_1	w	dr_4.fr	w	dr_4.fr	w
 .	w	k_0	w	m_2	m_1	w	.	w	.	w
-d_1	w	k_0	w	m_2	m_1	w	.	w	.	w
+d_1	w	k_0	w	m_2	m_1	w	s_2.f2	w	a_2.f2	w
 up	w	m_3	w	m_2	m_1	w	me_2.f2	w	me_1.f2	w
 
 on(.fr)
 {
 	this->enabled = 0
 }
+
+
 
 wisdomEnabled = 1
 teleportEnabled = 1
@@ -239,7 +241,7 @@ on(merchant_5.f4)
 	}
 	if (this->state == 2)
 	{
-		0
+		message = "hahahaha"
 	}
 	0
 }
@@ -270,7 +272,7 @@ at(6)
 an#f6.fr	e_14	w	m_4	w	k_0	e_18	an#coin.fr	w	m_2	m_2
 e_14	k_0	w	m_3.m	w	.	k_0	e_18	w	e_6	m_2
 k_0	e_20	dr_1	.	dr_1	e_20	.	k_0	w	.	e_6
-t	.	w	e_22	w	.	.	.	w	e_17	.
+.	.	w	e_22	w	.	.	.	w	e_17	.
 w	w	w	dr_2	w	w	w	w	w	dr_0	w
 .	.	e_7	.	k_0	k_0	k_0	.	e_7	.	.
 .	w	w	w	w	w	w	w	w	w	w
@@ -321,6 +323,7 @@ on(#f6)
 {
 	tom->attack = tom->attack + 10
 	tom->defend = tom->defend + 10
+	top->health = tom->health + 1000
 }
 
 at(7)
@@ -394,67 +397,136 @@ enemy_5->money = 50
 enemy_5->exp = 50
 
 at(10)
-.	w	w	m_4	e_5	w	e_5	m_3	w	w	.
+.	w	w	m_4	e_5	w	e_5	m_3.m	w	w	.
 .	.	w	w	dr_0	w	dr_0	w	w	.	e_17
-.	.	.	.	.	w	.	.	.	e_17	m_2
+.	.	.	.	.	w	.	.	.	e_17	m_2.b
 .	w	.	w	w	w	w	w	.	w	w
 e_21	w	.	.	k_0	k_0	k_0	.	.	w	k_0
 e_20	w	.	w	w	w	w	dr_0	w	w	k_0
 e_21	w	.	dr_4.fr	d_0	down	w	.	dr_0	e_21	.
 .	w	w	w	w	w	w	dr_0	w	w	.
-.	w	m_1	m_4	m_3	w	.	e_20	.	w	k_0
-d_1	w	m_1	m_4	m_3	dr_2	e_11	w	e_11	w	k_0
-up	w	m_1	m_4	m_3	w	k_2	w	k_2	w	m_1
+.	w	m_1.m	m_4	m_3.m	w	.	e_20	.	w	k_0
+d_1	w	m_1.m	m_4	m_3.m	dr_2	e_11	w	e_11	w	k_0
+up	w	m_1.m	m_4	m_3.m	w	k_2	w	k_2	w	m_1.m
 
 at(11)
-m_1	w	k_0	w	k_1	w	k_2	w	m_2	a_3	m_2
-m_1	w	k_0	w	k_1	w	k_2	w	e_3	e_2	e_3
-m_1	w	k_0	w	k_1	w	k_2	w	.	e_3	.
+m_1.m	w	k_0	w	k_1	w	k_2	w	m_2.b	a_3	m_2.b
+m_1.m	w	k_0	w	k_1	w	k_2	w	e_3	e_2	e_3
+m_1.m	w	k_0	w	k_1	w	k_2	w	.	e_3	.
 dr_0	w	dr_0	w	dr_0	w	dr_0	w	w	dr_1	w
 .	.	.	.	.	w	.	.	.	.	.
 dr_0	w	w	dr_1	w	w	w	dr_1	w	w	dr_0
-m_4	w	.	e_3	m_4	e_4	m_4	e_3	.	w	m_3
-m_4	w	e_5	w	w	w	w	w	e_5	w	m_3
-m_4	w	e_5	w	.	me_3	.	w	e_5	w	m_3
-w	w	dr_2	w	m_1	.	m_1	w	dr_2	w	w
+m_4	w	.	e_3	m_4	e_4	m_4	e_3	.	w	m_3.m
+m_4	w	e_5	w	w	w	w	w	e_5	w	m_3.m
+m_4	w	e_5	w	.	me_3	.	w	e_5	w	m_3.m
+w	w	dr_2	w	m_1.m	.	m_1.m	w	dr_2	w	w
 down	d_0	.	.	.	.	.	.	.	d_1	up
 
+armour_3->defend = 85
+
+enemy_2->health = 1500
+enemy_2->attack = 560
+enemy_2->defend = 460
+enemy_2->money = 60
+enemy_2->exp = 60
+
+enemy_3->health = 1250
+enemy_3->attack = 500
+enemy_3->defend = 400
+enemy_3->money = 55
+enemy_3->exp = 55
+
+enemy_4->health = 1200
+enemy_4->attack = 620
+enemy_4->defend = 520
+enemy_4->money = 65
+enemy_4->exp = 75
+
 at(12)
-me_1	m_4	w	.	e_16	e_15	e_16	.	w	m_2	any#axe.pi
-m_3	.	w	.	w	dr_0	w	.	w	.	m_2
+me_1	m_4	w	.	e_16	e_15	e_16	.	w	m_2.b	any#axe.pi
+m_3.m	.	w	.	w	dr_0	w	.	w	.	m_2.b
 .	.	w	.	w	e_15	w	.	w	.	.
 .	e_4	w	.	w	k_0	w	.	w	e_12	.
 e_4	e_10	w	.	w	k_0	w	.	w	e_13	e_12
-w	dr_1	w	.	w	m_1	w	.	w	dr_1	w
-.	.	.	.	w	m_1	w	.	.	.	.
+w	dr_1	w	.	w	m_1.m	w	.	w	dr_1	w
+.	.	.	.	w	m_1.m	w	.	.	.	.
 w	w	w	.	w	w	w	.	w	w	w
-m_4	e_4	dr_0	e_3	e_3	e_2	e_3	e_3	dr_0	e_4	m_3
+m_4	e_4	dr_0	e_3	e_3	e_2	e_3	e_3	dr_0	e_4	m_3.m
 w	w	w	w	w	dr_1	w	w	w	w	w
 up	d_1	.	.	.	.	.	.	.	d_0	dn
+
+enemy_10->health = 2000
+enemy_10->attack = 680
+enemy_10->defend = 590
+enemy_10->money = 70
+enemy_10->exp = 65
+
+enemy_12->health = 1200
+enemy_12->attack = 980
+enemy_12->defend = 900
+enemy_12->money = 88
+enemy_12->exp = 75
+
+enemy_13->health = 1500
+enemy_13->attack = 830
+enemy_13->defend = 730
+enemy_13->money = 80
+enemy_13->exp = 70
+
+#axe->pix = ":/images/axe"
+
+on(#axe)
+{
+	message = "have you met theif?"
+	message = merchant_5.f4->state
+	if(merchant_5.f4->state == 1)
+	{
+		message = "inside if"
+		merchant_5.f4->state = 2
+		message = "stated changed"
+	}
+	0
+}
+
+
 
 at(13)
 .	e_4	.	.	.	.	.	w	.	e_10	.
 .	w	w	w	w	w	dr_0	w	.	w	.
 .	w	.	.	e_3	.	.	w	.	w	.
-m_2	w	dr_2	w	w	w	.	w	.	w	.
-e_16	w	.	.	e_10	w	e_3	w	m_3	w	.
-e_15	w	.	e_9	dr_4	w	e_2	w	m_3	w	.
-e_16	w	e_10	dr_4.fr	me_2	w	e_3	w	m_3	w	m_4
+m_2.b	w	dr_2	w	w	w	.	w	.	w	.
+e_16	w	.	.	e_10	w	e_3	w	m_3.m	w	.
+e_15	w	.	e_9	dr_4	w	e_2	w	m_3.m	w	.
+e_16	w	e_10	dr_4.fr	me_2	w	e_3	w	m_3.m	w	m_4
 .	w	w	w	w	w	.	w	.	w	m_4
-.	e_16	.	w	.	.	.	m_10	.	w	m_4
-w	w	.	w	m_2	w	w	w	w	w	.
-down	d_0	.	dr_1	d_1	up	w	an#up3	e_9	dr_0	.
+.	e_16	t	w	.	.	.	e_10	.	w	m_4
+w	w	.	w	m_2.b	w	w	w	w	w	.
+down	d_0	.	dr_1	d_1	up	w	an#up3.fr	e_9	dr_0	.
+
+#up3->pix = ":/images/up3"
+
+on(#up3)
+{
+	tom->attack = tom->attack + 30
+	tom->defend = tom->defend + 30
+	tom->health = tom->health + 3000
+}
 
 at(14)
 w	.	e_13	an#key3	up	d_1	k_0.f14	k_1.f14	k_2.f14	.	w
-w	.	m_2	w	w	w	w	w	m_2	.	w
+w	.	m_2.b	w	w	w	w	w	m_2.b	.	w
 w	.	w	w	w	w	w	w	w	.	w
 w	.	w	w	w	an#vase.pi	w	w	w	.	w
 w	.	w	w	w	dr_4	w	w	w	.	w
-w	.	m_1	w	w	e_10	w	w	m_1	.	w
+w	.	m_1.m	w	w	e_10	w	w	m_1.m	.	w
 w	.	aw_1	aw_1	w	e_9	w	aw_1	aw_1	.	w
 w	.	aw_1	aw_1	w	e_10	w	aw_1	aw_1	.	w
 w	.	aw_1	aw_1	w	dr_1	w	aw_1	aw_1	.	w
 w	e_3	e_2	e_3	dr_1	d_0	dr_1	e_3	e_2	e_2	w
 w	w	w	w	w	down	w	w	w	w	w
 
+enemy_9->health = 2500
+enemy_9->attack = 900
+enemy_9->defend = 850
+enemy_9->money = 84
+enemy_9->exp = 75

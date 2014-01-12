@@ -11,7 +11,6 @@ class MagicTom : public MagicDisplayObject
     QPixmap *pix;
 
 public:
-    int range;
     MagicTom(int, int, int, MagicMap *);
     QList<MagicDisplayObject *> inventory;
 

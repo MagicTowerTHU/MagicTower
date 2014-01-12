@@ -136,7 +136,7 @@
         <file>assets/Images/387.bmp</file>
         <file alias="cross">assets/Images/390.bmp</file>
         <file>assets/Images/393.bmp</file>
-        <file>assets/Images/395.bmp</file>
+        <file alias="up3">assets/Images/395.bmp</file>
         <file alias="upgrade">assets/Images/398.bmp</file>
         <file>assets/Images/415.bmp</file>
         <file alias="merchant_4.0">assets/Images/460.bmp</file>
