@@ -460,7 +460,7 @@ enemy_4->money = 65
 enemy_4->exp = 75
 
 at(12)
-me_1	m_4	w	.	e_16	e_15	e_16	.	w	m_2.b	any#axe.pi
+me_1.f12	m_4	w	.	e_16	e_15	e_16	.	w	m_2.b	any#axe.pi
 m_3.m	.	w	.	w	dr_0	w	.	w	.	m_2.b
 .	.	w	.	w	e_15	w	.	w	.	.
 .	e_4	w	.	w	k_0	w	.	w	e_12	.
@@ -471,6 +471,26 @@ w	w	w	.	w	w	w	.	w	w	w
 m_4	e_4	dr_0	e_3	e_3	e_2	e_3	e_3	dr_0	e_4	m_3.m
 w	w	w	w	w	dr_1	w	w	w	w	w
 up	d_1	.	.	.	.	.	.	.	d_0	dn
+
+on(merchant_1.f12)
+{
+	choice = input("商人: 如果你缺少金币, 我可以帮你.", "1. 卖出一把黄钥匙($7)", "2. 卖出一把蓝钥匙($35)", "3. 卖出一把红钥匙($70)")
+	if(choice == 1)
+		if(tom->get_K0 == 1)
+		{
+			tom->money = tom->money - 7
+		}
+	if(choice == 2)
+		if(tom->get_K1 == 1)
+		{
+			tom->money = tom->money - 35
+		}
+	if(choice == 3)
+		if(tom->get_K2 == 1)
+		{
+			tom->money = tom->money - 70
+		}
+}
 
 enemy_10->health = 2000
 enemy_10->attack = 680
