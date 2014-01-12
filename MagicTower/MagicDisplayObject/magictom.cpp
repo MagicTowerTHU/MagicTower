@@ -1,6 +1,8 @@
 #include "magictom.h"
 #include "magickey.h"
 
+#include "../MagicAnimate/magiclevel.h"
+
 #include <QBitmap>
 #include <QDebug>
 
@@ -73,8 +75,30 @@ void MagicTom::setProperty(QString propertyName, MagicVarient propertyValue)
         }
         return;
     }
-    if (propertyName == "level" && propertyValue.getInt() > property["range"].getInt())
-        property["range"] = propertyValue.getInt();
+    if (propertyName == "level")
+    {
+        parent->appendSound(":/sounds/level");
+        int level = propertyValue.getInt();
+        if (level == 0)
+            parent->mBackSound->change(0);
+        else if (level < 8)
+            parent->mBackSound->change(1);
+        else if (level < 15)
+            parent->mBackSound->change(2);
+        else if (level < 19)
+            parent->mBackSound->change(3);
+        else
+            parent->mBackSound->change(4);
+
+        if (parent->eventFlag)
+        {
+            parent->appendAnimate(new MagicLevel(parent, level), true);
+            return;
+        }
+
+        if (propertyValue.getInt() > property["range"].getInt())
+            property["range"] = propertyValue.getInt();
+    }
     MagicDisplayObject::setProperty(propertyName, propertyValue);
 }
 

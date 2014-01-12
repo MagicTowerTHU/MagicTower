@@ -24,7 +24,7 @@ bool MagicTele::paint(QPainter *painter)
     if (wantDelete)
         return false;
 
-    int offset = 16, margin_top = 20, margin_left = 10;
+    int offset = 16;
     for (int i = 1; i < 8; i++)
     {
         painter->drawPixmap(i*32 + offset, 2*32, *wall);
@@ -44,13 +44,16 @@ bool MagicTele::paint(QPainter *painter)
                 painter->drawPixmap(i*32 + offset, j*32, *floor);
 
     painter->setPen("white");
-    painter->drawText(2*32 + offset + margin_left, 3*32 + margin_top, content);
+    painter->setFont(QFont("黑体", 12));
+    painter->drawText(QRect(2*32 + offset, 3*32, 128, 32), Qt::AlignVCenter | Qt::AlignLeft, content);
+
+    painter->setFont(QFont("黑体", 12, 3));
 
     int k = 1;
     for (int j = 4; j < 8 && k <= parent->Tom()->property["range"].getInt(); j++)
         for (int i = 2; i < 8 && k <= parent->Tom()->property["range"].getInt(); i++)
         {
-            painter->drawText(i*32 + offset + margin_left, j*32 + margin_top, QString::number(k));
+            painter->drawText(QRect(i*32 + offset, j*32, 32, 32), Qt::AlignCenter, QString::number(k));
             k++;
         }
 
@@ -81,14 +84,6 @@ void MagicTele::input(int choice)
     case Qt::Key_Enter:
         int target = xChoose - 2 + (yChoose - 4) * 6 + 1;
         parent->Tom()->setProperty("level", MagicVarient(target));
-        for (QList<MagicDisplayObject *>::iterator i = parent->displayList.begin(); i != parent->displayList.end(); i++)
-            if((**i)["level"].getInt() == parent->Tom()->property["level"].getInt() &&
-               (**i)["label"].getString() == "destination_up")
-            {
-                int x = (**i)["position_x"].getInt(), y = (**i)["position_y"].getInt();
-                parent->Tom()->setProperty("position_x", x);
-                parent->Tom()->setProperty("position_y", y);
-            }
         wantDelete = true;
         break;
     }

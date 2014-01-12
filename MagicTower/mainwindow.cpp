@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <QMenuBar>
 #include <QFileDialog>
+#include <QFontDatabase>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -24,6 +25,8 @@ MainWindow::MainWindow(QWidget *parent)
     QWidget *widget = new QWidget(this);
     widget->setLayout(layout);
     setCentralWidget(widget);
+
+    QFontDatabase::addApplicationFont(":/fonts/微软雅黑");
 
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), mWidget, SLOT(animate()));

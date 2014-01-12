@@ -43,7 +43,9 @@ MagicMap::MagicMap()
 
 void MagicMap::destoryList()
 {
+    animateListLock.lockForWrite();
     animateList.clear(), displayList.clear();
+    animateListLock.unlock();
     /*
     for (auto i = animateList.begin(); i != animateList.end(); i++)
     {
@@ -163,6 +165,7 @@ bool MagicMap::loadRecord(QFile *file)
 
 void MagicMap::paint(QPainter *painter)
 {
+    soundListLock.lock();
     for (auto i = soundToPlay.begin(); i != soundToPlay.end(); i++)
     {
         QSound::play(*i);
@@ -170,6 +173,7 @@ void MagicMap::paint(QPainter *painter)
         if (soundToPlay.empty())
             break;
     }
+    soundListLock.unlock();
 
     for (auto i = displayList.begin(); i != displayList.end(); i++)
         if ((**i)["enabled"].isTrue() &&
@@ -188,7 +192,7 @@ void MagicMap::paint(QPainter *painter)
         j++;
     }
 
-    animateListLock.lock();
+    animateListLock.lockForWrite();
     for (QList<MagicAnimate *>::iterator i = animateList.begin(); i != animateList.end(); i++)
         if ((*i)->paint(painter) == false)
         {
@@ -209,9 +213,9 @@ void MagicMap::appendAnimate(MagicAnimate *animate, bool block)
 {
     if (block)
         animate->lock();
-    animateListLock.lock();
-    animateList.push_front(animate);
+    animateListLock.lockForWrite();
     animateFlag = true;
+    animateList.push_front(animate);
     animateListLock.unlock();
     if (block)
     {
@@ -229,7 +233,9 @@ void MagicMap::appendObject(MagicDisplayObject *target)
 
 void MagicMap::appendSound(QString target)
 {
+    soundListLock.lock();
     soundToPlay.append(target);
+    soundListLock.unlock();
 }
 
 class KeyThread : public QThread
@@ -242,6 +248,12 @@ public:
     {
         this->parent = parent;
         key = e->key();
+        parent->eventFlag++;
+    }
+
+    ~KeyThread()
+    {
+        parent->eventFlag--;
     }
 
     void run()
@@ -273,13 +285,6 @@ public:
             default:
                 break;
             }
-            switch (key)
-            {
-            case Qt::Key_0: parent->mBackSound->change(0); break;
-            case Qt::Key_1: parent->mBackSound->change(1); break;
-            case Qt::Key_2: parent->mBackSound->change(2); break;
-            case Qt::Key_3: parent->mBackSound->change(3); break;
-            }
             if (key == Qt::Key_L && parent->property["wisdomEnabled"].isTrue())
                 parent->appendAnimate(new MagicWisdom(parent), false);
 
@@ -292,6 +297,7 @@ public:
         }
         else
         {
+            parent->animateListLock.lockForRead();
             if (key == Qt::Key_L && parent->property["wisdomEnabled"].isTrue())
                 for (auto i = parent->animateList.begin(); i != parent->animateList.end(); i++)
                     if(MagicWisdom *wisdom = dynamic_cast<MagicWisdom *>(*i))
@@ -319,6 +325,7 @@ public:
                     else
                         tele->input(key);
                 }
+            parent->animateListLock.unlock();
         }
     }
 };

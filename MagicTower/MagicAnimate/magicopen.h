@@ -2,7 +2,8 @@
 #define MAGICOPEN_H
 
 #include "magicanimate.h"
-#include "../MagicDisplayObject/magicdoor.h"
+
+class MagicDoor;
 
 class MagicOpen : public MagicAnimate
 {
@@ -10,7 +11,7 @@ class MagicOpen : public MagicAnimate
     MagicDoor *target;
 
 public:
-    MagicOpen(MagicMap *, int, MagicDoor *, int);
+    MagicOpen(MagicMap *, MagicDoor *);
     virtual bool paint(QPainter *); // false -> please destroy me.
 };
 

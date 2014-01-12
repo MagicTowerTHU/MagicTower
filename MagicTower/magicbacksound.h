@@ -7,7 +7,7 @@
 
 class MagicBackSound : public MagicSoundObject
 {
-    QSound *mSound[4];
+    QSound *mSound[5];
     int now;
 
 public:

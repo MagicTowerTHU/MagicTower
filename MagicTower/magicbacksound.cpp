@@ -6,6 +6,7 @@ MagicBackSound::MagicBackSound()
     mSound[1] = new QSound(":/sounds/back_1");
     mSound[2] = new QSound(":/sounds/back_2");
     mSound[3] = new QSound(":/sounds/back_3");
+    mSound[4] = new QSound(":/sounds/back_4");
     now = 1;
 }
 

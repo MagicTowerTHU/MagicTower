@@ -35,6 +35,9 @@ bool MagicMessage::paint(QPainter *painter)
     if (wantDelete)
         return false;
 
+    painter->save();
+    painter->setOpacity(0.8);
+
     painter->drawPixmap(1*32, 2*32, *leftupangle);
     painter->drawPixmap(9*32, 2*32, *rightupangle);
     painter->drawPixmap(1*32, 8*32, *leftdownangle);
@@ -56,6 +59,11 @@ bool MagicMessage::paint(QPainter *painter)
 
     int margin_top = 17;
     painter->setPen("white");
-    painter->drawText(3*32, margin_top + 4*32, content);
+    painter->setFont(QFont("黑体", 14));
+    painter->setOpacity(1);
+    painter->drawText(QRect(3*32, margin_top + 3*32, 5*32, 3*32), content);
+
+    painter->restore();
+
     return true;
 }

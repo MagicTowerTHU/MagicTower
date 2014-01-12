@@ -9,10 +9,12 @@
 */
 
 #include "magicwall.h"
-//#include "../MagicAnimate/magicopen.h"
+#include "../MagicAnimate/magicopen.h"
 
 class MagicDoor : public MagicWall
 {
+    friend class MagicOpen;
+
     int color;
 
 public:

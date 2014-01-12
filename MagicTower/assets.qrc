@@ -202,7 +202,7 @@
         <file alias="middle">assets/Images/011.bmp</file>
     </qresource>
     <qresource prefix="/sounds">
-        <file alias="1.wav">assets/Sounds/1.wav</file>
+        <file>assets/Sounds/1.wav</file>
         <file>assets/Sounds/2.wav</file>
         <file>assets/Sounds/3.wav</file>
         <file>assets/Sounds/4.wav</file>
@@ -212,7 +212,7 @@
         <file>assets/Sounds/8.wav</file>
         <file>assets/Sounds/9.wav</file>
         <file alias="attack">assets/Sounds/10.wav</file>
-        <file>assets/Sounds/11.wav</file>
+        <file alias="level">assets/Sounds/11.wav</file>
         <file>assets/Sounds/12.wav</file>
         <file>assets/Sounds/13.wav</file>
         <file>assets/Sounds/14.wav</file>
@@ -223,7 +223,7 @@
         <file>assets/Sounds/19.wav</file>
         <file>assets/Sounds/20.wav</file>
         <file alias="beep">assets/Sounds/21.wav</file>
-        <file>assets/Sounds/853.wav</file>
+        <file alias="back_4">assets/Sounds/853.wav</file>
         <file alias="back_0">assets/Sounds/857.wav</file>
         <file alias="back_2">assets/Sounds/859.wav</file>
         <file>assets/Sounds/streaming.wav</file>

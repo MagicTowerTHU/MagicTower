@@ -8,6 +8,7 @@
 #include "MagicAnimate/magicanimate.h"
 
 #include <QMutex>
+#include <QReadWriteLock>
 #include <QTimer>
 #include <QFile>
 #include <QKeyEvent>
@@ -24,17 +25,18 @@ class MagicMap : public MagicObject
     MagicFloor *inventory[24];
 
     QTimer *animateTimer;
-    QMutex animateListLock;
-    QWaitCondition appendingAnimate;
 
     void destoryList();
     void initialize();
 
     QStringList soundToPlay;
+    QMutex soundListLock;
 
 public:
     bool animateFlag;
     QList<MagicAnimate *> animateList;
+    QReadWriteLock animateListLock;
+
     MagicBackSound *mBackSound;
 
     bool move(int, int); // direction
@@ -46,6 +48,8 @@ public:
     bool saveRecord(QFile * = NULL);
     bool loadRecord(QFile * = NULL);
     void paint(QPainter *);
+
+    int eventFlag = 0;
     void keyPressEvent(QKeyEvent *);
 
     void appendAnimate(MagicAnimate *, bool);
