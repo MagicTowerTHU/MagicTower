@@ -14,6 +14,8 @@
 #include <QList>
 #include <QWaitCondition>
 
+class KeyThread;
+
 class MagicMap : public MagicObject
 {
     MagicTom *mTom;
@@ -27,6 +29,8 @@ class MagicMap : public MagicObject
 
     void destoryList();
     void initialize();
+
+    QStringList soundToPlay;
 
 public:
     bool animateFlag;
@@ -46,6 +50,8 @@ public:
 
     void appendAnimate(MagicAnimate *, bool);
     void appendObject(MagicDisplayObject *);
+
+    void appendSound(QString);
 
     QList<MagicObject *> findDisplayObject(QString, QString, QList<QString>);
     const virtual MagicVarient& operator[](QString) const;

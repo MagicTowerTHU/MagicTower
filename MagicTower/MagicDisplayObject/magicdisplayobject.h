@@ -13,6 +13,8 @@ class MagicExpression;
 class MagicDisplayObject : public MagicObject
 {
     QList<MagicExpression *>action;
+
+protected:
     MagicMap *parent;
 
 public:

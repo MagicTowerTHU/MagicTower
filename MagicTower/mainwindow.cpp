@@ -38,13 +38,17 @@ void MainWindow::createMenus()
     loadAct = new QAction(tr("L&oad record"), this);
     exitAct = new QAction(tr("E&xit"), this);
 
-    fileMenu = menuBar()->addMenu(tr("&File"));
+    fileMenu = menuBar()->addMenu(tr("&Magic Tower"));
     fileMenu->addAction(openAct);
+    openAct->setShortcut(QKeySequence("Ctrl+m"));
     fileMenu->addSeparator();
     fileMenu->addAction(saveAct);
+    saveAct->setShortcut(QKeySequence("Ctrl+s"));
     fileMenu->addAction(loadAct);
+    loadAct->setShortcut(QKeySequence("Ctrl+o"));
     fileMenu->addSeparator();
     fileMenu->addAction(exitAct);
+    exitAct->setShortcut(QKeySequence("Ctrl+w"));
 
     connect(exitAct, SIGNAL(triggered()), this, SLOT(close()));
     connect(openAct, SIGNAL(triggered()), this, SLOT(open()));

@@ -16,7 +16,6 @@ public:
 
     virtual void paint(QPainter *painter);
     void changePic(int, int);
-    bool setStep(int);
     virtual bool move(MagicMap *);
     bool haveInventory(QString);
     bool consumeInventory(QString);
