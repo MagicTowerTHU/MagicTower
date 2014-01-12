@@ -1,8 +1,10 @@
 MagicTower
 ======================
-powered by QT 5.2.0
+> powered by QT 5.2.0
 
-项目概述
+> > 2013·秋·程序设计与算法基础  
+
+项目成果
 ----------
 * 按21层版本魔塔地图制作；
 * 丰富多彩的图形和小动画；
@@ -13,22 +15,22 @@ powered by QT 5.2.0
 
 开发环境
 ----------
-* 基于QT 5.2.0的QMainWindow(Core GUI)和QT多媒体库QMultiMedia环境，以及最新的C++11编译器；
-* 2D绘图、文字绘制均使用QPainter，配合QTimer发送重画信号，形成动画；
-* 输入事件主要为键盘，可触发或相应游戏中的相关事件。该事件由继承了QMainWindow的MainWindow类发出。
+* ![Alt text](http://qt-project.org/images/qt13a/Qt-logo.png)基于QT 5.2.0的`QMainWindow`(Core GUI)和QT多媒体库`QMultiMedia`环境，以及最新的C++11编译器；
+* 2D绘图、文字绘制均使用`QPainter`，配合`QTimer`发送重画信号，形成动画；
+* 输入事件主要为键盘，可触发或相应游戏中的相关事件。该事件由继承了`QMainWindow`的`MainWindow`类发出。
 
 
 面向对象
 ----------
-* 充分利用C++的面向对象特点，过程和对象几乎完全封装于类中，并且充分利用类继承的多态特性，在触发事件、对象重画、获取对象属性等方面都起到了至关重要的作用。另外构造函数的继承方式非常有助于批量设置同类项对象属性，同时避免代码重复(Don't Repeat Yourself)和犯低级错误的问题。
+* 充分利用C++的面向对象特点，过程和对象几乎完全封装于类中，并且充分利用类继承的多态特性，在触发事件、对象重画、获取对象属性等方面都起到了至关重要的作用。另外构造函数的继承方式非常有助于批量设置同类项对象属性，同时避免代码重复(Don't Repeat Yourself)和低级错误。
 * 类结构简要说明及类图
 
-> * 程序主界面由继承自QMainWindow类的MainWindow类管理，辅助两个QWidget派生类Widget（主界面）和Status（左侧状态栏）。
+> * 程序主界面由继承自`QMainWindow`类的`MainWindow`类管理，辅助两个`QWidget`派生类`Widget`（主界面）和`Status`（左侧状态栏）。
 
-> * 画图的工作主要由MagicObject及其子类*MagicDisplayObject*派生出的各类地图元素类完成。
+> * 画图的工作主要由`MagicObject`及其子类*`MagicDisplayObject`*派生出的各类地图元素类完成。
 
-> * 程序中需要用户交互和播放动画的部分由*MagicAnimate*派生类管理，每个动画管理各自的生存周期。
-![ScreenShot](http://220.113.7.105/MagicTower/ClassDiagram.png)
+> * 程序中需要用户交互和播放动画的部分由*`MagicAnimate`*派生类管理，每个动画管理各自的生存周期。
+![Alt text](http://220.113.7.105/MagicTower/ClassDiagram.png)
 
 * 对象事件触发（当主角即将与该对象碰撞时）
 
