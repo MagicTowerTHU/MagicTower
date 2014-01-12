@@ -34,22 +34,6 @@ void MagicTom::paint(QPainter *painter)
     painter->drawPixmap(x, y, *pix);
 }
 
-bool MagicTom::setStep(int direction)
-{
-    this->pix = this->Pix[direction][2];
-    int dx[4]={0, -32, 0, 32}, dy[4]={32, 0, -32, 0};
-    if (x + dx[direction] > 320 || y + dy[direction] > 320 || x + dx[direction] < 0 || y + dy[direction] < 0)
-    {
-        QSound::play(":/sounds/beep");
-        return false;
-    }
-    else
-    {
-        QSound::play(":/sounds/step");
-        return true;
-    }
-}
-
 bool MagicTom::move(MagicMap *)
 {
     return true;

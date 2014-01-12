@@ -28,6 +28,9 @@
 #define red 2
 #define silver 3
 
+#include <QThread>
+#include <QMutex>
+
 MagicMap::MagicMap()
 {
     animateTimer = new QTimer();
@@ -160,6 +163,14 @@ bool MagicMap::loadRecord(QFile *file)
 
 void MagicMap::paint(QPainter *painter)
 {
+    for (auto i = soundToPlay.begin(); i != soundToPlay.end(); i++)
+    {
+        QSound::play(*i);
+        i = soundToPlay.erase(i);
+        if (soundToPlay.empty())
+            break;
+    }
+
     for (auto i = displayList.begin(); i != displayList.end(); i++)
         if ((**i)["enabled"].isTrue() &&
             (((**i)["level"] == mTom->property["level"]).isTrue() || (**i)["label"].getString() == "floor"))
@@ -216,14 +227,17 @@ void MagicMap::appendObject(MagicDisplayObject *target)
     displayList.push_back(target);
 }
 
-#include <QThread>
+void MagicMap::appendSound(QString target)
+{
+    soundToPlay.append(target);
+}
 
 class KeyThread : public QThread
 {
     MagicMap *parent;
     int key;
-public:
 
+public:
     KeyThread(MagicMap *parent, QKeyEvent *e)
     {
         this->parent = parent;
@@ -311,8 +325,9 @@ public:
 
 void MagicMap::keyPressEvent(QKeyEvent *e)
 {
-    KeyThread *thread = new KeyThread(this, e);
-    thread->start();
+    KeyThread *keyThread = new KeyThread(this, e);
+    keyThread->start();
+    QObject::connect(keyThread, SIGNAL(finished()), keyThread, SLOT(deleteLater()));
 }
 
 int dx[] = {0, -1, 0, 1};
@@ -325,7 +340,7 @@ bool MagicMap::move(int direction, int distance)
 
     if (target_x < 0 || target_x > 10 || target_y < 0 || target_y > 10)
     {
-        QSound::play(":/sounds/beep");
+        this->appendSound(":/sounds/beep");
         return false;
     }
 
@@ -335,9 +350,11 @@ bool MagicMap::move(int direction, int distance)
             ((**i)["level"] == mTom->property["level"]).isTrue())
             if ((**i)["enabled"].isTrue() && (**i)["label"].getString() != "floor" && !(*i)->move(this))
             {
-                QSound::play(":/sounds/beep");
+                this->appendSound(":/sounds/beep");
                 return false;
             }
+
+    this->appendSound(":/sounds/step");
 
     return true;
 }
@@ -380,6 +397,7 @@ const MagicVarient& MagicMap::operator[](QString propertyName) const
         const_cast<MagicMap *>(this)->appendAnimate(new MagicInputBox(const_cast<MagicMap *>(this), message, l), true);
         return property.find("input").value();
     }
+    return MagicObject::operator [](propertyName);
 }
 
 void MagicMap::setProperty(QString propertyName, MagicVarient propertyValue)

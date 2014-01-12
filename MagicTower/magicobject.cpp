@@ -15,7 +15,7 @@ MagicVarient& MagicObject::operator[](QString propertyName)
 
 const MagicVarient& MagicObject::operator[](QString propertyName) const
 {
-    return property[propertyName];
+    return property.find(propertyName).value();
 }
 
 void MagicObject::setProperty(QString propertyName, MagicVarient propertyValue)

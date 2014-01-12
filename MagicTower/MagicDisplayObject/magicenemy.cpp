@@ -104,6 +104,8 @@ bool MagicEnemy::move(MagicMap *map)
         map->Tom()->property["exp"] += property["exp"].getInt();
         map->Tom()->property["money"] += property["money"].getInt();
         property["enabled"] = 0;
+
+        parent->appendSound(":/sounds/attack");
         return runAction(map, true);
     }
     else
@@ -129,6 +131,8 @@ bool MagicEnemy::move(MagicMap *map)
             map->Tom()->property["money"] += property["money"].getInt();
             qDebug() << "Tom health left:" << map->Tom()->property["health"].getInt();
             property["enabled"] = 0;
+
+            parent->appendSound(":/sounds/attack");
             return runAction(map, true);
         }
     }
