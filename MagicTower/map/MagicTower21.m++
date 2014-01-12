@@ -558,7 +558,7 @@ w	.	w	w	w	dr_4.fr	w	w	w	.	w
 w	.	m_1.m	w	w	e_10	w	w	m_1.m	.	w
 w	.	aw_1	aw_1	w	e_9	w	aw_1	aw_1	.	w
 w	.	aw_1	aw_1	w	e_10	w	aw_1	aw_1	.	w
-w	.	aw_1	aw_1	w	dr_1	w	aw_1	aw_1	t	w
+w	.	aw_1	aw_1	w	dr_1	w	aw_1	aw_1	.	w
 w	e_3	e_2	e_3	dr_1	d_0	dr_1	e_3	e_2	e_2	w
 w	w	w	w	w	down	w	w	w	w	w
 
@@ -583,11 +583,29 @@ at(15)
 .	aw_1	w	w	me_2.f15	w	me_1.f15	w	w	aw_1	.
 .	aw_1	w	w	m_4	w	m_4	w	w	aw_1	.
 .	aw_1	w	w	m_3	w	m_3	w	w	aw_1	.
-.	aw_1	aw_1	w	.	w	.	w	aw_1	aw_1	.
+.	aw_1	aw_1	w	s_4.f15.hid	w	a_4.f15.hid	w	aw_1	aw_1	.
 .	aw_1	aw_1	w	dr_0	w	dr_0	w	aw_1	aw_1	.
-.	aw_1	aw_1	w	.	.	.	w	aw_1	aw_1	.
+.	aw_1	aw_1	w	.	.	t	w	aw_1	aw_1	.
 .	aw_1	aw_1	aw_1	aw_1	dr_2	aw_1	aw_1	aw_1	aw_1	.
 .	.	.	.	.	.	.	.	.	.	.
+
+
+on(merchant_2.f15)
+{
+	message = "老者: 少年! 拿着这个剑! 你需要它!"
+	weapon_4.f15->picked = 1
+	tom->attack = tom->attack + 80
+	this->enabled = 0
+}
+
+
+on(merchant_1.f15)
+{
+	message = "老者: 盾拿去."
+	armour_4.f15->picked = 1
+	tom->defend = tom->defend + 80
+	this->enabled = 0
+}
 
 at(16)
 aw_1	aw_1	aw_1	aw_1	aw_1	d_0	down	aw_1	aw_1	aw_1	aw_1
