@@ -39,6 +39,13 @@ bool MagicTom::move(MagicMap *)
     return true;
 }
 
+void MagicTom::setProperty(QString propertyName, MagicVarient propertyValue)
+{
+    if (propertyName == "level" && propertyValue.getInt() > range)
+        range = propertyValue.getInt();
+    MagicDisplayObject::setProperty(propertyName, propertyValue);
+}
+
 void MagicTom::changePic(int direction, int duration)
 {
     if (duration > 0)

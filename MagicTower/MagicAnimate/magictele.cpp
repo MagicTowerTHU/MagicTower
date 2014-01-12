@@ -47,8 +47,8 @@ bool MagicTele::paint(QPainter *painter)
     painter->drawText(2*32 + offset + margin_left, 3*32 + margin_top, content);
 
     int k = 1;
-    for (int j = 4; j < 8 && k != 22; j++)
-        for (int i = 2; i < 8 && k != 22; i++)
+    for (int j = 4; j < 8 && k <= parent->Tom()->range; j++)
+        for (int i = 2; i < 8 && k <= parent->Tom()->range; i++)
         {
             painter->drawText(i*32 + offset + margin_left, j*32 + margin_top, QString::number(k));
             k++;
@@ -66,26 +66,16 @@ void MagicTele::input(int choice)
             yChoose--;
         break;
     case Qt::Key_Down:
-        if (yChoose + 1 <= 7)
+        if ((yChoose+1-4)*6 + (xChoose-2) + 1 <= parent->Tom()->range)
             yChoose++;
         break;
     case Qt::Key_Left:
         if (xChoose - 1 >= 2)
             xChoose--;
-        else if (yChoose - 1 >= 4)
-        {
-            yChoose--;
-            xChoose = 7;
-        }
         break;
     case Qt::Key_Right:
-        if (xChoose + 1 <= 7)
+        if ((yChoose-4)*6 + (xChoose+1-2) + 1 <= parent->Tom()->range)
             xChoose++;
-        else if (yChoose + 1 <= 7)
-        {
-            yChoose++;
-            xChoose = 2;
-        }
         break;
     case Qt::Key_Return:
     case Qt::Key_Enter:

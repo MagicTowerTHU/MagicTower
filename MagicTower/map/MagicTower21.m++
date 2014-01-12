@@ -385,6 +385,7 @@ e_14	m_1.m	e_14	w	w	dr_1	w	w	.	w	k_0
 k_1	e_14	m_1.m	w	e_6	e_11	e_6	w	.	dr_0	e_14
 s_3	k_1	e_14	dr_0	m_2.b	e_6	m_2.b	w	.	w	.
 
+weapon_3->attack = 70
 
 enemy_5->health = 900
 enemy_5->attack = 450
@@ -393,3 +394,14 @@ enemy_5->money = 50
 enemy_5->exp = 50
 
 at(10)
+.	w	w	m_4	e_5	w	e_5	m_3	w	w	.
+.	.	w	w	dr_0	w	dr_0	w	w	.	e_17
+.	.	.	.	.	w	.	.	.	e_17	m_2
+.	w	.	w	w	w	w	w	.	w	w
+e_21	w	.	.	k_0	k_0	k_0	.	.	w	k_0
+e_20	w	.	w	w	w	w	dr_0	w	w	k_0
+e_21	w	.	dr_4.fr	d_0	down	w	.	dr_0	e_21	.
+.	w	w	w	w	w	w	dr_0	w	w	.
+.	w	m_1	m_4	m_3	w	.	e_20	.	w	k_0
+.	w	m_1	m_4	m_3	dr_2	e_11	w	e_11	w	k_0
+.	w	m_1	m_4	m_3	w	k_2	w	k_2	w	m_1
