@@ -116,8 +116,9 @@ bool MagicEnemy::move(MagicMap *map)
         int enemyHealth = property["health"].getInt();
         while (tomHealth > 0 && enemyHealth > 0)
         {
-            tomHealth -= casualty;
             enemyHealth -= kill;
+            if(enemyHealth <= 0) break;
+            tomHealth -= casualty;
         }
         if(tomHealth <= 0)
         {

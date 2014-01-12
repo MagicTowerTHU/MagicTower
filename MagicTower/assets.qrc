@@ -41,11 +41,11 @@
         <file alias="armour_3">assets/Images/118.bmp</file>
         <file alias="armour_4">assets/Images/121.bmp</file>
         <file alias="armour_5">assets/Images/124.bmp</file>
-        <file alias="weapon_1">assets/Images/127.bmp</file>
+        <file alias="weapon_5">assets/Images/127.bmp</file>
         <file alias="weapon_2">assets/Images/130.bmp</file>
         <file alias="weapon_3">assets/Images/133.bmp</file>
         <file alias="weapon_4">assets/Images/136.bmp</file>
-        <file alias="weapon_5">assets/Images/139.bmp</file>
+        <file alias="weapon_1">assets/Images/139.bmp</file>
         <file alias="merchant_3.2">assets/Images/142.bmp</file>
         <file alias="merchant_3.3">assets/Images/145.bmp</file>
         <file alias="altwall_1">assets/Images/148.bmp</file>
@@ -160,8 +160,8 @@
         <file alias="merchant_2.1">assets/Images/665.bmp</file>
         <file alias="merchant_5.0">assets/Images/721.bmp</file>
         <file alias="merchant_5.1">assets/Images/723.bmp</file>
-        <file>assets/Images/746.bmp</file>
-        <file>assets/Images/748.bmp</file>
+        <file alias="merchant_6.0">assets/Images/746.bmp</file>
+        <file alias="merchant_6.1">assets/Images/748.bmp</file>
         <file alias="enemy_30.0">assets/Images/771.bmp</file>
         <file alias="enemy_30.1">assets/Images/773.bmp</file>
         <file alias="enemy_31.0">assets/Images/781.bmp</file>
