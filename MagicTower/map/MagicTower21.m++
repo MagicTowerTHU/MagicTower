@@ -357,3 +357,26 @@ enemy_19->attack = 300
 enemy_19->defend = 150
 enemy_19->money = 40
 enemy_19->exp = 35
+
+at(8)
+dn	w	.	.	.	.	w	.	k_0	e_14	.
+d_0	w	.	w	w	dr_0	w	dr_0	w	w	.
+.	w	.	w	.	.	dr_1	.	.	w	m_3.m
+.	w	.	w	e_11	w	w	w	e_21	w	e_26
+e_21	w	.	w	m_1.m	w	up	d_1	.	w	e_26
+e_20	w	m_4	w	m_1.m	w	w	w	w	w	.
+e_21	w	e_26	w	.	.	.	w	.	e_20	.
+.	w	e_26	w	w	w	e_22	w	dr_0	w	w
+.	w	.	e_14	.	w	e_14	w	.	.	.
+.	w	w	w	dr_0	w	.	w	w	w	.
+.	.	e_11	.	.	w	.	e_18	e_19	e_18	.
+
+
+at(9)
+
+
+enemy_5->health = 900
+enemy_5->attack = 450
+enemy_5->defend = 330
+enemy_5->money = 50
+enemy_5->exp = 50
