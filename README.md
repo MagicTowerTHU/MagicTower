@@ -21,7 +21,14 @@ powered by QT 5.2.0
 面向对象
 ----------
 * 充分利用C++的面向对象特点，过程和对象几乎完全封装于类中，并且充分利用类继承的多态特性，在触发事件、对象重画、获取对象属性等方面都起到了至关重要的作用。另外构造函数的继承方式非常有助于批量设置同类项对象属性，同时避免代码重复(Don't repeat your self)和犯低级错误的问题。
-* 类图及简要说明
+* 类结构简要说明及类图
+
+> * 程序主界面由继承自QMainWindow类的MainWindow类管理，辅助两个QWidget派生类Widget（主界面）和Status（左侧状态栏）。
+
+> * 画图的工作主要由MagicObject及其子类*MagicDisplayObject*派生出的各类地图元素类完成。
+
+> * 程序中需要用户交互和播放动画的部分由*MagicAnimate*派生类管理，每个动画管理各自的生存周期。
+![ScreenShot](http://220.113.7.105/MagicTower/ClassDiagram.png)
 
 * 对象事件触发（当主角即将与该对象碰撞时）
 
