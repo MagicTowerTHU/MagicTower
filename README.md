@@ -20,8 +20,15 @@ powered by QT 5.2.0
 
 面向对象
 ----------
-* 充分利用C++的面向对象特点，过程和对象几乎完全封装于类中，并且充分利用类继承的多态特性，在触发事件、对象重画、获取对象属性等方面都起到了至关重要的作用。另外构造函数的继承方式非常有助于批量设置同类项对象属性，同时避免代码重复(Don't repeat your self)和犯低级错误的问题。
-* 类图及简要说明
+* 充分利用C++的面向对象特点，过程和对象几乎完全封装于类中，并且充分利用类继承的多态特性，在触发事件、对象重画、获取对象属性等方面都起到了至关重要的作用。另外构造函数的继承方式非常有助于批量设置同类项对象属性，同时避免代码重复(Don't Repeat Yourself)和犯低级错误的问题。
+* 类结构简要说明及类图
+
+> * 程序主界面由继承自QMainWindow类的MainWindow类管理，辅助两个QWidget派生类Widget（主界面）和Status（左侧状态栏）。
+
+> * 画图的工作主要由MagicObject及其子类*MagicDisplayObject*派生出的各类地图元素类完成。
+
+> * 程序中需要用户交互和播放动画的部分由*MagicAnimate*派生类管理，每个动画管理各自的生存周期。
+![ScreenShot](http://220.113.7.105/MagicTower/ClassDiagram.png)
 
 * 对象事件触发（当主角即将与该对象碰撞时）
 
@@ -75,7 +82,7 @@ void MagicMap::setProperty(QString propertyName, MagicVarient propertyValue)
 
 脚本语言
 ----------
-* 脚本语言的语法解释和脚本语言的元编程(Metaprogramming)特性。魔塔程序具有解释固定语法的文本地图文件的能力，支持以下功能
+* 脚本语言的语法解释和脚本语言的元编程(Metaprogramming)特性是本程序的亮点。魔塔程序具有解释固定语法的文本地图文件的能力，支持以下功能
 
 > * C语言的基本运算符
 
@@ -83,11 +90,12 @@ void MagicMap::setProperty(QString propertyName, MagicVarient propertyValue)
 +, -, *, /, %, ^, &, <<, >>, ~, =, <, <=, >, >=, ==, !=
 ```
 
-> * if分支结构，和goto跳转
+> * if分支结构，goto跳转语句（变量不用声明就可以用的哦~）
 
-```VB
+```c++
 i = 0
 :for_i
+print = i // print为输出至控制台
 i = i + 1
 if (i <= 3)
     goto for_i
@@ -169,7 +177,7 @@ m_1.m	wi  	k_0	    w   	.	    down    .	    w	    k_0	    k_0	    k_0
 w -> wall, k->key, dr->door, e->enemy, d_0->destionation_when_upstair, d_1->destionatoin_when_downstair, m->medicine
 ```
 
-
+* MagicTower的存档功能与脚本逻辑密不可分。地图的布局、事件选择器与事件、每个对象的属性哈希表可以完备地表达地图状态，所以存储时只需要存储以上信息即可。存档功能暂时还没有进行压缩和加密，所以存档文件的体积相对较大，并且容易被玩家修改。
 
 
 
