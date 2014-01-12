@@ -15,6 +15,7 @@
 #include "magicteleport.h"
 #include "magicdestination.h"
 #include "magicaltwall.h"
+#include "magicany.h"
 
 #include "../magicmap.h"
 
@@ -44,6 +45,7 @@ MagicDisplayObject *MagicHelper::createObject(QString target, QString Id, QList<
         alias["te"] = "teleport";
         alias["d"] = "destination";
         alias["aw"] = "altwall";
+        alias["an"] = "any";
     }
     QRegExp rx("^([a-zA-Z0-9]*)(_(\\S*))?");
     rx.indexIn(target);
@@ -88,6 +90,8 @@ MagicDisplayObject *MagicHelper::createObject(QString target, QString Id, QList<
         ret = new MagicDestination(x, y, level, detail.toInt(), map);
     else if (category == "altwall")
         ret = new MagicAltWall(x, y, level, map, detail);
+    else if (category == "any")
+        ret = new MagicAny(x, y, level, map);
     else
         throw "No such label...";
 

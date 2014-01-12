@@ -141,7 +141,7 @@ d_0	w	m_4	w	m_2	w	m_3	m_4	k_0	k_1	w
 .	w	k_0	w	k_0	w	w	w	w	dr_0	w
 .	w	.	w	.	.	.	dr_0	.	.	w
 .	w	dr_0	w	w	dr_0	w	w	dr_0	w	w
-.	.	.	.	.	.	w	t	e_16	.	w
+.	.	.	.	.	.	w	.	e_16	.	w
 .	w	dr_0	w	w	dr_1	w	dr_4.fr	w	dr_4.fr	w
 .	w	k_0	w	m_2	m_1	w	.	w	.	w
 d_1	w	k_0	w	m_2	m_1	w	.	w	.	w
@@ -232,20 +232,86 @@ on(merchant_5.f4)
 	}
 	if (this->state == 2)
 	{
-
+		0
 	}
+	0
 }
 
 at(5)
-k3	w	m_1	w	m_2	e_8	.	.	e_8	k_0	k_1
-.	w	m_3	w	e_8	.	.	.	.	e_8	k_0
+an.f5	w	m_1.m	w	m_2.b	e_8	.	.	e_8	k_0	k_1
+.	w	m_3.m	w	e_8	k_0.f5	k_1.f5	k_2.f5	.	e_8	k_0
 e_21	w	.	w	e_24	.	w	w	dr_0	w	w
 .	dr_0	e_8	w	a_5	e_24	w	.	e_23	e_24	me_1.f5
 e_21	w	.	w	w	w	w	.	.	.	e_24
-m_3	w	.	.	.	e_21	e_25	.	.	.	.
+m_3.m	w	.	.	.	e_21	e_25	.	.	.	.
 m_4	w	w	e_26	w	w	w	w	.	.	.
 .	me_2.f5	w	e_26	w	.	.	.	e_23	e_22	.
 w	w	w	e_21	w	dr_0	w	dr_1	w	dr_0	w
-d_0	.	w	.	w	e_21	w	me_4	dr_0	d_1	w
+d_0	.	w	.	w	e_21	w	m_4	dr_0	d_1	w
 dn	.	e_21	.	.	.	w	k_0	w	up	w
 
+armour_5->defend = 10
+
+.key.f5->enabled = 0
+on(any.f5)
+{
+	.key.f5->picked = 1
+	this->enabled = 0
+}
+
+at(6)
+an#f6.fr	e_14	w	m_4	w	k_0	e_18	an#coin.fr	w	m_2	m_2
+e_14	k_0	w	m_3.m	w	.	k_0	e_18	w	e_6	m_2
+k_0	e_20	dr_1	.	dr_1	e_20	.	k_0	w	.	e_6
+t	.	w	e_22	w	.	.	.	w	e_17	.
+w	w	w	dr_2	w	w	w	w	w	dr_0	w
+.	.	e_7	.	k_0	k_0	k_0	.	e_7	.	.
+.	w	w	w	w	w	w	w	w	w	w
+.	w	e_21	dr_0	e_21	.	.	.	.	.	w
+.	w	dr_0	w	dr_0	w	w	w	w	dr_1	w
+.	w	e_21	w	.	.	w	w	.	d_0	w
+.	.	.	w	up	d_1	dr_0	dr_0	.	dn	w
+
+enemy_14->health = 400
+enemy_14->attack = 90
+enemy_14->defend = 50
+enemy_14->money = 15
+enemy_14->exp = 12
+
+enemy_7->health = 100
+enemy_7->attack = 200
+enemy_7->defend = 110
+enemy_7->money = 230
+enemy_7->exp = 25
+
+enemy_17->health = 500
+enemy_17->attack = 400
+enemy_17->defend = 260
+enemy_17->money = 47
+enemy_17->exp = 45
+
+enemy_18->health = 700
+enemy_18->attack = 250
+enemy_18->defend = 125
+enemy_18->money = 32
+enemy_18->exp = 30
+
+enemy_6->health = 500
+enemy_6->attack = 115
+enemy_6->defend = 65
+enemy_6->money = 15
+enemy_6->exp = 15
+
+any#coin->pix = ":/images/coin"
+
+on(#coin)
+{
+	tom->money = tom->money + 300
+}
+
+any#f6->pix = ":/images/upgrade"
+on(#f6)
+{
+	tom->attack = tom->attack + 10
+	tom->defend = tom->defend + 10
+}
