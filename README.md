@@ -13,9 +13,9 @@ MagicTower
 * 较完备的轻量级地图编辑；
 * 扩展和改编简单易行。
 
-开发环境
+开发环境![Alt text](http://qt-project.org/images/qt13a/Qt-logo.png)
 ----------
-* ![Alt text](http://qt-project.org/images/qt13a/Qt-logo.png)基于QT 5.2.0的`QMainWindow`(Core GUI)和QT多媒体库`QMultiMedia`环境，以及最新的C++11编译器；
+* 基于QT 5.2.0的`QMainWindow`(Core GUI)和QT多媒体库`QMultiMedia`环境，以及最新的C++11编译器；
 * 2D绘图、文字绘制均使用`QPainter`，配合`QTimer`发送重画信号，形成动画；
 * 输入事件主要为键盘，可触发或相应游戏中的相关事件。该事件由继承了`QMainWindow`的`MainWindow`类发出。
 
