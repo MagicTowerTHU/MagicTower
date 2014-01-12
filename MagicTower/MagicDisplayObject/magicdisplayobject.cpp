@@ -11,6 +11,7 @@ MagicDisplayObject::MagicDisplayObject(int x, int y, int level, MagicMap *parent
     this->parent = parent;
     property["enabled"] = 1;
     property["picked"] = 0;
+    property["id"] = "";
 }
 
 
@@ -27,7 +28,7 @@ void MagicDisplayObject::setProperty(QString propertyName, MagicVarient property
         x = propertyValue.getInt() * 32;
     if (propertyName == "position_y")
         y = propertyValue.getInt() * 32;
-    if (propertyName == "picked")
+    if (propertyName == "picked" && propertyValue.isTrue())
         parent->Tom()->inventory.push_back(this);
     MagicObject::setProperty(propertyName, propertyValue);
 }
