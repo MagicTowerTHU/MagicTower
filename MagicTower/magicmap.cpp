@@ -71,8 +71,8 @@ void MagicMap::initialize()
         for (int j = 0; j < 11; j++)
                 displayList.push_front(/*floor[11 * i + j] = */new MagicFloor(i, j, 1, this));
 
-    for (int i = 12; i < 14; i++)
-        for (int j = 0; j < 12; j++)
+    for (int i = 12; i <= 14; i++)
+        for (int j = 0; j < 11; j++)
                 displayList.push_front(/*inventory[12 * (i - 12) + j] = */new MagicFloor(j, i, 1, this));
 }
 
@@ -180,8 +180,8 @@ void MagicMap::paint(QPainter *painter)
     int j = 0;
     for (auto i = mTom->inventory.begin(); i != mTom->inventory.end(); i++)
     {
-        int x = j % 12;
-        int y = j / 12 + 12;
+        int x = j % 11;
+        int y = j / 11 + 12;
         (**i)["position_x"] = x, (**i)["position_y"] = y;
         (*i)->x = x * 32, (*i)->y = y * 32;
         (*i)->paint(painter);
