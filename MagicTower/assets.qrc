@@ -133,7 +133,7 @@
         <file alias="keythree">assets/Images/378.bmp</file>
         <file alias="teleport">assets/Images/381.bmp</file>
         <file alias="wit">assets/Images/384.bmp</file>
-        <file>assets/Images/387.bmp</file>
+        <file alias="vase">assets/Images/387.bmp</file>
         <file alias="cross">assets/Images/390.bmp</file>
         <file>assets/Images/393.bmp</file>
         <file alias="up3">assets/Images/395.bmp</file>

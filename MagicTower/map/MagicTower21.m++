@@ -273,31 +273,7 @@ dn	.	e_21	.	.	.	w	k_0	w	up	w
 
 on(merchant_1.f5)
 {
-	choice = input("商人: 只要你有金币,我就可以帮你.", "1. 购买一把黄钥匙($10)", "2. 购买一把蓝钥匙($50)", "3. 购买一把红钥匙($100)")
-	if(choice == 1)
-	{
-		if (tom->money >= 10)
-		{
-			tom->add_K = 0
-			tom->money = tom->money - 10
-		}
-	}
-	if(choice == 2)
-	{
-		if (tom->money >= 50)
-		{
-			tom->add_K = 1
-			tom->money = tom->money - 50
-		}
-	}
-	if(choice == 3)
-	{
-		if (tom->money >= 100)
-		{
-			tom->add_K = 2
-			tom->money = tom->money - 100
-		}
-	}
+	0
 }
 
 armour_5->defend = 10
@@ -540,7 +516,7 @@ e_16	w	.	.	e_10	w	e_3	w	m_3.m	w	.
 e_15	w	.	e_9	dr_4	w	e_2	w	m_3.m	w	.
 e_16	w	e_10	dr_4.fr	me_2	w	e_3	w	m_3.m	w	m_4
 .	w	w	w	w	w	.	w	.	w	m_4
-.	e_16	t	w	.	.	.	e_10	.	w	m_4
+.	e_16	.	w	.	.	.	e_10	.	w	m_4
 w	w	.	w	m_2.b	w	w	w	w	w	.
 down	d_0	.	dr_1	d_1	up	w	an#up3.fr	e_9	dr_0	.
 
@@ -558,13 +534,21 @@ w	.	e_13	an#key3	up	d_1	k_0.f14	k_1.f14	k_2.f14	.	w
 w	.	m_2.b	w	w	w	w	w	m_2.b	.	w
 w	.	w	w	w	w	w	w	w	.	w
 w	.	w	w	w	an#vase.pi	w	w	w	.	w
-w	.	w	w	w	dr_4	w	w	w	.	w
+w	.	w	w	w	dr_4.fr	w	w	w	.	w
 w	.	m_1.m	w	w	e_10	w	w	m_1.m	.	w
 w	.	aw_1	aw_1	w	e_9	w	aw_1	aw_1	.	w
 w	.	aw_1	aw_1	w	e_10	w	aw_1	aw_1	.	w
-w	.	aw_1	aw_1	w	dr_1	w	aw_1	aw_1	.	w
+w	.	aw_1	aw_1	w	dr_1	w	aw_1	aw_1	t	w
 w	e_3	e_2	e_3	dr_1	d_0	dr_1	e_3	e_2	e_2	w
 w	w	w	w	w	down	w	w	w	w	w
+
+#vase->pix = ":/images/vase"
+
+on(#vase)
+{
+	tom->attack = tom->attack + tom->attack / 5
+	tom->defend = tom->defend + tom->defend / 5
+}
 
 enemy_9->health = 2500
 enemy_9->attack = 900
