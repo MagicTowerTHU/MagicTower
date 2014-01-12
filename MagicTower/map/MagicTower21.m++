@@ -587,7 +587,6 @@ on(merchant_1.f12)
 		else
 			message = "Are you kidding me?"
 	}
-	print = "between if's"
 	if(choice == 2)
 	{
 		if(tom->get_K1 == 1)
@@ -766,4 +765,7 @@ aw_1	aw_1	aw_1	w	w	up	w	w	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	aw_1	w	w	w	aw_1	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1
 aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1	aw_1
+
+
+at(18)
 
