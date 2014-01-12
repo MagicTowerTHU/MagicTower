@@ -128,7 +128,7 @@
         <file alias="enemy_29.0">assets/Images/364.bmp</file>
         <file alias="enemy_29.1">assets/Images/366.bmp</file>
         <file alias="coin">assets/Images/369.bmp</file>
-        <file>assets/Images/372.bmp</file>
+        <file alias="axe">assets/Images/372.bmp</file>
         <file>assets/Images/375.bmp</file>
         <file alias="keythree">assets/Images/378.bmp</file>
         <file>assets/Images/381.bmp</file>
