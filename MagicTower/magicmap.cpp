@@ -405,6 +405,11 @@ void MagicMap::setProperty(QString propertyName, MagicVarient propertyValue)
         QSound::play(propertyValue.getString());
         return;
     }
+    if (propertyName == "backsound")
+    {
+        mBackSound->change(propertyValue.getInt());
+        return;
+    }
     else if (propertyName == "print")
     {
         qDebug() << propertyValue.getString();

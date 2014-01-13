@@ -20,7 +20,11 @@ void MagicBackSound::play(int loop) // default: 0
 void MagicBackSound::change(int target)
 {
     if (now != target)
-        stop(), now = target, play();
+    {
+        stop();
+        if (target >= 0 && target <= 4)
+            now = target, play();
+    }
 }
 
 void MagicBackSound::stop()

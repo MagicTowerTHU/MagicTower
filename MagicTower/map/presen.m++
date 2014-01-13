@@ -1,0 +1,95 @@
+
+backsound = 0-1
+
+at(0)
+w	w	w	w	w	w	w	w	w	w	w
+k_0	.	.	.	.	.	.	.	.	d_0	up
+.	w	w	w	w	w	w	w	w	.	.
+.	w	an#gdg_1.g	an#gdg_2.g	an#gdg_3.g	e_7	m_1	m_2	w	.	.
+.	w	an#gdg_4.g	an#gdg_5.g	an#gdg_6.g	e_6	m_1	m_3	w	.	.
+.	w	an#gdg_7.g	an#gdg_8.g	an#gdg_9.g	e_5	m_1	m_4	w	.	.
+.	w	e_1	e_2	e_3	e_4	m_1	m_2	w	.	.
+.	w	m_1	m_1	m_1	m_1	m_1	m_3	w	.	.
+.	w	m_3	m_2	m_4	m_3	m_2	m_4	w	.	.
+.	w	w	w	w	w	w	dr_0	w	.	.
+.	.	.	.	.	t	.	.	.	.	.
+
+on (.fr)
+{
+	this->enabled = 0
+}
+
+at(1)
+w	w.fr	dr_4.fr	dr_4	.	.	.	.	.	.	.
+w	w	dr_4.fr	dr_4	.	.	.	.	.	d_1	down#to0
+dr_4	dr_4.fr	dr_4.fr	dr_4	.	.	.	.	.	.	.
+dr_4	dr_4.fr	dr_4	dr_4	.	an#yq_1.y	an#yq_2.y	an#yq_3.y	.	.	.
+.	.	.	.	.	an#yq_4.y	an#yq_5.y	an#yq_6.y	.	.	.
+.	.	.	.	.	an#yq_7.y	an#yq_8.y	an#yq_9.y	.	.	.
+.	.	.	.	.	.	.	.	.	.	.
+.	.	.	.	.	.	.	.	.	.	.
+.	.	.	.	.	.	.	.	.	.	.
+.	.	.	.	.	.	.	.	.	.	.
+an#dry.hid	.	.	.	.	.	.	.	.	.	.
+
+.hid->enabled = 0
+
+#dry->pix = ""
+
+on(#to_0)
+{
+	backsound = 0-1
+}
+
+g_state = 1
+y_state = 0
+
+on(.g)
+{
+	if (g_state == 1)
+	{
+		message = "hello man, i need yuqian!"
+		g_state = 2
+	}
+	else
+	if (g_state == 2)
+		message = "Please go and get him quickly. I've been waiting for years!"
+	else
+	if (g_state == 3)
+	{
+		message = "Nice!"
+		g_state = 4
+	}
+	if (g_state == 4)
+	{
+		sound = ""
+	}
+	return = 0
+}
+
+on(.y)
+{
+	if (y_state == 0)
+	{
+		message = "............."
+		message
+	if (y_state == 1)
+	{
+		message = "hello man, i need the hair dryer!"
+		g_state = 2
+	}
+	else
+	if (g_state == 2)
+		message = "Please go and get him quickly. I've been waiting for years!"
+	if (g_state == 3)
+	{
+		message = "Nice!"
+		g_state = 4
+	}
+	if (g_state == 4)
+	{
+		sound = ""
+	}
+	return = 0
+}
+
