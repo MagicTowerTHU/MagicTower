@@ -62,7 +62,7 @@ public:
 
     QList<MagicObject *> findDisplayObject(QString, QString, QList<QString>);
 
-    virtual void setProperty(QString, MagicVarient);
+    virtual void setProperty(QString, MagicVarient, bool = true);
     //bool eraseMapObject(QString, int, int);
 
     MagicTom *Tom();
