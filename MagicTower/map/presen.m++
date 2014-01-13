@@ -3,42 +3,70 @@ backsound = 0-1
 
 at(0)
 w	w	w	w	w	w	w	w	w	w	w
-k_0	.	.	.	.	.	.	.	.	d_0	up
+k_0	.	.	.	.	.	.	.	.	d_1	up#to1.hid
 .	w	w	w	w	w	w	w	w	.	.
-.	w	an#gdg_1.g	an#gdg_2.g	an#gdg_3.g	e_7	m_1	m_2	w	.	.
-.	w	an#gdg_4.g	an#gdg_5.g	an#gdg_6.g	e_6	m_1	m_3	w	.	.
-.	w	an#gdg_7.g	an#gdg_8.g	an#gdg_9.g	e_5	m_1	m_4	w	.	.
+.	w	an#gdg_1.g	an#gdg_2.g	an#gdg_3.g	e_7.clear	m_1.clear	m_2.clear	w	.	.
+.	w	an#gdg_4.g	an#gdg_5.g	an#gdg_6.g	e_6.clear	m_1.clear	m_3.clear	w	.	.
+.	w	an#gdg_7.g	an#gdg_8.g	an#gdg_9.g	e_5.clear	m_1.clear	m_4.clear	w	.	.
 .	w	e_1	e_2	e_3	e_4	m_1	m_2	w	.	.
 .	w	m_1	m_1	m_1	m_1	m_1	m_3	w	.	.
 .	w	m_3	m_2	m_4	m_3	m_2	m_4	w	.	.
 .	w	w	w	w	w	w	dr_0	w	.	.
 .	.	.	.	.	t	.	.	.	.	.
 
-on (.fr)
+on(.fr)
 {
 	this->enabled = 0
 }
 
 at(1)
-w	w.fr	dr_4.fr	dr_4	.	.	.	.	.	.	.
-w	w	dr_4.fr	dr_4	.	.	.	.	.	d_1	down#to0
+w#cover.fr	w.fr	dr_4.fr	dr_4	.	.	.	.	.	.	.
+w	w	dr_4.fr	dr_4	.	.	.	.	.	d_0	down#to0
 dr_4	dr_4.fr	dr_4.fr	dr_4	.	.	.	.	.	.	.
-dr_4	dr_4.fr	dr_4	dr_4	.	an#yq_1.y	an#yq_2.y	an#yq_3.y	.	.	.
+dr_4	dr_4#in	dr_4	dr_4	.	an#yq_1.y	an#yq_2.y	an#yq_3.y	.	.	.
 .	.	.	.	.	an#yq_4.y	an#yq_5.y	an#yq_6.y	.	.	.
-.	.	.	.	.	an#yq_7.y	an#yq_8.y	an#yq_9.y	.	.	.
+.	.	.	.	.	an#yq_7.y	an#yq_8.y	.	an#yq_9.y	.	.
 .	.	.	.	.	.	.	.	.	.	.
 .	.	.	.	.	.	.	.	.	.	.
 .	.	.	.	.	.	.	.	.	.	.
 .	.	.	.	.	.	.	.	.	.	.
 an#dry.hid	.	.	.	.	.	.	.	.	.	.
 
+on(#in)
+{
+	if(y_state == 2)
+		this->enabled = 0
+}
+
+on(#cover)
+{
+	this->enabled = 0
+	#dry->enabled = 1
+	#dry->position_x = this->position_x
+	#dry->position_y = this->position_y
+}
+
+on(#dry)
+{
+	this->picked = 1
+	y_state = 3
+}
+
 .hid->enabled = 0
 
-#dry->pix = ""
+#dry->pix = "/Users/Kevin/Documents/temp/MagicTower/presentation/resources/drier.png"
 
-on(#to_0)
+on(#to0)
 {
 	backsound = 0-1
+	if(y_state == 4)
+	{
+		if(clear_cnt == 0)
+		{
+			.y->level = 0
+			y_state = 5
+		}
+	}
 }
 
 g_state = 1
@@ -48,21 +76,24 @@ on(.g)
 {
 	if (g_state == 1)
 	{
-		message = "hello man, i need yuqian!"
+		message = "勇士: 这不是郭德刚郭老师吗!"
+		message = "德刚: 诶呀年轻人你认识我?"
+		message = "勇士: 可不是嘛!"
+		message = "德刚: 我很欣慰啊!"
+		message = "德刚: 你能帮我把谦哥找来吗?"
+		message = "勇士: 没问题啊!"
+		#to1->enabled = 1
 		g_state = 2
 	}
 	else
 	if (g_state == 2)
-		message = "Please go and get him quickly. I've been waiting for years!"
+		message = "德刚: 谦哥找着没有呢?"
 	else
 	if (g_state == 3)
 	{
-		message = "Nice!"
-		g_state = 4
-	}
-	if (g_state == 4)
-	{
-		sound = ""
+		message = "我在说相声."
+		g_state = 5
+		y_state = 6
 	}
 	return = 0
 }
@@ -71,25 +102,66 @@ on(.y)
 {
 	if (y_state == 0)
 	{
-		message = "............."
-		message
-	if (y_state == 1)
-	{
-		message = "hello man, i need the hair dryer!"
-		g_state = 2
+		if(this->id != "yq_9")
+		{
+			message = "于谦: ............."
+			message = "勇士: 他在说啥?"
+
+		}
+		else
+		{
+			if(tom->position_x == 9)
+			{
+				this->position_x = 7
+				return == 1
+				y_state = 1
+			}
+			else
+			{
+				message = "于谦: ............."
+				message = "勇士: 他在说啥?"
+			}
+		}
 	}
 	else
-	if (g_state == 2)
-		message = "Please go and get him quickly. I've been waiting for years!"
-	if (g_state == 3)
+	if (y_state == 1)
 	{
-		message = "Nice!"
-		g_state = 4
+		message = "勇士: 于老师您这是干嘛哪?"
+		message = "于谦: 我啊, 我正烫头呢!"
+		message = "勇士: 您跟我走吧! 郭老师正找您呢!"
+		message = "于谦: 不行啊! 我这没吹头发呢."
+		message = "于谦: 我要吹风机!"
+		y_state = 2
 	}
-	if (g_state == 4)
+	else
+	if (y_state == 2)
 	{
-		sound = ""
+		message = "于谦: 我要吹风机!"
+	}
+	if (y_state == 3)
+	{
+		message = "勇士: 于老师您的吹风机来了!"
+		#dry->picked = 0
+		message = "于谦: 太好啦! 我这就去找老郭!"
+		y_state = 4
+		g_state = 3
+	}
+	else
+	if (y_state == 4)
+		message = "于谦: 马上就走着什么急..."
+	if (y_state == 5)
+	{
+		message = "我在说相声."
+		g_state = 5
+		y_state = 6
 	}
 	return = 0
 }
 
+// must be on tail
+clear_cnt = 9
+on (.clear)
+{
+	if (this->enabled == 0)
+		clear_cnt = clear_cnt - 1
+}
