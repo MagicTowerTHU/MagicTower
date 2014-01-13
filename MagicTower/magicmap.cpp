@@ -236,7 +236,7 @@ public:
         parent->animateListLock.lockForWrite();
         if (dynamic_cast<MagicPopup *>(target) == NULL)
             parent->animateFlag++;
-        parent->animateList.push_front(target);
+        parent->animateList.append(target);
         parent->animateListLock.unlock();
     }
 };
@@ -254,7 +254,7 @@ void MagicMap::appendAnimate(MagicAnimate *animate, bool block)
     animateListLock.lockForWrite();
     if (dynamic_cast<MagicPopup *>(animate) == NULL)
         animateFlag++;
-    animateList.push_front(animate);
+    animateList.append(animate);
     animateListLock.unlock();
     animate->wait(animate);
     animate->unlock();

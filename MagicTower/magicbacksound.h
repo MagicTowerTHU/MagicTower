@@ -4,11 +4,13 @@
 #include "magicsoundobject.h"
 
 #include <QtMultimedia/QSound>
+#include <QMutex>
 
 class MagicBackSound : public MagicSoundObject
 {
     QSound *mSound[5];
     int now;
+    QMutex soundMutex;
 
 public:
     MagicBackSound();

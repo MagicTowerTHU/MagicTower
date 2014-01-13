@@ -9,7 +9,7 @@ w	w	aw_1	aw_1	aw_1	k_0.ini	aw_1	aw_1	aw_1	w	w
 w	w	w	w	w	dr_0	w	w	w	w	w
 aw_2	w	aw_2	w	.	me_4#fairy	.	w	aw_2	w	aw_2
 aw_2	aw_2	aw_2	aw_2	aw_2	.	aw_2	aw_2	aw_2	aw_2	aw_2
-aw_2	aw_2	aw_2	aw_2	aw_2	.	aw_2	aw_2	aw_2	aw_2	aw_2
+aw_2	aw_2	aw_2	aw_2	aw_2	t	aw_2	aw_2	aw_2	aw_2	aw_2
 
 #fairy->state = 0
 on (#fairy)
@@ -458,7 +458,7 @@ on(#f6)
 }
 
 at(7)
-up	d_1	.	.	.	t	.	.	w	w	w
+up	d_1	.	.	.	.	.	.	w	w	w
 w	w	.	e_20	w	dr_1	w	e_14	.	w	w
 w	.	e_20	m_4	w	e_19	w	m_3	e_14	.	w
 .	.	w	w	w	dr_4	w	w	w	.	.
@@ -612,7 +612,7 @@ enemy_4->exp = 75
 
 at(12)
 me_1.f12	m_4	w	.	e_16	e_15	e_16	.	w	m_2	any#axe.pi
-m_3	t	w	.	w	dr_0	w	.	w	.	m_2
+m_3	.	w	.	w	dr_0	w	.	w	.	m_2
 .	.	w	.	w	e_15	w	.	w	.	.
 .	e_4	w	.	w	k_0	w	.	w	e_12	.
 e_4	e_10	w	.	w	k_0	w	.	w	e_13	e_12
@@ -995,9 +995,9 @@ on(#last)
 }
 
 
-wisdomEnabled = 1
-teleportEnabled = 1
+//wisdomEnabled = 1
+//teleportEnabled = 1
 
-tom->health = 50000
-tom->attack = 50000
-tom->defend = 50000
+//tom->health = 50000
+//tom->attack = 50000
+//tom->defend = 50000

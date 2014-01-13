@@ -13,18 +13,21 @@ MagicBackSound::MagicBackSound()
 void MagicBackSound::play(int loop) // default: 0
 {
     if (loop <= 0) loop = 2147483647; // wtf
-    mSound[now]->setLoops(loop);
     mSound[now]->play();
+    mSound[now]->setLoops(loop);
 }
 
 void MagicBackSound::change(int target)
 {
+    soundMutex.lock();
     if (now != target)
     {
         stop();
+        now = target;
         if (target >= 0 && target <= 4)
-            now = target, play();
+            play();
     }
+    soundMutex.unlock();
 }
 
 void MagicBackSound::stop()

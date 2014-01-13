@@ -29,7 +29,7 @@ bool MagicLevel::paint(QPainter *painter)
         painter->setOpacity(((cnt - 10) / 20.0) * ((cnt - 10) / 20.0));
 
         painter->setPen("white");
-        painter->setFont(QFont("Arial", 24, 10));
+        painter->setFont(QFont("Arial", 28, 10));
         painter->drawText(screen, Qt::AlignCenter, buffer);
     }
     else if (cnt < 50)
@@ -80,7 +80,7 @@ bool MagicLevel::paint(QPainter *painter)
         painter->setOpacity(((50 - cnt) / 20.0) * ((50 - cnt) / 20.0));
 
         painter->setPen("white");
-        painter->setFont(QFont("Arial", 24, 5));
+        painter->setFont(QFont("Arial", 28, 5));
         painter->drawText(screen, Qt::AlignCenter, buffer);
     }
     else if (cnt < 60)
