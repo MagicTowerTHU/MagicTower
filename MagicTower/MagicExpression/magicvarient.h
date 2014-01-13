@@ -13,8 +13,8 @@ public:
     MagicVarient(QString);
     MagicVarient();
 
-    int getInt();
-    QString getString();
+    int getInt() const;
+    QString getString() const;
     QString getOutput();
     static MagicVarient setInput(QString);
     bool isTrue();

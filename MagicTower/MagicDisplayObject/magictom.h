@@ -6,6 +6,7 @@
 class MagicKey;
 
 #include <QSound>
+#include <QMap>
 
 class MagicTom : public MagicDisplayObject
 {

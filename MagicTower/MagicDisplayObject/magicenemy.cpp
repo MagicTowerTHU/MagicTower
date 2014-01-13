@@ -68,7 +68,6 @@ int MagicEnemy::damage(MagicMap *map)
 {
     int kill = map->Tom()->property["attack"].getInt() - property["defend"].getInt();
     int casualty = property["attack"].getInt() - map->Tom()->property["defend"].getInt();
-    int tomHealth = map->Tom()->property["health"].getInt();
     int enemyHealth = property["health"].getInt();
     if (casualty <= 0) return 0;
     if (kill <= 0) return -1;

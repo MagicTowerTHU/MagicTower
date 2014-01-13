@@ -21,14 +21,35 @@ MagicDisplayObject::~MagicDisplayObject()
             delete *i;
 }
 
+QString MagicDisplayObject::getLabel()
+{
+    return property["label"].getString();
+}
+
 void MagicDisplayObject::setProperty(QString propertyName, MagicVarient propertyValue)
 {
     if (propertyName == "position_x")
         x = propertyValue.getInt() * 32;
     if (propertyName == "position_y")
         y = propertyValue.getInt() * 32;
-    if (propertyName == "picked" && propertyValue.isTrue())
-        parent->Tom()->inventory.push_back(this);
+    if (propertyName == "label")
+        return;
+    if (propertyName == "picked")
+    {
+        if (propertyValue.isTrue())
+        {
+            for (auto i = parent->Tom()->inventory.begin(); i != parent->Tom()->inventory.end(); i++)
+                if ((*i)->getLabel() >= getLabel())
+                {
+                    parent->Tom()->inventory.insert(i, this);
+                    goto exit;
+                }
+            parent->Tom()->inventory.append(this);
+        }
+        else
+            parent->Tom()->inventory.removeAll(this);
+    }
+exit:
     MagicObject::setProperty(propertyName, propertyValue);
 }
 

@@ -20,7 +20,7 @@ MagicVarient::MagicVarient()
     this->type = false;
 }
 
-int MagicVarient::getInt()
+int MagicVarient::getInt() const
 {
     if(!this->type)
         return *((int*)this->data);
@@ -31,7 +31,7 @@ int MagicVarient::getInt()
     }
 }
 
-QString MagicVarient::getString()
+QString MagicVarient::getString() const
 {
     if(this->type)
         return *((QString*)this->data);

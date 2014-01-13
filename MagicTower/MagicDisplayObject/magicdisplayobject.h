@@ -16,6 +16,7 @@ class MagicDisplayObject : public MagicObject
 
 protected:
     MagicMap *parent;
+    virtual QString getLabel();
 
 public:
     int x, y;

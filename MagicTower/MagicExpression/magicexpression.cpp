@@ -482,38 +482,56 @@ MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
     if (!file->open(QIODevice::ReadOnly | QIODevice::Text))
         printf("File Cannot Open..."), throw "File Cannot Open...";
 
-    QTextStream in(file);
-    while (!in.atEnd())
+    QStack<QTextStream *> inStack;
+
+    inStack.push(new QTextStream(file));
+    while (!inStack.empty())
     {
-        QString line = QString(in.readLine().split("\\\\").at(0)).replace('\t', ' ').trimmed();
-        if (line.isEmpty())
-            continue;
+    newFile:
+        QTextStream &in = *inStack.top();
+        while (!in.atEnd())
+        {
+            QString line = QString(in.readLine().split("//").at(0)).replace('\t', ' ').trimmed();
 
-        if (targetFlag)
-            onList.append(line);
+            if (line.isEmpty())
+                continue;
 
-        try
-        {
-            goForIt(line, map, &in);
+            if (line.startsWith("#include "))
+            {
+                QFile *newFile = new QFile(line.mid(9).trimmed());
+                if (!newFile->open(QIODevice::ReadOnly | QIODevice::Text))
+                    throw QString("File <") + line.mid(9).trimmed() + "> Cannot Open...";
+                inStack.push(new QTextStream(newFile));
+                goto newFile;
+            }
+
+            if (targetFlag)
+                onList.append(line);
+
+            try
+            {
+                goForIt(line, map, &in);
+            }
+            catch (const char *e)
+            {
+                qDebug() << "Exception : " << e;
+                lineInfo(line, in);
+                return NULL;
+            }
+            catch (int x)
+            {
+                qDebug() << "Exception : " << x;
+                lineInfo(line, in);
+                return NULL;
+            }
+            catch (QString x)
+            {
+                qDebug() << x;
+                lineInfo(line, in);
+                return NULL;
+            }
         }
-        catch (const char *e)
-        {
-            qDebug() << "Exception : " << e;
-            lineInfo(line, in);
-            return NULL;
-        }
-        catch (int x)
-        {
-            qDebug() << "Exception : " << x;
-            lineInfo(line, in);
-            return NULL;
-        }
-        catch (QString x)
-        {
-            qDebug() << x;
-            lineInfo(line, in);
-            return NULL;
-        }
+        inStack.pop();
     }
 
     preprocessing = false;
@@ -521,7 +539,7 @@ MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
     {
         try
         {
-            goForIt(*i, map, &in);
+            goForIt(*i, map, NULL);
         }
         catch (const char *e)
         {

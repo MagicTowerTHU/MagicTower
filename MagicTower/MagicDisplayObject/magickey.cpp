@@ -47,3 +47,8 @@ bool MagicKey::move(MagicMap *map)
     }
     return ret;
 }
+
+QString MagicKey::getLabel()
+{
+    return property["label"].getString() + "_" + QString::number(color);
+}
