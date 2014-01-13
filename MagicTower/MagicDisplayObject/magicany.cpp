@@ -14,7 +14,7 @@ MagicAny::~MagicAny()
 
 #include <QDebug>
 
-void MagicAny::setProperty(QString propertyName, MagicVarient propertyValue)
+void MagicAny::setProperty(QString propertyName, MagicVarient propertyValue, bool)
 {
     if (propertyName == "pix")
         pix = new QPixmap(propertyValue.getString());

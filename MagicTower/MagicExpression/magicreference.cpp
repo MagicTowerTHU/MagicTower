@@ -40,6 +40,8 @@ MagicVarient MagicReference::getValue(MagicMap *map)
     }
 }
 
+#include <QDebug>
+
 MagicVarient MagicReference::setValue(MagicVarient x, MagicMap *map)
 {
     if (objectLabel == "this")
@@ -47,10 +49,16 @@ MagicVarient MagicReference::setValue(MagicVarient x, MagicMap *map)
         (MagicExpression::environment)->setProperty(property, x);
         return x;
     }
+
+    if (property == "pix")
+    {
+        qDebug() << "pix<-" << x.getString();
+    }
+
     QList<MagicObject *>target = map->findDisplayObject(objectLabel, objectId, objectClass);
     if (!target.empty())
         for (QList<MagicObject *>::iterator i = target.begin(); i != target.end(); i++)
-            (**i).setProperty(property, x);
+            (*i)->setProperty(property, x);
     else
     {
         QString err = "<MagicReference::setValue(MagicMap *)> Cannot find object : " + objectLabel + (objectId != "" ? "#" + objectId : "");// + (objectClass != "" ? "." + objectClass : "");

@@ -10,7 +10,7 @@ class MagicAny : public MagicDisplayObject
 public:
     MagicAny(int, int ,int, MagicMap *);
     ~MagicAny();
-    virtual void setProperty(QString, MagicVarient);
+    virtual void setProperty(QString, MagicVarient, bool = true);
     virtual void paint(QPainter *);
     virtual bool move(MagicMap *);
 };

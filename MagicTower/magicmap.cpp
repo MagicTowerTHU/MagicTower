@@ -423,7 +423,7 @@ QList<MagicObject *> MagicMap::findDisplayObject(QString objectLabel, QString ob
     return objects;
 }
 
-void MagicMap::setProperty(QString propertyName, MagicVarient propertyValue)
+void MagicMap::setProperty(QString propertyName, MagicVarient propertyValue, bool)
 {
     if (propertyName == "sound")
     {
