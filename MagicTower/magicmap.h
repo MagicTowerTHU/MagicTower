@@ -19,6 +19,8 @@ class KeyThread;
 
 class MagicMap : public MagicObject
 {
+    friend class Widget;
+
     MagicTom *mTom;
 
     MagicFloor *floor[121];

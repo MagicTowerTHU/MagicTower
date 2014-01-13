@@ -2,6 +2,7 @@
 #include "magicmap.h"
 
 #include "MagicAnimate/magicpopup.h"
+#include "MagicExpression/magicexpression.h"
 
 #include <QPainter>
 #include <QTimer>
@@ -51,7 +52,12 @@ void Widget::animate()
         if (mMap->loadMap(new QFile(mapToLoad)))
             mMap->appendPopup("Map Load succeeded.", false);
         else
+        {
+            MagicExpression::onList.clear();
+            MagicExpression::atList.clear();
+            mMap->initialize();
             mMap->appendPopup("Bad Map. Info are shown in the console.", false);
+        }
         mapToLoad = "";
         loadingFlag = false;
     }
@@ -61,7 +67,12 @@ void Widget::animate()
         if (mMap->loadRecord(new QFile(recToLoad)))
             mMap->appendPopup("Record Load succeeded.", false);
         else
+        {
+            MagicExpression::onList.clear();
+            MagicExpression::atList.clear();
+            mMap->initialize();
             mMap->appendPopup("Bad Record. Info are shown in the console.", false);
+        }
         recToLoad = "";
         loadingFlag = false;
     }
@@ -71,7 +82,12 @@ void Widget::animate()
         if (mMap->saveRecord(new QFile(recToSave)))
             mMap->appendPopup("Record Saved succeeded.", false);
         else
+        {
+            MagicExpression::onList.clear();
+            MagicExpression::atList.clear();
+            mMap->initialize();
             mMap->appendPopup("Bad operation. Info are shown in the console.", false);
+        }
         recToSave = "";
         loadingFlag = false;
     }
