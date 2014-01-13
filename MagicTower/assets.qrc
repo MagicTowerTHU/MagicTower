@@ -200,6 +200,8 @@
         <file alias="left_middle">assets/Images/009.png</file>
         <file alias="right_middle">assets/Images/010.png</file>
         <file alias="middle">assets/Images/011.bmp</file>
+        <file alias="gdg">assets/Images/gdg.bmp</file>
+        <file alias="yq">assets/Images/yq.bmp</file>
     </qresource>
     <qresource prefix="/sounds">
         <file>assets/Sounds/1.wav</file>

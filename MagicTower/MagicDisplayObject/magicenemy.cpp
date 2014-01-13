@@ -70,15 +70,11 @@ int MagicEnemy::damage(MagicMap *map)
     int casualty = property["attack"].getInt() - map->Tom()->property["defend"].getInt();
     int tomHealth = map->Tom()->property["health"].getInt();
     int enemyHealth = property["health"].getInt();
-    int damage = 0;
     if (casualty <= 0) return 0;
-    while (tomHealth > 0 && enemyHealth > 0)
-    {
-        tomHealth -= casualty;
-        damage += casualty;
-        enemyHealth -= kill;
-    }
-    return damage;
+    if (kill <= 0) return -1;
+    int turns = (enemyHealth % kill) ? (enemyHealth / kill + 1) : (enemyHealth / kill);
+    Q_ASSERT(turns > 0);
+    return (turns - 1) * casualty;
 }
 
 void MagicEnemy::paint(QPainter *painter)
@@ -95,46 +91,39 @@ bool MagicEnemy::move(MagicMap *map)
                 property["health"].getInt();*/
     bool ret;
 
-    if (map->Tom()->property["attack"].getInt() <= property["defend"].getInt())
+    int kill = map->Tom()->property["attack"].getInt() - property["defend"].getInt();
+    int casualty = property["attack"].getInt() - map->Tom()->property["defend"].getInt();
+    int tomHealth = map->Tom()->property["health"].getInt();
+    int enemyHealth = property["health"].getInt();
+
+
+    if (kill <= 0)
     {
         //qDebug() << "can't break defence!!";
         ret = false;
     }
-    else if(map->Tom()->property["defend"].getInt() >= property["attack"].getInt())
+    else if(casualty <= 0)
     {
         //qDebug() << "Tom health left:" << map->Tom()->property["health"].getInt();
         map->Tom()->property["exp"] += property["exp"].getInt();
         map->Tom()->property["money"] += property["money"].getInt();
         property["enabled"] = 0;
-
         parent->appendSound(":/sounds/attack");
         ret = true;
     }
     else
     {
-        int kill = map->Tom()->property["attack"].getInt() - property["defend"].getInt();
-        int casualty = property["attack"].getInt() - map->Tom()->property["defend"].getInt();
-        int tomHealth = map->Tom()->property["health"].getInt();
-        int enemyHealth = property["health"].getInt();
-        while (tomHealth > 0 && enemyHealth > 0)
-        {
-            enemyHealth -= kill;
-            if(enemyHealth <= 0) break;
-            tomHealth -= casualty;
-        }
-        if(tomHealth <= 0)
-        {
-            //qDebug() << "will die!!";
-            return runAction(map, false);
-        }
+        int turns = (enemyHealth % kill) ? (enemyHealth / kill + 1) : (enemyHealth / kill);
+        Q_ASSERT(turns > 0);
+        int damage = (turns - 1) * casualty;
+        if (damage >= tomHealth)
+            ret = false;
         else
         {
-            map->Tom()->property["health"] = tomHealth;
             map->Tom()->property["exp"] += property["exp"].getInt();
             map->Tom()->property["money"] += property["money"].getInt();
-            //qDebug() << "Tom health left:" << map->Tom()->property["health"].getInt();
+            map->Tom()->property["health"] -= damage;
             property["enabled"] = 0;
-
             parent->appendSound(":/sounds/attack");
             ret = true;
         }
