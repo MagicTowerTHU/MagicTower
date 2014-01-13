@@ -293,6 +293,7 @@ on(merchant_5.f4)
 		message = "小偷: 非常感谢, 一会我就打开第二层的门."
 		message = "小偷: 如果你找到那个铁榔头的话"
 		message = "小偷: 就来这里找我!"
+		door.f2->enabled = 0
 		this->state = 1
 	}
 	if (this->state == 2)
