@@ -9,7 +9,7 @@ w	w	aw_1	aw_1	aw_1	k_0.ini	aw_1	aw_1	aw_1	w	w
 w	w	w	w	w	dr_0	w	w	w	w	w
 aw_2	w	aw_2	w	.	me_4#fairy	.	w	aw_2	w	aw_2
 aw_2	aw_2	aw_2	aw_2	aw_2	.	aw_2	aw_2	aw_2	aw_2	aw_2
-aw_2	aw_2	aw_2	aw_2	aw_2	t	aw_2	aw_2	aw_2	aw_2	aw_2
+aw_2	aw_2	aw_2	aw_2	aw_2	.	aw_2	aw_2	aw_2	aw_2	aw_2
 
 #fairy->state = 0
 on (#fairy)
@@ -404,7 +404,7 @@ e_14	k_0	w	m_3	w	.	k_0	e_18	w	e_6	m_2
 k_0	e_20	dr_1	.	dr_1	e_20	.	k_0	w	.	e_6
 .	.	w	e_22	w	.	.	.	w	e_17	.
 w	w	w	dr_2	w	w	w	w	w	dr_0	w
-.	.	e_7	.	k_0	k_0	k_0	.	e_7	.	.
+t	.	e_7	.	k_0	k_0	k_0	.	e_7	.	.
 .	w	w	w	w	w	w	w	w	w	w
 .	w	e_21	dr_0	e_21	.	.	.	.	.	w
 .	w	dr_0	w	dr_0	w	w	w	w	dr_1	w
@@ -461,7 +461,7 @@ up	d_1	.	.	.	.	.	.	w	w	w
 w	w	.	e_20	w	dr_1	w	e_14	.	w	w
 w	.	e_20	m_4	w	e_19	w	m_3	e_14	.	w
 .	.	w	w	w	dr_4	w	w	w	.	.
-.	.	d_1	e_19	dr_4.fr	an#cross.pi	dr_4	e_19	dr_1	.	.
+.	.	dr_1	e_19	dr_4.fr	an#cross.pi	dr_4	e_19	dr_1	.	.
 .	w	w	w	w	dr_4	w	w	w	w	.
 .	w	m_1	m_3	w	e_19	w	m_4	m_1	w	.
 .	w	k_0	m_1	w	dr_1	w	m_1	k_0	w	.
@@ -524,6 +524,14 @@ k_1	e_14	m_1	w	e_6	e_11	e_6	w	.	dr_0	e_14
 s_3	k_1	e_14	dr_0	m_2	e_6	m_2	w	.	w	.
 
 weapon_3->attack = 70
+
+#snow->pix = ":/images/teleport"
+
+on(#snow)
+{
+	this->picked = 1
+	teleportEnabled = 1
+}
 
 enemy_5->health = 900
 enemy_5->attack = 450
@@ -987,3 +995,5 @@ on(#last)
 
 
 wisdomEnabled = 1
+
+teleportEnabled = 1
