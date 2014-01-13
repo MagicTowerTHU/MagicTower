@@ -15,6 +15,7 @@
 #include "MagicDisplayObject/magicmedicine.h"
 
 #include "MagicExpression/magicexpression.h"
+#include "MagicAnimate/magicpopup.h"
 
 #include <QPoint>
 #include <QPointer>
@@ -22,6 +23,7 @@
 #include <QDebug>
 #include <QTextStream>
 #include <QMediaObject>
+#include <QMutableListIterator>
 
 #define yellow 0
 #define blue 1
@@ -64,7 +66,7 @@ void MagicMap::initialize()
     mTom = new MagicTom(0, 0, 1, this);
     displayList.push_front(mTom);
 
-    animateFlag = false;
+    animateFlag = 0;
 
     property["wisdomEnabled"] = 0;
     property["teleportEnabled"] = 0;
@@ -94,7 +96,11 @@ bool MagicMap::loadMap(QFile *file)
 
         try
         {
-            MagicExpression::input(file, this)->run(this);
+            MagicExpression *global = MagicExpression::input(file, this);
+            if (global)
+                global->run(this);
+            else
+                return false;
         }
         catch (const char *e)
         {
@@ -104,6 +110,7 @@ bool MagicMap::loadMap(QFile *file)
         catch (QString x)
         {
             qDebug() << "Exception: " << x;
+            return false;
         }
 
         return true;
@@ -158,7 +165,10 @@ bool MagicMap::loadRecord(QFile *file)
         (*i)->loadProperty(&in, this);
 
     if (!in.atEnd())
+    {
+        qDebug() << "File should not end here...";
         return false;
+    }
 
     return true;
 }
@@ -166,12 +176,10 @@ bool MagicMap::loadRecord(QFile *file)
 void MagicMap::paint(QPainter *painter)
 {
     soundListLock.lock();
-    for (auto i = soundToPlay.begin(); i != soundToPlay.end(); i++)
+    for (QMutableListIterator<QString> i(soundToPlay); i.hasNext(); )
     {
-        QSound::play(*i);
-        i = soundToPlay.erase(i);
-        if (soundToPlay.empty())
-            break;
+        QSound::play(i.next());
+        i.remove();
     }
     soundListLock.unlock();
 
@@ -193,20 +201,22 @@ void MagicMap::paint(QPainter *painter)
     }
 
     animateListLock.lockForWrite();
-    for (QList<MagicAnimate *>::iterator i = animateList.begin(); i != animateList.end(); i++)
-        if ((*i)->paint(painter) == false)
+    for (QMutableListIterator<MagicAnimate *> i(animateList); i.hasNext(); )
+        if (i.next()->paint(painter) == false)
         {
-            (*i)->lock();
-            (*i)->wakeAll();
-            (*i)->unlock();
-            i = animateList.erase(i);
-            if (animateList.empty())
-            {
-                animateFlag = false;
-                break;
-            }
+            i.value()->lock();
+            i.value()->wakeAll();
+            i.value()->unlock();
+            if (dynamic_cast<MagicPopup *>(i.value()) == NULL)
+                animateFlag--;
+            i.remove();
         }
     animateListLock.unlock();
+}
+
+void MagicMap::appendPopup(QString content, bool block)
+{
+    appendAnimate(new MagicPopup(this, content), block);
 }
 
 void MagicMap::appendAnimate(MagicAnimate *animate, bool block)
@@ -214,7 +224,8 @@ void MagicMap::appendAnimate(MagicAnimate *animate, bool block)
     if (block)
         animate->lock();
     animateListLock.lockForWrite();
-    animateFlag = true;
+    if (dynamic_cast<MagicPopup *>(animate) == NULL)
+        animateFlag++;
     animateList.push_front(animate);
     animateListLock.unlock();
     if (block)
@@ -357,7 +368,6 @@ bool MagicMap::move(int direction, int distance)
             ((**i)["level"] == mTom->property["level"]).isTrue())
             if ((**i)["enabled"].isTrue()  && !(*i)->move(this))
             {
-                this->appendSound(":/sounds/beep");
                 return false;
             }
 
@@ -401,6 +411,11 @@ void MagicMap::setProperty(QString propertyName, MagicVarient propertyValue)
     else if (propertyName == "message")
     {
         appendAnimate(new MagicMessage(this, propertyValue.getString()), true);
+        return;
+    }
+    else if (propertyName == "popup")
+    {
+        appendPopup(propertyValue.getString());
         return;
     }
     MagicObject::setProperty(propertyName, propertyValue);

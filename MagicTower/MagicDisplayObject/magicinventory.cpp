@@ -23,5 +23,5 @@ bool MagicInventory::move(MagicMap *map)
         property["enabled"] = 0;
         setProperty("picked", 1);
     }
-    return runAction(map, true);
+    return runAction(map, false);
 }

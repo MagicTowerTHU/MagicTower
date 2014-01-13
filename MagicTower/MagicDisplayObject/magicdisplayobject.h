@@ -20,7 +20,7 @@ protected:
 public:
     int x, y;
     MagicDisplayObject(int, int, int, MagicMap *);
-    ~MagicDisplayObject();
+    virtual ~MagicDisplayObject();
     virtual void paint(QPainter *) = 0;
     virtual bool move(MagicMap *) = 0;
     virtual void setProperty(QString, MagicVarient);

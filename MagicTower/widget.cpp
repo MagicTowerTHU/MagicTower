@@ -1,6 +1,8 @@
 #include "widget.h"
 #include "magicmap.h"
 
+#include "MagicAnimate/magicpopup.h"
+
 #include <QPainter>
 #include <QTimer>
 #include <QKeyEvent>
@@ -46,21 +48,30 @@ void Widget::animate()
     if (!mapToLoad.isEmpty())
     {
         loadingFlag = true;
-        mMap->loadMap(new QFile(mapToLoad));
+        if (mMap->loadMap(new QFile(mapToLoad)))
+            mMap->appendPopup("Map Load succeeded.", false);
+        else
+            mMap->appendPopup("Bad Map. Info are shown in the console.", false);
         mapToLoad = "";
         loadingFlag = false;
     }
     if (!recToLoad.isEmpty())
     {
         loadingFlag = true;
-        mMap->loadRecord(new QFile(recToLoad));
+        if (mMap->loadRecord(new QFile(recToLoad)))
+            mMap->appendPopup("Record Load succeeded.", false);
+        else
+            mMap->appendPopup("Bad Record. Info are shown in the console.", false);
         recToLoad = "";
         loadingFlag = false;
     }
     if (!recToSave.isEmpty())
     {
         loadingFlag = true;
-        mMap->saveRecord(new QFile(recToSave));
+        if (mMap->saveRecord(new QFile(recToSave)))
+            mMap->appendPopup("Record Saved succeeded.", false);
+        else
+            mMap->appendPopup("Bad operation. Info are shown in the console.", false);
         recToSave = "";
         loadingFlag = false;
     }

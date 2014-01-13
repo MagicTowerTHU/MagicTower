@@ -220,7 +220,7 @@ MagicOperand *processLine(QString buffer)
     return stackNum.pop();
 }
 
-MagicOperand *getCondition(QString buffer, int p)
+MagicOperand *getCondition(QString buffer, int)
 {
     QRegExp rx("^\\s*\\((.*)\\)$");
     rx.indexIn(buffer.mid(2));
@@ -463,6 +463,16 @@ void MagicExpression::initAll()
     onList.clear(), atList.clear();
 }
 
+void lineInfo(QString line, QTextStream &in)
+{
+    qDebug() << "\t@line: -> " << line << "(" << in.readLine() << "," << in.readLine() << ")";
+}
+
+void lineInfo(QString line, QStringList::iterator i)
+{
+    qDebug() << "\t@line: -> " << line << "(" << *i++ << "," << *i++ << ")";
+}
+
 MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
 {
     initAll();
@@ -489,11 +499,20 @@ MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
         catch (const char *e)
         {
             qDebug() << "Exception : " << e;
+            lineInfo(line, in);
+            return NULL;
         }
-        catch (int x) {qDebug() << "Exception : " << x;}
+        catch (int x)
+        {
+            qDebug() << "Exception : " << x;
+            lineInfo(line, in);
+            return NULL;
+        }
         catch (QString x)
         {
             qDebug() << x;
+            lineInfo(line, in);
+            return NULL;
         }
     }
 
@@ -504,11 +523,24 @@ MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
         {
             goForIt(*i, map, &in);
         }
-        /*catch (const char *e)
+        catch (const char *e)
         {
             qDebug() << "Exception : " << e;
-        }*/
-        catch (int x) {qDebug() << "Exception : " << x;}
+            lineInfo(*i, i);
+            return NULL;
+        }
+        catch (int x)
+        {
+            qDebug() << "Exception : " << x;
+            lineInfo(*i, i);
+            return NULL;
+        }
+        catch (QString x)
+        {
+            qDebug() << x;
+            lineInfo(*i, i);
+            return NULL;
+        }
     }
 
     return final();
@@ -536,8 +568,13 @@ void MagicExpression::process(QTextStream &in, int n, MagicMap *map)
         catch (const char *e)
         {
             qDebug() << "Exception : " << e;
+            lineInfo(line, in);
         }
-        catch (int x) {qDebug() << "Exception : " << x;}
+        catch (int x)
+        {
+            qDebug() << "Exception : " << x;
+            lineInfo(line, in);
+        }
     }
 }
 

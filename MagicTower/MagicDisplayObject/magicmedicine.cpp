@@ -46,8 +46,8 @@ bool MagicMedicine::move(MagicMap *map)
         map->Tom()->property["defend"] += property["defend"].getInt();
 
     property["enabled"] = 0;
-    qDebug() <<"Tom:"<< map->Tom()->property["attack"].getInt() <<
+    /*qDebug() <<"Tom:"<< map->Tom()->property["attack"].getInt() <<
                          map->Tom()->property["defend"].getInt() <<
-                         map->Tom()->property["health"].getInt();
+                         map->Tom()->property["health"].getInt();*/
     return runAction(map, true);
 }

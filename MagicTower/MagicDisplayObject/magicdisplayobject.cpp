@@ -14,7 +14,6 @@ MagicDisplayObject::MagicDisplayObject(int x, int y, int level, MagicMap *parent
     property["id"] = "";
 }
 
-
 MagicDisplayObject::~MagicDisplayObject()
 {
     for (auto i = action.begin(); i != action.end(); i++)

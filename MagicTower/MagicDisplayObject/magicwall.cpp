@@ -1,4 +1,5 @@
 #include "magicwall.h"
+#include "../magicmap.h"
 
 MagicWall::MagicWall(int x, int y, int level, MagicMap *parent)
     : MagicDisplayObject(x, y, level, parent)
@@ -20,5 +21,10 @@ void MagicWall::paint(QPainter *painter)
 
 bool MagicWall::move(MagicMap *map)
 {
-    return runAction(map, false);
+    if (!runAction(map, false))
+    {
+        parent->appendSound(":/sounds/beep");
+        return false;
+    }
+    return true;
 }

@@ -12,15 +12,15 @@ MagicCondition::MagicCondition(MagicOperand *condition)
 void MagicCondition::run(MagicMap *map)
 {
     if (condition->getValue(map).isTrue())
+    {
         if (trueBranch)
             trueBranch->run(map);
-        else
-            qDebug() << "MagicExpression::run() terminates";
+    }
     else
+    {
         if (falseBranch)
             falseBranch->run(map);
-        else
-            qDebug() << "MagicExpression::run() terminates";
+    }
 }
 
 void MagicCondition::setNext(MagicExpression *next)

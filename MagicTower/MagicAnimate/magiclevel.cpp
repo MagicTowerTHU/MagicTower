@@ -6,6 +6,7 @@ MagicLevel::MagicLevel(MagicMap *parent, int level)
 {
     this->buffer = "Level " + QString::number(level);
     this->level = level;
+    parent->appendSound(":/sounds/level");
 }
 
 QRect MagicLevel::screen(0, 0, 352, 352);
@@ -58,6 +59,19 @@ bool MagicLevel::paint(QPainter *painter)
                     }
             }
             parent->Tom()->property["level"] = level;
+        }
+        if (cnt == 31)
+        {
+            if (level == 0)
+                parent->mBackSound->change(0);
+            else if (level < 8)
+                parent->mBackSound->change(1);
+            else if (level < 15)
+                parent->mBackSound->change(2);
+            else if (level < 19)
+                parent->mBackSound->change(3);
+            else
+                parent->mBackSound->change(4);
         }
 
         painter->setPen("black");

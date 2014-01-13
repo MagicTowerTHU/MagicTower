@@ -72,7 +72,7 @@ void MagicObject::loadProperty(QTextStream *in, MagicMap *map)
     }
 }*/
 
-void MagicObject::loadProperty(QTextStream *in, MagicMap *map)
+void MagicObject::loadProperty(QTextStream *in, MagicMap *)
 {
     int length = in->readLine().toInt();
     for (int i = 0; i < length; i++)

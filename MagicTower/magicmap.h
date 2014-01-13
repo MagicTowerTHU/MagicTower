@@ -33,7 +33,7 @@ class MagicMap : public MagicObject
     QMutex soundListLock;
 
 public:
-    bool animateFlag;
+    int animateFlag = 0;
     QList<MagicAnimate *> animateList;
     QReadWriteLock animateListLock;
 
@@ -52,6 +52,7 @@ public:
     int eventFlag = 0;
     void keyPressEvent(QKeyEvent *);
 
+    void appendPopup(QString, bool = false);
     void appendAnimate(MagicAnimate *, bool);
     void appendObject(MagicDisplayObject *);
 

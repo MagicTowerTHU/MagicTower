@@ -56,7 +56,8 @@ SOURCES += main.cpp\
     MagicDisplayObject/magicdestination.cpp \
     MagicDisplayObject/magicaltwall.cpp \
     MagicDisplayObject/magicany.cpp \
-    MagicAnimate/magiclevel.cpp
+    MagicAnimate/magiclevel.cpp \
+    MagicAnimate/magicpopup.cpp
 
 HEADERS  += mainwindow.h \
     widget.h \
@@ -99,7 +100,8 @@ HEADERS  += mainwindow.h \
     MagicDisplayObject/magicdestination.h \
     MagicDisplayObject/magicaltwall.h \
     MagicDisplayObject/magicany.h \
-    MagicAnimate/magiclevel.h
+    MagicAnimate/magiclevel.h \
+    MagicAnimate/magicpopup.h
 
 RESOURCES += \
     assets.qrc \

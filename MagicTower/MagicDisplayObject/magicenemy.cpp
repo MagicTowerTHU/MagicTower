@@ -89,24 +89,26 @@ void MagicEnemy::paint(QPainter *painter)
 
 bool MagicEnemy::move(MagicMap *map)
 {
-    qDebug() << property["label"].getString() <<
+    /*qDebug() << property["label"].getString() <<
                 property["attack"].getInt() <<
                 property["defend"].getInt() <<
-                property["health"].getInt();
+                property["health"].getInt();*/
+    bool ret;
+
     if (map->Tom()->property["attack"].getInt() <= property["defend"].getInt())
     {
-        qDebug() << "can't break defence!!";
-        return runAction(map, false);
+        //qDebug() << "can't break defence!!";
+        ret = false;
     }
     else if(map->Tom()->property["defend"].getInt() >= property["attack"].getInt())
     {
-        qDebug() << "Tom health left:" << map->Tom()->property["health"].getInt();
+        //qDebug() << "Tom health left:" << map->Tom()->property["health"].getInt();
         map->Tom()->property["exp"] += property["exp"].getInt();
         map->Tom()->property["money"] += property["money"].getInt();
         property["enabled"] = 0;
 
         parent->appendSound(":/sounds/attack");
-        return runAction(map, true);
+        ret = true;
     }
     else
     {
@@ -122,7 +124,7 @@ bool MagicEnemy::move(MagicMap *map)
         }
         if(tomHealth <= 0)
         {
-            qDebug() << "will die!!";
+            //qDebug() << "will die!!";
             return runAction(map, false);
         }
         else
@@ -130,11 +132,17 @@ bool MagicEnemy::move(MagicMap *map)
             map->Tom()->property["health"] = tomHealth;
             map->Tom()->property["exp"] += property["exp"].getInt();
             map->Tom()->property["money"] += property["money"].getInt();
-            qDebug() << "Tom health left:" << map->Tom()->property["health"].getInt();
+            //qDebug() << "Tom health left:" << map->Tom()->property["health"].getInt();
             property["enabled"] = 0;
 
             parent->appendSound(":/sounds/attack");
-            return runAction(map, true);
+            ret = true;
         }
     }
+    ret = runAction(map, ret);
+    if (ret)
+        parent->appendPopup(QString("获得经验: ") + QString::number(property["exp"].getInt()) +
+                "  金币: " + QString::number(property["money"].getInt()));
+
+    return ret;
 }

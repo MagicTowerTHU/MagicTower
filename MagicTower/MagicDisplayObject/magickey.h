@@ -9,6 +9,7 @@ class MagicKey : public MagicInventory
 
 public:
     MagicKey(int, int, int, MagicMap *, int);
+    virtual bool move(MagicMap *);
 
     static const int yellow, blue, red, silver;
 };

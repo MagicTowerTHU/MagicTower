@@ -216,7 +216,7 @@
         <file>assets/Sounds/12.wav</file>
         <file>assets/Sounds/13.wav</file>
         <file>assets/Sounds/14.wav</file>
-        <file>assets/Sounds/15.wav</file>
+        <file alias="popup">assets/Sounds/15.wav</file>
         <file>assets/Sounds/16.wav</file>
         <file>assets/Sounds/17.wav</file>
         <file alias="step">assets/Sounds/18.wav</file>

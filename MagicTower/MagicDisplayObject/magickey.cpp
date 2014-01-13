@@ -1,4 +1,5 @@
 #include "magickey.h"
+#include "../MagicAnimate/magicpopup.h"
 
 const int MagicKey::yellow = 0;
 const int MagicKey::blue = 1;
@@ -27,4 +28,22 @@ MagicKey::MagicKey(int x, int y, int level, MagicMap *parent, int color)
         pix = new QPixmap(":/images/key_silver"); // didn't find this kind of key...
         break;
     }
+}
+
+bool MagicKey::move(MagicMap *map)
+{
+    bool ret = MagicInventory::move(map);
+    switch (color)
+    {
+    case yellow:
+        parent->appendPopup("您获得了一把黄钥匙");
+        break;
+    case blue:
+        parent->appendPopup("您获得了一把蓝钥匙");
+        break;
+    case red:
+        parent->appendPopup("您获得了一把红钥匙");
+        break;
+    }
+    return ret;
 }
