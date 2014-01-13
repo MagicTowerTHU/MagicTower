@@ -50,11 +50,6 @@ MagicVarient MagicReference::setValue(MagicVarient x, MagicMap *map)
         return x;
     }
 
-    if (property == "pix")
-    {
-        qDebug() << "pix<-" << x.getString();
-    }
-
     QList<MagicObject *>target = map->findDisplayObject(objectLabel, objectId, objectClass);
     if (!target.empty())
         for (QList<MagicObject *>::iterator i = target.begin(); i != target.end(); i++)
