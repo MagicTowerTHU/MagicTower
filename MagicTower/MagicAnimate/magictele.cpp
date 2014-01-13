@@ -8,8 +8,9 @@ MagicTele::MagicTele(MagicMap *parent, QString content)
     wall = new QPixmap(":/images/wall");
     chosen = new QPixmap(":/images/chosen");
     this->content = content;
-    xChoose = 2;
-    yChoose = 4;
+    int currentLevel = parent->Tom()->property["level"].getInt();
+    xChoose = 2 + (currentLevel - 1) % 6;
+    yChoose = 4 + (currentLevel - 1) / 6;
 }
 
 MagicTele::~MagicTele()
@@ -77,7 +78,8 @@ void MagicTele::input(int choice)
             xChoose--;
         break;
     case Qt::Key_Right:
-        if ((yChoose-4)*6 + (xChoose+1-2) + 1 <= parent->Tom()->property["range"].getInt())
+        if ((yChoose-4)*6 + (xChoose+1-2) + 1 <= parent->Tom()->property["range"].getInt() &&
+                (xChoose+1-2) < 6)
             xChoose++;
         break;
     case Qt::Key_Return:
