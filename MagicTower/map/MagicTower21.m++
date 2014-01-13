@@ -130,15 +130,15 @@ enemy_25->defend = 5
 enemy_25->money = 5
 enemy_25->exp = 4
 
-enemy_14->health = 850
-enemy_14->attack = 350
-enemy_14->defend = 200
-enemy_14->money = 8
-enemy_14->exp = 6
+enemy_14->health = 400
+enemy_14->attack = 90
+enemy_14->defend = 50
+enemy_14->money = 15
+enemy_14->exp = 12
 
 enemy_8->health = 125
 enemy_8->attack = 50
-enemy_8->defend = 20
+enemy_8->defend = 25
 enemy_8->money = 10
 enemy_8->exp = 7
 
@@ -411,16 +411,16 @@ w	w	w	dr_2	w	w	w	w	w	dr_0	w
 .	w	e_21	w	.	.	w	w	.	d_0	w
 .	.	.	w	up	d_1	dr_0	dr_0	.	dn	w
 
-enemy_24->health = 400
-enemy_24->attack = 90
-enemy_24->defend = 50
-enemy_24->money = 15
-enemy_24->exp = 12
+enemy_24->health = 150
+enemy_24->attack = 40
+enemy_24->defend = 20
+enemy_24->money = 8
+enemy_24->exp = 6
 
 enemy_7->health = 100
 enemy_7->attack = 200
 enemy_7->defend = 110
-enemy_7->money = 230
+enemy_7->money = 30
 enemy_7->exp = 25
 
 enemy_17->health = 500
@@ -822,26 +822,29 @@ on(#line)
 
 on(enemy_30.f16)
 {
-	enemy_30->health = enemy_30->health * 4 / 3
-	enemy_30->attack = enemy_30->attack * 4 / 3
-	enemy_30->defend = enemy_30->defend * 4 / 3
-	enemy_30->money = enemy_30->money * 3 / 2
-	enemy_30->exp = enemy_30->exp * 3 / 2
-	enemy_12->health = enemy_12->health * 4 / 3
-	enemy_12->attack = enemy_12->attack * 4 / 3
-	enemy_12->defend = enemy_12->defend * 4 / 3
-	enemy_12->money = enemy_12->money *3 / 2
-	enemy_12->exp = enemy_12->exp * 3 / 2
-	enemy_13->health = enemy_13->health * 4 / 3
-	enemy_13->attack = enemy_13->attack * 4 / 3
-	enemy_13->defend = enemy_13->defend * 4 / 3
-	enemy_13->money = enemy_13->money *3 / 2
-	enemy_13->exp = enemy_13->exp * 3 / 2
-	enemy_9->health = enemy_9->health * 4 / 3
-	enemy_9->attack = enemy_9->attack * 4 / 3
-	enemy_9->defend = enemy_9->defend * 4 / 3
-	enemy_9->money = enemy_9->money *3 / 2
-	enemy_9->exp = enemy_9->exp * 3 / 2
+	if(return == 1)
+	{
+		enemy_30->health = enemy_30->health * 4 / 3
+		enemy_30->attack = enemy_30->attack * 4 / 3
+		enemy_30->defend = enemy_30->defend * 4 / 3
+		enemy_30->money = enemy_30->money * 4 / 3
+		enemy_30->exp = enemy_30->exp * 4 / 3
+		enemy_12->health = enemy_12->health * 4 / 3
+		enemy_12->attack = enemy_12->attack * 4 / 3
+		enemy_12->defend = enemy_12->defend * 4 / 3
+		enemy_12->money = enemy_12->money * 4 / 3
+		enemy_12->exp = enemy_12->exp * 4 / 3
+		enemy_13->health = enemy_13->health * 4 / 3
+		enemy_13->attack = enemy_13->attack * 4 / 3
+		enemy_13->defend = enemy_13->defend * 4 / 3
+		enemy_13->money = enemy_13->money * 4 / 3
+		enemy_13->exp = enemy_13->exp * 4 / 3
+		enemy_9->health = enemy_9->health * 4 / 3
+		enemy_9->attack = enemy_9->attack * 4 / 3
+		enemy_9->defend = enemy_9->defend * 4 / 3
+		enemy_9->money = enemy_9->money * 4 / 3
+		enemy_9->exp = enemy_9->exp * 4 / 3
+	}
 }
 
 at(17)
@@ -919,11 +922,11 @@ at(19)
 weapon_5->attack = 150
 armour_1->defend = 190
 
-enemy_31->health = 33333
-enemy_31->attack = 2000
-enemy_31->defend = 1600
-enemy_31->money = 375
-enemy_31->exp = 330
+enemy_31->health = 30000
+enemy_31->attack = 1700
+enemy_31->defend = 1500
+enemy_31->money = 250
+enemy_31->exp = 220
 
 on(enemy_31.f19)
 {
@@ -932,6 +935,14 @@ on(enemy_31.f19)
 	message = "魔王: 想不到你还真能活到这里."
 	message = "魔王: 仙子还真以为你能打败我?"
 	message = "魔王: 你还差得远呢!"
+	if(return == 1)
+	{
+		enemy_31->health = 30000
+		enemy_31->attack = 1700
+		enemy_31->defend = 1500
+		enemy_31->money = 250
+		enemy_31->exp = 220
+	}
 }
 
 at(20)
@@ -973,3 +984,6 @@ on(#last)
 {
 	#d4.f21->enabled = 0
 }
+
+
+wisdomEnabled = 1

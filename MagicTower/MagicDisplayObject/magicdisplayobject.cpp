@@ -39,14 +39,10 @@ void MagicDisplayObject::setAction(MagicExpression *action)
 
 bool MagicDisplayObject::runAction(MagicMap *map, bool mask)
 {
-    auto ret = map->property.find("return");
-    if (ret != map->property.end())
-        map->property.erase(ret);
+    map->property["return"] = mask;
     MagicExpression::setEnvironment(this);
     for (auto i = action.begin(); i != action.end(); i++)
         (*i)->run(map);
     MagicExpression::setEnvironment(NULL);
-    if ((ret = map->property.find("return")) != map->property.end())
-        return (*ret).isTrue();
-    return mask;
+    return map->property["return"].getInt();
 }
