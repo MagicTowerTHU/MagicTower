@@ -573,7 +573,9 @@ void MagicExpression::process(QTextStream &in, int n, MagicMap *map)
 
     for (int i = 0; i < n; i++)
     {
-        QString line = in.readLine();
+        QString line = QString(in.readLine().split("//").at(0)).replace('\t', ' ').trimmed();
+        if (line.isEmpty())
+            continue;
 
         if (targetFlag || line.startsWith("on")) // avoid the ignorance...>_<
             onList.append(line);

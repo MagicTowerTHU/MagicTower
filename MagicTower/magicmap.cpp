@@ -427,7 +427,7 @@ void MagicMap::setProperty(QString propertyName, MagicVarient propertyValue, boo
 {
     if (propertyName == "sound")
     {
-        QSound::play(propertyValue.getString());
+        appendSound(propertyValue.getString());
         return;
     }
     if (propertyName == "backsound")
