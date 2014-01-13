@@ -7,6 +7,9 @@ class MagicKey : public MagicInventory
 {
     int color;
 
+protected:
+    virtual QString getLabel();
+
 public:
     MagicKey(int, int, int, MagicMap *, int);
     virtual bool move(MagicMap *);
