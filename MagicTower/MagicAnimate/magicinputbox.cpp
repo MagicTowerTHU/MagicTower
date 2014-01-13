@@ -54,7 +54,7 @@ bool MagicInputBox::paint(QPainter *painter)
         painter->drawPixmap(l*32, k*32, *black);
     painter->drawPixmap(l*32, k*32, *rightedge);
     l = 3;
-    painter->drawText(l*32, k*32 + margin_top, content);
+    painter->drawText(QRect(QPoint(80 + 16, 48 + 8), QPoint(272 - 16, 96 + 16 - 8)), Qt::AlignVCenter | Qt::TextWordWrap, content);
 
     for (auto i = entries.begin(); i != entries.end(); i++)
     {
