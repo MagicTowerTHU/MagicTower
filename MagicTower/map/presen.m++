@@ -67,6 +67,7 @@ on(#to0)
 		{
 			.y->level = 0
 			y_state = 5
+			g_state = 3
 		}
 	}
 }
@@ -146,7 +147,6 @@ on(.y)
 		#dry->picked = 0
 		message = "于谦: 太好啦! 我这就去找老郭!"
 		y_state = 4
-		g_state = 3
 	}
 	else
 	if (y_state == 4)
