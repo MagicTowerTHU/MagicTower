@@ -180,3 +180,8 @@ void MagicMap::setProperty(QString propertyName, MagicVarient propertyValue)
 * 多线程的好处在于，遇到需要阻塞的动画（比如小人行走），应保证不阻塞进程的消息队列线程。动态地添加线程去完成相应的任务，可以使程序正确处理线程阻塞，并且不引起程序假死。
     - 在处理阻塞动画时，除了同步某些关键数据时采用了`QMutex`互斥锁和`QReadWriteLock`读写锁，MagicTower还采用了`QWaitCondition`处理消息：当动画播放完成，即将删除`MagicAnimate`前，通知正在等待的线程。`MagicAnimate`同时继承了`QMutex`和`QWaitCondition`类，方便单独管理阻塞。
 
+项目管理
+------------
+由于我们是仅有两人组成的小型开发团队，项目管理并没有太大难度。仅用小型的项目管理工具加上足够畅通的交流方式就可以得到较好的效果。
+* 使用Github进行项目管理，包括代码托管，分支合并和版本控制。
+* 使用微信
