@@ -49,5 +49,16 @@ bool MagicMedicine::move(MagicMap *map)
     /*qDebug() <<"Tom:"<< map->Tom()->property["attack"].getInt() <<
                          map->Tom()->property["defend"].getInt() <<
                          map->Tom()->property["health"].getInt();*/
-    return runAction(map, true);
+    bool ret = runAction(map, false);
+
+    QString label = property["label"].getString(), t;
+    if (label == "medicine_1")
+        t = "您获得了小血瓶 生命加200";
+    else if (label == "medicine_2")
+        t = "您获得了大血瓶 生命加500";
+    else if (label == "medicine_3")
+        t = "您获得了红宝石 攻击加3点";
+    else if (label == "medicine_4")
+        t = "您获得了蓝宝石 防御加3点";
+    map->appendPopup(t);
 }
