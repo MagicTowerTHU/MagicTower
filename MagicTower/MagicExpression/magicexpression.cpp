@@ -556,7 +556,7 @@ void MagicExpression::process(QTextStream &in, int n, MagicMap *map)
     {
         QString line = in.readLine();
 
-        if (targetFlag)
+        if (targetFlag || line.startsWith("on")) // avoid the ignorance...>_<
             onList.append(line);
 
         try

@@ -254,6 +254,8 @@ class KeyThread : public QThread
     MagicMap *parent;
     int key;
 
+    static const int moveDuration = 4;
+
 public:
     KeyThread(MagicMap *parent, QKeyEvent *e)
     {
@@ -276,22 +278,22 @@ public:
             case Qt::Key_Down:
                 parent->Tom()->changePic(0,0);
                 if (parent->move(0, 1))
-                    parent->appendAnimate(new MagicMove(parent, 0, 1, parent->Tom()), false);
+                    parent->appendAnimate(new MagicMove(parent, 0, 1, parent->Tom(), moveDuration), false);
                 break;
             case Qt::Key_Left:
                 parent->Tom()->changePic(1,0);
                 if (parent->move(1, 1))
-                    parent->appendAnimate(new MagicMove(parent, 1, 1, parent->Tom()), false);
+                    parent->appendAnimate(new MagicMove(parent, 1, 1, parent->Tom(), moveDuration), false);
                 break;
             case Qt::Key_Up:
                 parent->Tom()->changePic(2,0);
                 if (parent->move(2, 1))
-                    parent->appendAnimate(new MagicMove(parent, 2, 1, parent->Tom()), false);
+                    parent->appendAnimate(new MagicMove(parent, 2, 1, parent->Tom(), moveDuration), false);
                 break;
             case Qt::Key_Right:
                 parent->Tom()->changePic(3,0);
                 if (parent->move(3, 1))
-                    parent->appendAnimate(new MagicMove(parent, 3, 1, parent->Tom()), false);
+                    parent->appendAnimate(new MagicMove(parent, 3, 1, parent->Tom(), moveDuration), false);
                 break;
             default:
                 break;

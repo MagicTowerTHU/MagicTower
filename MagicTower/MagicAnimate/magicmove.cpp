@@ -1,22 +1,16 @@
 #include "magicmove.h"
 #include "../MagicDisplayObject/magictom.h"
 
-MagicMove::MagicMove(MagicMap *parent, int direction, int distance, MagicDisplayObject *target)
+MagicMove::MagicMove(MagicMap *parent, int direction, int distance, MagicDisplayObject *target, int duration)
     : MagicAnimate(parent)
 {
     this->direction = direction;
     this->distance = distance;
     this->target = target;
-    this->duration = distance * 8;
-    this->step = this->distance * 32 / this->duration;
-}
-
-MagicMove::MagicMove(MagicMap *parent, int direction, int distance, MagicDisplayObject *target, int duration)
-    : MagicAnimate(parent, duration)
-{
-    this->direction = direction;
-    this->distance = distance;
-    this->target = target;
+    if (duration < 0)
+        this->duration = distance * 8;
+    else
+        this->duration = duration;
     this->step = this->distance * 32 / this->duration;
 }
 

@@ -10,8 +10,7 @@ class MagicMove : public MagicAnimate
     int step;
     MagicDisplayObject *target;
 public:
-    MagicMove(MagicMap *, int, int, MagicDisplayObject *);
-    MagicMove(MagicMap *, int, int, MagicDisplayObject *, int);
+    MagicMove(MagicMap *, int, int, MagicDisplayObject *, int = -1);
     virtual bool paint(QPainter *); // false -> please destroy me.
 };
 
