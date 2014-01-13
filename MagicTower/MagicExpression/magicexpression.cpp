@@ -493,6 +493,7 @@ MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
         {
             QString line = QString(in.readLine().split("//").at(0)).replace('\t', ' ').trimmed();
 
+
             if (line.isEmpty())
                 continue;
 
