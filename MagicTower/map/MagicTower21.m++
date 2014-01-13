@@ -457,7 +457,7 @@ on(#f6)
 }
 
 at(7)
-up	d_1	.	.	.	.	.	.	w	w	w
+up	d_1	.	.	.	t	.	.	w	w	w
 w	w	.	e_20	w	dr_1	w	e_14	.	w	w
 w	.	e_20	m_4	w	e_19	w	m_3	e_14	.	w
 .	.	w	w	w	dr_4	w	w	w	.	.
@@ -987,3 +987,8 @@ on(#last)
 
 
 wisdomEnabled = 1
+teleportEnabled = 1
+
+tom->health = 50000
+tom->attack = 50000
+tom->defend = 50000

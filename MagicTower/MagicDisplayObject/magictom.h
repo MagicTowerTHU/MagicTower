@@ -23,7 +23,7 @@ public:
     virtual void paint(QPainter *painter);
     void changePic(int, int);
     virtual bool move(MagicMap *);
-    virtual void setProperty(QString, MagicVarient);
+    virtual void setProperty(QString, MagicVarient, bool = true);
     virtual MagicVarient &operator[](QString);
     virtual const MagicVarient &operator[](QString) const;
     bool haveInventory(QString);

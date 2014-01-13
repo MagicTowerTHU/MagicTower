@@ -26,7 +26,7 @@ QString MagicDisplayObject::getLabel()
     return property["label"].getString();
 }
 
-void MagicDisplayObject::setProperty(QString propertyName, MagicVarient propertyValue)
+void MagicDisplayObject::setProperty(QString propertyName, MagicVarient propertyValue, bool)
 {
     if (propertyName == "position_x")
         x = propertyValue.getInt() * 32;
@@ -36,6 +36,7 @@ void MagicDisplayObject::setProperty(QString propertyName, MagicVarient property
         return;
     if (propertyName == "picked")
     {
+        this->property["enabled"] = 0;
         if (propertyValue.isTrue())
         {
             for (auto i = parent->Tom()->inventory.begin(); i != parent->Tom()->inventory.end(); i++)

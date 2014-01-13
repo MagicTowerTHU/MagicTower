@@ -27,7 +27,7 @@ public:
 
     virtual MagicVarient &operator[](QString);
     virtual const MagicVarient &operator[](QString) const;
-    virtual void setProperty(QString, MagicVarient);
+    virtual void setProperty(QString, MagicVarient, bool = true);
 
     void saveProperty(QTextStream *);
     void loadProperty(QTextStream *, MagicMap * = NULL);

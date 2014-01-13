@@ -83,7 +83,7 @@ void MagicTele::input(int choice)
     case Qt::Key_Return:
     case Qt::Key_Enter:
         int target = xChoose - 2 + (yChoose - 4) * 6 + 1;
-        parent->Tom()->setProperty("level", MagicVarient(target));
+        parent->Tom()->setProperty("level", MagicVarient(target), false);
         wantDelete = true;
         break;
     }

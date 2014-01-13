@@ -24,7 +24,7 @@ public:
     virtual ~MagicDisplayObject();
     virtual void paint(QPainter *) = 0;
     virtual bool move(MagicMap *) = 0;
-    virtual void setProperty(QString, MagicVarient);
+    virtual void setProperty(QString, MagicVarient, bool = true);
 
     void setAction(MagicExpression *);
     bool runAction(MagicMap *, bool);

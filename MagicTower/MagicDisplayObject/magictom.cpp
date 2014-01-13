@@ -57,7 +57,7 @@ bool MagicTom::move(MagicMap *)
     return true;
 }
 
-void MagicTom::setProperty(QString propertyName, MagicVarient propertyValue)
+void MagicTom::setProperty(QString propertyName, MagicVarient propertyValue, bool block)
 {
     if (propertyName == "add_K")
     {
@@ -81,10 +81,11 @@ void MagicTom::setProperty(QString propertyName, MagicVarient propertyValue)
 
         if (parent->eventFlag)
         {
-            parent->appendAnimate(new MagicLevel(parent, level), true);
-            return;
+            parent->appendAnimate(new MagicLevel(parent, level), block);
         }
         else
+        {
+            MagicDisplayObject::setProperty(propertyName, propertyValue);
             if (level == 0)
                 parent->mBackSound->change(0);
             else if (level < 8)
@@ -95,9 +96,12 @@ void MagicTom::setProperty(QString propertyName, MagicVarient propertyValue)
                 parent->mBackSound->change(3);
             else
                 parent->mBackSound->change(4);
+        }
 
         if (propertyValue.getInt() > property["range"].getInt())
             property["range"] = propertyValue.getInt();
+
+        return;
     }
     MagicDisplayObject::setProperty(propertyName, propertyValue);
 }
@@ -142,7 +146,7 @@ bool MagicTom::consumeInventory(QString label)
     for (auto i = inventory.begin(); i != inventory.end(); i++)
         if ( ((**i)["label"] == MagicVarient(label)).isTrue() )
         {
-            i = inventory.erase(i);
+            (*i)->setProperty("picked", 0);
             return true;
         }
     return false;
@@ -154,7 +158,7 @@ bool MagicTom::consumeInventory(QString label, int color)
         if ( ((**i)["label"] == MagicVarient(label)).isTrue() &&
              ((**i)["color"] == MagicVarient(color)).isTrue() )
         {
-            i = inventory.erase(i);
+            (*i)->setProperty("picked", 0);
             return true;
         }
     return false;

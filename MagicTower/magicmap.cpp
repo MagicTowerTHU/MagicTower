@@ -219,20 +219,45 @@ void MagicMap::appendPopup(QString content, bool block)
     appendAnimate(new MagicPopup(this, content), block);
 }
 
+class AppendThread : public QThread
+{
+    MagicAnimate *target;
+    MagicMap *parent;
+
+public:
+    AppendThread(MagicMap *parent, MagicAnimate *target)
+    {
+        this->parent = parent;
+        this->target = target;
+    }
+
+    void run()
+    {
+        parent->animateListLock.lockForWrite();
+        if (dynamic_cast<MagicPopup *>(target) == NULL)
+            parent->animateFlag++;
+        parent->animateList.push_front(target);
+        parent->animateListLock.unlock();
+    }
+};
+
 void MagicMap::appendAnimate(MagicAnimate *animate, bool block)
 {
-    if (block)
-        animate->lock();
+    if (!block)
+    {
+        AppendThread *appendThread = new AppendThread(this, animate);
+        appendThread->start();
+        QObject::connect(appendThread, SIGNAL(finished()), appendThread, SLOT(deleteLater()));
+        return;
+    }
+    animate->lock();
     animateListLock.lockForWrite();
     if (dynamic_cast<MagicPopup *>(animate) == NULL)
         animateFlag++;
     animateList.push_front(animate);
     animateListLock.unlock();
-    if (block)
-    {
-        animate->wait(animate);
-        animate->unlock();
-    }
+    animate->wait(animate);
+    animate->unlock();
 }
 
 void MagicMap::appendObject(MagicDisplayObject *target)
