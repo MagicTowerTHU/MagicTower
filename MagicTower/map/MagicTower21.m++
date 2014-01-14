@@ -1004,10 +1004,9 @@ on(#dn.f21)
             teleportEnabled = 1
 }
 
+//wisdomEnabled = 1
+//teleportEnabled = 1
 
-wisdomEnabled = 1
-teleportEnabled = 1
-
-tom->health = 50000
-tom->attack = 50000
-tom->defend = 50000
+//tom->health = 50000
+//tom->attack = 50000
+//tom->defend = 50000

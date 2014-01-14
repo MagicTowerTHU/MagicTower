@@ -133,7 +133,13 @@ on (#up0)
 	if (this->levelToGo == 1)
 		tom->_level = 1
 	else
+	if (this->levelToGo == 2)
 		tom->_level = 3
+	else
+	{
+		message = "到达第二层的方法隐藏在'T'键里……"
+		tom->_level = 0
+	}
 }
 
 on (.t0)
