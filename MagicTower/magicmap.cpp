@@ -326,8 +326,7 @@ public:
             if (key == Qt::Key_L && parent->property["wisdomEnabled"].isTrue())
                 parent->appendAnimate(new MagicWisdom(parent), false);
 
-            if (key == Qt::Key_T && parent->property["teleportEnabled"].isTrue() &&
-                    parent->Tom()->property["level"].getInt() != 0)
+            if (key == Qt::Key_T && parent->property["teleportEnabled"].isTrue())
                 parent->appendAnimate(new MagicTele(parent), false);
 
             if (key == Qt::Key_M) //for test

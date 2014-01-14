@@ -9,6 +9,7 @@ MagicTele::MagicTele(MagicMap *parent, QString content)
     chosen = new QPixmap(":/images/chosen");
     this->content = content;
     int currentLevel = parent->Tom()->property["level"].getInt();
+    if (currentLevel <= 0) currentLevel = 1;
     xChoose = 2 + (currentLevel - 1) % 6;
     yChoose = 4 + (currentLevel - 1) / 6;
 }
