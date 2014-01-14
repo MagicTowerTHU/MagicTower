@@ -21,7 +21,7 @@ public:
     virtual void run(MagicMap *);
     virtual void setNext(MagicExpression *);
 
-    static MagicExpression *input(QFile *, MagicMap *);
+    static MagicExpression *input(QString, MagicMap *);
     static void process(QTextStream &, int, MagicMap *);
 
     static MagicDisplayObject *environment;

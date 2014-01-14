@@ -61,4 +61,6 @@ bool MagicMedicine::move(MagicMap *map)
     else if (label == "medicine_4")
         t = "您获得了蓝宝石 防御加" + QString::number(property["defend"].getInt()) + "点";
     map->appendPopup(t);
+
+    return ret;
 }

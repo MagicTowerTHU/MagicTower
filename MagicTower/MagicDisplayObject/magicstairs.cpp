@@ -15,14 +15,25 @@ MagicStairs::MagicStairs(int x, int y, int level, MagicMap *parent, int directio
 
 bool MagicStairs::move(MagicMap *map)
 {
-    switch(direction)
+    map->Tom()->property.remove("_level");
+    bool ret = runAction(map, false);
+
+    MagicVarient targetLevel;
+    switch (direction)
     {
     case 1:
-        map->Tom()->setProperty("level", map->Tom()->property["level"] + 1);
+        targetLevel = map->Tom()->property["level"] + 1;
         break;
     default:
-        map->Tom()->setProperty("level", map->Tom()->property["level"] - 1);
+        targetLevel = map->Tom()->property["level"] - 1;
         break;
     }
-    return runAction(map, false);
+
+    QHash<QString, MagicVarient>::iterator i;
+    if ((i = map->Tom()->property.find("_level")) != map->Tom()->property.end())
+        targetLevel = i.value();
+    map->Tom()->property.remove("_level");
+    map->Tom()->setProperty("level", targetLevel);
+
+    return ret;
 }

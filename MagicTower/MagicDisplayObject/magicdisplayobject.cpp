@@ -16,9 +16,11 @@ MagicDisplayObject::MagicDisplayObject(int x, int y, int level, MagicMap *parent
 
 MagicDisplayObject::~MagicDisplayObject()
 {
+    /*
     for (auto i = action.begin(); i != action.end(); i++)
         if (*i)
             delete *i;
+    */
 }
 
 QString MagicDisplayObject::getLabel()

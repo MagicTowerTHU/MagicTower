@@ -473,14 +473,20 @@ void lineInfo(QString line, QStringList::iterator i)
     qDebug() << "\t@line: -> " << line << "(" << *i++ << "," << *i++ << ")";
 }
 
-MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
+MagicExpression *MagicExpression::input(QString fileName, MagicMap *map)
 {
     initAll();
 
     preprocessing = true;
 
+    QRegExp rx("(.*/)");
+    rx.indexIn(fileName);
+    QString filepre = rx.cap(1);
+
+    QFile *file = new QFile(fileName);
+
     if (!file->open(QIODevice::ReadOnly | QIODevice::Text))
-        printf("File Cannot Open..."), throw "File Cannot Open...";
+        throw "File Cannot Open...";
 
     QStack<QTextStream *> inStack;
 
@@ -499,9 +505,10 @@ MagicExpression *MagicExpression::input(QFile *file, MagicMap *map)
 
             if (line.startsWith("#include "))
             {
-                QFile *newFile = new QFile(line.mid(9).trimmed());
+                QString newFileName = filepre + line.mid(9).trimmed();
+                QFile *newFile = new QFile(newFileName);
                 if (!newFile->open(QIODevice::ReadOnly | QIODevice::Text))
-                    throw QString("File <") + line.mid(9).trimmed() + "> Cannot Open...";
+                    throw QString("File <") + newFileName + "> Cannot Open...";
                 inStack.push(new QTextStream(newFile));
                 goto newFile;
             }
