@@ -9,8 +9,8 @@ MagicDisplayObject::MagicDisplayObject(int x, int y, int level, MagicMap *parent
     property["level"] = level;
     this->x = x * 32, this->y = y * 32;
     this->parent = parent;
-    property["enabled"] = 1;
     property["picked"] = 0;
+    property["enabled"] = 1;
     property["id"] = "";
 }
 

@@ -33,7 +33,7 @@ down.t0	d_0	.	.	.	w	.	.	.	.	.
 .	.	.	w	.	.	.	w	.	.	.
 .	.	.	w	.	.	.	w	.	.	.
 .	.	.	.	.	.	.	w	.	.	.
-.	.	.	.	.	.	w	.	.	.	.
+.	.	.	.	.	.	w	.	.	an#qa.fra	.
 .	.	.	.	.	w	.	.	.	.	.
 .	.	.	.	.	w	.	.	.	.	.
 .	.	.	.	w	.	.	.	.	.	.
@@ -147,6 +147,16 @@ on (#up0)
 on (.t0)
 {
 	tom->_level = 0
+}
+
+on (#qa)
+{
+	message = "下面是Q&A环节啦^_^"
+	message = "[Possible Questions]你们用了什么类结构？"
+	message = "[Possible Questions]你们两个人分别做了什么？"
+	message = "[Possible Questions]你们用了什么数据结构和算法？"
+	message = "[Possible Questions]看看你们的代码= =b"
+	message = "↖欢迎更多问题↗"
 }
 
 #include enabled.mh
