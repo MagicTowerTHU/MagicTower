@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js - The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>魔塔</h1>
+                    <h1>MagicTower</h2>
+                    <h4>重温儿时的经典</h4>
+                    <p>
+                        <small>powered by QT 5.2.0</small>
+                    </p>
+					<p>
+						<small>Created by 赵锦煦<a href="http://github.com/JimmyZJX">@JimmyZJX</a> / 徐方舟<a href="http://github.com/KevinXuxuxu">@KevinXuxuxu</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h2>项目成果</h2>
+                    <ul>
+						<li>原版地图</li>
+                        <li>图形和小动画</li>
+                        <li>集成全部音效</li>
+                        <li>地图加载和存档</li>
+                        <li>完备的轻量级地图编辑</li>
+                        <li>扩展和改编</li>
+					</ul>
+
+					<aside class="notes">
+						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+					</aside>
+				</section>
+
+				<!-- Example of nested vertical slides -->
+				<section>
+					<section>
+						<h1>原版地图</h1>
+					</section>
+					<section>
+						<h2>自创脚本语言Map++(.m++)</h2>
+                        <img width = "2000" src = "1.jpg">
+                        <p>原版地图写了1000多行</p>
+					</section>
+				</section>
+
+				<section>
+					<h2>开发环境</h2>
+                    <img width = "100" src = "2.jpg" style = "border: none">
+                    <ul>
+					<li>基于QT 5.2.0的 <code>QMainWindow</code> (Core GUI)和QT多媒体库 <code>QMultiMedia</code> 环境，以及最新的C++11编译器</li>
+                    <li>2D绘图、文字绘制均使用 <code>QPainter</code> ，配合 <code>QTimer</code> 发送重画信号，形成动画</li>
+                    <li>键盘输入可触发或相应游戏中的相关事件。该事件由继承了 <code>QMainWindow</code> 的 <code>MainWindow类发出</code> </li>
+					</ul>
+                        
+				</section>
+
+				<section>
+					<h2>面向对象</h2>
+					<p>
+						充分利用C++的面向对象特点
+					</p>
+                    <ul>
+                        <li>完全封装</li>
+                        <li>继承的多态特性</li>
+                        <li>构造函数的继承</li>
+                        <br>
+                    <p>保证了DRY (Don't Repeat Yourself), 避免低级错误</p>
+				</section>
+                
+                <section>
+                    <section>
+                        <h2>类结构</h2>
+                            <ul>
+                                <li>主界面: <code>MainWindow : QMainWindow</code></li>
+                                <li>辅助:<code><ul><li>Widget : QWidget</li><li>Status : QWidget</li></ul></code></li>
+                                <li>画图: <code>MagicDisplayObject : MagicObject </code>及派生类</li>
+                                <li>动画: <code>MagicAnimate </code>及派生类</li>
+                                </ul>
+                        </section>
+                    <section>
+                        <h2>类图</h2>
+                        <a href="http://220.113.7.105/MagicTower/ClassDiagram.png">
+                            <img width="1500" src="http://220.113.7.105/MagicTower/ClassDiagram.png">
+                        </a>
+                        </section>
+                    <section>
+                        <h3>对象事件触发</h3>
+                        <pre><code data-trim contenteditable>
+virtual bool MagicDisplayObject::move(MagicMap *) = 0;
+                        </code></pre>
+                        </section>
+                    <section>
+                        <h3>对象绘图方法</h3>
+                        <pre><code data-trim contenteditable>
+virtual void MagicDisplayObject::paint(QPainter *) = 0;
+virtual void MagicAnimateObject::paint(QPainter *) = 0;
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>获取对象属性</h3>
+                        <p><small>对象的所有动态属性均在 <code>QHash&lt;QString, MagicVariant&gt; MagicObject::property</code> 中</small></p>
+                        <pre><code data-trim contenteditable>
+virtual void MagicObject::setProperty(QString key, MagicVarient value)
+{
+    property[key] = value;
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>劫持属性</h3>
+                        <pre><code data-trim contenteditable>
+void MagicDisplayObject::setProperty(QString propertyName, MagicVarient propertyValue)
+{
+    if (propertyName == "position_x")
+        x = propertyValue.getInt() * 32;
+    if (propertyName == "position_y")
+        y = propertyValue.getInt() * 32;
+    MagicObject::setProperty(propertyName, propertyValue);
+}
+                        </code></pre>
+                        <pre><code data-trim contenteditable>
+void MagicMap::setProperty(QString propertyName, MagicVarient propertyValue)
+{
+    if (propertyName == "sound")
+    {
+        QSound::play(propertyValue.getString());
+        return;
+    }
+    else if (propertyName == "message")
+    {
+        appendAnimate(new MagicMessage(this, propertyValue.getString()), true);
+        return;
+    }
+    MagicObject::setProperty(propertyName, propertyValue);
+}
+                        </code></pre>
+                    </section>
+                </section>
+                
+                <section>
+                    <section>
+                        <h2>多线程</h2>
+                        <ul>
+                            <li>多线程在<code>MagicTower</code>中主要用于声音播放（合成）、界面重绘和键盘事件处理</li>
+                            <li>多线程的好处在于，遇到需要阻塞的动画（比如小人行走），应保证不阻塞进程的消息队列线程。动态地添加线程去完成相应的任务，可以使程序正确处理线程阻塞，并且不引起程序假死</li>
+                        </ul>
+                    </section>
+                    <section>
+                    <h3>细节</h3>
+                    <p>在处理阻塞动画时，除了同步某些关键数据时采用了<code>QMutex互斥锁</code>和<code>QReadWriteLock</code>读写锁, <code>MagicTower</code>还采用了<code>QWaitCondition</code>处理消息: 当动画播放完成，即将删除<code>MagicAnimate</code>前，通知正在等待的线程。</p>
+                    <p><code>MagicAnimate</code>同时继承了<code>QMutex</code>和<code>QWaitCondition</code>类，方便单独管理阻塞。</p>
+                    </section>
+                </section>
+                
+                <section>
+                    <section>
+                        <h2>脚本语言 <code>Map++(.m++,.mh)</code></h2>
+                            <ul>
+                        <li>语法解释</li>
+                        <li>元编程(Metaprogramming)</li>
+                        </ul>
+                        <br><br>
+                        <p>魔塔程序具有解释固定语法的文本地图文件的能力</p>
+                    </section>
+                    <section>
+                        <h3>C语言的基本运算符</h3>
+                        <pre><code data-trim contenteditable>
+                            +, -, *, /, %, ^, &, <<, >>, ~, =, <, <=, >, >=, ==, != ;
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3><code>if </code>和<code> goto</code> 语句</h3>
+                        <p>变量不用声明就可以使用</p>
+                        <br>
+                        <pre><code data-trim contenteditable>
+...
+{
+    i = 0
+    :for_i
+    print = i // print为输出至控制台
+    i = i + 1
+    if (i <= 3)
+    goto for_i
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>对象的属性获取与设置</h3>
+                        <pre><code data-trim contenteditable>
+...
+{
+    tom->health = 10000
+    emeny_3->attack = 300
+}
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>对象选择功能 (仿CSS)</h3>
+                        <pre><code data-trim contenteditable class="language-css">
+.hidden->enabled = 0
+wall.hidden
+#axe->pix = ":/images/axe"
+                        </code></pre>
+                    </section>
+                    
+                    <section>
+                        <h3>对象事件触发</h3>
+                        <pre style="height:1500;"><code data-trim contenteditable>
+on (.fragile)
+{
+    this->enabled = 0
+}
+on (.hard)
+    return = 0
+on (wall.mistery)
+    message = "这堵墙看起来有机关……"
+on (merchant_exp.floor5)
+{
+    ret = input("You can use your extra exp to grow your power, please choose: ",
+                "1. 50 exp -> 10 attack", "2. 30 exp -> 7 defend",
+                "3. 100 exp -> {15 attack, 15 defend}", "4. Not this time.")
+    if (ret == 1)
+        if (tom->exp >= 50)
+        {
+            tom->exp = tom->exp - 50
+            tom->attack = tom->attack + 10
+        }
+    if (ret == 2)
+        if (tom->exp >= 30)
+        {
+            tom->exp = tom->exp - 30
+            tom->defend = tom->defend + 7
+        }
+    if (ret == 3)
+        if (tom->exp >= 100)
+        {
+            tom->exp = tom->exp - 100
+            tom->attack = tom->attack + 15
+            tom->defend = tom->defend + 15
+        }
+}
+
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>输入整层地图</h3>
+                        <pre><code data-trim contenteditable>
+at (1)
+up      d_1     k_0     e_29    e_28    e_29    .       .       .       .       .
+w       w       w       w       w       w       w       w       w       w       .
+m_1.s   .       e_25    dr_0    .       w       m_1.m   k_0     m_1.m   w       .
+k_0     e_25    m_3.s   w       .       w       m_1.m   k_0     m_1.m   w       .
+w       dr_0    w       w       .       w       w       w       e_26    w       .
+k_0     e_24    .       w       .       dr_0    e_8     e_29    e_21    w       .
+m_4     .       k_1     w       .       w       w       w       w       w       .
+w       dr_0    w       w       .       .       .       .       .       .       .
+.       e_24    .       w       w       dr_2    w       w       w       dr_0    w
+m_1.m   m_2.b   k_0     w       k_2     d_0     .       w       k_0     e_23    k_1
+m_1.m   wi      k_0     w       .       down    .       w       k_0     k_0     k_0
+
+                            
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>支持头文件(.mh)</h3>
+                        <pre><code data-trim contenteditable>
+#include fragile.mh
+...
+                        </code></pre>
+                    </section>
+                </section>
+                
+                
+                <section>
+                    <h2>项目管理</h2>
+                    <img width="500" src="http://developerdrive.developerdrive.netdna-cdn.com/wp-content/uploads/2013/06/github.png" style="border:none">
+                    <p>用于代码托管，分支合并和版本控制</p>
+                    
+                    <img width="200" src="http://tra.thmz.com/uploads/allimg/130704/2-130F4110T4548.jpg" style="border:none">
+                    <p>用于交流沟通</p>
+                </section>
+                
+                <section>
+                    <h2>老师可能问的问题</h2>
+                    <ul>
+                        <li>
+                            你们的代码量有多少？
+                            <ul><li>源文件加头文件4700左右，<code>.m++ .mh</code>文件1000行左右。</li></ul>
+                        </li>
+                        <li>
+                            你们的分工是怎那样的？
+                            <ul><li>徐方舟负责所有的画图，动画，事件和地图。</li>
+                                <li>赵锦煦负责脚本设计和解析，与之相关的接口和各种奇怪的bug。</li></ul>
+                        </li>
+                        <li>
+                            你们用什么算法了嘛？
+                            <ul><li>...</li></ul>
+                        </li>
+                    </ul>
+                </section>
+                
+                <section>
+                    <h2>Thank you for attention!</h2>
+                    <p>感谢测试同学：捉哥，摸哥</p>
+                    <p>感谢宿舍同学让我们熬了几个夜</p>
+				</section>
+				<section id="themes">
+					<h2>Themes</h2>
+					<p>
+						Reveal.js comes with a few themes built in: <br>
+						<a href="?#/themes">Default</a> -
+						<a href="?theme=sky#/themes">Sky</a> -
+						<a href="?theme=beige#/themes">Beige</a> -
+						<a href="?theme=simple#/themes">Simple</a> -
+						<a href="?theme=serif#/themes">Serif</a> -
+						<a href="?theme=night#/themes">Night</a> <br>
+						<a href="?theme=moon.css#/themes">Moon</a> -
+						<a href="?theme=simple.css#/themes">Simple</a> -
+						<a href="?theme=solarized.css#/themes">Solarized</a>
+					</p>
+					<p>
+						<small>
+							* Theme demos are loaded after the presentation which leads to flicker. In production you should load your theme in the <code>&lt;head&gt;</code> using a <code>&lt;link&gt;</code>.
+						</small>
+					</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+                margin: 0.01,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
