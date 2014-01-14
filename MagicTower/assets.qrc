@@ -204,7 +204,7 @@
     <qresource prefix="/sounds">
         <file>assets/Sounds/1.wav</file>
         <file>assets/Sounds/2.wav</file>
-        <file>assets/Sounds/3.wav</file>
+        <file alias="3">assets/Sounds/3.wav</file>
         <file>assets/Sounds/4.wav</file>
         <file>assets/Sounds/5.wav</file>
         <file>assets/Sounds/6.wav</file>

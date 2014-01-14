@@ -1,4 +1,5 @@
 #include fragile.mh
+#include hidden.mh
 
 at(0)
 t	w	.	.	.	.	.	.	.	.	f#fy.fra
@@ -11,7 +12,7 @@ f.step	w	w	w	w	.	.	.	.	.	.
 .	m_1#m1	m_2	m_3	m_4	f#m4.fra	.	.	.	.	.
 w	w	w	w	w	.	.	.	.	.	.
 .	.	.	.	.	.	.	.	.	.	.
-.	.	.	.	.	.	e_1.c	e_2.c	e_3.c	d_1	up#up0
+.	.	.	.	.	.	e_1.c	e_2.c	e_3.c	d_1	up#up0.hid
 
 at(1)
 down.t0	d_0	.	.	.	w	.	.	.	.	.
@@ -104,6 +105,7 @@ on (.enemy)
 on (#fy)
 {
 	popup = "啊……你竟然找到了封印……"
+	sound = ":/sounds/3"
 	enemy_3->attack = 10
 }
 

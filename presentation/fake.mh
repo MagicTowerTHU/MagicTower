@@ -1,0 +1,7 @@
+any.fake->pix = ":/images/floor"
+on (any.fake)
+{
+	this->pix = ":/images/wall"
+	return = 0
+}
+
