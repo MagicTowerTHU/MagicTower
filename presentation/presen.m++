@@ -1,6 +1,4 @@
 
-
-
 backsound = 0-1
 
 at(0)
@@ -183,3 +181,5 @@ on (.clear)
 	if (this->enabled == 0)
 		clear_cnt = clear_cnt - 1
 }
+
+

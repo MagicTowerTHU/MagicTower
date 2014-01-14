@@ -32,5 +32,10 @@ void MagicBackSound::change(int target)
 
 void MagicBackSound::stop()
 {
-    mSound[now]->stop();
+    try
+    {
+        if (now >= 0 && now <= 4)
+        mSound[now]->stop();
+    }
+    catch (...) {}
 }

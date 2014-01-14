@@ -1,0 +1,7 @@
+#include enabled.mh
+
+tom->health = 50000
+tom->attack = 5000
+tom->defend = 5000
+tom->exp = 5000
+tom->money = 10000

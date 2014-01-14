@@ -1,0 +1,112 @@
+#include fragile.m++
+
+at(0)
+t	w	.	.	.	.	.	.	.	.	.
+f#begin.fra	w	.	.	.	.	.	.	.	.	.
+.	w	.	.	.	.	.	.	.	.	.
+f#pop.fra	w	.	.	.	.	.	.	.	.	.
+f.step	w	.	.	.	.	.	.	.	.	.
+f.step	w	.	.	.	.	.	.	.	.	.
+f.step	w	w	w	w	.	.	.	.	.	.
+.	m_1#m1	m_2	m_3	m_4	f#m4.fra	.	.	.	.	.
+w	w	w	w	w	.	.	.	.	.	.
+.	.	.	.	.	.	.	.	.	.	.
+.	.	.	.	.	.	e_1.c	e_2.c	e_3.c	d_1	up#up0
+
+at(1)
+down.t0	d_0	.	.	.	w	.	.	.	.	.
+.	.	.	.	.	w	.	.	.	.	.
+.	.	.	.	w	w	.	.	.	.	.
+.	.	.	w	.	w	.	.	.	.	.
+.	.	.	.	.	w	.	.	.	.	.
+.	.	.	.	.	w	.	.	.	.	.
+.	.	.	.	.	w	.	.	.	.	.
+.	.	.	.	.	w	.	.	.	.	.
+.	.	.	.	.	w	.	.	.	.	.
+.	.	.	.	.	w	.	.	.	.	.
+.	.	.	w	w	w	w	w	.	.	.
+
+at(2)
+down.t0	d_0	.	.	.	w	.	.	.	.	.
+.	.	.	.	w	.	w	.	.	.	.
+.	.	.	w	.	.	.	w	.	.	.
+.	.	.	w	.	.	.	w	.	.	.
+.	.	.	.	.	.	.	w	.	.	.
+.	.	.	.	.	.	w	.	.	.	.
+.	.	.	.	.	w	.	.	.	.	.
+.	.	.	.	.	w	.	.	.	.	.
+.	.	.	.	w	.	.	.	.	.	.
+.	.	.	w	.	.	.	.	.	.	.
+.	.	.	w	w	w	w	w	.	.	.
+
+on (#begin)
+{
+	message = "欢迎进入魔塔（请按回车键继续）"
+	message = "下面我来给大家进行功能展示和说明。"
+	message = "【这里的文字是由message功能显示的。message可以阻塞游戏进程，"
+	message = "脚本语言中通过设置message变量的值来调用。】"
+	message = "为了展示阻塞功能，我们在一个事件流中逐渐减少主角的血量。"
+	message = "接下来5次message后主角的血量逐次减少10。"
+	
+	i = 0
+:for_i
+	tom->health = tom->health - 10
+	i = i + 1
+	message = "主角即将受到未知来源的伤害……（这里还用了循环呐～）"
+	if (i < 5)
+		goto for_i
+	
+	message = "好啦，下面我们让主角走两步吧……"
+	
+	
+}
+
+on (#pop)
+{
+	popup = "Attention!!"
+}
+
+step_i = 0
+on (.step)
+{
+	popup = step_i
+	step_i = step_i + 1
+}
+
+medicine_1->health = 1000
+medicine_2->health = 1000
+medicine_3->attack = 1234
+medicine_4->attack = 4321
+on (#m1)
+{
+	message = "吃道具长能力！"
+}
+
+on (#m4)
+{
+	message = "去战斗吧孩子！"
+}
+
+c_cnt = 0
+on (.c)
+{
+	c_cnt = c_cnt + 1
+	if (return * (c_cnt >= 3))
+	{
+		message = "All Enemy cleared!! Congratulations~"
+		#up0->enabled = 1
+	}
+}
+
+on (#up0)
+{
+	tom->_level = input("您想去第几层？", "1", "2")
+}
+
+on (.t0)
+{
+	tom->_level = 0
+}
+
+
+

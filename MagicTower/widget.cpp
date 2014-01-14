@@ -49,7 +49,7 @@ void Widget::animate()
     if (!mapToLoad.isEmpty())
     {
         loadingFlag = true;
-        if (mMap->loadMap(new QFile(mapToLoad)))
+        if (mMap->loadMap(mapToLoad))
             mMap->appendPopup("Map Load succeeded.", false);
         else
         {

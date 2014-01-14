@@ -46,7 +46,7 @@ public:
     MagicMap();
     QList<MagicDisplayObject *> displayList;
 
-    bool loadMap(QFile * = NULL);
+    bool loadMap(QString = "");
     bool saveRecord(QFile * = NULL);
     bool loadRecord(QFile * = NULL);
     void paint(QPainter *);

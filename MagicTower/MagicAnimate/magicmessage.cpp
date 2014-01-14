@@ -61,7 +61,7 @@ bool MagicMessage::paint(QPainter *painter)
     painter->setPen("white");
     painter->setFont(QFont("黑体", 14));
     painter->setOpacity(1);
-    painter->drawText(QRect(3*32, margin_top + 3*32, 5*32, 3*32), content);
+    painter->drawText(QRect(3*32, margin_top + 3*32, 5*32, 3*32 + 16), content);
 
     painter->restore();
 

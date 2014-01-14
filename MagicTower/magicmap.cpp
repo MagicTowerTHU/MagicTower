@@ -80,9 +80,9 @@ void MagicMap::initialize()
                 displayList.push_front(/*inventory[12 * (i - 12) + j] = */new MagicFloor(j, i, 100, this));
 }
 
-bool MagicMap::loadMap(QFile *file)
+bool MagicMap::loadMap(QString fileName)
 {
-    if (!file)
+    if (fileName.isEmpty())
     {
         (*mTom)["position_x"] = 0;
         (*mTom)["position_y"] = 0;
@@ -96,7 +96,7 @@ bool MagicMap::loadMap(QFile *file)
 
         try
         {
-            MagicExpression *global = MagicExpression::input(file, this);
+            MagicExpression *global = MagicExpression::input(fileName, this);
             if (global)
                 global->run(this);
             else
@@ -326,8 +326,7 @@ public:
             if (key == Qt::Key_L && parent->property["wisdomEnabled"].isTrue())
                 parent->appendAnimate(new MagicWisdom(parent), false);
 
-            if (key == Qt::Key_T && parent->property["teleportEnabled"].isTrue() &&
-                    parent->Tom()->property["level"].getInt() != 0)
+            if (key == Qt::Key_T && parent->property["teleportEnabled"].isTrue())
                 parent->appendAnimate(new MagicTele(parent), false);
 
             if (key == Qt::Key_M) //for test

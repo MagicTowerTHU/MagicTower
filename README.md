@@ -183,5 +183,5 @@ void MagicMap::setProperty(QString propertyName, MagicVarient propertyValue)
 项目管理
 ------------
 由于我们是仅有两人组成的小型开发团队，项目管理并没有太大难度。仅用小型的项目管理工具加上足够畅通的交流方式就可以得到较好的效果。
-* 使用Github进行项目管理，包括代码托管，分支合并和版本控制。
-* 使用微信[Alt text]("github.png")
+* ![Alt text](github.png)使用Github进行项目管理，包括代码托管，分支合并和版本控制。
+* ![Alt text](http://59.66.130.131/upload/upload/249/WeChat55.png)使用微信
