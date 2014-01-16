@@ -484,6 +484,7 @@ MagicExpression *MagicExpression::input(QString fileName, MagicMap *map)
     QString filepre = rx.cap(1);
 
     QFile *file = new QFile(fileName);
+    map->setPath(filepre);
 
     if (!file->open(QIODevice::ReadOnly | QIODevice::Text))
         throw "File Cannot Open...";

@@ -39,7 +39,7 @@ QString MagicVarient::getString() const
         return QString("<Number>") + QString::number(getInt());
 }
 
-QString MagicVarient::getOutput()
+QString MagicVarient::getOutput() const
 {
     if (!this->data)
         return "\"";
@@ -56,14 +56,14 @@ MagicVarient MagicVarient::setInput(QString t)
     return MagicVarient(t.toInt());
 }
 
-bool MagicVarient::isTrue()
+bool MagicVarient::isTrue() const
 {
     if(this->type && *((QString*)this->data) != "") return true;
     if(!this->type && *((int*)this->data) != 0) return true;
     return false;
 }
 
-MagicVarient MagicVarient::operator==(MagicVarient a)
+MagicVarient MagicVarient::operator==(MagicVarient a) const
 {
     MagicVarient temp(0);
     if(!this->type && !a.type)
@@ -79,7 +79,7 @@ MagicVarient MagicVarient::operator==(MagicVarient a)
     return MagicVarient(-1);
 }
 
-MagicVarient MagicVarient::operator!=(MagicVarient a)
+MagicVarient MagicVarient::operator!=(MagicVarient a) const
 {
     MagicVarient temp(0);
     if(!this->type && !a.type)
@@ -96,7 +96,7 @@ MagicVarient MagicVarient::operator!=(MagicVarient a)
     return MagicVarient(0);
 }
 
-MagicVarient MagicVarient::operator>(MagicVarient a)
+MagicVarient MagicVarient::operator>(MagicVarient a) const
 {
     MagicVarient temp(0);
     if(!this->type && !a.type)
@@ -113,7 +113,7 @@ MagicVarient MagicVarient::operator>(MagicVarient a)
     return MagicVarient(0);
 }
 
-MagicVarient MagicVarient::operator>=(MagicVarient a)
+MagicVarient MagicVarient::operator>=(MagicVarient a) const
 {
     MagicVarient temp(0);
     if(!this->type && !a.type)
@@ -130,7 +130,7 @@ MagicVarient MagicVarient::operator>=(MagicVarient a)
     return MagicVarient(0);
 }
 
-MagicVarient MagicVarient::operator<(MagicVarient a)
+MagicVarient MagicVarient::operator<(MagicVarient a) const
 {
     MagicVarient temp(0);
     if(!this->type && !a.type)
@@ -147,7 +147,7 @@ MagicVarient MagicVarient::operator<(MagicVarient a)
     return MagicVarient(0);
 }
 
-MagicVarient MagicVarient::operator<=(MagicVarient a)
+MagicVarient MagicVarient::operator<=(MagicVarient a) const
 {
     MagicVarient temp(0);
     if(!this->type && !a.type)
@@ -166,7 +166,7 @@ MagicVarient MagicVarient::operator<=(MagicVarient a)
 
 
 
-MagicVarient MagicVarient:: operator+(MagicVarient a)
+MagicVarient MagicVarient:: operator+(MagicVarient a) const
 {
     if(!this->type && !a.type)
     {
@@ -184,7 +184,7 @@ MagicVarient MagicVarient:: operator+(MagicVarient a)
     return MagicVarient(0);
 }
 
-MagicVarient MagicVarient::operator-(MagicVarient a)
+MagicVarient MagicVarient::operator-(MagicVarient a) const
 {
     MagicVarient temp(0);
     if(!this->type && !a.type)
@@ -196,7 +196,7 @@ MagicVarient MagicVarient::operator-(MagicVarient a)
     return MagicVarient(0);
 }
 
-MagicVarient MagicVarient::operator*(MagicVarient a)
+MagicVarient MagicVarient::operator*(MagicVarient a) const
 {
     MagicVarient temp(0);
     if(!this->type && !a.type)
@@ -207,7 +207,7 @@ MagicVarient MagicVarient::operator*(MagicVarient a)
     throw("Error: Invalid use of operator *");
     return MagicVarient(0);
 }
-MagicVarient MagicVarient::operator/(MagicVarient a)
+MagicVarient MagicVarient::operator/(MagicVarient a) const
 {
     MagicVarient temp(0);
     if(!this->type && !a.type)
@@ -218,7 +218,7 @@ MagicVarient MagicVarient::operator/(MagicVarient a)
     throw("Error: Invalid use of operator /");
     return MagicVarient(0);
 }
-MagicVarient MagicVarient::operator%(MagicVarient a)
+MagicVarient MagicVarient::operator%(MagicVarient a) const
 {
     MagicVarient temp(0);
     if(!this->type && !a.type)
@@ -229,7 +229,7 @@ MagicVarient MagicVarient::operator%(MagicVarient a)
     throw("Error: Invalid use of operator %");
     return MagicVarient(0);
 }
-MagicVarient MagicVarient::operator^(MagicVarient a)
+MagicVarient MagicVarient::operator^(MagicVarient a) const
 {
     MagicVarient temp(0);
     if(!this->type && !a.type)
@@ -240,7 +240,7 @@ MagicVarient MagicVarient::operator^(MagicVarient a)
     throw("Error: Invalid use of operator ^");
     return MagicVarient(0);
 }
-MagicVarient MagicVarient::operator&(MagicVarient a)
+MagicVarient MagicVarient::operator&(MagicVarient a) const
 {
     MagicVarient temp(0);
     if(!this->type && !a.type)
@@ -252,7 +252,7 @@ MagicVarient MagicVarient::operator&(MagicVarient a)
     return MagicVarient(0);
 }
 
-MagicVarient MagicVarient::operator<<(MagicVarient a)
+MagicVarient MagicVarient::operator<<(MagicVarient a) const
 {
     MagicVarient temp(0);
     if(!this->type && !a.type)
@@ -264,7 +264,7 @@ MagicVarient MagicVarient::operator<<(MagicVarient a)
     return MagicVarient(0);
 }
 
-MagicVarient MagicVarient::operator>>(MagicVarient a)
+MagicVarient MagicVarient::operator>>(MagicVarient a) const
 {
     MagicVarient temp(0);
     if(!this->type && !a.type)
@@ -276,7 +276,7 @@ MagicVarient MagicVarient::operator>>(MagicVarient a)
     return MagicVarient(0);
 }
 
-MagicVarient MagicVarient::operator~()
+MagicVarient MagicVarient::operator~() const
 {
     MagicVarient temp(0);
     if(!this->type)

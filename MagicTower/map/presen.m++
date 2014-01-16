@@ -50,7 +50,7 @@ on(#cover)
 
 on(#dry)
 {
-	this->picked = 1
+	this->pick = 1
 	y_state = 3
 }
 
@@ -144,7 +144,7 @@ on(.y)
 	if (y_state == 3)
 	{
 		message = "勇士: 于老师您的吹风机来了!"
-		#dry->picked = 0
+		#dry->drop = 1
 		message = "于谦: 太好啦! 我这就去找老郭!"
 		y_state = 4
 	}

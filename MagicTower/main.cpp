@@ -5,7 +5,6 @@
 
 void test(MainWindow *pW)
 {
-    printf("Hello test!\n");
     pW->getWidget()->loadMap(":/maps/beta");
 }
 

@@ -15,27 +15,27 @@ public:
 
     int getInt() const;
     QString getString() const;
-    QString getOutput();
+    QString getOutput() const;
     static MagicVarient setInput(QString);
-    bool isTrue();
+    bool isTrue() const;
 
-    MagicVarient operator==(MagicVarient);
-    MagicVarient operator!=(MagicVarient);
-    MagicVarient operator>(MagicVarient);
-    MagicVarient operator>=(MagicVarient);
-    MagicVarient operator<(MagicVarient);
-    MagicVarient operator<=(MagicVarient);
+    MagicVarient operator==(MagicVarient) const;
+    MagicVarient operator!=(MagicVarient) const;
+    MagicVarient operator>(MagicVarient) const;
+    MagicVarient operator>=(MagicVarient) const;
+    MagicVarient operator<(MagicVarient) const;
+    MagicVarient operator<=(MagicVarient) const;
 
-    MagicVarient operator+(MagicVarient);
-    MagicVarient operator-(MagicVarient);
-    MagicVarient operator*(MagicVarient);
-    MagicVarient operator/(MagicVarient);
-    MagicVarient operator%(MagicVarient);
-    MagicVarient operator^(MagicVarient);
-    MagicVarient operator&(MagicVarient);
-    MagicVarient operator<<(MagicVarient);
-    MagicVarient operator>>(MagicVarient);
-    MagicVarient operator~();
+    MagicVarient operator+(MagicVarient) const;
+    MagicVarient operator-(MagicVarient) const;
+    MagicVarient operator*(MagicVarient) const;
+    MagicVarient operator/(MagicVarient) const;
+    MagicVarient operator%(MagicVarient) const;
+    MagicVarient operator^(MagicVarient) const;
+    MagicVarient operator&(MagicVarient) const;
+    MagicVarient operator<<(MagicVarient) const;
+    MagicVarient operator>>(MagicVarient) const;
+    MagicVarient operator~() const;
 
     MagicVarient &operator+=(MagicVarient);
     MagicVarient &operator-=(MagicVarient);

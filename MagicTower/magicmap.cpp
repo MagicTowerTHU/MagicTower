@@ -67,6 +67,7 @@ void MagicMap::initialize()
     displayList.push_front(mTom);
 
     animateFlag = 0;
+    eventFlag = 0;
 
     property["wisdomEnabled"] = 0;
     property["teleportEnabled"] = 0;
@@ -120,7 +121,7 @@ bool MagicMap::loadMap(QString fileName)
 bool MagicMap::saveRecord(QFile *file)
 {
     if (!file->open(QIODevice::WriteOnly | QIODevice::Text))
-        printf("File Cannot Open..."), throw "File Cannot Open...";
+        throw "File Cannot Open...";
 
     QTextStream out(file);
 
@@ -139,7 +140,7 @@ bool MagicMap::saveRecord(QFile *file)
 bool MagicMap::loadRecord(QFile *file)
 {
     if (!file->open(QIODevice::ReadOnly | QIODevice::Text))
-        printf("File Cannot Open..."), throw "File Cannot Open...";
+        throw "File Cannot Open...";
 
     QTextStream in(file);
 
@@ -427,7 +428,7 @@ void MagicMap::setProperty(QString propertyName, MagicVarient propertyValue, boo
 {
     if (propertyName == "sound")
     {
-        appendSound(propertyValue.getString());
+        appendSound(getResource(propertyValue.getString()));
         return;
     }
     if (propertyName == "backsound")
@@ -469,4 +470,17 @@ bool MagicMap::eraseMapObject(QString label, int x, int y)
 MagicTom *MagicMap::Tom()
 {
     return this->mTom;
+}
+
+void MagicMap::setPath(QString path)
+{
+    mapPath = path;
+}
+
+QString MagicMap::getResource(QString file)
+{
+    if (file.startsWith(":") || file.startsWith("/"))
+        return file;
+    else
+        return mapPath + file;
 }

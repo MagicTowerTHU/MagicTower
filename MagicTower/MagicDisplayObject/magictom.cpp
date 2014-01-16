@@ -61,18 +61,20 @@ void MagicTom::setProperty(QString propertyName, MagicVarient propertyValue, boo
 {
     if (propertyName == "add_K")
     {
-        switch (propertyValue.getInt())
-        {
-        case 0:
-            backupKey0.takeFirst()->setProperty("picked", 1);
-            break;
-        case 1:
-            backupKey1.takeFirst()->setProperty("picked", 1);
-            break;
-        case 2:
-            backupKey2.takeFirst()->setProperty("picked", 1);
-            break;
-        }
+        int iteration = propertyValue.getInt();
+        for (int i = 0; i < iteration; i++)
+            switch (propertyValue.getInt())
+            {
+            case 0:
+                backupKey0.takeFirst()->setProperty("pick", 1);
+                break;
+            case 1:
+                backupKey1.takeFirst()->setProperty("pick", 1);
+                break;
+            case 2:
+                backupKey2.takeFirst()->setProperty("pick", 1);
+                break;
+            }
         return;
     }
     if (propertyName == "level")
@@ -146,7 +148,7 @@ bool MagicTom::consumeInventory(QString label)
     for (auto i = inventory.begin(); i != inventory.end(); i++)
         if ( ((**i)["label"] == MagicVarient(label)).isTrue() )
         {
-            (*i)->setProperty("picked", 0);
+            (*i)->setProperty("drop", 1);
             return true;
         }
     return false;
@@ -158,7 +160,7 @@ bool MagicTom::consumeInventory(QString label, int color)
         if ( ((**i)["label"] == MagicVarient(label)).isTrue() &&
              ((**i)["color"] == MagicVarient(color)).isTrue() )
         {
-            (*i)->setProperty("picked", 0);
+            (*i)->setProperty("drop", 1);
             return true;
         }
     return false;

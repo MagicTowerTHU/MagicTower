@@ -36,11 +36,24 @@ void MagicDisplayObject::setProperty(QString propertyName, MagicVarient property
         y = propertyValue.getInt() * 32;
     if (propertyName == "label")
         return;
+    if (propertyName == "drop")
+    {
+        MagicDisplayObject *nonConst = const_cast<MagicDisplayObject *>(this);
+        nonConst->property["enabled"] = 0;
+        nonConst->setProperty("picked", 0);
+        return;
+    }
+    if (propertyName == "pick")
+    {
+        MagicDisplayObject *nonConst = const_cast<MagicDisplayObject *>(this);
+        nonConst->setProperty("picked", 1);
+        return;
+    }
     if (propertyName == "picked")
     {
-        this->property["enabled"] = 0;
         if (propertyValue.isTrue())
         {
+            property["enabled"] = 0;
             for (auto i = parent->Tom()->inventory.begin(); i != parent->Tom()->inventory.end(); i++)
                 if ((*i)->getLabel() >= getLabel())
                 {

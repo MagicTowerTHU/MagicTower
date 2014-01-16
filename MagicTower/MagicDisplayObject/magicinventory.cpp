@@ -21,7 +21,7 @@ bool MagicInventory::move(MagicMap *map)
     //if (map->Tom()->inventory.size() < 33)
     {
         property["enabled"] = 0;
-        setProperty("picked", 1);
+        setProperty("pick", 1);
     }
     return runAction(map, false);
 }

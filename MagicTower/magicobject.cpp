@@ -8,12 +8,12 @@ MagicObject::MagicObject()
 {
 }
 
-MagicVarient& MagicObject::operator[](QString propertyName)
+MagicVarient &MagicObject::operator[](QString propertyName)
 {
     return property[propertyName];
 }
 
-const MagicVarient& MagicObject::operator[](QString propertyName) const
+const MagicVarient &MagicObject::operator[](QString propertyName) const
 {
     return property.find(propertyName).value();
 }

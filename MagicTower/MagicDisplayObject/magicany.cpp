@@ -1,4 +1,5 @@
 #include "magicany.h"
+#include "magicmap.h"
 
 MagicAny::MagicAny(int x, int y, int level, MagicMap *parent)
     : MagicDisplayObject(x, y, level, parent)
@@ -17,7 +18,7 @@ MagicAny::~MagicAny()
 void MagicAny::setProperty(QString propertyName, MagicVarient propertyValue, bool)
 {
     if (propertyName == "pix")
-        pix = new QPixmap(propertyValue.getString());
+        pix = new QPixmap(parent->getResource(propertyValue.getString()));
     //qDebug() << propertyName << ":" << propertyValue.getString();
     MagicDisplayObject::setProperty(propertyName, propertyValue);
 }

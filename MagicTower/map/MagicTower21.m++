@@ -66,7 +66,7 @@ on (#fairy)
 	}
 }
 
-.ini->picked = 1
+.ini->pick = 1
 .ini->enabled = 0
 
 enemy_27->health = 100
@@ -179,7 +179,7 @@ on(merchant_2.f2)
 {
 	message = "老者: 拿着这把剑吧孩子!"
 	message = "老者: 它会给你无穷的力量!"
-	weapon_2.f2->picked = 1
+	weapon_2.f2->pick = 1
 	tom->attack = tom->attack + 30
 	this->enabled = 0
 }
@@ -187,7 +187,7 @@ on(merchant_1.f2)
 {
 	message = "老者: 拿着这只盾吧孩子!"
 	message = "老者: 它会给你无穷的力量!"
-	armour_2.f2->picked = 1
+	armour_2.f2->pick = 1
 	tom->defend = tom->defend + 30
 	this->enabled = 0
 }
@@ -396,7 +396,7 @@ armour_5->defend = 10
 .key.f5->enabled = 0
 on(any.f5)
 {
-	.key.f5->picked = 1
+	.key.f5->pick = 1
 	this->enabled = 0
 }
 
@@ -486,11 +486,9 @@ on(#cross)
 
 on (.pi)
 {
-	this->picked = 1
+	this->pick = 1
 	this->enabled = 0
 }
-
-
 
 enemy_19->health = 1300
 enemy_19->attack = 300
@@ -531,7 +529,7 @@ weapon_3->attack = 70
 
 on(#snow)
 {
-	this->picked = 1
+	this->pick = 1
 	teleportEnabled = 1
 }
 
@@ -790,7 +788,7 @@ at(15)
 on(merchant_2.f15)
 {
 	message = "老者: 少年! 拿着这个剑! 你需要它!"
-	weapon_4.f15->picked = 1
+	weapon_4.f15->pick = 1
 	tom->attack = tom->attack + 80
 	this->enabled = 0
 }
@@ -799,7 +797,7 @@ on(merchant_2.f15)
 on(merchant_1.f15)
 {
 	message = "老者: 盾拿去."
-	armour_4.f15->picked = 1
+	armour_4.f15->pick = 1
 	tom->defend = tom->defend + 80
 	this->enabled = 0
 }

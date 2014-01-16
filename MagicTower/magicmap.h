@@ -34,6 +34,8 @@ class MagicMap : public MagicObject
     QStringList soundToPlay;
     QMutex soundListLock;
 
+    QString mapPath;
+
 public:
     int animateFlag = 0;
     QList<MagicAnimate *> animateList;
@@ -64,6 +66,9 @@ public:
 
     virtual void setProperty(QString, MagicVarient, bool = true);
     //bool eraseMapObject(QString, int, int);
+
+    void setPath(QString);
+    QString getResource(QString);
 
     MagicTom *Tom();
 };
